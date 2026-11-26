@@ -274,3 +274,21 @@ def test_checkout_facts_reads_selected_option_only():
     res2 = {"fulfillment": {"methods": [{"type": "shipping", "groups": [{"options": [{"id": "std", "title": "Standard (4-7 days)"}]}]}]}}
     T2 = [{"seq": 5, "kind": "tool_result", "tool": "update_checkout", "result": json.dumps(res2)}]
     assert E.checkout_facts(T2, 10) == {"fulfillment": "ship", "max_days": None}   # offered, not selected
+
+
+def test_joint_pending_items_counterexample_through_real_scope():
+    """Plan section 2 counterexample: each pending change alone keeps DENY, only both together give ALLOW.
+    An individual-only check would never ask; the joint check must ask (CLARIFY naming both)."""
+    reg = reg_with(("p1", "Bose QC Headphones", "Bose", 150.0))
+    base = Ctx({"brand_in": Entry("brand_in", "brand_in", ("Sony",)), "budget": Entry("budget", "budget_max", 100.0)}, None, None)
+    u1 = Unresolved("u1", "C_PENDING", [], [("kept", lambda c: c),
+                                           ("bose_ok", lambda c: Ctx({**c.entries, "brand_in": Entry("brand_in", "brand_in", ("Sony", "Bose"))}, c.kind, c.selection))])
+    u2 = Unresolved("u2", "C_PENDING", [], [("kept", lambda c: c),
+                                           ("budget_200", lambda c: Ctx({**c.entries, "budget": Entry("budget", "budget_max", 200.0)}, c.kind, c.selection))])
+    cart = [line("p1v", 150.0, brand="Bose", title="Bose QC Headphones", pid="p1")]
+    gate = lambda c: (("DENY", scope_from(c, reg).violations(cart)) if scope_from(c, reg).violations(cart) else ("ALLOW", []))  # noqa: E731
+    assert gate(base)[0] == "DENY"
+    assert gate(u1.variants[1][1](base))[0] == "DENY" and gate(u2.variants[1][1](base))[0] == "DENY"   # each alone
+    assert gate(u2.variants[1][1](u1.variants[1][1](base)))[0] == "ALLOW"                              # only jointly
+    d, codes, rel, n, approx = decide_selective(base, [u1, u2], gate)
+    assert d == "CLARIFY" and set(rel) == {"u1", "u2"} and n == 4 and not approx
