@@ -48,10 +48,33 @@ IDS_LIST_SHA = "540669d10c44bb26a9dfe208a01268d1ade649ea3375ba9eff32ce8a449bfb46
 SETS = {"S_R1": "test_cross_template", "S_R3": "train"}
 
 
-def check_frozen():
-    r = subprocess.run(["git", "diff", "--quiet", FREEZE, "--", *FROZEN_PATHS], cwd=ROOT)
-    if r.returncode != 0:
-        raise SystemExit(f"decision code differs from the freeze commit {FREEZE} in {FROZEN_PATHS}; nothing was run")
+ALLOW_NEW = {"eval/integrated/paired_compare.py"}   # analysis-only file; not imported by any decision code
+
+
+def check_frozen(base: Path | None = None):
+    """Allow-list freeze check (runner change, researcher decision 2026-11-27).
+    Every file the freeze commit has under FROZEN_PATHS must exist and be byte-identical in git's stored form
+    (git hash-object with the path's filters, as core.autocrlf=true here) to the freeze-commit blob; a file not in the
+    freeze commit is allowed only if listed in ALLOW_NEW. Any other addition, deletion or change -> refuse.
+    __pycache__ folders (untracked bytecode caches) are ignored. `base` = folder to check (default: this repo)."""
+    base = Path(base) if base else ROOT
+    ls = subprocess.run(["git", "ls-tree", "-r", FREEZE, "--", *FROZEN_PATHS], cwd=ROOT, capture_output=True, text=True, check=True)
+    frozen = {l.split("\t", 1)[1]: l.split()[2] for l in ls.stdout.splitlines() if "\t" in l}
+    now = {p.relative_to(base).as_posix() for fp in FROZEN_PATHS for p in (base / fp).rglob("*")
+           if p.is_file() and "__pycache__" not in p.parts}
+    problems = []
+    for rel, sha in sorted(frozen.items()):
+        f = base / rel
+        if not f.exists():
+            problems.append(f"deleted: {rel}")
+            continue
+        h = subprocess.run(["git", "hash-object", "--path", rel, str(f)], cwd=ROOT, capture_output=True, text=True, check=True)
+        if h.stdout.strip() != sha:
+            problems.append(f"changed: {rel}")
+    problems += [f"added (not allow-listed): {rel}" for rel in sorted(now - set(frozen)) if rel not in ALLOW_NEW]
+    if problems:
+        raise SystemExit(f"decision code differs from the freeze commit {FREEZE}: {problems[:10]}; nothing was run")
+    return True
 
 
 def sealed_ids() -> dict:
