@@ -1,0 +1,682 @@
+{
+  "note": "descriptive diagnostics; no model calls; rules unchanged; PLAN_v3 results untouched",
+  "D1_product_type": {
+    "values": {
+      "일반 종류": 555,
+      "구체 상품명(카탈로그 제목과 일치)": 483,
+      "조건·후보 혼합": 218,
+      "긴 설명(카탈로그 불일치)": 108
+    },
+    "changes": {
+      "일반 종류 → 구체 상품명(카탈로그 제목과 일치)": 51,
+      "일반 종류 → 일반 종류": 13,
+      "구체 상품명(카탈로그 제목과 일치) → 일반 종류": 25,
+      "조건·후보 혼합 → 구체 상품명(카탈로그 제목과 일치)": 44,
+      "일반 종류 → 조건·후보 혼합": 10,
+      "구체 상품명(카탈로그 제목과 일치) → 조건·후보 혼합": 31,
+      "조건·후보 혼합 → 긴 설명(카탈로그 불일치)": 7,
+      "일반 종류 → 긴 설명(카탈로그 불일치)": 11,
+      "조건·후보 혼합 → 조건·후보 혼합": 16,
+      "구체 상품명(카탈로그 제목과 일치) → 구체 상품명(카탈로그 제목과 일치)": 60,
+      "긴 설명(카탈로그 불일치) → 일반 종류": 2,
+      "구체 상품명(카탈로그 제목과 일치) → 긴 설명(카탈로그 불일치)": 8,
+      "긴 설명(카탈로그 불일치) → 긴 설명(카탈로그 불일치)": 7,
+      "조건·후보 혼합 → 일반 종류": 6,
+      "긴 설명(카탈로그 불일치) → 조건·후보 혼합": 4,
+      "긴 설명(카탈로그 불일치) → 구체 상품명(카탈로그 제목과 일치)": 5
+    },
+    "pending_ptype_changes": {
+      "일반 종류 → 구체 상품명(카탈로그 제목과 일치)": 46,
+      "일반 종류 → 일반 종류": 11,
+      "조건·후보 혼합 → 구체 상품명(카탈로그 제목과 일치)": 42,
+      "일반 종류 → 조건·후보 혼합": 6,
+      "구체 상품명(카탈로그 제목과 일치) → 조건·후보 혼합": 30,
+      "조건·후보 혼합 → 긴 설명(카탈로그 불일치)": 7,
+      "일반 종류 → 긴 설명(카탈로그 불일치)": 11,
+      "조건·후보 혼합 → 조건·후보 혼합": 16,
+      "구체 상품명(카탈로그 제목과 일치) → 구체 상품명(카탈로그 제목과 일치)": 53,
+      "긴 설명(카탈로그 불일치) → 일반 종류": 2,
+      "구체 상품명(카탈로그 제목과 일치) → 긴 설명(카탈로그 불일치)": 7,
+      "긴 설명(카탈로그 불일치) → 긴 설명(카탈로그 불일치)": 7,
+      "조건·후보 혼합 → 일반 종류": 4,
+      "구체 상품명(카탈로그 제목과 일치) → 일반 종류": 14,
+      "긴 설명(카탈로그 불일치) → 조건·후보 혼합": 4,
+      "긴 설명(카탈로그 불일치) → 구체 상품명(카탈로그 제목과 일치)": 4
+    },
+    "examples": {
+      "일반 종류 → 구체 상품명(카탈로그 제목과 일치)": [
+        {
+          "episode": "ep-7c79cb434298",
+          "from": "Baby Bracelet",
+          "to": "Hematite Bracelet (Blessed Already)"
+        },
+        {
+          "episode": "ep-d98e9ec1b95c",
+          "from": "journal",
+          "to": "College Ruled Prime Journal"
+        },
+        {
+          "episode": "ep-d154bf078941",
+          "from": "handle",
+          "to": "BBQ grill brush with detachable handle"
+        }
+      ],
+      "일반 종류 → 일반 종류": [
+        {
+          "episode": "ep-4bdfb88f3eb5",
+          "from": "hook",
+          "to": "Fishing Hook Set"
+        },
+        {
+          "episode": "ep-7a4bb9e76fa6",
+          "from": "drum",
+          "to": "white marching drum"
+        },
+        {
+          "episode": "ep-133793bb9147",
+          "from": "banner",
+          "to": "beach-theme birthday banner"
+        }
+      ],
+      "조건·후보 혼합 → 구체 상품명(카탈로그 제목과 일치)": [
+        {
+          "episode": "ep-fed1e7907cf9",
+          "from": "Feditch Women's Bottoming Jumpsuit Tops or Women's Maternity String Top (whichev",
+          "to": "Feditch Women's Bottoming Jumpsuit Top"
+        },
+        {
+          "episode": "ep-ad2a3b790fd3",
+          "from": "Bagets O.S.T Various Artist Vinyl Album or NCAT TWICE: WITH YOU-TH [13TH MINI AL",
+          "to": "NCAT TWICE: WITH YOU-TH [13TH MINI ALBUM]"
+        },
+        {
+          "episode": "ep-11d545af8be6",
+          "from": "Kids' Cross Pendant Necklace (Dear to Me; similar substitute acceptable if out o",
+          "to": "Mens Stainless Steel Gold Cross Zircon Pendant Necklace"
+        }
+      ],
+      "일반 종류 → 조건·후보 혼합": [
+        {
+          "episode": "ep-f66c1a83f381",
+          "from": "boots",
+          "to": "cheapest of: find. Gumsole Chelsea Boots, IELGY Women's Martin Boots, or Sledger"
+        },
+        {
+          "episode": "ep-df4755a0ebbb",
+          "from": "Dynamo Solar Flashlight",
+          "to": "A similar in-stock flashlight to the Dynamo Solar Flashlight"
+        },
+        {
+          "episode": "ep-412d7cbfa56e",
+          "from": "Mary Jane Loafers",
+          "to": "Baellerry Women's Bowknot School Shoes, or a similar alternative if unavailable "
+        }
+      ],
+      "구체 상품명(카탈로그 제목과 일치) → 조건·후보 혼합": [
+        {
+          "episode": "ep-de6c37cfa575",
+          "from": "Guitar Pick Holder Wood Guitar Pick Display Case Mini Guitar Pick Box with Woode",
+          "to": "Guitar Pick Holder Wood Guitar Pick Display Case Mini Guitar Pick Box with Woode"
+        },
+        {
+          "episode": "ep-53006e0ea2b3",
+          "from": "muslin baby sleeping bag",
+          "to": "baby sleeping bag (muslin preferred, similar alternative acceptable)"
+        },
+        {
+          "episode": "ep-c680b0d17daf",
+          "from": "good 999 jewelry Fashionable Design Round pearl zircon 9 pairs of stud earrings ",
+          "to": "Similar good 999 pearl earrings to the Fashionable Design Round pearl zircon 9 p"
+        }
+      ],
+      "조건·후보 혼합 → 긴 설명(카탈로그 불일치)": [
+        {
+          "episode": "ep-b501ca826a28",
+          "from": "Kids' Party Card Game or Couple Card Game (choose the cheapest)",
+          "to": "Couple Card Game (choose the cheapest)"
+        },
+        {
+          "episode": "ep-165b8f273ff7",
+          "from": "Steel Barbecue Grill or similar",
+          "to": "FirePlus Leo gas grill"
+        },
+        {
+          "episode": "ep-29e6b80b1048",
+          "from": "detergent (preferably scale-stain detergent; a similar substitute is acceptable ",
+          "to": "Tide Ultra Original Scent Bar Detergent (450g)"
+        }
+      ],
+      "일반 종류 → 긴 설명(카탈로그 불일치)": [
+        {
+          "episode": "ep-7e9918b5f3e6",
+          "from": "carrier",
+          "to": "AmazonBasics folding soft-sided pet crate"
+        },
+        {
+          "episode": "ep-2d3f3f6e1cb6",
+          "from": "clip",
+          "to": "69mm stainless steel swivel eye bolt snap hook/clip"
+        },
+        {
+          "episode": "ep-d16ba62589ea",
+          "from": "tech gift",
+          "to": "AmazonBasics Desktop Mini Condenser Microphone with Tripod"
+        }
+      ],
+      "조건·후보 혼합 → 조건·후보 혼합": [
+        {
+          "episode": "ep-78c0ff82bd3c",
+          "from": "Kitchen towels; choose the cheaper of Presto! Non-Woven Kitchen Towel and 365 Ev",
+          "to": "Kitchen towels; choose the cheaper of the Presto! Non-Woven Kitchen Towel and 36"
+        },
+        {
+          "episode": "ep-4f7464b4d68e",
+          "from": "Steel Tongue Drum, or a similar product if out of stock",
+          "to": "A drum to keep; preferably a Steel Tongue Drum or something similar if unavailab"
+        },
+        {
+          "episode": "ep-4f7464b4d68e",
+          "from": "A drum to keep; preferably a Steel Tongue Drum or something similar if unavailab",
+          "to": "A drum to keep; preferably a Steel Tongue Drum or something similar if unavailab"
+        }
+      ],
+      "구체 상품명(카탈로그 제목과 일치) → 구체 상품명(카탈로그 제목과 일치)": [
+        {
+          "episode": "ep-8ad154a910d3",
+          "from": "Solimo Adult One Daily Multivitamin",
+          "to": "Solimo Adult 50+ One Daily Multivitamin"
+        },
+        {
+          "episode": "ep-f5f1aca15049",
+          "from": "Solimo 2-in-1 Dandruff Shampoo & Conditioner, 14.2 fl oz, Pack of 6",
+          "to": "Solimo 2-in-1 Dandruff Shampoo & Conditioner, 14.2 fl oz, single bottles"
+        },
+        {
+          "episode": "ep-0b6ecbc5a265",
+          "from": "NCAT TWICE: WITH YOU-TH [13TH MINI ALBUM]",
+          "to": "NCAT TWICE: WITH YOU-TH [13TH MINI ALBUM] — Set All Version, regular P.O.B."
+        }
+      ],
+      "긴 설명(카탈로그 불일치) → 일반 종류": [
+        {
+          "episode": "ep-45ad6c8997de",
+          "from": "drum (choose the cheapest among the La Marcha Parade Marching Drum 14\" x 12\", po",
+          "to": "Kids' Jazz Drum"
+        },
+        {
+          "episode": "ep-0f891ca88add",
+          "from": "Stud earring & pendant set, 1/10 cttw white",
+          "to": "earring"
+        }
+      ],
+      "구체 상품명(카탈로그 제목과 일치) → 긴 설명(카탈로그 불일치)": [
+        {
+          "episode": "ep-1fd4549d4d6f",
+          "from": "AmazonBasics Mini Bluetooth Speaker - Red",
+          "to": "AmazonBasics Mini Bluetooth Speaker - Red, Solimo Designer Arrow Texture case, a"
+        },
+        {
+          "episode": "ep-78a5868b8ad9",
+          "from": "Amazon Collection Zirconia Tennis Bracelet",
+          "to": "JEB00819 Silver Ag925 Bracelet"
+        },
+        {
+          "episode": "ep-1b0a5b6ba28a",
+          "from": "Amazon Collection Zirconia Tennis Bracelet",
+          "to": "Amazon Collection round-cut Cubic Zirconia bracelet"
+        }
+      ],
+      "긴 설명(카탈로그 불일치) → 긴 설명(카탈로그 불일치)": [
+        {
+          "episode": "ep-1fd4549d4d6f",
+          "from": "AmazonBasics Mini Bluetooth Speaker - Red, Solimo Designer Arrow Texture case, a",
+          "to": "AmazonBasics Mini Bluetooth Speaker - Red, Amazon Brand item (Arrow Texture case"
+        },
+        {
+          "episode": "ep-1fd4549d4d6f",
+          "from": "AmazonBasics Mini Bluetooth Speaker - Red, Amazon Brand item (Arrow Texture case",
+          "to": "AmazonBasics Mini Bluetooth Speaker - Red, Amazon Brand item, and Car Phone Hold"
+        },
+        {
+          "episode": "ep-caae2c76d014",
+          "from": "Cantu Shea Butter Styling Gel — 18.5 oz",
+          "to": "Cantu Shea Butter Styling Gel — 18.5 oz, Avocado hydrating"
+        }
+      ],
+      "조건·후보 혼합 → 일반 종류": [
+        {
+          "episode": "ep-d26a2a00058f",
+          "from": "Tooth Shark Comb, or a similar comb if unavailable",
+          "to": "comb"
+        },
+        {
+          "episode": "ep-195f6113bbaa",
+          "from": "outdoor basketball stand or Up Bars Stand, whichever is cheapest",
+          "to": "outdoor basketball stand"
+        },
+        {
+          "episode": "ep-333a9cc52ac9",
+          "from": "drill (compare the AmazonBasics Speed Steel Drill and the Cordless Electric Dril",
+          "to": "actual drill"
+        }
+      ],
+      "구체 상품명(카탈로그 제목과 일치) → 일반 종류": [
+        {
+          "episode": "ep-cde620078f4b",
+          "from": "1 3/16-inch length square knob",
+          "to": "square knob"
+        },
+        {
+          "episode": "ep-5469b507a24f",
+          "from": "4-Digit Retractable Cable Lock, Black, 1-Pack",
+          "to": "lock"
+        },
+        {
+          "episode": "ep-17f994c1c05b",
+          "from": "Kolton 14-pair shoe storage cabinet",
+          "to": "shoe rack"
+        }
+      ],
+      "긴 설명(카탈로그 불일치) → 조건·후보 혼합": [
+        {
+          "episode": "ep-0b2d8f1f2f56",
+          "from": "Aloe Derma Hair Rescue Bundle (Watsons Packaging)",
+          "to": "Aloe Derma Hair Rescue Bundle (Watsons Packaging), or a similar hair-care bundle"
+        },
+        {
+          "episode": "ep-29e6b80b1048",
+          "from": "Japan floor cleaner (500ml, $5.49)",
+          "to": "detergent (preferably scale-stain detergent; a similar substitute is acceptable "
+        },
+        {
+          "episode": "ep-751f8972837e",
+          "from": "Amazon Brand – Solimo Moisture Rich Skin Care Bath Oil, 16 fl oz",
+          "to": "A product similar to Solimo Sunburn Relief Gel for soothing irritated skin"
+        }
+      ],
+      "긴 설명(카탈로그 불일치) → 구체 상품명(카탈로그 제목과 일치)": [
+        {
+          "episode": "ep-1d328b2a1798",
+          "from": "very sexy everyday fragrance, sweet vanilla profile, specifically the AK oil",
+          "to": "very sexy AK oil"
+        },
+        {
+          "episode": "ep-5a5aa7d50df3",
+          "from": "ZM509 compression swim shorts",
+          "to": "men's guard swim suit"
+        },
+        {
+          "episode": "ep-b63223f61e0a",
+          "from": "Tire Pressure Sensor and RXR FULL FACE HELMET",
+          "to": "RXR FULL FACE HELMET"
+        }
+      ]
+    }
+  },
+  "D2_reference_resolution_validation": {
+    "split": "validation",
+    "journeys": 4015,
+    "counts": {
+      "shopper_turns": 11353,
+      "ref_turns": 1083,
+      "ref_with_enumerated_list": 856,
+      "ref_resolved_to_list_item": 788,
+      "ref_linked_to_catalog_sku": 505,
+      "ref_deictic_ambiguous": 194,
+      "ref_deictic_single_candidate": 100
+    },
+    "examples": [
+      {
+        "episode": "ep-0df3711169bd",
+        "user": "I'll go with option 1, ART HUB – VALLEJO Acrylic Medium & Varnish. Thanks for finding that!",
+        "item": "**ART HUB – VALLEJO Acrylic Medium & Varnish** ($21.99 each, all in stock): pre metal medium 60, glo",
+        "sku": "prod_01HBSEWSK83EARGYFBTT608JV6",
+        "title": "ART HUB - VALLEJO Acrylic Medium & Varnish (Gloss Matte Satin Sealer Finish Coat"
+      },
+      {
+        "episode": "ep-2640e0647785",
+        "user": "Oh, I’m not entirely sure about that one. Please just go with whatever fits what I’ve told you.",
+        "item": "I found the Black Color Keyboard (the 37-key melodica, $22.99) and the Gel Frost FrostedMax Gel ball",
+        "sku": "prod_01VK7CNY6M2REFD8SCBRJ9X54S",
+        "title": "Gel Frost FrostedMax Gel balls"
+      },
+      {
+        "episode": "ep-4ab605b869d8",
+        "user": "I would like to proceed with option 1, the V2 3-Tier Mechanical Keyboard Stand / Dock (3D printed).",
+        "item": "**V2 3-Tier Mechanical Keyboard Stand / Dock (3D printed)** — $19.99, available in green, white, bla",
+        "sku": "117961190",
+        "title": "V2 3-Tier Mechanical Keyboard Stand / Dock 3D Printed"
+      },
+      {
+        "episode": "ep-a5151d6d949e",
+        "user": "Thanks for the details! I'll go with option 1, the AmazonBasics Zinc Alloy Guitar Capo.",
+        "item": "**AmazonBasics Zinc Alloy Guitar Capo** (Black) — $16.99, in stock",
+        "sku": "988063029",
+        "title": "AmazonBasics Zinc Alloy Guitar Capo for Acoustic and Electric Guitar, Black"
+      },
+      {
+        "episode": "ep-aebf24772c5e",
+        "user": "Alright, I’ll go with option 2, which is the Gel Frost FrostedMax Gel balls.",
+        "item": "**Gel Frost FrostedMax Gel balls** — 100g gfr superhard, $13.99",
+        "sku": "prod_01VK7CNY6M2REFD8SCBRJ9X54S",
+        "title": "Gel Frost FrostedMax Gel balls"
+      },
+      {
+        "episode": "ep-aebf24772c5e",
+        "user": "I'm so sorry for the confusion, but I really need to clarify: I'll just go with option 2, the Gel Frost FrostedMax Gel b",
+        "item": "**Gel Frost FrostedMax Gel balls** — $13.99",
+        "sku": "prod_01VK7CNY6M2REFD8SCBRJ9X54S",
+        "title": "Gel Frost FrostedMax Gel balls"
+      }
+    ]
+  },
+  "D3_m2a_blind_spots": {
+    "validation": {
+      "counts": {
+        "violating": 918,
+        "cart_sku_outside_witnesses": 317,
+        "all_cart_skus_in_witnesses": 601
+      },
+      "unsatisfied_predicate_ops_by_source": {
+        "kind:on_ask": 88,
+        "kind:stated": 87,
+        "prefer:stated": 72,
+        "max_price:stated": 69,
+        "eq:on_ask": 68,
+        "max_price:on_ask": 38,
+        "all_of:stated": 37,
+        "cheapest:stated": 22,
+        "mentions:stated": 16,
+        "one_of:stated": 7,
+        "eq:stated": 5,
+        "eq:default": 4,
+        "is:stated": 3,
+        "excludes:stated": 1,
+        "cheapest_per_unit:stated": 1
+      }
+    },
+    "R1_test_cross_store": {
+      "counts": {
+        "violating": 48,
+        "all_cart_skus_in_witnesses": 32,
+        "cart_sku_outside_witnesses": 16
+      },
+      "unsatisfied_predicate_ops_by_source": {
+        "max_price:stated": 8,
+        "kind:on_ask": 6,
+        "kind:stated": 6,
+        "prefer:stated": 2,
+        "eq:on_ask": 2,
+        "all_of:stated": 2,
+        "one_of:stated": 2,
+        "cheapest:stated": 2
+      }
+    },
+    "R3_test_cross_store": {
+      "counts": {
+        "violating": 20,
+        "all_cart_skus_in_witnesses": 3,
+        "cart_sku_outside_witnesses": 17
+      },
+      "unsatisfied_predicate_ops_by_source": {
+        "kind:on_ask": 17,
+        "prefer:stated": 17
+      }
+    },
+    "R2_test_cross_store": {
+      "counts": {
+        "violating": 73,
+        "cart_sku_outside_witnesses": 57,
+        "all_cart_skus_in_witnesses": 16
+      },
+      "unsatisfied_predicate_ops_by_source": {
+        "prefer:stated": 55,
+        "kind:on_ask": 51,
+        "eq:on_ask": 1,
+        "cheapest_per_unit:stated": 1
+      }
+    },
+    "m2a_checks": [
+      "all_of",
+      "brand",
+      "count",
+      "max_price",
+      "(brand exclusion)"
+    ]
+  },
+  "D4_unjustified_but_stated": {
+    "counts": {
+      "scored_unjustified": 299,
+      "in_spec_other_source:default|user_stated": 62,
+      "not_in_spec|not_found": 84,
+      "in_spec_other_source:default|not_found": 64,
+      "not_in_spec|user_stated": 76,
+      "value_mismatch|not_found": 12,
+      "value_mismatch|user_stated": 1
+    },
+    "by_field": {
+      "brand_in|not_in_spec|user_stated": 73,
+      "quantity|in_spec_other_source:default|not_found": 62,
+      "quantity|in_spec_other_source:default|user_stated": 58,
+      "budget_max|not_in_spec|not_found": 42,
+      "deadline_days|not_in_spec|not_found": 28,
+      "substitute|not_in_spec|not_found": 10,
+      "budget_max|value_mismatch|not_found": 6,
+      "quantity|value_mismatch|not_found": 4,
+      "brand_in|not_in_spec|not_found": 4,
+      "fulfillment|in_spec_other_source:default|user_stated": 4,
+      "bundle_all|not_in_spec|user_stated": 3,
+      "fulfillment|in_spec_other_source:default|not_found": 2,
+      "quantity|value_mismatch|user_stated": 1,
+      "fulfillment|value_mismatch|not_found": 1,
+      "deadline_days|value_mismatch|not_found": 1
+    },
+    "examples": [
+      {
+        "episode": "ep-10fb70bc99e0",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "nli",
+        "utterance": ""
+      },
+      {
+        "episode": "ep-8edae59e0ae8",
+        "set": "R1_test_cross_store",
+        "field": "brand_in",
+        "value": [
+          "AmazonBasics"
+        ],
+        "kind": "not_in_spec",
+        "how": "rule",
+        "utterance": "I'd like the AmazonBasics Gel Ink Pens, the Car Collection Coloring Book (Real Cars) and the 3600 lumens transmissive projector together in "
+      },
+      {
+        "episode": "ep-861dff764a02",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "rule",
+        "utterance": "I would appreciate it if you could ship the item to Mara Thornvale, 1 Maple Way, Springfield, IL 62701, US. My email address is email-61cbb9"
+      },
+      {
+        "episode": "ep-28f3d674ac27",
+        "set": "R1_test_cross_store",
+        "field": "brand_in",
+        "value": [
+          "AmazonBasics"
+        ],
+        "kind": "not_in_spec",
+        "how": "rule",
+        "utterance": "I'd like to order the AmazonBasics Vehicle Headlight Bulb again. I'd like to spend no more than $30. I'll pick it up from the store myself."
+      },
+      {
+        "episode": "ep-600bddbd563d",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "rule",
+        "utterance": "I'll go with option 1, a size."
+      },
+      {
+        "episode": "ep-12de0c69ba57",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "nli",
+        "utterance": ""
+      },
+      {
+        "episode": "ep-46de0712dd2c",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "nli",
+        "utterance": ""
+      },
+      {
+        "episode": "ep-f1f0a928e6c8",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "nli",
+        "utterance": ""
+      },
+      {
+        "episode": "ep-d64d52fa075a",
+        "set": "R1_test_cross_store",
+        "field": "quantity",
+        "value": 1,
+        "kind": "in_spec_other_source:default",
+        "how": "rule",
+        "utterance": "I'll go with option 1, AmazonBasics Refillable Fountain Pen."
+      },
+      {
+        "episode": "ep-d64d52fa075a",
+        "set": "R1_test_cross_store",
+        "field": "brand_in",
+        "value": [
+          "AmazonBasics"
+        ],
+        "kind": "not_in_spec",
+        "how": "rule",
+        "utterance": "I'll go with option 1, AmazonBasics Refillable Fountain Pen."
+      }
+    ]
+  },
+  "D5_temporal_leakage": {
+    "R1_test_cross_store": {
+      "counts": {
+        "no_consent_point": 103,
+        "journeys": 97,
+        "user_turns_after_last_consent_request": 93,
+        "journeys_with_user_turns_after": 93
+      },
+      "decision_changes": {
+        "fnctod:ALLOW->DENY": 1,
+        "fnctod_r:CLARIFY->DENY": 5,
+        "fnctod_rn:CLARIFY->DENY": 8,
+        "fnctod_r:CLARIFY->ALLOW": 4,
+        "fnctod_rn:CLARIFY->ALLOW": 6
+      },
+      "truncated_decisions": {
+        "legit": {
+          "fnctod:ALLOW": 64,
+          "fnctod_r:CLARIFY": 22,
+          "fnctod_rn:CLARIFY": 33,
+          "fnctod_r:ALLOW": 42,
+          "fnctod_rn:ALLOW": 31,
+          "fnctod:DENY": 6,
+          "fnctod_r:DENY": 6,
+          "fnctod_rn:DENY": 6
+        },
+        "viol": {
+          "fnctod:ALLOW": 24,
+          "fnctod_r:CLARIFY": 8,
+          "fnctod_rn:CLARIFY": 11,
+          "fnctod:DENY": 3,
+          "fnctod_r:DENY": 4,
+          "fnctod_rn:DENY": 4,
+          "fnctod_r:ALLOW": 15,
+          "fnctod_rn:ALLOW": 12
+        }
+      }
+    },
+    "R3_test_cross_store": {
+      "counts": {
+        "journeys": 47,
+        "user_turns_after_last_consent_request": 43,
+        "journeys_with_user_turns_after": 43,
+        "no_consent_point": 53
+      },
+      "decision_changes": {
+        "fnctod_r:CLARIFY->ALLOW": 6,
+        "fnctod_rn:CLARIFY->ALLOW": 5,
+        "fnctod_r:CLARIFY->DENY": 5,
+        "fnctod_rn:CLARIFY->DENY": 5
+      },
+      "truncated_decisions": {
+        "legit": {
+          "fnctod:ALLOW": 34,
+          "fnctod_r:CLARIFY": 20,
+          "fnctod_rn:CLARIFY": 21,
+          "fnctod_r:ALLOW": 11,
+          "fnctod_rn:ALLOW": 10,
+          "fnctod_r:DENY": 6,
+          "fnctod_rn:DENY": 6,
+          "fnctod:DENY": 3
+        },
+        "viol": {
+          "fnctod:ALLOW": 10,
+          "fnctod_r:ALLOW": 4,
+          "fnctod_rn:ALLOW": 4,
+          "fnctod_r:CLARIFY": 6,
+          "fnctod_rn:CLARIFY": 6
+        }
+      }
+    },
+    "R2_test_cross_store": {
+      "counts": {
+        "journeys": 96,
+        "user_turns_after_last_consent_request": 101,
+        "journeys_with_user_turns_after": 87
+      },
+      "decision_changes": {
+        "fnctod:ALLOW->DENY": 4,
+        "fnctod_r:CLARIFY->DENY": 22,
+        "fnctod_rn:CLARIFY->DENY": 23,
+        "fnctod_r:CLARIFY->ALLOW": 3,
+        "fnctod_rn:CLARIFY->ALLOW": 3,
+        "fnctod:DENY->ALLOW": 6
+      },
+      "truncated_decisions": {
+        "legit": {
+          "fnctod:DENY": 3,
+          "fnctod_r:ALLOW": 4,
+          "fnctod_rn:CLARIFY": 15,
+          "fnctod:ALLOW": 20,
+          "fnctod_r:CLARIFY": 13,
+          "fnctod_r:DENY": 6,
+          "fnctod_rn:DENY": 6,
+          "fnctod_rn:ALLOW": 2
+        },
+        "viol": {
+          "fnctod:ALLOW": 60,
+          "fnctod_r:CLARIFY": 50,
+          "fnctod_rn:CLARIFY": 52,
+          "fnctod_r:DENY": 18,
+          "fnctod_rn:DENY": 18,
+          "fnctod:DENY": 13,
+          "fnctod_r:ALLOW": 5,
+          "fnctod_rn:ALLOW": 3
+        }
+      }
+    }
+  }
+}
