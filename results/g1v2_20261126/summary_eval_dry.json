@@ -1,0 +1,12 @@
+{
+  "split": "eval",
+  "n": 140,
+  "failed": [],
+  "dry_run": true,
+  "case_file_sha256": "1115a4399f6be13755dfdf9bcdeaa526954a0a1dec21f3d758c7b743289efcd4",
+  "dry_run_estimate": {
+    "calls_lower_bound": 490,
+    "input_tokens_est": 85899,
+    "note": "dry answers select no function, so FnCTOD argument calls are not counted"
+  }
+}

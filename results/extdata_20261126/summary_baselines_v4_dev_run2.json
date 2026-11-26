@@ -1,0 +1,56 @@
+{
+  "prompts_sha256": "d9c696febf7ffc7c49640f3afd5a492c64e1e783e6e343f0f366cf6e6a18ce43",
+  "input_condition": "A",
+  "precheck_only": true,
+  "ledger": "ledger_baselines_v4_run2.jsonl",
+  "rows": 1570,
+  "cost_usd_ledger_total": 0.129723,
+  "cache_hits": 0,
+  "summary_failures": 0,
+  "precheck_unparsed": 0,
+  "table": {
+    "PRECHECK|matched|1|DENY": {
+      "DENY": 16
+    },
+    "PRECHECK|matched|2|CLARIFY": {
+      "CLARIFY": 8
+    },
+    "PRECHECK|matched|2|DENY": {
+      "CLARIFY": 8
+    },
+    "PRECHECK|matched|3|ALLOW": {
+      "CLARIFY": 11,
+      "ALLOW": 5
+    },
+    "PRECHECK|matched|4|CLARIFY": {
+      "ALLOW": 14,
+      "CLARIFY": 2
+    },
+    "PRECHECK|matched|5|ALLOW": {
+      "CLARIFY": 16
+    },
+    "PRECHECK|matched|6|ALLOW": {
+      "CLARIFY": 14,
+      "ALLOW": 2
+    },
+    "PRECHECK|tx|authority_only|block": {
+      "ALLOW": 198,
+      "CLARIFY": 103,
+      "DENY": 6
+    },
+    "PRECHECK|tx|both|block": {
+      "DENY": 425,
+      "CLARIFY": 4,
+      "ALLOW": 1
+    },
+    "PRECHECK|tx|context_only|block": {
+      "DENY": 427,
+      "CLARIFY": 3
+    },
+    "PRECHECK|tx|normal|allow": {
+      "ALLOW": 203,
+      "CLARIFY": 96,
+      "DENY": 8
+    }
+  }
+}

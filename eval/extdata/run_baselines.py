@@ -7,6 +7,13 @@ Same transactions, exclusion and gate as eval/extdata/run_ext.py. Input to the m
 Output: results/extdata_20261126/baselines_{name}_{split}.jsonl, summary_baselines_{name}_{split}.json
 Usage: dry  .venv/Scripts/python.exe eval/extdata/run_baselines.py --data <v4> --name v4 --split dev --dry-run
        live ... --budget 0.40   (approved: prompts sha d9c696fe...)
+Harness options added 2026-11-27 after the policy freeze (prompts and decision code unchanged; defaults = old behaviour):
+  --precheck-only     skip SUMMARY
+  --seller-in-input   condition B: seller tool turns enter the PRECHECK input as agent turns (same mapping as
+                      run_ext.py --seller-to-extractor); without --run-tag it shares the condition-A ledger, so
+                      identical requests (no seller turn) replay A's answers and only changed inputs are paid
+  --run-tag T         separate output suffix AND separate ledger (no replay; used for the run-to-run agreement)
+  --cap-new-spend X   cap on NEW spend of this run (budget = what the ledger already holds + X)
 """
 from __future__ import annotations
 
@@ -38,6 +45,10 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--budget", type=float, default=0.40)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--precheck-only", action="store_true")
+    ap.add_argument("--seller-in-input", action="store_true")
+    ap.add_argument("--run-tag", default="")
+    ap.add_argument("--cap-new-spend", type=float, default=None)
     a = ap.parse_args()
     d = a.data / a.split
     eps = {e["episode_id"]: e for e in X.jl(d / "episodes.jsonl")}
@@ -47,12 +58,24 @@ def main():
     txs = [("tx", t) for t in X.jl(d / "transactions.jsonl") if t["episode_id"] not in excl] + \
           [("matched", t) for t in X.jl(d / "matched_stockout.jsonl") if t["episode_id"] not in excl]
     keep = sorted({t["episode_id"] for _, t in txs})
-    tag = f"{a.name}_{a.split}" + ("_dry" if a.dry_run else "")
+    tag = (f"{a.name}_{a.split}" + ("_B" if a.seller_in_input else "") + (f"_{a.run_tag}" if a.run_tag else "")
+           + ("_dry" if a.dry_run else ""))
     assert a.dry_run or not (OUT / f"baselines_{tag}.jsonl").exists(), "refusing to overwrite"
-    llm = R.DryLLM() if a.dry_run else OpenAIResponses("gpt-6-luna", OUT / f"ledger_baselines_{a.name}.jsonl", a.budget)
+    ledger = OUT / f"ledger_baselines_{a.name}{('_' + a.run_tag) if a.run_tag else ''}.jsonl"
+    budget = a.budget
+    if a.cap_new_spend is not None:
+        held = sum(json.loads(l).get("cost_usd", 0.0) for l in ledger.read_text(encoding="utf-8").splitlines() if l) if ledger.exists() else 0.0
+        budget = held + a.cap_new_spend
+    llm = R.DryLLM() if a.dry_run else OpenAIResponses("gpt-6-luna", ledger, budget)
 
     def turns(ep):
-        return [("shopper" if t["role"] == "user" else "agent", t["text"]) for t in ep["dialogue"] if t["role"] in ("user", "assistant")]
+        out = []
+        for t in ep["dialogue"]:
+            if t["role"] in ("user", "assistant"):
+                out.append(("shopper" if t["role"] == "user" else "agent", t["text"]))
+            elif a.seller_in_input and t["role"] == "tool" and t.get("source") == "seller":
+                out.append(("agent", t["text"]))       # condition B: as the extractor sees it in run_ext.py
+        return out
 
     def pre_job(item):
         kind, tx = item
@@ -79,7 +102,7 @@ def main():
             return e, ex
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
         pre = list(ex.map(pre_job, txs))
-        summ_ext = dict(ex.map(sum_job, keep))
+        summ_ext = {} if a.precheck_only else dict(ex.map(sum_job, keep))
     if a.dry_run:
         out = {"precheck_calls": len(txs), "summary_episodes": len(keep), "calls_lower_bound": llm.calls,
                "input_tokens_est": int(llm.chars_in / 4), "prompts_sha256": Bl.PROMPTS_SHA256}
@@ -91,7 +114,7 @@ def main():
         ep = eps[tx["episode_id"]]
         g = (tg.get(tx["transaction_id"]) if kind == "tx" else mg.get(tx["challenge_id"])) or {}
         se = summ_ext.get(tx["episode_id"])
-        sdec = "ERROR"
+        sdec = None if a.precheck_only else "ERROR"
         if se is not None and not isinstance(se, Exception):
             case = X.build_case(ep, tx, g)
             env = A.Env(case)
@@ -100,12 +123,15 @@ def main():
             sdec = verdict.integrated(d_, c_, False)
         key = (kind, g.get("transaction_type") or g.get("intent_case"), g.get("expected_checkout") or g.get("reference_verdict"))
         tab[("PRECHECK",) + key][p[0]] += 1
-        tab[("SUMMARY",) + key][sdec] += 1
+        if not a.precheck_only:
+            tab[("SUMMARY",) + key][sdec] += 1
         rows.append({"kind": kind, "id": tx.get("transaction_id") or tx.get("challenge_id"), "episode_id": tx["episode_id"],
                      "type": key[1], "expected": key[2], "precheck": p[0], "precheck_unparsed": p[1], "summary": sdec,
                      "follows_rejected_proposal": g.get("follows_rejected_proposal")})
     (OUT / f"baselines_{tag}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
-    out = {"prompts_sha256": Bl.PROMPTS_SHA256, "rows": len(rows), "cost_usd": round(llm.spent, 6), "cache_hits": llm.cache_hits,
+    out = {"prompts_sha256": Bl.PROMPTS_SHA256, "input_condition": "B (seller turns in input)" if a.seller_in_input else "A",
+           "precheck_only": a.precheck_only, "ledger": ledger.name, "rows": len(rows),
+           "cost_usd_ledger_total": round(llm.spent, 6), "cache_hits": llm.cache_hits,
            "summary_failures": sum(1 for v in summ_ext.values() if isinstance(v, Exception)),
            "precheck_unparsed": sum(1 for p in pre if p[1]),
            "table": {"|".join(map(str, k)): dict(v) for k, v in sorted(tab.items(), key=lambda kv: str(kv[0]))}}

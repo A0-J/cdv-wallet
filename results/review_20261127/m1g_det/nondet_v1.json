@@ -1,0 +1,87 @@
+{
+  "prompt_version": "v1",
+  "rows_file": "results\\m1g_20261126\\rows_dev.jsonl",
+  "episodes": 430,
+  "excluded": [
+    "ctw-37be76ca1294bd7e",
+    "ctw-ce69c8078f6c4767"
+  ],
+  "transactions": 1474,
+  "candidates_both_runs": 497,
+  "candidate_agreement": 476,
+  "episodes_with_any_flip": 21,
+  "tx_state_differs": 16,
+  "tx_pending_differs": 34,
+  "tx_state_or_pending_differs": 48,
+  "tx_mandate_differs": 16,
+  "tx_B3_decision_differs": 0,
+  "tx_B3_transitions": {},
+  "tx_B3_allow_switch": 0,
+  "tx_B3_differs_by_type": {
+    "authority_only": "0/307",
+    "both": "0/430",
+    "context_only": "0/430",
+    "normal": "0/307"
+  },
+  "tx_B4_decision_differs": 34,
+  "tx_B4_transitions": {
+    "DENY->CLARIFY": 14,
+    "CLARIFY->DENY": 20
+  },
+  "tx_B4_allow_switch": 0,
+  "tx_B4_differs_by_type": {
+    "authority_only": "0/307",
+    "both": "17/430",
+    "context_only": "17/430",
+    "normal": "0/307"
+  },
+  "allow_switch_flip_causes": {
+    "B3": {},
+    "B4": {}
+  },
+  "transition_matrix": {
+    "ALL": {
+      "ACCEPT->ACCEPT": 217,
+      "ACCEPT->REJECT": 2,
+      "CLARIFY->ACCEPT": 1,
+      "CLARIFY->CLARIFY": 9,
+      "CLARIFY->REJECT": 9,
+      "REJECT->ACCEPT": 2,
+      "REJECT->CLARIFY": 7,
+      "REJECT->REJECT": 250
+    },
+    "label=CLARIFY": {
+      "ACCEPT->ACCEPT": 13,
+      "CLARIFY->ACCEPT": 1,
+      "CLARIFY->CLARIFY": 9,
+      "CLARIFY->REJECT": 9,
+      "REJECT->ACCEPT": 1,
+      "REJECT->CLARIFY": 7,
+      "REJECT->REJECT": 75
+    },
+    "cited=user": {
+      "ACCEPT->ACCEPT": 217,
+      "ACCEPT->REJECT": 2,
+      "CLARIFY->ACCEPT": 1,
+      "CLARIFY->CLARIFY": 9,
+      "CLARIFY->REJECT": 9,
+      "REJECT->ACCEPT": 2,
+      "REJECT->CLARIFY": 7,
+      "REJECT->REJECT": 205
+    },
+    "label=REJECT": {
+      "ACCEPT->ACCEPT": 2,
+      "ACCEPT->REJECT": 1,
+      "REJECT->ACCEPT": 1,
+      "REJECT->REJECT": 167
+    },
+    "cited=non-user": {
+      "REJECT->REJECT": 45
+    },
+    "label=ACCEPT": {
+      "ACCEPT->ACCEPT": 202,
+      "ACCEPT->REJECT": 1,
+      "REJECT->REJECT": 8
+    }
+  }
+}

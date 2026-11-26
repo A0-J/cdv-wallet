@@ -1,0 +1,274 @@
+{
+  "rows_tag": "m1g",
+  "by_field_A": {
+    "Fulfillment": {
+      "AV0": 130,
+      "AV1": 79,
+      "AV2": 65,
+      "AV2+": 11,
+      "B2": 8,
+      "B3": 11,
+      "B4": 10,
+      "PRECHECK": 0,
+      "n": 130
+    },
+    "Fulfillment 단독": {
+      "AV0": 130,
+      "AV1": 79,
+      "AV2": 65,
+      "AV2+": 11,
+      "B2": 8,
+      "B3": 11,
+      "B4": 10,
+      "PRECHECK": 0,
+      "n": 130
+    },
+    "Deadline": {
+      "AV0": 120,
+      "AV1": 73,
+      "AV2": 54,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 40,
+      "B4": 31,
+      "PRECHECK": 0,
+      "n": 120
+    },
+    "Deadline 단독": {
+      "AV0": 120,
+      "AV1": 73,
+      "AV2": 54,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 40,
+      "B4": 31,
+      "PRECHECK": 0,
+      "n": 120
+    },
+    "Price": {
+      "AV0": 108,
+      "AV1": 64,
+      "AV2": 49,
+      "AV2+": 0,
+      "B2": 1,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 108
+    },
+    "Price 단독": {
+      "AV0": 106,
+      "AV1": 64,
+      "AV2": 49,
+      "AV2+": 0,
+      "B2": 1,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 106
+    },
+    "Quantity": {
+      "AV0": 74,
+      "AV1": 1,
+      "AV2": 1,
+      "AV2+": 1,
+      "B2": 0,
+      "B3": 9,
+      "B4": 8,
+      "PRECHECK": 0,
+      "n": 74
+    },
+    "Quantity 단독": {
+      "AV0": 36,
+      "AV1": 0,
+      "AV2": 0,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 9,
+      "B4": 8,
+      "PRECHECK": 0,
+      "n": 36
+    },
+    "Brand": {
+      "AV0": 36,
+      "AV1": 1,
+      "AV2": 1,
+      "AV2+": 1,
+      "B2": 0,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 36
+    }
+  },
+  "AV2_vs_B2": {
+    "base_allows_B2_blocks": 162,
+    "B2_allows_base_blocks": 2,
+    "B2_components": {
+      "수령 방식(동의 시점)": 53,
+      "기한(동의 시점)": 54,
+      "총액(수수료 포함)": 49,
+      "E2(판매자 주장)": 4,
+      "브랜드": 2
+    },
+    "not_explained_by_consent3": 6
+  },
+  "AV2+_vs_B2": {
+    "base_allows_B2_blocks": 5,
+    "B2_allows_base_blocks": 2,
+    "B2_components": {
+      "E2(판매자 주장)": 4,
+      "브랜드": 1
+    },
+    "not_explained_by_consent3": 5
+  },
+  "by_field_B": {
+    "Fulfillment": {
+      "AV0": 130,
+      "AV1": 78,
+      "AV2": 65,
+      "AV2+": 10,
+      "B2": 8,
+      "B3": 11,
+      "B4": 10,
+      "PRECHECK": 0,
+      "n": 130
+    },
+    "Fulfillment 단독": {
+      "AV0": 130,
+      "AV1": 78,
+      "AV2": 65,
+      "AV2+": 10,
+      "B2": 8,
+      "B3": 11,
+      "B4": 10,
+      "PRECHECK": 0,
+      "n": 130
+    },
+    "Deadline": {
+      "AV0": 120,
+      "AV1": 74,
+      "AV2": 57,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 43,
+      "B4": 30,
+      "PRECHECK": 0,
+      "n": 120
+    },
+    "Deadline 단독": {
+      "AV0": 120,
+      "AV1": 74,
+      "AV2": 57,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 43,
+      "B4": 30,
+      "PRECHECK": 0,
+      "n": 120
+    },
+    "Price": {
+      "AV0": 108,
+      "AV1": 62,
+      "AV2": 46,
+      "AV2+": 0,
+      "B2": 1,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 108
+    },
+    "Price 단독": {
+      "AV0": 106,
+      "AV1": 62,
+      "AV2": 46,
+      "AV2+": 0,
+      "B2": 1,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 106
+    },
+    "Quantity": {
+      "AV0": 74,
+      "AV1": 2,
+      "AV2": 1,
+      "AV2+": 1,
+      "B2": 1,
+      "B3": 10,
+      "B4": 9,
+      "PRECHECK": 0,
+      "n": 74
+    },
+    "Quantity 단독": {
+      "AV0": 36,
+      "AV1": 0,
+      "AV2": 0,
+      "AV2+": 0,
+      "B2": 0,
+      "B3": 10,
+      "B4": 9,
+      "PRECHECK": 0,
+      "n": 36
+    },
+    "Brand": {
+      "AV0": 36,
+      "AV1": 2,
+      "AV2": 1,
+      "AV2+": 1,
+      "B2": 1,
+      "B3": 0,
+      "B4": 0,
+      "PRECHECK": 0,
+      "n": 36
+    }
+  },
+  "stale": {
+    "episodes": 72,
+    "by_type": {
+      "context_only": {
+        "DENY|DENY|DENY|DENY|DENY": 66,
+        "DENY|DENY|ALLOW|DENY|ALLOW": 5,
+        "DENY|DENY|ALLOW|DENY|DENY": 1
+      },
+      "normal": {
+        "ALLOW|DENY|ALLOW|DENY|DENY": 12,
+        "ALLOW|DENY|ALLOW|ALLOW|DENY": 3,
+        "ALLOW|DENY|ALLOW|ALLOW|ALLOW": 26,
+        "ALLOW|DENY|DENY|DENY|DENY": 9,
+        "ALLOW|DENY|DENY|ALLOW|DENY": 21,
+        "DENY|DENY|DENY|DENY|DENY": 1
+      }
+    }
+  },
+  "validation": {
+    "AV0": {
+      "viol_blocked": 1,
+      "legit_blocked": 0
+    },
+    "AV1": {
+      "viol_blocked": 7,
+      "legit_blocked": 19
+    },
+    "AV2": {
+      "viol_blocked": 11,
+      "legit_blocked": 26
+    },
+    "AV2+": {
+      "viol_blocked": 16,
+      "legit_blocked": 28
+    },
+    "B2": {
+      "viol_blocked": 15,
+      "legit_blocked": 41
+    },
+    "B3": {
+      "viol_blocked": 14,
+      "legit_blocked": 32
+    },
+    "B4": {
+      "viol_blocked": 20,
+      "legit_blocked": 86
+    }
+  }
+}

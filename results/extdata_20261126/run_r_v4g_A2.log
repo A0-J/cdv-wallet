@@ -1,0 +1,2 @@
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2271.79it/s]
+{"dataset": "v4", "split": "dev", "input_condition": "A (shopper and agent turns only)", "episodes": 430, "transactions": 1474, "excluded_episodes": 2, "dry_run": false, "failed": [], "cost_usd": 0.0, "cache_hits": 2547, "matched_rows": 96, "m1_main": "M1-G", "m1g_cost_usd": 0.32883, "unverified_policy": "consent_clarify"}

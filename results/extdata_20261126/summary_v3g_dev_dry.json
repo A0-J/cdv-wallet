@@ -1,0 +1,13 @@
+{
+  "dataset": "v3g",
+  "split": "dev",
+  "episodes": 398,
+  "transactions": 723,
+  "excluded_episodes": 2,
+  "dry_run": true,
+  "dry_run_estimate": {
+    "calls_lower_bound": 1867,
+    "input_tokens_est": 474151,
+    "note": "dry answers select no function: FnCTOD argument calls not counted"
+  }
+}

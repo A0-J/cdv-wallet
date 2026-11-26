@@ -1,0 +1,103 @@
+{
+  "extraction_A": {
+    "calls": 2547,
+    "input_tokens": 987583,
+    "output_tokens": 428032,
+    "cost_usd": 0.312774,
+    "latency_median_s": 2.398,
+    "latency_p90_s": 3.716,
+    "errors": 0
+  },
+  "m1g_natural_A_so_far": {
+    "calls": 994,
+    "input_tokens": 273559,
+    "output_tokens": 64377,
+    "cost_usd": 0.059544,
+    "latency_median_s": 1.624,
+    "latency_p90_s": 2.223,
+    "errors": 0
+  },
+  "precheck_A_run1": {
+    "calls": 1570,
+    "input_tokens": 647964,
+    "output_tokens": 131225,
+    "cost_usd": 0.130409,
+    "latency_median_s": 1.875,
+    "latency_p90_s": 2.412,
+    "errors": 0
+  },
+  "precheck_A_run2": {
+    "calls": 1570,
+    "input_tokens": 647964,
+    "output_tokens": 129854,
+    "cost_usd": 0.129723,
+    "latency_median_s": 1.851,
+    "latency_p90_s": 2.384,
+    "errors": 0
+  },
+  "summary_baseline": {
+    "calls": 860,
+    "input_tokens": 189476,
+    "output_tokens": 166833,
+    "cost_usd": 0.102364,
+    "latency_median_s": 2.717,
+    "latency_p90_s": 3.731,
+    "errors": 0
+  },
+  "episodes": 430,
+  "transactions": 1474,
+  "matched": 96,
+  "gate_ms": {
+    "case+env build": {
+      "median": 0.14,
+      "p90": 0.21,
+      "n": 1474
+    },
+    "B2 gate (mandate + full M2 gate)": {
+      "median": 0.27,
+      "p90": 0.35,
+      "n": 1474
+    },
+    "AV0 (A-VIP)": {
+      "median": 0.2,
+      "p90": 0.26,
+      "n": 1474
+    },
+    "AV2 (A-VIP + cart check)": {
+      "median": 0.22,
+      "p90": 0.27,
+      "n": 1474
+    }
+  },
+  "b3_gate_calls_per_tx": {
+    "median": 4,
+    "max": 64
+  },
+  "precheck_agreement": {
+    "n": 1570,
+    "same": 1467,
+    "transitions": {
+      "ALLOW->ALLOW": 379,
+      "ALLOW->CLARIFY": 44,
+      "ALLOW->DENY": 1,
+      "CLARIFY->ALLOW": 42,
+      "CLARIFY->CLARIFY": 218,
+      "CLARIFY->DENY": 11,
+      "DENY->ALLOW": 2,
+      "DENY->CLARIFY": 3,
+      "DENY->DENY": 870
+    },
+    "by_type": {
+      "matched|1": "16/16",
+      "matched|2": "16/16",
+      "matched|3": "7/16",
+      "matched|4": "13/16",
+      "matched|5": "16/16",
+      "matched|6": "10/16",
+      "tx|authority_only": "272/307",
+      "tx|both": "422/430",
+      "tx|context_only": "424/430",
+      "tx|normal": "271/307"
+    }
+  }
+}

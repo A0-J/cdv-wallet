@@ -1,0 +1,609 @@
+{
+  "m1_main": "M1-G",
+  "unverified_policy": "consent_clarify",
+  "m1g_prompt": "v2",
+  "m1g_cost_usd": 0.054207,
+  "consent_checkout_check": true,
+  "note": "Development evaluation on VALIDATION (no model calls): arms B0-B4 on the P2 extraction.",
+  "model_calls": "M1-G basis calls, see ledger_m1g",
+  "n": 306,
+  "seconds": 2111.6,
+  "sets": {
+    "V1": 200,
+    "V3": 100,
+    "V2": 6
+  },
+  "reference_turns": {
+    "ref_all": 101,
+    "ref_with_list": 84,
+    "resolved_all": 62,
+    "resolved_with_list": 57
+  },
+  "groups": {
+    "legit(outcome)": {
+      "n": 235,
+      "B0": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          1.6
+        ],
+        "clarify_causes": {}
+      },
+      "B1": {
+        "ALLOW": 169,
+        "CLARIFY": 66,
+        "DENY": 0,
+        "blocked_pct": 28.1,
+        "blocked_ci95": [
+          22.7,
+          34.1
+        ],
+        "clarify_causes": {
+          "M1": 66
+        }
+      },
+      "B2": {
+        "ALLOW": 191,
+        "CLARIFY": 29,
+        "DENY": 15,
+        "blocked_pct": 18.7,
+        "blocked_ci95": [
+          14.3,
+          24.2
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 13,
+          "gate_other": 16
+        }
+      },
+      "B3": {
+        "ALLOW": 203,
+        "CLARIFY": 26,
+        "DENY": 6,
+        "blocked_pct": 13.6,
+        "blocked_ci95": [
+          9.8,
+          18.6
+        ],
+        "clarify_causes": {
+          "gate_other": 16,
+          "M1": 4,
+          "UNKNOWN_ATTR": 6
+        }
+      },
+      "B4": {
+        "ALLOW": 146,
+        "CLARIFY": 85,
+        "DENY": 4,
+        "blocked_pct": 37.9,
+        "blocked_ci95": [
+          31.9,
+          44.2
+        ],
+        "clarify_causes": {
+          "M1": 66,
+          "gate_other": 14,
+          "UNKNOWN_ATTR": 5
+        }
+      },
+      "B3_v2": {
+        "ALLOW": 181,
+        "CLARIFY": 44,
+        "DENY": 10,
+        "blocked_pct": 23.0,
+        "blocked_ci95": [
+          18.1,
+          28.8
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 17,
+          "gate_other": 20,
+          "M1": 7
+        }
+      },
+      "v1": {
+        "ALLOW": 114,
+        "CLARIFY": 117,
+        "DENY": 4,
+        "blocked_pct": 51.5,
+        "blocked_ci95": [
+          45.1,
+          57.8
+        ],
+        "clarify_causes": {
+          "M1": 117
+        }
+      },
+      "AV0": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          1.6
+        ],
+        "clarify_causes": {}
+      },
+      "AV1": {
+        "ALLOW": 215,
+        "CLARIFY": 0,
+        "DENY": 20,
+        "blocked_pct": 8.5,
+        "blocked_ci95": [
+          5.6,
+          12.8
+        ],
+        "clarify_causes": {}
+      },
+      "AV2": {
+        "ALLOW": 207,
+        "CLARIFY": 0,
+        "DENY": 28,
+        "blocked_pct": 11.9,
+        "blocked_ci95": [
+          8.4,
+          16.7
+        ],
+        "clarify_causes": {}
+      }
+    },
+    "violating(outcome)": {
+      "n": 71,
+      "B0": {
+        "ALLOW": 71,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          5.1
+        ],
+        "clarify_causes": {}
+      },
+      "B1": {
+        "ALLOW": 43,
+        "CLARIFY": 28,
+        "DENY": 0,
+        "blocked_pct": 39.4,
+        "blocked_ci95": [
+          28.9,
+          51.1
+        ],
+        "clarify_causes": {
+          "M1": 28
+        }
+      },
+      "B2": {
+        "ALLOW": 47,
+        "CLARIFY": 9,
+        "DENY": 15,
+        "blocked_pct": 33.8,
+        "blocked_ci95": [
+          23.9,
+          45.4
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 3,
+          "gate_other": 6
+        }
+      },
+      "B3": {
+        "ALLOW": 49,
+        "CLARIFY": 9,
+        "DENY": 13,
+        "blocked_pct": 31.0,
+        "blocked_ci95": [
+          21.4,
+          42.5
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 1,
+          "M1": 2,
+          "gate_other": 6
+        }
+      },
+      "B4": {
+        "ALLOW": 29,
+        "CLARIFY": 32,
+        "DENY": 10,
+        "blocked_pct": 59.2,
+        "blocked_ci95": [
+          47.5,
+          69.8
+        ],
+        "clarify_causes": {
+          "M1": 28,
+          "UNKNOWN_ATTR": 1,
+          "gate_other": 3
+        }
+      },
+      "B3_v2": {
+        "ALLOW": 45,
+        "CLARIFY": 13,
+        "DENY": 13,
+        "blocked_pct": 36.6,
+        "blocked_ci95": [
+          26.4,
+          48.2
+        ],
+        "clarify_causes": {
+          "M1": 5,
+          "UNKNOWN_ATTR": 1,
+          "gate_other": 7
+        }
+      },
+      "v1": {
+        "ALLOW": 30,
+        "CLARIFY": 38,
+        "DENY": 3,
+        "blocked_pct": 57.7,
+        "blocked_ci95": [
+          46.2,
+          68.5
+        ],
+        "clarify_causes": {
+          "M1": 38
+        }
+      },
+      "AV0": {
+        "ALLOW": 69,
+        "CLARIFY": 0,
+        "DENY": 2,
+        "blocked_pct": 2.8,
+        "blocked_ci95": [
+          0.8,
+          9.7
+        ],
+        "clarify_causes": {}
+      },
+      "AV1": {
+        "ALLOW": 63,
+        "CLARIFY": 0,
+        "DENY": 8,
+        "blocked_pct": 11.3,
+        "blocked_ci95": [
+          5.8,
+          20.7
+        ],
+        "clarify_causes": {}
+      },
+      "AV2": {
+        "ALLOW": 58,
+        "CLARIFY": 0,
+        "DENY": 13,
+        "blocked_pct": 18.3,
+        "blocked_ci95": [
+          11.0,
+          28.8
+        ],
+        "clarify_causes": {}
+      }
+    },
+    "pay_viol(U denies)": {
+      "n": 30,
+      "B0": {
+        "ALLOW": 30,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          11.4
+        ],
+        "clarify_causes": {}
+      },
+      "B1": {
+        "ALLOW": 19,
+        "CLARIFY": 11,
+        "DENY": 0,
+        "blocked_pct": 36.7,
+        "blocked_ci95": [
+          21.9,
+          54.5
+        ],
+        "clarify_causes": {
+          "M1": 11
+        }
+      },
+      "B2": {
+        "ALLOW": 14,
+        "CLARIFY": 2,
+        "DENY": 14,
+        "blocked_pct": 53.3,
+        "blocked_ci95": [
+          36.1,
+          69.8
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 2
+        }
+      },
+      "B3": {
+        "ALLOW": 15,
+        "CLARIFY": 2,
+        "DENY": 13,
+        "blocked_pct": 50.0,
+        "blocked_ci95": [
+          33.2,
+          66.8
+        ],
+        "clarify_causes": {
+          "M1": 1,
+          "gate_other": 1
+        }
+      },
+      "B4": {
+        "ALLOW": 9,
+        "CLARIFY": 11,
+        "DENY": 10,
+        "blocked_pct": 70.0,
+        "blocked_ci95": [
+          52.1,
+          83.3
+        ],
+        "clarify_causes": {
+          "M1": 11
+        }
+      },
+      "B3_v2": {
+        "ALLOW": 13,
+        "CLARIFY": 4,
+        "DENY": 13,
+        "blocked_pct": 56.7,
+        "blocked_ci95": [
+          39.2,
+          72.6
+        ],
+        "clarify_causes": {
+          "M1": 4
+        }
+      },
+      "v1": {
+        "ALLOW": 12,
+        "CLARIFY": 15,
+        "DENY": 3,
+        "blocked_pct": 60.0,
+        "blocked_ci95": [
+          42.3,
+          75.4
+        ],
+        "clarify_causes": {
+          "M1": 15
+        }
+      },
+      "AV0": {
+        "ALLOW": 28,
+        "CLARIFY": 0,
+        "DENY": 2,
+        "blocked_pct": 6.7,
+        "blocked_ci95": [
+          1.8,
+          21.3
+        ],
+        "clarify_causes": {}
+      },
+      "AV1": {
+        "ALLOW": 22,
+        "CLARIFY": 0,
+        "DENY": 8,
+        "blocked_pct": 26.7,
+        "blocked_ci95": [
+          14.2,
+          44.4
+        ],
+        "clarify_causes": {}
+      },
+      "AV2": {
+        "ALLOW": 18,
+        "CLARIFY": 0,
+        "DENY": 12,
+        "blocked_pct": 40.0,
+        "blocked_ci95": [
+          24.6,
+          57.7
+        ],
+        "clarify_causes": {}
+      }
+    },
+    "violating_not_pay_checkable": {
+      "n": 42,
+      "B0": {
+        "ALLOW": 42,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          8.4
+        ],
+        "clarify_causes": {}
+      },
+      "B1": {
+        "ALLOW": 25,
+        "CLARIFY": 17,
+        "DENY": 0,
+        "blocked_pct": 40.5,
+        "blocked_ci95": [
+          27.0,
+          55.5
+        ],
+        "clarify_causes": {
+          "M1": 17
+        }
+      },
+      "B2": {
+        "ALLOW": 34,
+        "CLARIFY": 7,
+        "DENY": 1,
+        "blocked_pct": 19.0,
+        "blocked_ci95": [
+          10.0,
+          33.3
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 1,
+          "gate_other": 6
+        }
+      },
+      "B3": {
+        "ALLOW": 35,
+        "CLARIFY": 7,
+        "DENY": 0,
+        "blocked_pct": 16.7,
+        "blocked_ci95": [
+          8.3,
+          30.6
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 1,
+          "M1": 1,
+          "gate_other": 5
+        }
+      },
+      "B4": {
+        "ALLOW": 21,
+        "CLARIFY": 21,
+        "DENY": 0,
+        "blocked_pct": 50.0,
+        "blocked_ci95": [
+          35.5,
+          64.5
+        ],
+        "clarify_causes": {
+          "M1": 17,
+          "UNKNOWN_ATTR": 1,
+          "gate_other": 3
+        }
+      },
+      "B3_v2": {
+        "ALLOW": 33,
+        "CLARIFY": 9,
+        "DENY": 0,
+        "blocked_pct": 21.4,
+        "blocked_ci95": [
+          11.7,
+          35.9
+        ],
+        "clarify_causes": {
+          "UNKNOWN_ATTR": 1,
+          "M1": 1,
+          "gate_other": 7
+        }
+      },
+      "v1": {
+        "ALLOW": 19,
+        "CLARIFY": 23,
+        "DENY": 0,
+        "blocked_pct": 54.8,
+        "blocked_ci95": [
+          39.9,
+          68.8
+        ],
+        "clarify_causes": {
+          "M1": 23
+        }
+      },
+      "AV0": {
+        "ALLOW": 42,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          8.4
+        ],
+        "clarify_causes": {}
+      },
+      "AV1": {
+        "ALLOW": 42,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "blocked_pct": 0.0,
+        "blocked_ci95": [
+          0,
+          8.4
+        ],
+        "clarify_causes": {}
+      },
+      "AV2": {
+        "ALLOW": 41,
+        "CLARIFY": 0,
+        "DENY": 1,
+        "blocked_pct": 2.4,
+        "blocked_ci95": [
+          0.4,
+          12.3
+        ],
+        "clarify_causes": {}
+      }
+    }
+  },
+  "mcnemar_legit_blocked": {
+    "B3 vs B4": {
+      "a_only": 0,
+      "b_only": 57,
+      "p": 0.0
+    },
+    "B3 vs B2": {
+      "a_only": 13,
+      "b_only": 25,
+      "p": 0.073
+    },
+    "B3 vs v1": {
+      "a_only": 13,
+      "b_only": 102,
+      "p": 0.0
+    },
+    "B4 vs B1": {
+      "a_only": 23,
+      "b_only": 0,
+      "p": 0.0
+    }
+  },
+  "mcnemar_payviol_blocked": {
+    "B3 vs B2": {
+      "a_only": 2,
+      "b_only": 3,
+      "p": 1.0
+    },
+    "B3 vs B1": {
+      "a_only": 10,
+      "b_only": 6,
+      "p": 0.4545
+    },
+    "B3 vs B0": {
+      "a_only": 15,
+      "b_only": 0,
+      "p": 0.0001
+    }
+  },
+  "m1_items": {
+    "unresolved_by_kind": {
+      "SELECTION_UNRESOLVED": 35,
+      "M1G_AMBIGUOUS": 55,
+      "OMISSION": 28
+    },
+    "rejected_by_code": {
+      "M1G_not_mentioned": 411,
+      "M1G_question": 12
+    },
+    "selection_how": {
+      "named_in_request": 53,
+      "null": 172,
+      "list_index": 50,
+      "deictic_single": 9,
+      "named": 16,
+      "agree_single_proposal": 6
+    },
+    "deferred_fields": {
+      "deadline_days": 33,
+      "fulfillment": 33
+    }
+  },
+  "ms_all_arms_median": 5953.7
+}

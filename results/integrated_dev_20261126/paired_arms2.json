@@ -1,0 +1,66 @@
+{
+  "AV1 vs B2 | pay_viol": {
+    "n": 30,
+    "both": 8,
+    "AV1_only": 0,
+    "B2_only": 8,
+    "neither": 14,
+    "p_exact": 0.0078
+  },
+  "AV1 vs B2 | legit": {
+    "n": 235,
+    "both": 18,
+    "AV1_only": 2,
+    "B2_only": 10,
+    "neither": 205,
+    "p_exact": 0.0386
+  },
+  "AV2 vs B2 | pay_viol": {
+    "n": 30,
+    "both": 11,
+    "AV2_only": 1,
+    "B2_only": 5,
+    "neither": 13,
+    "p_exact": 0.2188
+  },
+  "AV2 vs B2 | legit": {
+    "n": 235,
+    "both": 20,
+    "AV2_only": 8,
+    "B2_only": 8,
+    "neither": 199,
+    "p_exact": 1.0
+  },
+  "B2 vs B3 | pay_viol": {
+    "n": 30,
+    "both": 14,
+    "B2_only": 2,
+    "B3_only": 3,
+    "neither": 11,
+    "p_exact": 1.0
+  },
+  "B2 vs B3 | legit": {
+    "n": 235,
+    "both": 25,
+    "B2_only": 3,
+    "B3_only": 17,
+    "neither": 190,
+    "p_exact": 0.0026
+  },
+  "B3 vs B4 | pay_viol": {
+    "n": 30,
+    "both": 17,
+    "B3_only": 0,
+    "B4_only": 7,
+    "neither": 6,
+    "p_exact": 0.0156
+  },
+  "B3 vs B4 | legit": {
+    "n": 235,
+    "both": 42,
+    "B3_only": 0,
+    "B4_only": 113,
+    "neither": 80,
+    "p_exact": 0.0
+  }
+}

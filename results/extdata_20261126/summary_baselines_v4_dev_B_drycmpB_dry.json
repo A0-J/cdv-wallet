@@ -1,0 +1,7 @@
+{
+  "precheck_calls": 1570,
+  "summary_episodes": 430,
+  "calls_lower_bound": 1570,
+  "input_tokens_est": 642218,
+  "prompts_sha256": "d9c696febf7ffc7c49640f3afd5a492c64e1e783e6e343f0f366cf6e6a18ce43"
+}

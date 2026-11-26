@@ -1,0 +1,14 @@
+{
+  "dataset": "v4",
+  "split": "dev",
+  "input_condition": "B (seller turns to extractor)",
+  "episodes": 430,
+  "transactions": 1474,
+  "excluded_episodes": 2,
+  "dry_run": true,
+  "dry_run_estimate": {
+    "calls_lower_bound": 1397,
+    "input_tokens_est": 395780,
+    "note": "dry answers select no function: FnCTOD argument calls not counted"
+  }
+}

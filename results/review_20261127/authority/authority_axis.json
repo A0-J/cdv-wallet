@@ -1,0 +1,303 @@
+{
+  "A_current_decisions": {
+    "P4_A_rules_v2(pre-freeze)": {
+      "n_rows": 1474,
+      "by_reason": {
+        "payee": {
+          "B0": {
+            "ALLOW": 214
+          },
+          "B1": {
+            "CLARIFY": 204,
+            "ALLOW": 10
+          },
+          "B2": {
+            "DENY": 120,
+            "ALLOW": 89,
+            "CLARIFY": 5
+          },
+          "B3": {
+            "DENY": 96,
+            "CLARIFY": 47,
+            "ALLOW": 71
+          },
+          "B4": {
+            "CLARIFY": 204,
+            "DENY": 5,
+            "ALLOW": 5
+          },
+          "AV0": {
+            "ALLOW": 214
+          },
+          "AV1": {
+            "ALLOW": 132,
+            "DENY": 82
+          },
+          "AV2": {
+            "ALLOW": 106,
+            "DENY": 108
+          },
+          "n": 214
+        },
+        "expired": {
+          "B0": {
+            "ALLOW": 193
+          },
+          "B1": {
+            "CLARIFY": 189,
+            "ALLOW": 4
+          },
+          "B2": {
+            "DENY": 115,
+            "ALLOW": 74,
+            "CLARIFY": 4
+          },
+          "B3": {
+            "DENY": 95,
+            "CLARIFY": 40,
+            "ALLOW": 58
+          },
+          "B4": {
+            "CLARIFY": 189,
+            "ALLOW": 2,
+            "DENY": 2
+          },
+          "AV0": {
+            "ALLOW": 193
+          },
+          "AV1": {
+            "ALLOW": 102,
+            "DENY": 91
+          },
+          "AV2": {
+            "DENY": 118,
+            "ALLOW": 75
+          },
+          "n": 193
+        },
+        "payer": {
+          "B0": {
+            "ALLOW": 170
+          },
+          "B1": {
+            "CLARIFY": 165,
+            "ALLOW": 5
+          },
+          "B2": {
+            "DENY": 99,
+            "ALLOW": 70,
+            "CLARIFY": 1
+          },
+          "B3": {
+            "DENY": 86,
+            "CLARIFY": 23,
+            "ALLOW": 61
+          },
+          "B4": {
+            "CLARIFY": 165,
+            "DENY": 3,
+            "ALLOW": 2
+          },
+          "AV0": {
+            "ALLOW": 170
+          },
+          "AV1": {
+            "DENY": 76,
+            "ALLOW": 94
+          },
+          "AV2": {
+            "DENY": 94,
+            "ALLOW": 76
+          },
+          "n": 170
+        },
+        "grant_id": {
+          "B0": {
+            "ALLOW": 160
+          },
+          "B1": {
+            "CLARIFY": 155,
+            "ALLOW": 5
+          },
+          "B2": {
+            "DENY": 93,
+            "ALLOW": 63,
+            "CLARIFY": 4
+          },
+          "B3": {
+            "DENY": 87,
+            "CLARIFY": 18,
+            "ALLOW": 55
+          },
+          "B4": {
+            "CLARIFY": 155,
+            "DENY": 3,
+            "ALLOW": 2
+          },
+          "AV0": {
+            "ALLOW": 160
+          },
+          "AV1": {
+            "DENY": 66,
+            "ALLOW": 94
+          },
+          "AV2": {
+            "DENY": 77,
+            "ALLOW": 83
+          },
+          "n": 160
+        }
+      },
+      "pair_identical": {
+        "authority_only vs normal": {
+          "paired": 307,
+          "no_identical_checkout_mate": 0,
+          "same_decision_per_arm": {
+            "B0": 307,
+            "B1": 307,
+            "B2": 307,
+            "B3": 307,
+            "B4": 307,
+            "AV0": 307,
+            "AV1": 307,
+            "AV2": 307
+          }
+        },
+        "both vs context_only": {
+          "paired": 430,
+          "no_identical_checkout_mate": 0,
+          "same_decision_per_arm": {
+            "B0": 430,
+            "B1": 430,
+            "B2": 430,
+            "B3": 430,
+            "B4": 430,
+            "AV0": 430,
+            "AV1": 430,
+            "AV2": 430
+          }
+        }
+      }
+    },
+    "R-v4g_A_M1-G(post-freeze)": "not present",
+    "baselines(condition A)": {
+      "payee": {
+        "precheck": {
+          "DENY": 125,
+          "ALLOW": 60,
+          "CLARIFY": 29
+        },
+        "summary": {
+          "DENY": 135,
+          "ALLOW": 77,
+          "CLARIFY": 2
+        }
+      },
+      "expired": {
+        "precheck": {
+          "DENY": 115,
+          "ALLOW": 48,
+          "CLARIFY": 30
+        },
+        "summary": {
+          "DENY": 134,
+          "ALLOW": 57,
+          "CLARIFY": 2
+        }
+      },
+      "payer": {
+        "precheck": {
+          "DENY": 100,
+          "ALLOW": 48,
+          "CLARIFY": 22
+        },
+        "summary": {
+          "DENY": 116,
+          "ALLOW": 54
+        }
+      },
+      "grant_id": {
+        "precheck": {
+          "DENY": 92,
+          "CLARIFY": 26,
+          "ALLOW": 42
+        },
+        "summary": {
+          "DENY": 97,
+          "ALLOW": 61,
+          "CLARIFY": 2
+        }
+      },
+      "none": {
+        "precheck": {
+          "ALLOW": 201,
+          "DENY": 427,
+          "CLARIFY": 109
+        },
+        "summary": {
+          "ALLOW": 249,
+          "DENY": 482,
+          "CLARIFY": 6
+        }
+      },
+      "authority_only vs normal identical-checkout mate": {
+        "paired": 307,
+        "same_decision": {
+          "precheck": 269,
+          "summary": 307
+        }
+      },
+      "authority_only decisions": {
+        "precheck": {
+          "ALLOW": 197,
+          "CLARIFY": 103,
+          "DENY": 7
+        },
+        "summary": {
+          "ALLOW": 224,
+          "DENY": 78,
+          "CLARIFY": 5
+        }
+      }
+    }
+  },
+  "B_exploratory_feed": {
+    "expired": {
+      "control ALLOW  -> mapped ALLOW ": 193
+    },
+    "none": {
+      "control ALLOW  -> mapped ALLOW ": 737
+    },
+    "payee": {
+      "control ALLOW  -> mapped DENY CHOSEN_NOT_IN_CART": 214
+    },
+    "payer": {
+      "control ALLOW  -> mapped DENY MANDATE_SIG": 170
+    },
+    "grant_id": {
+      "control ALLOW  -> mapped DENY BIND_MISMATCH": 160
+    }
+  },
+  "C_stale_reuse": {
+    "episodes": 72,
+    "by_type": {
+      "context_only": {
+        "v2 current (full gate) DENY | v1 under CDV DENY | v1 if no revocation (full gate) DENY | AV0 ALLOW": 66,
+        "v2 current (full gate) DENY | v1 under CDV DENY | v1 if no revocation (full gate) ALLOW | AV0 ALLOW": 6
+      },
+      "normal": {
+        "v2 current (full gate) ALLOW | v1 under CDV DENY | v1 if no revocation (full gate) ALLOW | AV0 ALLOW": 41,
+        "v2 current (full gate) ALLOW | v1 under CDV DENY | v1 if no revocation (full gate) DENY | AV0 ALLOW": 30,
+        "v2 current (full gate) DENY | v1 under CDV DENY | v1 if no revocation (full gate) DENY | AV0 ALLOW": 1
+      }
+    }
+  },
+  "n_transactions": 1474,
+  "authority_reasons": {
+    "expired": 193,
+    "none": 737,
+    "payee": 214,
+    "payer": 170,
+    "grant_id": 160
+  }
+}

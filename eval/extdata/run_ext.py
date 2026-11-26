@@ -142,6 +142,10 @@ def main():
     ap.add_argument("--m1g-budget", type=float, default=0.20)
     ap.add_argument("--tag", default="", help="output suffix (rows/summary); never overwrites")
     ap.add_argument("--unverified-policy", default="consent_clarify", choices=["consent_clarify", "record"])
+    # runner options added 2026-11-27 (adjustment 21, runner only; defaults = old behaviour)
+    ap.add_argument("--m1g-memo", action="store_true",
+                    help="within this run, one M1-G call per distinct input shared by all transactions; parallel pre-warm")
+    ap.add_argument("--ledger-tag", default="", help="separate extraction and M1-G ledgers (an independent repeat run)")
     ap.add_argument("--seller-to-extractor", action="store_true",
                     help="condition (B): tool turns with source=seller are also given to the extractor (as assistant text)")
     a = ap.parse_args()
@@ -168,7 +172,11 @@ def main():
     A.UNVERIFIED_POLICY = a.unverified_policy
     m1_llm = None
     if a.m1g and not a.dry_run:
-        m1_llm = OpenAIResponses(a.model, OUT / f"ledger_m1g_{a.name}.jsonl", a.m1g_budget)
+        lt = f"_{a.ledger_tag}" if a.ledger_tag else ""
+        m1_llm = OpenAIResponses(a.model, OUT / f"ledger_m1g_{a.name}{lt}.jsonl", a.m1g_budget)
+        if a.m1g_memo:
+            from m1g_memo import MemoLLM
+            m1_llm = MemoLLM(m1_llm)
     OUT.mkdir(parents=True, exist_ok=True)
     files_sha = {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(d.glob("*.jsonl"))}
     (OUT / f"exclusion_{a.name}_{a.split}.json").write_text(json.dumps(
@@ -176,7 +184,8 @@ def main():
          "excluded_episodes": excl, "episodes_kept": len(keep), "transactions_kept": len(keep_tx)}, indent=2) + "\n",
         encoding="utf-8", newline="\n")
     assert a.dry_run or not (OUT / f"rows_{tag}.jsonl").exists(), f"refusing to overwrite rows_{tag}.jsonl"
-    llm = R.DryLLM() if a.dry_run else OpenAIResponses(a.model, OUT / f"ledger_{a.name}.jsonl", a.budget)
+    llm = R.DryLLM() if a.dry_run else OpenAIResponses(
+        a.model, OUT / f"ledger_{a.name}{('_' + a.ledger_tag) if a.ledger_tag else ''}.jsonl", a.budget)
 
     def to_extractor(t):
         if t["role"] in ("user", "assistant"):
@@ -205,6 +214,24 @@ def main():
         return
     from cdv.nli import NLI
     nli = NLI()
+    if m1_llm is not None and a.m1g_memo:                 # parallel pre-warm of the distinct M1-G requests
+        from cdv.v2.m1g_path import run_m1g_path
+        from m1g_memo import prewarm
+
+        def pw(item):
+            e, txx, gtx = item
+            v = ext.get(e)
+            if v is None or isinstance(v, Exception):
+                return None
+            c_ = build_case(eps[e], txx, gtx)
+            st = sorted([{"seq": int(s_["turn_id"][1:]), "state": s_["state"]} for s_ in v[0] if int(s_["turn_id"][1:]) < c_.t],
+                        key=lambda s_: s_["seq"])
+            br = sorted({str(b) for s_ in st for k in ("brand_include", "brand_exclude") for b in ((s_["state"].get(A.PC) or {}).get(k) or [])})
+            return run_m1g_path(st, c_.user_turns, c_.agent_turns, c_.reg, c_.t, m1_llm, known_brands=br)
+        items = [(t["episode_id"], t, tgold.get(t["transaction_id"]) or {}) for t in keep_tx]
+        if a.with_matched:
+            items += [(m["episode_id"], m, {}) for m in jl(d / "matched_stockout.jsonl") if m["episode_id"] in set(keep)]
+        prewarm_errors = prewarm([lambda it=it: pw(it) for it in items], m1_llm, a.workers)
     rows, failed = [], [{"episode_id": e, "error": repr(v)} for e, v in ext.items() if isinstance(v, Exception)]
     for tx in keep_tx:
         v = ext.get(tx["episode_id"])
@@ -258,6 +285,10 @@ def main():
                                                         for e in ext if not isinstance(ext[e], Exception)), 6),
                  "cache_hits": llm.cache_hits, "matched_rows": n_matched, "m1_main": "M1-G" if m1_llm else "rules_v2",
                  "m1g_cost_usd": round(m1_llm.spent, 6) if m1_llm else 0.0, "unverified_policy": A.UNVERIFIED_POLICY,
+                 "m1g_memo": bool(a.m1g_memo), "ledger_tag": a.ledger_tag,
+                 "m1g_requests_before_reuse": getattr(m1_llm, "requested", None),
+                 "m1g_distinct_requests": getattr(m1_llm, "distinct", None),
+                 "m1g_prewarm_errors": locals().get("prewarm_errors"),
                  "by_arm_type_expected": {f"{k[0]}|{k[1]}|{k[2]}": dict(v) for k, v in sorted(tab.items())}})
     (OUT / f"summary_{tag}.json").write_text(json.dumps(summ, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in summ.items() if k != "by_arm_type_expected"}))

@@ -1,0 +1,306 @@
+{
+  "n": 306,
+  "main_legit": {
+    "B0": {
+      "ALLOW": 235
+    },
+    "B1": {
+      "CLARIFY:M1": 66,
+      "ALLOW": 169
+    },
+    "B2": {
+      "CLARIFY:unknown_attr": 13,
+      "ALLOW": 137,
+      "ALLOW(unverified condition)": 54,
+      "CLARIFY:other_gate": 16,
+      "DENY": 15
+    },
+    "B3": {
+      "ALLOW": 168,
+      "ALLOW(unverified condition)": 35,
+      "CLARIFY:other_gate": 10,
+      "CLARIFY:selection": 6,
+      "DENY": 6,
+      "CLARIFY:M1": 4,
+      "CLARIFY:unknown_attr": 6
+    },
+    "B4": {
+      "CLARIFY:M1": 66,
+      "ALLOW": 115,
+      "ALLOW(unverified condition)": 31,
+      "CLARIFY:other_gate": 9,
+      "CLARIFY:selection": 5,
+      "CLARIFY:unknown_attr": 5,
+      "DENY": 4
+    },
+    "B3_v2": {
+      "CLARIFY:unknown_attr": 17,
+      "ALLOW": 128,
+      "ALLOW(unverified condition)": 53,
+      "CLARIFY:other_gate": 13,
+      "CLARIFY:selection": 7,
+      "DENY": 10,
+      "CLARIFY:M1": 7
+    },
+    "v1": {
+      "CLARIFY:M1": 117,
+      "ALLOW": 114,
+      "DENY": 4
+    },
+    "AV0": {
+      "ALLOW": 235
+    },
+    "AV1": {
+      "DENY": 20,
+      "ALLOW": 215
+    },
+    "AV2": {
+      "DENY": 28,
+      "ALLOW": 207
+    }
+  },
+  "unverified_share": {
+    "B0": 0.0,
+    "B1": 0.0,
+    "B2": 34.6,
+    "B3": 20.9,
+    "B4": 20.9,
+    "B3_v2": 33.0,
+    "v1": 0.0,
+    "AV0": 0.0,
+    "AV1": 0.0,
+    "AV2": 0.0
+  },
+  "mcnemar_legit_blocked": {
+    "B3 vs B4": {
+      "first_only": 0,
+      "second_only": 57,
+      "p_exact": 0.0
+    },
+    "B3 vs B1": {
+      "first_only": 23,
+      "second_only": 57,
+      "p_exact": 0.0002
+    },
+    "B3 vs B2": {
+      "first_only": 13,
+      "second_only": 25,
+      "p_exact": 0.073
+    }
+  },
+  "wrong": {
+    "U_blocks": {
+      "n": 29,
+      "B0": {
+        "ALLOW": 29
+      },
+      "B1": {
+        "CLARIFY": 11,
+        "ALLOW": 18
+      },
+      "B2": {
+        "ALLOW": 13,
+        "DENY": 14,
+        "CLARIFY": 2
+      },
+      "B3": {
+        "ALLOW": 14,
+        "DENY": 13,
+        "CLARIFY": 2
+      },
+      "B4": {
+        "CLARIFY": 11,
+        "DENY": 10,
+        "ALLOW": 8
+      },
+      "B3_v2": {
+        "ALLOW": 12,
+        "DENY": 13,
+        "CLARIFY": 4
+      },
+      "v1": {
+        "ALLOW": 11,
+        "CLARIFY": 15,
+        "DENY": 3
+      },
+      "AV0": {
+        "ALLOW": 27,
+        "DENY": 2
+      },
+      "AV1": {
+        "ALLOW": 21,
+        "DENY": 8
+      },
+      "AV2": {
+        "ALLOW": 17,
+        "DENY": 12
+      }
+    },
+    "U_allows": {
+      "n": 42,
+      "B0": {
+        "ALLOW": 42
+      },
+      "B1": {
+        "CLARIFY": 17,
+        "ALLOW": 25
+      },
+      "B2": {
+        "ALLOW": 34,
+        "CLARIFY": 7,
+        "DENY": 1
+      },
+      "B3": {
+        "ALLOW": 35,
+        "CLARIFY": 7
+      },
+      "B4": {
+        "CLARIFY": 21,
+        "ALLOW": 21
+      },
+      "B3_v2": {
+        "ALLOW": 33,
+        "CLARIFY": 9
+      },
+      "v1": {
+        "CLARIFY": 23,
+        "ALLOW": 19
+      },
+      "AV0": {
+        "ALLOW": 42
+      },
+      "AV1": {
+        "ALLOW": 42
+      },
+      "AV2": {
+        "ALLOW": 41,
+        "DENY": 1
+      }
+    }
+  },
+  "b2_vs_b3": {
+    "n_differ": 49,
+    "by_cause": [
+      {
+        "group": "legit",
+        "change": "B2 CLARIFY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (UNKNOWN_ATTR)",
+        "n": 8
+      },
+      {
+        "group": "legit",
+        "change": "B2 CLARIFY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (UNVERIFIED_AT_CONSENT)",
+        "n": 7
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "selection S",
+        "n": 6
+      },
+      {
+        "group": "legit",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (BUNDLE_MEMBER_MISSING)",
+        "n": 3
+      },
+      {
+        "group": "wrong",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (MAX_TOTAL_WITH_FEES)",
+        "n": 3
+      },
+      {
+        "group": "legit",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (BRAND)",
+        "n": 3
+      },
+      {
+        "group": "legit",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (QUANTITY)",
+        "n": 3
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "product kind",
+        "n": 2
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 DENY",
+        "cause": "verification: verified ledger differs (BUNDLE_MEMBER_MISSING)",
+        "n": 2
+      },
+      {
+        "group": "wrong",
+        "change": "B2 CLARIFY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (UNVERIFIED_AT_CONSENT)",
+        "n": 2
+      },
+      {
+        "group": "wrong",
+        "change": "B2 ALLOW -> B3 DENY",
+        "cause": "verification: verified ledger differs (MAX_TOTAL_WITH_FEES)",
+        "n": 1
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "verification: unresolved M1 item changes the decision",
+        "n": 1
+      },
+      {
+        "group": "legit",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (MAX_TOTAL_WITH_FEES)",
+        "n": 1
+      },
+      {
+        "group": "wrong",
+        "change": "B2 DENY -> B3 ALLOW",
+        "cause": "verification: B2 used an unverified extractor value (QUANTITY)",
+        "n": 1
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "verification: verified ledger differs (UNKNOWN_ATTR)",
+        "n": 1
+      },
+      {
+        "group": "wrong",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "verification: unresolved M1 item changes the decision",
+        "n": 1
+      },
+      {
+        "group": "legit",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "verification: verified ledger differs (EVIDENCE_MISSING)",
+        "n": 1
+      },
+      {
+        "group": "legit",
+        "change": "B2 DENY -> B3 CLARIFY",
+        "cause": "verification: unresolved M1 item changes the decision",
+        "n": 1
+      },
+      {
+        "group": "wrong",
+        "change": "B2 ALLOW -> B3 CLARIFY",
+        "cause": "verification: verified ledger differs (EVIDENCE_MISSING)",
+        "n": 1
+      },
+      {
+        "group": "wrong",
+        "change": "B2 ALLOW -> B3 DENY",
+        "cause": "selection S",
+        "n": 1
+      }
+    ]
+  }
+}

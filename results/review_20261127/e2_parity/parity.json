@@ -1,0 +1,72 @@
+{
+  "transactions": {
+    "seller_turn": 574,
+    "listing_text": 574,
+    "platform_turn": 180,
+    "catalog_stock0": 68
+  },
+  "n_transactions": 1482,
+  "matched": {
+    "case1|DENY|contradicted_by_platform": {
+      "n": 8,
+      "platform_turn": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case1|DENY|no_platform_evidence": {
+      "n": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case2|CLARIFY|no_platform_evidence": {
+      "n": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case2|DENY|contradicted_by_platform": {
+      "n": 8,
+      "platform_turn": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case3|ALLOW|contradicted_by_platform": {
+      "n": 8,
+      "platform_turn": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case3|ALLOW|no_platform_evidence": {
+      "n": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case4|CLARIFY|contradicted_by_platform": {
+      "n": 8,
+      "platform_turn": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case4|CLARIFY|no_platform_evidence": {
+      "n": 8,
+      "seller_turn": 8,
+      "listing_text": 8
+    },
+    "case5|ALLOW|confirmed_by_platform": {
+      "n": 16,
+      "platform_turn": 16,
+      "seller_turn": 16,
+      "catalog_stock0": 16,
+      "listing_text": 16
+    },
+    "case6|ALLOW|no_seller_claim": {
+      "n": 16
+    }
+  },
+  "transaction_fields": [
+    "checkout",
+    "episode_id",
+    "payment_grant",
+    "payment_request",
+    "transaction_id"
+  ]
+}

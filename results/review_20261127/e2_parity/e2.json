@@ -1,0 +1,703 @@
+{
+  "A": {
+    "summary": {
+      "n": 96,
+      "false_positive_fired_on_reference_ALLOW": "24/48",
+      "fp_by_case": {
+        "3": "12/16",
+        "5": "12/16",
+        "6": "0/16"
+      },
+      "hit_on_reference_CLARIFY": "17/24",
+      "miss_on_reference_CLARIFY": "7/24",
+      "fired_on_reference_DENY(redundant)": "19/24",
+      "B2": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 8,
+          "DENY": 7
+        },
+        "final_equals_reference": "48/96",
+        "allow_on_reference_CLARIFY": 4,
+        "allow_on_reference_ALLOW": "24/48"
+      },
+      "B3": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 5,
+          "DENY": 7
+        },
+        "final_equals_reference": "50/96",
+        "allow_on_reference_CLARIFY": 3,
+        "allow_on_reference_ALLOW": "24/48"
+      },
+      "B4": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 5,
+          "DENY": 7
+        },
+        "final_equals_reference": "24/96",
+        "allow_on_reference_CLARIFY": 0,
+        "allow_on_reference_ALLOW": "0/48"
+      }
+    },
+    "cells": [
+      {
+        "case": 1,
+        "reference": "DENY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 1,
+        "reference": "DENY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 2,
+        "reference": "CLARIFY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 3,
+            "CLARIFY": 5
+          },
+          "e2_code_in_final": 5
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 3,
+            "CLARIFY": 5
+          },
+          "e2_code_in_final": 5
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 5
+        }
+      },
+      {
+        "case": 2,
+        "reference": "DENY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 7
+        }
+      },
+      {
+        "case": 3,
+        "reference": "ALLOW",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 7
+        }
+      },
+      {
+        "case": 3,
+        "reference": "ALLOW",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 5,
+            "ALLOW": 3
+          },
+          "e2_code_in_final": 5
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 5,
+            "ALLOW": 3
+          },
+          "e2_code_in_final": 5
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 5
+        }
+      },
+      {
+        "case": 4,
+        "reference": "CLARIFY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 2,
+            "DENY": 6
+          },
+          "e2_code_in_final": 2
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 2,
+            "DENY": 6
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 4,
+        "reference": "CLARIFY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 1,
+            "CLARIFY": 1,
+            "DENY": 6
+          },
+          "e2_code_in_final": 1
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 3,
+            "DENY": 5
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 5,
+        "reference": "ALLOW",
+        "evidence": "confirmed_by_platform",
+        "n": 16,
+        "e2_fired": 12,
+        "by_similarity": {
+          "title_overlap": "9/13",
+          "type_only": "3/3"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 4,
+            "CLARIFY": 12
+          },
+          "e2_code_in_final": 12
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 4,
+            "CLARIFY": 12
+          },
+          "e2_code_in_final": 12
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 16
+          },
+          "e2_code_in_final": 12
+        }
+      },
+      {
+        "case": 6,
+        "reference": "ALLOW",
+        "evidence": "no_seller_claim",
+        "n": 16,
+        "e2_fired": 0,
+        "by_similarity": {
+          "title_overlap": "0/13",
+          "type_only": "0/3"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 16
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 16
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 16
+          },
+          "e2_code_in_final": 0
+        }
+      }
+    ]
+  },
+  "B": {
+    "summary": {
+      "n": 96,
+      "false_positive_fired_on_reference_ALLOW": "24/48",
+      "fp_by_case": {
+        "3": "12/16",
+        "5": "12/16",
+        "6": "0/16"
+      },
+      "hit_on_reference_CLARIFY": "17/24",
+      "miss_on_reference_CLARIFY": "7/24",
+      "fired_on_reference_DENY(redundant)": "19/24",
+      "B2": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 6,
+          "DENY": 7
+        },
+        "final_equals_reference": "46/96",
+        "allow_on_reference_CLARIFY": 4,
+        "allow_on_reference_ALLOW": "24/48"
+      },
+      "B3": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 5,
+          "DENY": 7
+        },
+        "final_equals_reference": "48/96",
+        "allow_on_reference_CLARIFY": 3,
+        "allow_on_reference_ALLOW": "24/48"
+      },
+      "B4": {
+        "final_E2_code_by_reference": {
+          "ALLOW": 24,
+          "CLARIFY": 5,
+          "DENY": 7
+        },
+        "final_equals_reference": "24/96",
+        "allow_on_reference_CLARIFY": 0,
+        "allow_on_reference_ALLOW": "0/48"
+      }
+    },
+    "cells": [
+      {
+        "case": 1,
+        "reference": "DENY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 1,
+        "reference": "DENY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "DENY": 8
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 2,
+        "reference": "CLARIFY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 3,
+            "CLARIFY": 5
+          },
+          "e2_code_in_final": 5
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 3,
+            "CLARIFY": 5
+          },
+          "e2_code_in_final": 5
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 5
+        }
+      },
+      {
+        "case": 2,
+        "reference": "DENY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 7
+        }
+      },
+      {
+        "case": 3,
+        "reference": "ALLOW",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 7,
+            "ALLOW": 1
+          },
+          "e2_code_in_final": 7
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 7
+        }
+      },
+      {
+        "case": 3,
+        "reference": "ALLOW",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "CLARIFY": 5,
+            "ALLOW": 3
+          },
+          "e2_code_in_final": 5
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 5,
+            "ALLOW": 3
+          },
+          "e2_code_in_final": 5
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 5
+        }
+      },
+      {
+        "case": 4,
+        "reference": "CLARIFY",
+        "evidence": "contradicted_by_platform",
+        "n": 8,
+        "e2_fired": 7,
+        "by_similarity": {
+          "title_overlap": "5/6",
+          "type_only": "2/2"
+        },
+        "B2": {
+          "final": {
+            "DENY": 7,
+            "CLARIFY": 1
+          },
+          "e2_code_in_final": 1
+        },
+        "B3": {
+          "final": {
+            "DENY": 7,
+            "CLARIFY": 1
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 4,
+        "reference": "CLARIFY",
+        "evidence": "no_platform_evidence",
+        "n": 8,
+        "e2_fired": 5,
+        "by_similarity": {
+          "title_overlap": "4/7",
+          "type_only": "1/1"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 1,
+            "DENY": 7
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "CLARIFY": 2,
+            "DENY": 6
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 8
+          },
+          "e2_code_in_final": 0
+        }
+      },
+      {
+        "case": 5,
+        "reference": "ALLOW",
+        "evidence": "confirmed_by_platform",
+        "n": 16,
+        "e2_fired": 12,
+        "by_similarity": {
+          "title_overlap": "9/13",
+          "type_only": "3/3"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 4,
+            "CLARIFY": 12
+          },
+          "e2_code_in_final": 12
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 4,
+            "CLARIFY": 12
+          },
+          "e2_code_in_final": 12
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 16
+          },
+          "e2_code_in_final": 12
+        }
+      },
+      {
+        "case": 6,
+        "reference": "ALLOW",
+        "evidence": "no_seller_claim",
+        "n": 16,
+        "e2_fired": 0,
+        "by_similarity": {
+          "title_overlap": "0/13",
+          "type_only": "0/3"
+        },
+        "B2": {
+          "final": {
+            "ALLOW": 16
+          },
+          "e2_code_in_final": 0
+        },
+        "B3": {
+          "final": {
+            "ALLOW": 16
+          },
+          "e2_code_in_final": 0
+        },
+        "B4": {
+          "final": {
+            "CLARIFY": 16
+          },
+          "e2_code_in_final": 0
+        }
+      }
+    ]
+  }
+}

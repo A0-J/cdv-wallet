@@ -1,0 +1,19 @@
+{
+  "set": "V3",
+  "split": "validation",
+  "n_selected": 100,
+  "n_done": 100,
+  "failed": [],
+  "outcomes": {
+    "RIGHT": 80,
+    "WRONG": 17,
+    "WRONG_HIDDEN": 3
+  },
+  "dry_run": true,
+  "model": null,
+  "dry_run_estimate": {
+    "calls_lower_bound": 367,
+    "input_tokens_est": 152762,
+    "user_turns_before_t": 267
+  }
+}

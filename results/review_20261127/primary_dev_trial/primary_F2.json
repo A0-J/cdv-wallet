@@ -1,0 +1,128 @@
+[
+  {
+    "n": 29,
+    "clusters": 29,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 14,
+    "y_count": 18,
+    "x_pct": 48.3,
+    "y_pct": 62.1,
+    "diff_pp": -13.8,
+    "ci95": [
+      -31.0,
+      0.0
+    ],
+    "p_perm": 0.21875,
+    "p_mcnemar_units": 0.21875,
+    "discordant": {
+      "B2_only": 1,
+      "AV2_only": 5
+    },
+    "num": 1,
+    "label": "B2 대 AV2: 위반 부당 허용",
+    "population": "pay_viol",
+    "expect": "x<y",
+    "p_holm": 0.35848,
+    "reject": false
+  },
+  {
+    "n": 230,
+    "clusters": 230,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 189,
+    "y_count": 204,
+    "x_pct": 82.2,
+    "y_pct": 88.7,
+    "diff_pp": -6.5,
+    "ci95": [
+      -11.3,
+      -1.7
+    ],
+    "p_perm": 0.01053,
+    "p_mcnemar_units": 0.01067,
+    "discordant": {
+      "B2_only": 8,
+      "AV2_only": 23
+    },
+    "num": 2,
+    "label": "B2 대 AV2: 정상 허용",
+    "population": "legit",
+    "expect": "x>=y",
+    "p_holm": 0.03159,
+    "reject": true
+  },
+  {
+    "n": 230,
+    "clusters": 230,
+    "x": "B3",
+    "y": "B2",
+    "event": "ALLOW",
+    "x_count": 198,
+    "y_count": 189,
+    "x_pct": 86.1,
+    "y_pct": 82.2,
+    "diff_pp": 3.9,
+    "ci95": [
+      -0.9,
+      9.1
+    ],
+    "p_perm": 0.17924,
+    "p_mcnemar_units": 0.17547,
+    "discordant": {
+      "B3_only": 22,
+      "B2_only": 13
+    },
+    "num": 4,
+    "label": "B3 대 B2: 정상 허용",
+    "population": "legit",
+    "expect": "x<=y",
+    "p_holm": 0.35848,
+    "reject": false
+  },
+  {
+    "n": 230,
+    "clusters": 230,
+    "x": "B3",
+    "y": "B4",
+    "event": "CLARIFY",
+    "x_count": 26,
+    "y_count": 82,
+    "x_pct": 11.3,
+    "y_pct": 35.7,
+    "diff_pp": -24.3,
+    "ci95": [
+      -30.0,
+      -19.1
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 0,
+      "B4_only": 56
+    },
+    "num": 5,
+    "label": "B3 대 B4: 정상 확인 요청",
+    "population": "legit",
+    "expect": "x<y",
+    "p_holm": 4e-05,
+    "reject": true
+  },
+  {
+    "n": 0,
+    "num": 6,
+    "label": "B3 대 PRECHECK: 정상 허용",
+    "population": "legit",
+    "expect": "x>y"
+  },
+  {
+    "n": 0,
+    "num": 7,
+    "label": "B3 대 PRECHECK: 위반 부당 허용",
+    "population": "pay_viol",
+    "expect": "x>=y"
+  }
+]

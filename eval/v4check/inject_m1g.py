@@ -37,12 +37,18 @@ def main():
     ap.add_argument("--budget", type=float, default=0.15, help="cap per run (each run has its own ledger)")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--prompt-version", default="v1", choices=["v1", "v2"])
+    # harness options added 2026-11-27 after the policy freeze (defaults = the dev runs above, unchanged)
+    ap.add_argument("--data", type=Path, default=V4)
+    ap.add_argument("--name", default="v4")
+    ap.add_argument("--split", default="dev")
     a = ap.parse_args()
     global OUT
     if a.prompt_version != "v1":                    # v1 outputs are never overwritten
         OUT = OUT / f"prompt_{a.prompt_version}"
-    eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (V4 / "dev" / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
-    gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (V4 / "dev" / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
+    if (a.name, a.split) != ("v4", "dev"):          # other data: own sub-folder (file names kept)
+        OUT = OUT / f"{a.name}_{a.split}"
+    eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (a.data / a.split / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
+    gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (a.data / a.split / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
     items = []
     for e, ep in eps.items():
         g = gold[e]

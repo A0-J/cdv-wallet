@@ -1,0 +1,226 @@
+[
+  {
+    "n": 430,
+    "clusters": 350,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 9,
+    "y_count": 169,
+    "x_pct": 2.1,
+    "y_pct": 39.3,
+    "diff_pp": -37.2,
+    "ci95": [
+      -41.8,
+      -32.4
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B2_only": 2,
+      "AV2_only": 162
+    },
+    "num": 1,
+    "label": "B2 대 AV2: 위반 거래 부당 허용",
+    "population": "context_only",
+    "expect": "x<y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 307,
+    "clusters": 251,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 286,
+    "y_count": 171,
+    "x_pct": 93.2,
+    "y_pct": 55.7,
+    "diff_pp": 37.5,
+    "ci95": [
+      30.2,
+      45.4
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B2_only": 124,
+      "AV2_only": 9
+    },
+    "num": 2,
+    "label": "B2 대 AV2: 정상 거래 허용",
+    "population": "normal",
+    "expect": "x>=y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 256,
+    "clusters": 128,
+    "x": "B3",
+    "y": "B2",
+    "event": "ALLOW",
+    "x_count": 0,
+    "y_count": 122,
+    "x_pct": 0.0,
+    "y_pct": 47.7,
+    "diff_pp": -47.7,
+    "ci95": [
+      -56.2,
+      -39.1
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 0,
+      "B2_only": 122
+    },
+    "num": 3,
+    "label": "B3 대 B2: 결함 주입 조건의 부당 허용",
+    "population": "inject_follows_rejected",
+    "expect": "x<y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 307,
+    "clusters": 251,
+    "x": "B3",
+    "y": "B2",
+    "event": "ALLOW",
+    "x_count": 246,
+    "y_count": 286,
+    "x_pct": 80.1,
+    "y_pct": 93.2,
+    "diff_pp": -13.0,
+    "ci95": [
+      -17.5,
+      -9.1
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 2,
+      "B2_only": 42
+    },
+    "num": 4,
+    "label": "B3 대 B2: 자연 경로 정상 거래 허용",
+    "population": "normal",
+    "expect": "x<=y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 307,
+    "clusters": 251,
+    "x": "B3",
+    "y": "B4",
+    "event": "CLARIFY",
+    "x_count": 52,
+    "y_count": 123,
+    "x_pct": 16.9,
+    "y_pct": 40.1,
+    "diff_pp": -23.1,
+    "ci95": [
+      -28.1,
+      -18.5
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 0,
+      "B4_only": 71
+    },
+    "num": 5,
+    "label": "B3 대 B4: 정상 거래 확인 요청",
+    "population": "normal",
+    "expect": "x<y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 307,
+    "clusters": 251,
+    "x": "B3",
+    "y": "PRECHECK",
+    "event": "ALLOW",
+    "x_count": 246,
+    "y_count": 201,
+    "x_pct": 80.1,
+    "y_pct": 65.5,
+    "diff_pp": 14.7,
+    "ci95": [
+      7.4,
+      21.6
+    ],
+    "p_perm": 0.00046,
+    "p_mcnemar_units": 1e-05,
+    "discordant": {
+      "B3_only": 72,
+      "PRECHECK_only": 27
+    },
+    "num": 6,
+    "label": "B3 대 PRECHECK: 정상 거래 허용",
+    "population": "normal",
+    "expect": "x>y",
+    "p_holm": 0.00092,
+    "reject": true
+  },
+  {
+    "n": 430,
+    "clusters": 350,
+    "x": "B3",
+    "y": "PRECHECK",
+    "event": "ALLOW",
+    "x_count": 60,
+    "y_count": 0,
+    "x_pct": 14.0,
+    "y_pct": 0.0,
+    "diff_pp": 14.0,
+    "ci95": [
+      10.8,
+      17.1
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 60,
+      "PRECHECK_only": 0
+    },
+    "num": 7,
+    "label": "B3 대 PRECHECK: 위반 거래 부당 허용",
+    "population": "context_only",
+    "expect": "x>=y",
+    "p_holm": 8e-05,
+    "reject": true
+  },
+  {
+    "n": 16,
+    "clusters": 16,
+    "x": "B3",
+    "y": "PRECHECK",
+    "event": "ALLOW",
+    "x_count": 1,
+    "y_count": 13,
+    "x_pct": 6.2,
+    "y_pct": 81.2,
+    "diff_pp": -75.0,
+    "ci95": [
+      -100.0,
+      -43.8
+    ],
+    "p_perm": 0.00183,
+    "p_mcnemar_units": 0.00183,
+    "discordant": {
+      "B3_only": 1,
+      "PRECHECK_only": 13
+    },
+    "num": 8,
+    "label": "B3 대 PRECHECK: 거짓 전제 동의 허용",
+    "population": "matched_case4",
+    "expect": "x<y",
+    "p_holm": 0.00183,
+    "reject": true
+  }
+]

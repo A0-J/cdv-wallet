@@ -1,0 +1,252 @@
+{
+  "A": {
+    "authority_only": {
+      "PRECHECK&B2": {
+        "ALLOW": 191,
+        "DENY": 13,
+        "CLARIFY": 103
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 125,
+        "ALLOW": 167,
+        "DENY": 15
+      }
+    },
+    "both": {
+      "PRECHECK&B2": {
+        "DENY": 302
+      },
+      "PRECHECK&B3": {
+        "DENY": 302
+      }
+    },
+    "both/follows_rejected": {
+      "PRECHECK&B2": {
+        "DENY": 128
+      },
+      "PRECHECK&B3": {
+        "DENY": 128
+      }
+    },
+    "context_only": {
+      "PRECHECK&B2": {
+        "DENY": 301,
+        "CLARIFY": 1
+      },
+      "PRECHECK&B3": {
+        "DENY": 301,
+        "CLARIFY": 1
+      }
+    },
+    "context_only/follows_rejected": {
+      "PRECHECK&B2": {
+        "DENY": 128
+      },
+      "PRECHECK&B3": {
+        "DENY": 128
+      }
+    },
+    "matched case1 (DENY)": {
+      "PRECHECK&B2": {
+        "DENY": 16
+      },
+      "PRECHECK&B3": {
+        "DENY": 16
+      }
+    },
+    "matched case2 (CLARIFY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 8
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 8
+      }
+    },
+    "matched case2 (DENY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 8
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 8
+      }
+    },
+    "matched case3 (ALLOW)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 16
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 16
+      }
+    },
+    "matched case4 (CLARIFY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 4,
+        "DENY": 12
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 5,
+        "DENY": 11
+      }
+    },
+    "matched case5 (ALLOW)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 16
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 16
+      }
+    },
+    "matched case6 (ALLOW)": {
+      "PRECHECK&B2": {
+        "ALLOW": 6,
+        "CLARIFY": 10
+      },
+      "PRECHECK&B3": {
+        "ALLOW": 6,
+        "CLARIFY": 10
+      }
+    },
+    "normal": {
+      "PRECHECK&B2": {
+        "ALLOW": 194,
+        "CLARIFY": 100,
+        "DENY": 13
+      },
+      "PRECHECK&B3": {
+        "ALLOW": 165,
+        "CLARIFY": 127,
+        "DENY": 15
+      }
+    }
+  },
+  "B": {
+    "authority_only": {
+      "PRECHECK&B2": {
+        "ALLOW": 196,
+        "DENY": 21,
+        "CLARIFY": 90
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 113,
+        "ALLOW": 171,
+        "DENY": 23
+      }
+    },
+    "both": {
+      "PRECHECK&B2": {
+        "DENY": 300,
+        "CLARIFY": 2
+      },
+      "PRECHECK&B3": {
+        "DENY": 300,
+        "CLARIFY": 2
+      }
+    },
+    "both/follows_rejected": {
+      "PRECHECK&B2": {
+        "DENY": 127,
+        "ALLOW": 1
+      },
+      "PRECHECK&B3": {
+        "DENY": 127,
+        "CLARIFY": 1
+      }
+    },
+    "context_only": {
+      "PRECHECK&B2": {
+        "DENY": 302
+      },
+      "PRECHECK&B3": {
+        "DENY": 302
+      }
+    },
+    "context_only/follows_rejected": {
+      "PRECHECK&B2": {
+        "DENY": 128
+      },
+      "PRECHECK&B3": {
+        "DENY": 128
+      }
+    },
+    "matched case1 (DENY)": {
+      "PRECHECK&B2": {
+        "DENY": 16
+      },
+      "PRECHECK&B3": {
+        "DENY": 16
+      }
+    },
+    "matched case2 (CLARIFY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 6,
+        "ALLOW": 2
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 6,
+        "ALLOW": 2
+      }
+    },
+    "matched case2 (DENY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 7,
+        "ALLOW": 1
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 7,
+        "ALLOW": 1
+      }
+    },
+    "matched case3 (ALLOW)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 14,
+        "ALLOW": 2
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 14,
+        "ALLOW": 2
+      }
+    },
+    "matched case4 (CLARIFY)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 2,
+        "DENY": 14
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 3,
+        "DENY": 13
+      }
+    },
+    "matched case5 (ALLOW)": {
+      "PRECHECK&B2": {
+        "ALLOW": 3,
+        "CLARIFY": 13
+      },
+      "PRECHECK&B3": {
+        "ALLOW": 3,
+        "CLARIFY": 13
+      }
+    },
+    "matched case6 (ALLOW)": {
+      "PRECHECK&B2": {
+        "CLARIFY": 11,
+        "ALLOW": 5
+      },
+      "PRECHECK&B3": {
+        "CLARIFY": 11,
+        "ALLOW": 5
+      }
+    },
+    "normal": {
+      "PRECHECK&B2": {
+        "ALLOW": 193,
+        "CLARIFY": 94,
+        "DENY": 20
+      },
+      "PRECHECK&B3": {
+        "ALLOW": 169,
+        "CLARIFY": 116,
+        "DENY": 22
+      }
+    }
+  }
+}

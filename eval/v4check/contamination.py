@@ -52,13 +52,18 @@ def gate(env, case, cat, state):
     return env.full_gate(m)
 
 
-def main(tag=""):
+def main(tag="", data=None, name="v4", split="dev", m1g_rows_file=None, out=None):
+    """Defaults = the dev run (v4 dev, M1-G rows of the prompt-v1 run 1). Harness options added 2026-11-27 after the
+    policy freeze: data / name / split / m1g_rows_file / out for the v4b eval (decision code unchanged)."""
+    global OUT
+    OUT = out or OUT
+    data = data or V4
     sfx = f"_{tag}" if tag else ""
-    eps = {e["episode_id"]: e for e in X.jl(V4 / "dev" / "episodes.jsonl")}
-    eg = {g["episode_id"]: g for g in X.jl(V4 / "dev" / "episode_gold.jsonl")}
-    tg = {g["transaction_id"]: g for g in X.jl(V4 / "dev" / "transaction_gold.jsonl")}
-    excl = set(json.loads((ROOT / "results" / "extdata_20261126" / "exclusion_v4_dev.json").read_text(encoding="utf-8"))["excluded_episodes"])
-    m1g_rows = [json.loads(l) for l in (ROOT / "results" / "m1g_20261126" / "rows_dev.jsonl").read_text(encoding="utf-8").splitlines() if l]
+    eps = {e["episode_id"]: e for e in X.jl(data / split / "episodes.jsonl")}
+    eg = {g["episode_id"]: g for g in X.jl(data / split / "episode_gold.jsonl")}
+    tg = {g["transaction_id"]: g for g in X.jl(data / split / "transaction_gold.jsonl")}
+    excl = set(json.loads((ROOT / "results" / "extdata_20261126" / f"exclusion_{name}_{split}.json").read_text(encoding="utf-8"))["excluded_episodes"])
+    m1g_rows = [json.loads(l) for l in (m1g_rows_file or ROOT / "results" / "m1g_20261126" / "rows_dev.jsonl").read_text(encoding="utf-8").splitlines() if l]
     # M1-G rows are in the same order as episodes.jsonl x candidate_operations (inject_m1g.py)
     it = iter(m1g_rows)
     m1g = {}
@@ -83,7 +88,8 @@ def main(tag=""):
                               "v2": I.v2_decide(prev, op, cat, turns, users, nli), "M1-G": m1g[(e, k)]}) for k, op in ops]
     tab = defaultdict(Counter)
     approx = Counter()
-    for tx in X.jl(V4 / "dev" / "transactions.jsonl"):
+    per_tx = []                                       # per-transaction decisions (harness addition 2026-11-27)
+    for tx in X.jl(data / split / "transactions.jsonl"):
         e = tx["episode_id"]
         if e in excl:
             continue
@@ -125,6 +131,7 @@ def main(tag=""):
                         s2 = apply(s2, op)
                 outs.add(gate(env, case, cat, s2)[0])
             res[f"M1+M2 [{v}] B3-type"] = "CLARIFY" if len(outs) > 1 else verdict.integrated(d0, c0, False)
+        per_tx.append({"transaction_id": tx["transaction_id"], "episode_id": e, "groups": groups, "decisions": res})
         for grp in groups:
             for arm, dec in res.items():
                 tab[(grp, arm)][dec] += 1
@@ -132,7 +139,9 @@ def main(tag=""):
     out = {"excluded_episodes": sorted(excl), "approx_cases": dict(approx),
            "table": {f"{g}|{a}": dict(v) for (g, a), v in sorted(tab.items())}}
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"contamination_dev{sfx}.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"contamination_{split}{sfx}.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"contamination_{split}{sfx}_rows.jsonl").write_text("".join(json.dumps(r) + "\n" for r in per_tx),
+                                                               encoding="utf-8", newline="\n")
     md = ["# v4 dev 오염 주입 조건 (모델 호출 0; M1-G는 승인된 1회차 판정 재사용)", "",
           "- 이전 상태 = 정답 initial_state(주입 경로 오라클), 후보 연산을 근거 턴 순서로 적용. 같은 거래·같은 게이트. 생성 데이터.",
           "- 권한(grant) 축은 이 게이트의 검사 대상이 아니다(별도 축). 유형별 표에서 authority_only는 참고로만 본다.",
@@ -146,9 +155,20 @@ def main(tag=""):
         md += [f"## {grp} (n={n})", "", "| 비교군 | ALLOW | CLARIFY | DENY |", "|---|---:|---:|---:|"]
         md += [f"| {a} | {c.get('ALLOW', 0)} | {c.get('CLARIFY', 0)} | {c.get('DENY', 0)} |" for a, c in rows]
         md.append("")
-    (OUT / f"CONTAMINATION_dev{sfx}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"CONTAMINATION_{split}{sfx}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(md))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "")
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("tag", nargs="?", default="")
+    ap.add_argument("--data", type=Path, default=None)
+    ap.add_argument("--name", default="v4")
+    ap.add_argument("--split", default="dev")
+    ap.add_argument("--m1g-rows", type=Path, default=None, help="inject_m1g rows file whose m1g_run1 is used")
+    ap.add_argument("--out", type=Path, default=None)
+    a = ap.parse_args()
+    if a.out and any(a.out.glob(f"contamination_{a.split}{('_' + a.tag) if a.tag else ''}.json")):
+        raise SystemExit("refusing to overwrite")
+    main(a.tag, a.data, a.name, a.split, a.m1g_rows, a.out)

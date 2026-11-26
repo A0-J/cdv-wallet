@@ -1,0 +1,15 @@
+{
+  "sample": "sealed",
+  "run": 1,
+  "n": 400,
+  "prompts_sha256": "d9c696febf7ffc7c49640f3afd5a492c64e1e783e6e343f0f366cf6e6a18ce43",
+  "dry_run": true,
+  "decisions": {
+    "CLARIFY": 400
+  },
+  "unparsed": 400,
+  "dry_run_estimate": {
+    "calls": 400,
+    "input_tokens_est": 207728
+  }
+}

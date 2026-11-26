@@ -1,0 +1,603 @@
+{
+  "note": "exploratory arm PLAIN+M2 (not pre-registered); zero model calls",
+  "m1g_rows_available": [],
+  "A": {
+    "precheck_file": "baselines_v4_dev.jsonl",
+    "n_rows": 1570,
+    "table": {
+      "authority_only": {
+        "PLAIN_M2_record": {
+          "ALLOW": 185,
+          "DENY": 119,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 185,
+          "DENY": 119,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "ALLOW": 286,
+          "DENY": 8,
+          "CLARIFY": 13
+        },
+        "B3": {
+          "CLARIFY": 62,
+          "ALLOW": 236,
+          "DENY": 9
+        },
+        "PRECHECK": {
+          "ALLOW": 197,
+          "CLARIFY": 103,
+          "DENY": 7
+        }
+      },
+      "both": {
+        "PLAIN_M2_record": {
+          "DENY": 374,
+          "ALLOW": 51,
+          "CLARIFY": 5
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 374,
+          "ALLOW": 51,
+          "CLARIFY": 5
+        },
+        "B2": {
+          "DENY": 419,
+          "ALLOW": 10,
+          "CLARIFY": 1
+        },
+        "B3": {
+          "DENY": 355,
+          "CLARIFY": 66,
+          "ALLOW": 9
+        },
+        "PRECHECK": {
+          "DENY": 425,
+          "ALLOW": 1,
+          "CLARIFY": 4
+        }
+      },
+      "context_only": {
+        "PLAIN_M2_record": {
+          "DENY": 374,
+          "ALLOW": 51,
+          "CLARIFY": 5
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 374,
+          "ALLOW": 51,
+          "CLARIFY": 5
+        },
+        "B2": {
+          "DENY": 419,
+          "CLARIFY": 1,
+          "ALLOW": 10
+        },
+        "B3": {
+          "DENY": 355,
+          "CLARIFY": 66,
+          "ALLOW": 9
+        },
+        "PRECHECK": {
+          "DENY": 421,
+          "CLARIFY": 9
+        }
+      },
+      "matched case1 (DENY)": {
+        "PLAIN_M2_record": {
+          "DENY": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 16
+        },
+        "B2": {
+          "DENY": 16
+        },
+        "B3": {
+          "DENY": 16
+        },
+        "PRECHECK": {
+          "DENY": 16
+        }
+      },
+      "matched case2 (CLARIFY)": {
+        "PLAIN_M2_record": {
+          "DENY": 8
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 8
+        },
+        "B2": {
+          "ALLOW": 3,
+          "CLARIFY": 5
+        },
+        "B3": {
+          "ALLOW": 3,
+          "CLARIFY": 5
+        },
+        "PRECHECK": {
+          "CLARIFY": 8
+        }
+      },
+      "matched case2 (DENY)": {
+        "PLAIN_M2_record": {
+          "DENY": 8
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 8
+        },
+        "B2": {
+          "CLARIFY": 7,
+          "ALLOW": 1
+        },
+        "B3": {
+          "CLARIFY": 7,
+          "ALLOW": 1
+        },
+        "PRECHECK": {
+          "CLARIFY": 8
+        }
+      },
+      "matched case3 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "PLAIN_M2_consent_clarify": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "B2": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "B3": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "PRECHECK": {
+          "ALLOW": 6,
+          "CLARIFY": 10
+        }
+      },
+      "matched case4 (CLARIFY)": {
+        "PLAIN_M2_record": {
+          "ALLOW": 2,
+          "CLARIFY": 10,
+          "DENY": 4
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 2,
+          "CLARIFY": 10,
+          "DENY": 4
+        },
+        "B2": {
+          "ALLOW": 1,
+          "CLARIFY": 3,
+          "DENY": 12
+        },
+        "B3": {
+          "CLARIFY": 5,
+          "DENY": 11
+        },
+        "PRECHECK": {
+          "CLARIFY": 3,
+          "ALLOW": 13
+        }
+      },
+      "matched case5 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "DENY": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 16
+        },
+        "B2": {
+          "ALLOW": 4,
+          "CLARIFY": 12
+        },
+        "B3": {
+          "ALLOW": 4,
+          "CLARIFY": 12
+        },
+        "PRECHECK": {
+          "CLARIFY": 16
+        }
+      },
+      "matched case6 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "ALLOW": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 16
+        },
+        "B2": {
+          "ALLOW": 16
+        },
+        "B3": {
+          "ALLOW": 16
+        },
+        "PRECHECK": {
+          "ALLOW": 6,
+          "CLARIFY": 10
+        }
+      },
+      "normal": {
+        "PLAIN_M2_record": {
+          "DENY": 119,
+          "ALLOW": 185,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 119,
+          "ALLOW": 185,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "ALLOW": 286,
+          "CLARIFY": 13,
+          "DENY": 8
+        },
+        "B3": {
+          "ALLOW": 236,
+          "CLARIFY": 62,
+          "DENY": 9
+        },
+        "PRECHECK": {
+          "ALLOW": 201,
+          "CLARIFY": 100,
+          "DENY": 6
+        }
+      }
+    },
+    "follows_rejected_ALLOW": {
+      "PLAIN_M2_record": 24,
+      "PLAIN_M2_consent_clarify": 24,
+      "B2": 2,
+      "B3": 0,
+      "PRECHECK": 0
+    },
+    "n_follows_rejected": 256
+  },
+  "B": {
+    "precheck_file": "baselines_v4_dev_B.jsonl",
+    "n_rows": 1570,
+    "table": {
+      "authority_only": {
+        "PLAIN_M2_record": {
+          "ALLOW": 179,
+          "DENY": 125,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 179,
+          "DENY": 125,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "ALLOW": 286,
+          "DENY": 8,
+          "CLARIFY": 13
+        },
+        "B3": {
+          "CLARIFY": 62,
+          "ALLOW": 236,
+          "DENY": 9
+        },
+        "PRECHECK": {
+          "ALLOW": 215,
+          "CLARIFY": 78,
+          "DENY": 14
+        }
+      },
+      "both": {
+        "PLAIN_M2_record": {
+          "DENY": 370,
+          "ALLOW": 57,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 370,
+          "ALLOW": 57,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "DENY": 417,
+          "ALLOW": 10,
+          "CLARIFY": 3
+        },
+        "B3": {
+          "DENY": 352,
+          "CLARIFY": 70,
+          "ALLOW": 8
+        },
+        "PRECHECK": {
+          "DENY": 422,
+          "CLARIFY": 7,
+          "ALLOW": 1
+        }
+      },
+      "context_only": {
+        "PLAIN_M2_record": {
+          "DENY": 370,
+          "ALLOW": 57,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 370,
+          "ALLOW": 57,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "DENY": 417,
+          "CLARIFY": 3,
+          "ALLOW": 10
+        },
+        "B3": {
+          "DENY": 352,
+          "CLARIFY": 70,
+          "ALLOW": 8
+        },
+        "PRECHECK": {
+          "DENY": 425,
+          "CLARIFY": 5
+        }
+      },
+      "matched case1 (DENY)": {
+        "PLAIN_M2_record": {
+          "DENY": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 16
+        },
+        "B2": {
+          "DENY": 16
+        },
+        "B3": {
+          "DENY": 16
+        },
+        "PRECHECK": {
+          "DENY": 16
+        }
+      },
+      "matched case2 (CLARIFY)": {
+        "PLAIN_M2_record": {
+          "DENY": 8
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 8
+        },
+        "B2": {
+          "ALLOW": 3,
+          "CLARIFY": 5
+        },
+        "B3": {
+          "ALLOW": 3,
+          "CLARIFY": 5
+        },
+        "PRECHECK": {
+          "CLARIFY": 1,
+          "ALLOW": 7
+        }
+      },
+      "matched case2 (DENY)": {
+        "PLAIN_M2_record": {
+          "DENY": 8
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 8
+        },
+        "B2": {
+          "CLARIFY": 7,
+          "ALLOW": 1
+        },
+        "B3": {
+          "CLARIFY": 7,
+          "ALLOW": 1
+        },
+        "PRECHECK": {
+          "CLARIFY": 2,
+          "ALLOW": 6
+        }
+      },
+      "matched case3 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "PLAIN_M2_consent_clarify": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "B2": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "B3": {
+          "CLARIFY": 12,
+          "ALLOW": 4
+        },
+        "PRECHECK": {
+          "CLARIFY": 10,
+          "ALLOW": 6
+        }
+      },
+      "matched case4 (CLARIFY)": {
+        "PLAIN_M2_record": {
+          "ALLOW": 2,
+          "DENY": 7,
+          "CLARIFY": 7
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 2,
+          "DENY": 7,
+          "CLARIFY": 7
+        },
+        "B2": {
+          "ALLOW": 1,
+          "DENY": 14,
+          "CLARIFY": 1
+        },
+        "B3": {
+          "CLARIFY": 3,
+          "DENY": 13
+        },
+        "PRECHECK": {
+          "CLARIFY": 1,
+          "ALLOW": 15
+        }
+      },
+      "matched case5 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "DENY": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 16
+        },
+        "B2": {
+          "ALLOW": 4,
+          "CLARIFY": 12
+        },
+        "B3": {
+          "ALLOW": 4,
+          "CLARIFY": 12
+        },
+        "PRECHECK": {
+          "ALLOW": 13,
+          "CLARIFY": 3
+        }
+      },
+      "matched case6 (ALLOW)": {
+        "PLAIN_M2_record": {
+          "ALLOW": 16
+        },
+        "PLAIN_M2_consent_clarify": {
+          "ALLOW": 16
+        },
+        "B2": {
+          "ALLOW": 16
+        },
+        "B3": {
+          "ALLOW": 16
+        },
+        "PRECHECK": {
+          "CLARIFY": 11,
+          "ALLOW": 5
+        }
+      },
+      "normal": {
+        "PLAIN_M2_record": {
+          "DENY": 125,
+          "ALLOW": 179,
+          "CLARIFY": 3
+        },
+        "PLAIN_M2_consent_clarify": {
+          "DENY": 125,
+          "ALLOW": 179,
+          "CLARIFY": 3
+        },
+        "B2": {
+          "ALLOW": 286,
+          "CLARIFY": 13,
+          "DENY": 8
+        },
+        "B3": {
+          "ALLOW": 236,
+          "CLARIFY": 62,
+          "DENY": 9
+        },
+        "PRECHECK": {
+          "ALLOW": 210,
+          "CLARIFY": 84,
+          "DENY": 13
+        }
+      }
+    },
+    "follows_rejected_ALLOW": {
+      "PLAIN_M2_record": 26,
+      "PLAIN_M2_consent_clarify": 26,
+      "B2": 4,
+      "B3": 0,
+      "PRECHECK": 1
+    },
+    "n_follows_rejected": 256
+  },
+  "validation": {
+    "reference_rows": "dev_rows_frozen_m1g.jsonl",
+    "table": {
+      "legit|AV2": {
+        "DENY": 26,
+        "ALLOW": 203
+      },
+      "legit|B2": {
+        "CLARIFY": 27,
+        "ALLOW": 188,
+        "DENY": 14
+      },
+      "legit|B3": {
+        "ALLOW": 198,
+        "CLARIFY": 25,
+        "DENY": 6
+      },
+      "legit|PLAIN_M2_consent_clarify": {
+        "DENY": 38,
+        "ALLOW": 157,
+        "CLARIFY": 34
+      },
+      "legit|PLAIN_M2_record": {
+        "DENY": 38,
+        "ALLOW": 167,
+        "CLARIFY": 24
+      },
+      "other_wrong|AV2": {
+        "ALLOW": 37,
+        "DENY": 1
+      },
+      "other_wrong|B2": {
+        "ALLOW": 31,
+        "CLARIFY": 6,
+        "DENY": 1
+      },
+      "other_wrong|B3": {
+        "ALLOW": 31,
+        "CLARIFY": 7
+      },
+      "other_wrong|PLAIN_M2_consent_clarify": {
+        "ALLOW": 23,
+        "CLARIFY": 6,
+        "DENY": 9
+      },
+      "other_wrong|PLAIN_M2_record": {
+        "ALLOW": 27,
+        "CLARIFY": 2,
+        "DENY": 9
+      },
+      "pay_viol|AV2": {
+        "ALLOW": 18,
+        "DENY": 11
+      },
+      "pay_viol|B2": {
+        "ALLOW": 14,
+        "DENY": 13,
+        "CLARIFY": 2
+      },
+      "pay_viol|B3": {
+        "ALLOW": 15,
+        "DENY": 12,
+        "CLARIFY": 2
+      },
+      "pay_viol|PLAIN_M2_consent_clarify": {
+        "ALLOW": 13,
+        "DENY": 12,
+        "CLARIFY": 4
+      },
+      "pay_viol|PLAIN_M2_record": {
+        "ALLOW": 14,
+        "DENY": 12,
+        "CLARIFY": 3
+      }
+    }
+  }
+}
