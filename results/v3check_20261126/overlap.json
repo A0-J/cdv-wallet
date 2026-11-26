@@ -1,0 +1,79 @@
+{
+  "note": "Split-overlap check for the external dataset v3 (no model calls; reads v3 JSONL as data, runs none of its code).",
+  "sealed_final_sample": "not drawn yet (nothing to compare)",
+  "v3": {
+    "dev": {
+      "n": 400,
+      "unique": 352,
+      "carttrace_split": {
+        "train": 269,
+        "test_cross_store": 33,
+        "validation": 7,
+        "test_cross_template": 29,
+        "NOT_FOUND": 62
+      }
+    },
+    "eval": {
+      "n": 800,
+      "unique": 698,
+      "carttrace_split": {
+        "train": 522,
+        "test_cross_store": 71,
+        "NOT_FOUND": 121,
+        "test_cross_template": 57,
+        "validation": 29
+      }
+    }
+  },
+  "v3_dev_vs_eval_overlap": 0,
+  "overlap": {
+    "v3_dev": {
+      "G1v2_dev_bases": [],
+      "G1v2_eval_bases": [],
+      "exposure_registry": [
+        "ep-53dcf50a1717",
+        "ep-7cd88a5b0ca1"
+      ],
+      "E-M1_PLAN_v3_rows": [],
+      "P2_validation_dev": []
+    },
+    "v3_eval": {
+      "G1v2_dev_bases": [
+        "ep-5eead9fb9feb"
+      ],
+      "G1v2_eval_bases": [
+        "ep-2c3c2a8e7e1c"
+      ],
+      "exposure_registry": [],
+      "E-M1_PLAN_v3_rows": [
+        "ep-0e9446e18dd3",
+        "ep-47248103c9d3",
+        "ep-6abd4a814881",
+        "ep-73c95e9a289d",
+        "ep-d64d52fa075a",
+        "ep-ef5fa2e71a24"
+      ],
+      "P2_validation_dev": [
+        "ep-093952121a2c",
+        "ep-56e7d19c04b0",
+        "ep-8262632ed6f3"
+      ]
+    }
+  },
+  "overlap_counts": {
+    "v3_dev": {
+      "G1v2_dev_bases": 0,
+      "G1v2_eval_bases": 0,
+      "exposure_registry": 2,
+      "E-M1_PLAN_v3_rows": 0,
+      "P2_validation_dev": 0
+    },
+    "v3_eval": {
+      "G1v2_dev_bases": 1,
+      "G1v2_eval_bases": 1,
+      "exposure_registry": 0,
+      "E-M1_PLAN_v3_rows": 6,
+      "P2_validation_dev": 3
+    }
+  }
+}

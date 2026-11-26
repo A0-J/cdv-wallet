@@ -36,7 +36,7 @@ from cdv.mandate import Mandate, VersionRegistry  # noqa: E402
 from cdv.pipeline import state_to_entries  # noqa: E402
 from cdv.v2.integrate import decide_selective, ledger_to_mandate  # noqa: E402
 from cdv.v2.m1v2 import Ctx, run_m1v2  # noqa: E402
-from cdv.v2.scope import ScopeV2  # noqa: E402
+from cdv.v2.scope import ScopeV2, checkout_violations  # noqa: E402
 from e2_offline import e2_fires  # noqa: E402
 
 ARMS = {
@@ -47,6 +47,7 @@ ARMS = {
     "B4": {"m1": True, "m2": True, "selective": False},
 }
 NOW = 1_800_000_000.0
+CONSENT_CHECKOUT_CHECK = True   # decision 2026-11-26: check fulfillment/deadline against the checkout state at consent
 USER_SK = new_signing_key()
 USER_PK = public_of(USER_SK)
 PLAT_SK = new_signing_key()
@@ -110,9 +111,20 @@ class Env:
             codes = codes + viol
             if viol and all(v.startswith(("ITEM:", "SELECTED_MISSING:")) for v in viol):
                 d, codes = "CLARIFY", ["SELECTION_MISMATCH"] + viol
+        if CONSENT_CHECKOUT_CHECK and d != "DENY" and hasattr(sm.primary, "fulfillment"):
+            cv, _unk = checkout_violations(sm.primary, self.case.checkout_facts)
+            if cv:
+                d, codes = "DENY", ["OUT_OF_SCOPE"] + cv
         if d == "ALLOW" and self.e2:
             d, codes = "CLARIFY", codes + ["E2_STOCK_CLAIM_BY_CHOSEN"]
         return d, codes
+
+
+def unverified(scope, case) -> list:
+    """Mandate conditions the payment request could not show (counted as 'ALLOW (unverified condition)')."""
+    if not CONSENT_CHECKOUT_CHECK:
+        return scope.deferred()
+    return checkout_violations(scope, case.checkout_facts)[1]
 
 
 def signed_cart_mandate(env: Env) -> Mandate:
@@ -160,8 +172,10 @@ def run_arms(case, states: list, nli=None, gold: dict | None = None) -> dict:
                                  "m1_asks": asks}
             continue
         if not sw["m1"]:
-            d, codes = env.full_gate(mk(raw_ctx(st)))
-            out["arms"][name] = {"decision": verdict.integrated(d, codes, False), "gate": d, "codes": codes, "m1_asks": False}
+            mb = mk(raw_ctx(st))
+            d, codes = env.full_gate(mb)
+            out["arms"][name] = {"decision": verdict.integrated(d, codes, False), "gate": d, "codes": codes, "m1_asks": False,
+                                 "deferred": unverified(mb.primary, case)}
             continue
         if sw["selective"]:
             d, codes, rel, n_comb, approx = decide_selective(m1r.ctx, m1r.unresolved, lambda c: env.full_gate(mk(c)))
@@ -175,7 +189,7 @@ def run_arms(case, states: list, nli=None, gold: dict | None = None) -> dict:
             asks = bool(m1r.unresolved)
             out["arms"][name] = {"decision": verdict.integrated(d, codes, asks), "gate": d, "codes": codes, "m1_asks": asks}
         m = mk(m1r.ctx)
-        out["arms"][name]["deferred"] = m.primary.deferred()
+        out["arms"][name]["deferred"] = unverified(m.primary, case)
     if gold is not None:
         d, codes = env.full_gate(mk(gold_ctx(gold)))
         out["U_reference"] = {"decision": verdict.integrated(d, codes, False), "codes": codes}

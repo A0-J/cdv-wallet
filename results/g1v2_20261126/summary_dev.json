@@ -1,0 +1,192 @@
+{
+  "split": "dev",
+  "n": 140,
+  "failed": [],
+  "dry_run": false,
+  "case_file_sha256": "b83f585d7be5431034bb19aab1a124055778b2a21c6cf4822ba42193c8097ef5",
+  "cost_usd": 0.067578,
+  "cache_hits": 0,
+  "by_type_arm": {
+    "L1|fnctod": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "L1|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "L1|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "6/20",
+      "unnecessary_question": "6/20"
+    },
+    "L1|plain": {
+      "final_ok": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "L2|fnctod": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "L2|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "1/20",
+      "unnecessary_question": "1/20"
+    },
+    "L2|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "asked": "7/20",
+      "unnecessary_question": "7/20"
+    },
+    "L2|plain": {
+      "final_ok": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "N0|fnctod": {
+      "final_ok": "19/20",
+      "steps_ok": "19/20",
+      "preserved": "19/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "N0|fnctod_r": {
+      "final_ok": "19/20",
+      "steps_ok": "19/20",
+      "preserved": "19/20",
+      "asked": "1/20",
+      "unnecessary_question": "1/20"
+    },
+    "N0|fnctod_rn": {
+      "final_ok": "19/20",
+      "steps_ok": "19/20",
+      "preserved": "19/20",
+      "asked": "5/20",
+      "unnecessary_question": "5/20"
+    },
+    "N0|plain": {
+      "final_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "P1|fnctod": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "P1|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "2/20",
+      "unnecessary_question": "2/20"
+    },
+    "P1|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "2/20",
+      "unnecessary_question": "2/20"
+    },
+    "P1|plain": {
+      "final_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "S1|fnctod": {
+      "final_ok": "19/20",
+      "steps_ok": "19/20",
+      "preserved": "19/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "S1|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "1/20",
+      "unnecessary_question": "1/20"
+    },
+    "S1|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "5/20",
+      "unnecessary_question": "5/20"
+    },
+    "S1|plain": {
+      "final_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "S2|fnctod": {
+      "final_ok": "11/20",
+      "steps_ok": "11/20",
+      "preserved": "11/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "S2|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "S2|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "1/20",
+      "unnecessary_question": "0/20"
+    },
+    "S2|plain": {
+      "final_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "U2|fnctod": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    },
+    "U2|fnctod_r": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "1/20",
+      "unnecessary_question": "0/20"
+    },
+    "U2|fnctod_rn": {
+      "final_ok": "20/20",
+      "steps_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "2/20",
+      "unnecessary_question": "0/20"
+    },
+    "U2|plain": {
+      "final_ok": "20/20",
+      "preserved": "20/20",
+      "asked": "0/20",
+      "unnecessary_question": "0/20"
+    }
+  }
+}

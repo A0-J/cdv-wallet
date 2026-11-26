@@ -1,0 +1,158 @@
+{
+  "note": "v3 intervention path: inject candidate_operations into M1 v1 and M1 v2 and compare with the dataset's labels.",
+  "split": "dev",
+  "n_ops": 356,
+  "labels": {
+    "ACCEPT": 223,
+    "REJECT": 133
+  },
+  "confusion": {
+    "v1": {
+      "ALL|ACCEPT": {
+        "ACCEPT": 90,
+        "CLARIFY": 124,
+        "UNSUPPORTED": 9
+      },
+      "ALL|REJECT": {
+        "ACCEPT": 20,
+        "CLARIFY": 36,
+        "UNSUPPORTED": 16,
+        "REJECT": 61
+      },
+      "T0/omitted_condition|REJECT": {
+        "CLARIFY": 17
+      },
+      "T0/unsupported_condition|REJECT": {
+        "UNSUPPORTED": 16
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 22,
+        "CLARIFY": 13
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "ACCEPT": 19,
+        "CLARIFY": 9
+      },
+      "T1/RELAX|ACCEPT": {
+        "CLARIFY": 17,
+        "ACCEPT": 6
+      },
+      "T1/REVOKE|ACCEPT": {
+        "UNSUPPORTED": 9,
+        "ACCEPT": 11,
+        "CLARIFY": 10
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "CLARIFY": 23,
+        "ACCEPT": 5
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "ACCEPT": 27,
+        "CLARIFY": 4
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 9,
+        "ACCEPT": 8
+      },
+      "T2/budget|REJECT": {
+        "CLARIFY": 10,
+        "REJECT": 7
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "CLARIFY": 8,
+        "REJECT": 8
+      },
+      "T2/product_attribute|REJECT": {
+        "ACCEPT": 10,
+        "REJECT": 7
+      },
+      "T2/quantity_bundle|REJECT": {
+        "REJECT": 14,
+        "ACCEPT": 2,
+        "CLARIFY": 1
+      },
+      "T3/induced_consent|ACCEPT": {
+        "CLARIFY": 48
+      }
+    },
+    "v2": {
+      "ALL|ACCEPT": {
+        "ACCEPT": 90,
+        "CLARIFY": 113,
+        "UNSUPPORTED": 9,
+        "REJECT": 11
+      },
+      "ALL|REJECT": {
+        "CLARIFY": 36,
+        "REJECT": 79,
+        "UNSUPPORTED": 16,
+        "ACCEPT": 2
+      },
+      "T0/omitted_condition|REJECT": {
+        "REJECT": 17
+      },
+      "T0/unsupported_condition|REJECT": {
+        "UNSUPPORTED": 16
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 22,
+        "CLARIFY": 8,
+        "REJECT": 5
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "ACCEPT": 19,
+        "CLARIFY": 7,
+        "REJECT": 2
+      },
+      "T1/RELAX|ACCEPT": {
+        "CLARIFY": 17,
+        "ACCEPT": 6
+      },
+      "T1/REVOKE|ACCEPT": {
+        "UNSUPPORTED": 9,
+        "ACCEPT": 11,
+        "REJECT": 2,
+        "CLARIFY": 8
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "CLARIFY": 22,
+        "ACCEPT": 5,
+        "REJECT": 1
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "ACCEPT": 27,
+        "CLARIFY": 3,
+        "REJECT": 1
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 9,
+        "CLARIFY": 8
+      },
+      "T2/budget|REJECT": {
+        "CLARIFY": 10,
+        "REJECT": 7
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "CLARIFY": 8,
+        "REJECT": 8
+      },
+      "T2/product_attribute|REJECT": {
+        "CLARIFY": 10,
+        "REJECT": 7
+      },
+      "T2/quantity_bundle|REJECT": {
+        "REJECT": 15,
+        "ACCEPT": 2
+      },
+      "T3/induced_consent|ACCEPT": {
+        "CLARIFY": 48
+      }
+    }
+  }
+}

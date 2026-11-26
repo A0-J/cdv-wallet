@@ -93,6 +93,15 @@ def ref_stats(case):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tag", default="", help="suffix for output files (existing results are never overwritten)")
+    ap.add_argument("--no-consent-check", action="store_true", help="arms.CONSENT_CHECKOUT_CHECK = False (before)")
+    a = ap.parse_args()
+    A.CONSENT_CHECKOUT_CHECK = not a.no_consent_check
+    sfx = f"_{a.tag}" if a.tag else ""
+    for f in (f"dev_rows{sfx}.jsonl", f"dev_summary{sfx}.json"):
+        assert not (DEV / f).exists(), f"refusing to overwrite {f}"
     from cdv.nli import NLI
     nli = NLI()
     rows = []
@@ -120,9 +129,9 @@ def main():
         out.append({"episode_id": r["episode_id"], "set": r["set"], "outcome": r["outcome"], "t_kind": c.t_kind,
                     "pay_viol": o["U_reference"]["decision"] == "DENY", "ms_all_arms": ms_v2, **o})
     secs = round(time.perf_counter() - t0, 1)
-    (DEV / "dev_rows.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False, default=str) + "\n" for x in out),
+    (DEV / f"dev_rows{sfx}.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False, default=str) + "\n" for x in out),
                                         encoding="utf-8", newline="\n")
-    summ = {"note": __doc__.split("\n\n")[0], "model_calls": 0, "n": len(out), "seconds": secs,
+    summ = {"consent_checkout_check": A.CONSENT_CHECKOUT_CHECK, "note": __doc__.split("\n\n")[0], "model_calls": 0, "n": len(out), "seconds": secs,
             "sets": dict(Counter(x["set"] for x in out)), "reference_turns": dict(refc), "groups": {}}
     groups = {"legit(outcome)": [x for x in out if x["outcome"] in LEGIT],
               "violating(outcome)": [x for x in out if x["outcome"] in VIOL],
@@ -149,7 +158,7 @@ def main():
                         "selection_how": dict(Counter(x["m1"]["selection_how"] for x in out)),
                         "deferred_fields": dict(Counter(f for x in out for f in x["arms"]["B3"].get("deferred", [])))}
     summ["ms_all_arms_median"] = sorted(x["ms_all_arms"] for x in out)[len(out) // 2]
-    (DEV / "dev_summary.json").write_text(json.dumps(summ, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    (DEV / f"dev_summary{sfx}.json").write_text(json.dumps(summ, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(summ, indent=1, ensure_ascii=False))
 
 

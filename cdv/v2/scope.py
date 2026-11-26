@@ -112,3 +112,24 @@ class ScopeV2:
                 "kind": self.kind, "cart_ids": s(self.cart_ids), "must_include": [sorted(x) for x in self.must_include],
                 "fulfillment": self.fulfillment,
                 "deadline_days": self.deadline_days}
+
+
+def checkout_violations(scope: ScopeV2, facts: dict) -> tuple[list[str], list[str]]:
+    """Fulfillment / deadline against the checkout state at the payment-consent point (decision 2026-11-26).
+
+    facts: {"fulfillment": "ship" | "pickup" | None, "max_days": int | None} from structured checkout tool results.
+    Returns (violations, still_unverified). A missing fact leaves the condition unverified (never satisfied)."""
+    viol, unk = [], []
+    if scope.fulfillment:
+        f = (facts or {}).get("fulfillment")
+        if f is None:
+            unk.append("fulfillment")
+        elif f != scope.fulfillment:
+            viol.append(f"FULFILLMENT:{f}")
+    if scope.deadline_days:
+        d = (facts or {}).get("max_days")
+        if d is None:
+            unk.append("deadline_days")
+        elif d > scope.deadline_days:
+            viol.append(f"DEADLINE:{d}>{scope.deadline_days}")
+    return viol, unk

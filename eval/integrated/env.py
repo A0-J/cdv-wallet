@@ -48,6 +48,7 @@ class IntegratedCase:
     catalog: dict                       # (seller, cart_id) -> LineV2 (structured fields; cart price = payment request)
     cart: list                          # [((seller, variant_id), quantity)]
     unavailable: list                   # (seller, variant_id) shown unavailable by the platform before t
+    checkout_facts: dict = field(default_factory=dict)   # fulfillment / max delivery days from checkout state before t
     scoring: dict = field(default_factory=dict)   # hidden spec, outcome: NEVER passed to an arm
 
 
@@ -67,6 +68,58 @@ def load_rows(eids: set):
     if miss:
         raise InputError(f"episodes not found in any split ({len(miss)}): {miss[:5]}")
     return msgs, {e: sorted(v, key=lambda z: z["seq"]) for e, v in turns.items()}
+
+
+CHECKOUT_TOOLS = {"create_checkout", "update_checkout", "get_checkout", "start_checkout", "choose_fulfillment",
+                  "set_shipping_address", "create_checkout_session", "update_checkout_session", "get_checkout_session",
+                  "request_cart_mandate", "create_checkout_mandate"}
+DAYS_RE = re.compile(r"(\d+)\s*-\s*(\d+)\s*(?:business\s+)?days?", re.I)
+
+
+def _walk(o, fn):
+    if isinstance(o, dict):
+        fn(o)
+        for v in o.values():
+            _walk(v, fn)
+    elif isinstance(o, list):
+        for v in o:
+            _walk(v, fn)
+
+
+def checkout_facts(T: list, t: float) -> dict:
+    """Structured checkout state before t (platform facts): fulfillment method and the selected option's max days.
+    Only an option that is marked selected (selected_option / *_option_id) or a fulfillment expectation counts;
+    an offered list without a selection gives no deadline fact."""
+    res = [x for x in T if x["kind"] == "tool_result" and x["tool"] in CHECKOUT_TOOLS and x["seq"] < t]
+    if not res:
+        return {}
+    o = json.loads(res[-1]["result"] or "null")
+    while isinstance(o, str):
+        o = json.loads(o)
+    methods, sel_ids, sel_texts, opts = set(), set(), [], {}
+
+    def look(d):
+        for k in ("type", "method"):
+            v = str(d.get(k) or "").lower()
+            if v in ("shipping", "delivery"):
+                methods.add("ship")
+            elif v in ("pickup", "pick_up", "store_pickup"):
+                methods.add("pickup")
+        for k in ("selected_option", "selected_option_id", "selected_fulfillment_option_id", "fulfillment_option_id"):
+            v = d.get(k)
+            if isinstance(v, dict):
+                sel_texts.append(json.dumps(v))
+            elif v:
+                sel_ids.add(str(v))
+        if d.get("id") is not None and (d.get("title") or d.get("description")):
+            opts[str(d["id"])] = str(d.get("title") or d.get("description"))
+        for e in d.get("expectations") or []:
+            if isinstance(e, dict):
+                sel_texts.append(str(e.get("description") or ""))
+    _walk(o, look)
+    sel_texts += [opts[i] for i in sel_ids if i in opts]
+    days = [int(m.group(2)) for s in sel_texts for m in DAYS_RE.finditer(s)]
+    return {"fulfillment": next(iter(methods)) if len(methods) == 1 else None, "max_days": max(days) if days else None}
 
 
 def build_case(eid: str, msg: dict, T: list, source="original") -> IntegratedCase:
@@ -112,6 +165,7 @@ def build_case(eid: str, msg: dict, T: list, source="original") -> IntegratedCas
             catalog[key] = LineV2(**{**c.__dict__, "unit_price": (l.get("unit_price") or 0) / 100})
         cart.append((key, int(l.get("quantity") or 1)))
     return IntegratedCase(eid, msg["split"], source, t, t_kind, ut, at, reg, seller, offers, catalog, cart, unavailable,
+                          checkout_facts=checkout_facts(T, t) if t_kind == "consent_request" else {},
                           scoring={"outcome": msg["outcome_class"], "hidden_spec": msg["hidden_spec"],
                                    "final_cart": msg["final_cart"]})   # final_cart: for the PLAN_v3 bridge row only
 

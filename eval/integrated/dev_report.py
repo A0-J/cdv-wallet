@@ -119,7 +119,7 @@ def main():
     cols = ["ALLOW", "ALLOW(unverified condition)", "CLARIFY:M1", "CLARIFY:selection", "CLARIFY:unknown_attr",
             "CLARIFY:E2", "CLARIFY:other_gate", "DENY"]
     TAG = "[개발 분할(validation), 정책 두 가지 조정 후]"
-    md = ["# 개발 평가 보고 (validation, run2; 개발 단계 결과)", "",
+    md = [f"# 개발 평가 보고 (validation, {sfx[1:] or 'run2'}; 개발 단계 결과)", "",
           "모든 표: " + TAG + " — 브랜드 판정(상품명 일치), 선택 불일치만 있으면 CLARIFY. 최종 결과가 아니다.", "",
           f"{TAG} 정상(RIGHT/RIGHT_BY_LUCK) {len(L)}여정, 비교군별 판정. 'ALLOW(미검증 조건 있음)' = 서명된 Mandate에 수령 방식·기한이 있으나 장바구니 단계 결제 요청에 그 정보가 없어 검사하지 못하고 통과한 경우(충족으로 세지 않음).", "",
           "| 비교군 | " + " | ".join(cols) + " |", "|---|" + "---:|" * len(cols)]
