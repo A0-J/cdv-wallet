@@ -1,0 +1,106 @@
+{
+  "plan_sha256": "1c7226f9e48ca8c28a8d3feea2b1d24bf4867ace6b908565a694b8dac68b5121",
+  "split": "test_cross_store",
+  "post_hoc": true,
+  "paid_calls": 0,
+  "pairs_per_field": {
+    "budget": 40,
+    "deadline": 40,
+    "fulfillment": 40,
+    "quantity": 40,
+    "substitute": 40
+  },
+  "models": {
+    "cross-encoder/nli-deberta-v3-base": {
+      "by_field": {
+        "budget": {
+          "n_pos": 40,
+          "grounding_recall_pct": 25.0,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 55.0
+        },
+        "deadline": {
+          "n_pos": 40,
+          "grounding_recall_pct": 100.0,
+          "false_grounding_pct": 2.5,
+          "contradiction_on_altered_pct": 95.0
+        },
+        "fulfillment": {
+          "n_pos": 40,
+          "grounding_recall_pct": 82.5,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 22.5
+        },
+        "quantity": {
+          "n_pos": 40,
+          "grounding_recall_pct": 55.0,
+          "false_grounding_pct": 22.5,
+          "contradiction_on_altered_pct": 32.5
+        },
+        "substitute": {
+          "n_pos": 40,
+          "grounding_recall_pct": 62.5,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 85.0
+        }
+      },
+      "overall": {
+        "grounding_recall_pct": 65.0,
+        "false_grounding_pct": 5.0,
+        "contradiction_on_altered_pct": 58.0
+      },
+      "latency_ms_median": 52.3,
+      "id2label": {
+        "0": "contradiction",
+        "1": "entailment",
+        "2": "neutral"
+      }
+    },
+    "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli": {
+      "by_field": {
+        "budget": {
+          "n_pos": 40,
+          "grounding_recall_pct": 62.5,
+          "false_grounding_pct": 2.5,
+          "contradiction_on_altered_pct": 12.5
+        },
+        "deadline": {
+          "n_pos": 40,
+          "grounding_recall_pct": 100.0,
+          "false_grounding_pct": 2.5,
+          "contradiction_on_altered_pct": 97.5
+        },
+        "fulfillment": {
+          "n_pos": 40,
+          "grounding_recall_pct": 95.0,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 37.5
+        },
+        "quantity": {
+          "n_pos": 40,
+          "grounding_recall_pct": 60.0,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 62.5
+        },
+        "substitute": {
+          "n_pos": 40,
+          "grounding_recall_pct": 62.5,
+          "false_grounding_pct": 0.0,
+          "contradiction_on_altered_pct": 77.5
+        }
+      },
+      "overall": {
+        "grounding_recall_pct": 76.0,
+        "false_grounding_pct": 1.0,
+        "contradiction_on_altered_pct": 57.5
+      },
+      "latency_ms_median": 349.5,
+      "id2label": {
+        "0": "entailment",
+        "1": "neutral",
+        "2": "contradiction"
+      }
+    }
+  },
+  "plan_sha256_at_end": "1c7226f9e48ca8c28a8d3feea2b1d24bf4867ace6b908565a694b8dac68b5121"
+}

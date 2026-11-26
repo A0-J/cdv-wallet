@@ -10,11 +10,13 @@ import dataclasses
 import pytest
 
 from adapters import avip
+from cdv.canon import MockHmacKey, new_signing_key, public_of
 from cdv.evidence import Evidence, Issuer, IssuerRegistry, NonceStore
 from cdv.gate import Request, authorize, combined_hash, context_record
 from cdv.mandate import Clause, Line, Mandate, Scope, VersionRegistry
 
-USER_KEY = b"user-key"
+USER_SK = new_signing_key()          # wallet private key (signing side only)
+USER_KEY = public_of(USER_SK)         # what the gate receives
 SESSION = "sess-1"
 NOW = 1_000_000.0
 
@@ -39,11 +41,14 @@ def offers(extra_text: dict | None = None) -> list[dict]:
     return out
 
 
-ISSUERS = IssuerRegistry([
-    Issuer("platform-1", "platform", None, b"platform-key"),
-    Issuer("seller-S1", "seller", "S1", b"s1-key"),
-    Issuer("seller-S2", "seller", "S2", b"s2-key"),
-])
+def _issuer(iid, role, seller):
+    sk = new_signing_key()
+    return Issuer(iid, role, seller, public_of(sk), sk)
+
+
+ISSUERS_FULL = IssuerRegistry([_issuer("platform-1", "platform", None), _issuer("seller-S1", "seller", "S1"),
+                               _issuer("seller-S2", "seller", "S2")])
+ISSUERS = ISSUERS_FULL.public_view()      # the gate gets public keys only
 
 PRIMARY = Scope(brands=frozenset({"Sony"}), max_total=300000, required_features=frozenset({"ANC"}))
 FB = Clause("fb-1", ("S1", "sony-wh"), "out_of_stock",
@@ -52,13 +57,13 @@ FB = Clause("fb-1", ("S1", "sony-wh"), "out_of_stock",
 
 def mandate(version=1, primary=PRIMARY, fallbacks=(FB,)) -> Mandate:
     return Mandate("m-1", version, primary, tuple(fallbacks), basis={"fb-1": ["user_turn:2"]},
-                   user_turn_chain_head="h0", session=SESSION).signed(USER_KEY)
+                   user_turn_chain_head="h0", session=SESSION).signed(USER_SK)
 
 
 def stock_ev(issuer="platform-1", subject=("S1", "sony-wh"), nonce="n1", at=NOW - 10, session=SESSION,
              sign=True) -> Evidence:
     e = Evidence(issuer, subject, "out_of_stock", True, at, session, nonce)
-    return ISSUERS.sign(e) if sign else dataclasses.replace(e, signature="forged")
+    return ISSUERS_FULL.sign(e) if sign else dataclasses.replace(e, signature="forged")
 
 
 def request(cart_key, m=None, versions=None, evidences=(), clause_id=None, nonces=None, text=None,
@@ -188,3 +193,30 @@ def test_avip_record_verifies_untampered(cart_key):
     cap = avip.capture(offers())
     r = avip.record(cap, cart_key).body
     assert avip.verify(r, cap) == (True, [])
+
+
+# ---- signatures: ECDSA P-256 (public-key) vs mock (ablation); evaluated separately from M1
+def test_sig_gate_holds_no_private_keys():
+    req = request(("S1", "sony-wh"))
+    assert not hasattr(req.user_key, "sign")                       # public key object only
+    assert all(ISSUERS.get(i).signing_key is None for i in ("platform-1", "seller-S1", "seller-S2"))
+
+
+def test_sig_mandate_signed_by_other_user_is_rejected():
+    other = new_signing_key()
+    m = Mandate("m-1", 1, PRIMARY, (FB,), session=SESSION).signed(other)
+    res = authorize(request(("S1", "sony-wh"), m=m))
+    assert (res.decision, res.codes) == ("DENY", ["MANDATE_SIG"])
+
+
+def test_sig_mandate_body_tampered_after_signing_is_rejected():
+    m = mandate()
+    tampered = dataclasses.replace(m, primary=dataclasses.replace(PRIMARY, max_total=900000))
+    res = authorize(request(("S1", "sony-plus"), m=tampered))
+    assert (res.decision, res.codes) == ("DENY", ["MANDATE_SIG"])
+
+
+def test_sig_mock_hmac_mode_is_labelled_and_distinct():
+    k = MockHmacKey(b"shared")
+    m = Mandate("m-1", 1, PRIMARY, (FB,), session=SESSION).signed(k)
+    assert m.signature.startswith("hmac:") and m.signature_ok(k) and not m.signature_ok(USER_KEY)

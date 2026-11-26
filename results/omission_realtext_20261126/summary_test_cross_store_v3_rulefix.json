@@ -1,0 +1,144 @@
+{
+  "plan_sha256": "703323470f8905f8b328a4a8e33f3272848269493e96b35d245800c1ae05cba1",
+  "split": "test_cross_store",
+  "model_calls": 0,
+  "journeys": 9789,
+  "post_hoc": true,
+  "false_alarm_journeys_by_field": {
+    "substitute": 46,
+    "quantity": 47,
+    "deadline_days": 556,
+    "fulfillment": 34,
+    "bundle_all": 3
+  },
+  "false_alarm_rate_by_field_pct": {
+    "substitute": 0.47,
+    "quantity": 0.48,
+    "deadline_days": 5.68,
+    "fulfillment": 0.35,
+    "bundle_all": 0.03
+  },
+  "false_alarm_example_episode_ids": {
+    "substitute": [
+      "ep-12c38f721a9e",
+      "ep-38e63dcb867b",
+      "ep-4d11bd9c0da7",
+      "ep-5ed3ef200ca5",
+      "ep-263ff23a0e11",
+      "ep-88d5c24ccd7f",
+      "ep-b9b5f9385513",
+      "ep-db01787f5907",
+      "ep-e53ad2bb3906",
+      "ep-7be586d8cf80",
+      "ep-90a6c80d230a",
+      "ep-b010adcc2869",
+      "ep-9bb39ae08603",
+      "ep-0a9304f30301",
+      "ep-8657bc42046f"
+    ],
+    "quantity": [
+      "ep-13b9ffd72f30",
+      "ep-1c16db81ee82",
+      "ep-46db2e5f30a1",
+      "ep-591bfb7cc4fa",
+      "ep-9d6deb66c4c7",
+      "ep-de5ac1c3f6f7",
+      "ep-df1dfd741a35",
+      "ep-453ea32b6531",
+      "ep-4a73da2efd3e",
+      "ep-ba39c983a26d",
+      "ep-1dd75133a6dd",
+      "ep-26460abb9970",
+      "ep-afb67bd894ab",
+      "ep-b0245b368cb8",
+      "ep-3471ed77be00"
+    ],
+    "deadline_days": [
+      "ep-1739d39cbb07",
+      "ep-1a5fc4dca268",
+      "ep-20d4d7114cc7",
+      "ep-221d14c26d3d",
+      "ep-402a5bd61831",
+      "ep-53d6ca8f149f",
+      "ep-5527b2eda6a5",
+      "ep-6ea81c7a9c0c",
+      "ep-7f769f0f21c1",
+      "ep-87acd41753ce",
+      "ep-89623029bd19",
+      "ep-8cc417fe7cc3",
+      "ep-8fdb4662c426",
+      "ep-a810508ce57f",
+      "ep-abe2bb4be467"
+    ],
+    "fulfillment": [
+      "ep-3a642c3cef98",
+      "ep-40ae9a6fad41",
+      "ep-5f4273010890",
+      "ep-711e84b73739",
+      "ep-75d390f32bc1",
+      "ep-ca1126358e28",
+      "ep-dc2735169dfa",
+      "ep-f43e6f9cda76",
+      "ep-0e28932108dc",
+      "ep-e115c5d0b13d",
+      "ep-cb5d165420e4",
+      "ep-0b591080987b",
+      "ep-9a3cdceb08f2",
+      "ep-4b13e42275ff",
+      "ep-c5be6ac0c2db"
+    ],
+    "bundle_all": [
+      "ep-db1df96f8240",
+      "ep-1c8ebed4b1c8",
+      "ep-dc64693a8a73"
+    ]
+  },
+  "detection_by_field": {
+    "brand_in": {
+      "n": 116,
+      "detected": 10,
+      "pct": 8.6
+    },
+    "brand_out": {
+      "n": 27,
+      "detected": 0,
+      "pct": 0.0
+    },
+    "budget_max": {
+      "n": 3613,
+      "detected": 3153,
+      "pct": 87.3
+    },
+    "bundle_all": {
+      "n": 1921,
+      "detected": 1921,
+      "pct": 100.0
+    },
+    "deadline_days": {
+      "n": 2679,
+      "detected": 2178,
+      "pct": 81.3
+    },
+    "fulfillment": {
+      "n": 5156,
+      "detected": 3326,
+      "pct": 64.5
+    },
+    "quantity": {
+      "n": 3122,
+      "detected": 2358,
+      "pct": 75.5
+    },
+    "substitute": {
+      "n": 825,
+      "detected": 542,
+      "pct": 65.7
+    }
+  },
+  "latency_ms": {
+    "median": 0.091,
+    "p95": 0.225
+  },
+  "plan_sha256_at_end": "703323470f8905f8b328a4a8e33f3272848269493e96b35d245800c1ae05cba1",
+  "tag": "v3_rulefix"
+}

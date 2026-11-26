@@ -1,6 +1,7 @@
 """Three-stage evidence check for opening a conditional clause.
 
-E1 source     the evidence was produced by the issuer it names (signature stand-in: HMAC, canon.py)
+E1 source     the evidence was produced by the issuer it names (ECDSA P-256 signature; the verifier
+              holds only the issuer's public key. MockHmacKey only in the ablation)
 E2 authority  the issuer may assert this predicate about this subject
 E3 condition  subject, predicate, freshness (TTL), session binding, single use (nonce), scope rule
 
@@ -18,7 +19,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .canon import hmac_sign, hmac_verify
+from .canon import sign, verify
 from .mandate import Clause, Line
 
 AUTHORITY: dict[str, frozenset] = {
@@ -62,7 +63,8 @@ class Issuer:
     issuer_id: str
     role: str                 # "platform" or "seller"
     seller_id: str | None     # set when role == "seller"
-    key: bytes
+    verify_key: object        # ECDSA public key (or MockHmacKey in the ablation)
+    signing_key: object = None  # held by the issuer only; the harness uses it to mint evidence
 
 
 class IssuerRegistry:
@@ -73,8 +75,13 @@ class IssuerRegistry:
         return self._by_id.get(issuer_id)
 
     def sign(self, e: Evidence) -> Evidence:
-        k = self._by_id[e.issuer_id].key
-        return Evidence(**{**e.__dict__, "signature": hmac_sign(k, e.body())})
+        k = self._by_id[e.issuer_id].signing_key
+        return Evidence(**{**e.__dict__, "signature": sign(k, e.body())})
+
+    def public_view(self) -> "IssuerRegistry":
+        """What a verifier gets: public keys only."""
+        return IssuerRegistry([Issuer(i.issuer_id, i.role, i.seller_id, i.verify_key, None)
+                               for i in self._by_id.values()])
 
 
 class NonceStore:
@@ -94,7 +101,7 @@ def check_one(e: Evidence, clause: Clause, registry: IssuerRegistry, now: float,
 
     Subject matching against the clause is done by the caller (scope rule)."""
     issuer = registry.get(e.issuer_id)
-    if issuer is None or not hmac_verify(issuer.key, e.body(), e.signature):
+    if issuer is None or not verify(issuer.verify_key, e.body(), e.signature):
         return "E1_SOURCE"
     if not admissible(issuer.role, issuer.seller_id or "", e.subject[0], e.predicate, clause.proof):
         return "E2_AUTHORITY"

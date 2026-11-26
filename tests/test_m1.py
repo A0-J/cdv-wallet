@@ -160,3 +160,59 @@ def test_driver_pending_change_means_clarify():
     ops = [ChangeOp("revoke", "it", None, ("u3",))]
     r = verify_turn(Ledger(1, (BUNDLE,)), ops, [T3])
     assert "it" in r.ledger.by_id() and gate_hint(r) == "CLARIFY"
+
+
+# ---- omission scan: extended fields (2026-11-26)
+def _turns(*texts):
+    return [UserTurn(f"u{i}", i, s) for i, s in enumerate(texts)]
+
+
+def test_omission_quantity_latest_wins():
+    led = Ledger(1, (Entry("q", "quantity", 2, basis=("u0",)),))
+    assert scan_omissions(led, _turns("I'd like 2.")).status == ACCEPT
+    assert scan_omissions(led, _turns("I'd like 2.", "Actually make it 3.")).codes == ["OMITTED_QUANTITY:u1"]
+
+
+def test_omission_quantity_ignores_numbers_in_titles():
+    assert scan_omissions(Ledger(1, ()), _turns("I want the 24CT Prismacolor pencils")).status == ACCEPT
+
+
+def test_omission_brand_in_and_out_need_known_brands():
+    led = Ledger(1, ())
+    f = scan_omissions(led, _turns("Only Sony please.", "No Bose."), known_brands=("Sony", "Bose"))
+    assert f.codes == ["OMITTED_BRAND_IN:u0:Sony", "OMITTED_BRAND_OUT:u1:Bose"]
+    assert scan_omissions(led, _turns("Only Sony please."), known_brands=()).status == ACCEPT
+
+
+def test_omission_bundle_required_items():
+    items = {"p1": "keyboard stand", "p2": "tongue drum"}
+    led = Ledger(1, ())
+    f = scan_omissions(led, _turns("I want the keyboard stand and the tongue drum together."), known_items=items)
+    assert f.codes == ["OMITTED_BUNDLE:u0"]
+    ok = Ledger(1, (Entry("b", "bundle_all", ("p1", "p2"), basis=("u0",)),))
+    assert scan_omissions(ok, _turns("I want the keyboard stand and the tongue drum together."), known_items=items).status == ACCEPT
+
+
+def test_omission_deadline_and_fulfillment():
+    f = scan_omissions(Ledger(1, ()), _turns("It needs to arrive within 3 days.", "I'll collect it from the store."))
+    assert f.codes == ["OMITTED_DEADLINE:u0", "OMITTED_FULFILLMENT:u1:pickup"]
+    led = Ledger(1, (Entry("d", "deadline_days", 3, basis=("u0",)), Entry("f", "fulfillment", "pickup", basis=("u1",))))
+    assert scan_omissions(led, _turns("It needs to arrive within 3 days.", "I'll collect it from the store.")).status == ACCEPT
+
+
+def test_omission_fulfillment_latest_statement():
+    led = Ledger(1, (Entry("f", "fulfillment", "pickup", basis=("u0",)),))
+    f = scan_omissions(led, _turns("I'll pick it up.", "Actually please ship it to my office."))
+    assert f.codes == ["OMITTED_FULFILLMENT:u1:ship"]
+
+
+# Rule gaps found on the real walkthrough case ep-b63223f61e0a (validation), 2026-11-26.
+def test_collect_in_store_is_pickup():
+    from cdv import m1
+    assert [k for _, k in m1.fulfillment_mentions("I'd rather collect it in store.")] == ["pickup"]
+
+
+def test_tell_me_if_out_of_stock_is_not_a_substitution_allowance():
+    from cdv import m1
+    assert not m1.CONDITIONAL_RE.search("No preference on the color. If it is out of stock, just tell me.")
+    assert m1.CONDITIONAL_RE.search("If it is out of stock, the closest one is fine.")

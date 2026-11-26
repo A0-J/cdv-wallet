@@ -41,7 +41,7 @@ def context_record(m: Mandate, clause_id: str | None, evidence_nonces: list[str]
 @dataclass
 class Request:
     mandate: Mandate
-    user_key: bytes
+    user_key: object                    # user's PUBLIC key (ECDSA); the gate never holds private keys
     versions: VersionRegistry
     session: str
     offers: list[dict]                  # what the merchant returned (A-VIP capture input)

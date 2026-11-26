@@ -1,0 +1,233 @@
+{
+  "set": "G1 (generated)",
+  "n": 260,
+  "dry_run": true,
+  "correct_pct": {
+    "plain": 7.7,
+    "fnctod": 7.7,
+    "fnctod_r": 21.9,
+    "fnctod_rn": 21.9
+  },
+  "by_template": {
+    "plain": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 0
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 0
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 0
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 0
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 0
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 0
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 0
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 0
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 0
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 0
+      }
+    },
+    "fnctod": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 0
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 0
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 0
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 0
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 0
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 0
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 0
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 0
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 0
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 0
+      }
+    },
+    "fnctod_r": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 0
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 0
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 0
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 0
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 0
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 0
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 0
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 17
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 0
+      }
+    },
+    "fnctod_rn": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 0
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 0
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 0
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 0
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 0
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 0
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 0
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 0
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 17
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 0
+      }
+    }
+  },
+  "dry_run_estimate": {
+    "calls_lower_bound": 760,
+    "input_tokens_est": 119970
+  }
+}

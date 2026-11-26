@@ -1,0 +1,685 @@
+{
+  "model_calls": 0,
+  "kind": "generated (G3); gold mandates (upper bound / functional)",
+  "text_sha256": "379961fa1b4156141324690b1d94b7ef49b3ba63483c95d4bb827735ec72f2ea",
+  "splits": {
+    "dev": {
+      "source": "main",
+      "cases": 418,
+      "skipped": {
+        "a_same_brand": 2
+      },
+      "file_sha256": "10573fdb8a89a8ca3f768fae93ad96f297e821fe8017f04bd993955ba59a3e7e",
+      "table": {
+        "a|alt|gold=BLOCK": {
+          "P": {
+            "n": 68,
+            "DENY": 68,
+            "correct": 68
+          },
+          "W1": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 0
+          },
+          "W3": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 0
+          },
+          "P+E2": {
+            "n": 68,
+            "DENY": 68,
+            "correct": 68
+          }
+        },
+        "a|want|gold=ALLOW": {
+          "P": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          },
+          "W1": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          },
+          "W2s": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          },
+          "W2e": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          },
+          "W3": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          },
+          "P+E2": {
+            "n": 68,
+            "ALLOW": 68,
+            "correct": 68
+          }
+        },
+        "b|alt|gold=BLOCK": {
+          "P": {
+            "n": 70,
+            "DENY": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 70,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 12
+          },
+          "W3": {
+            "n": 70,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 12
+          },
+          "P+E2": {
+            "n": 70,
+            "DENY": 70,
+            "correct": 70
+          }
+        },
+        "b|want|gold=ALLOW": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          }
+        },
+        "c|alt|gold=BLOCK": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          }
+        },
+        "c|want|gold=ALLOW": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          }
+        },
+        "d|alt|gold=ALLOW": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          }
+        },
+        "d|want|gold=ALLOW": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          }
+        },
+        "e1|alt|gold=ALLOW": {
+          "P": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W2e": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "W3": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          },
+          "P+E2": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 70
+          }
+        },
+        "e2|alt|gold=CLARIFY": {
+          "P": {
+            "n": 70,
+            "CLARIFY": 70,
+            "correct": 70
+          },
+          "W1": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 70,
+            "ALLOW": 70,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 70,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 12
+          },
+          "W3": {
+            "n": 70,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 12
+          },
+          "P+E2": {
+            "n": 70,
+            "CLARIFY": 70,
+            "correct": 70
+          }
+        }
+      }
+    },
+    "eval": {
+      "source": "cross_seller",
+      "cases": 836,
+      "skipped": {
+        "a_same_brand": 4
+      },
+      "file_sha256": "bbb53afb74af44756d4ab7b1e0d6c0f2c6eb8970ba3ea8a8307e55940afcfd74",
+      "table": {
+        "a|alt|gold=BLOCK": {
+          "P": {
+            "n": 136,
+            "DENY": 136,
+            "correct": 136
+          },
+          "W1": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 0
+          },
+          "W3": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 0
+          },
+          "P+E2": {
+            "n": 136,
+            "DENY": 136,
+            "correct": 136
+          }
+        },
+        "a|want|gold=ALLOW": {
+          "P": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          },
+          "W1": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          },
+          "W2s": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          },
+          "W2e": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          },
+          "W3": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          },
+          "P+E2": {
+            "n": 136,
+            "ALLOW": 136,
+            "correct": 136
+          }
+        },
+        "b|alt|gold=BLOCK": {
+          "P": {
+            "n": 140,
+            "DENY": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 82,
+            "correct": 58,
+            "DENY": 58
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 82,
+            "correct": 58,
+            "DENY": 58
+          },
+          "W2e": {
+            "n": 140,
+            "CLARIFY": 58,
+            "correct": 116,
+            "ALLOW": 24,
+            "DENY": 58
+          },
+          "W3": {
+            "n": 140,
+            "CLARIFY": 58,
+            "correct": 116,
+            "ALLOW": 24,
+            "DENY": 58
+          },
+          "P+E2": {
+            "n": 140,
+            "DENY": 140,
+            "correct": 140
+          }
+        },
+        "b|want|gold=ALLOW": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          }
+        },
+        "c|alt|gold=BLOCK": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 0
+          }
+        },
+        "c|want|gold=ALLOW": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          }
+        },
+        "d|alt|gold=ALLOW": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          }
+        },
+        "d|want|gold=ALLOW": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          }
+        },
+        "e1|alt|gold=ALLOW": {
+          "P": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W2e": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "W3": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          },
+          "P+E2": {
+            "n": 140,
+            "ALLOW": 140,
+            "correct": 140
+          }
+        },
+        "e2|alt|gold=CLARIFY": {
+          "P": {
+            "n": 140,
+            "CLARIFY": 82,
+            "correct": 82,
+            "DENY": 58
+          },
+          "W1": {
+            "n": 140,
+            "ALLOW": 82,
+            "correct": 0,
+            "DENY": 58
+          },
+          "W2s": {
+            "n": 140,
+            "ALLOW": 82,
+            "correct": 0,
+            "DENY": 58
+          },
+          "W2e": {
+            "n": 140,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 24,
+            "DENY": 58
+          },
+          "W3": {
+            "n": 140,
+            "CLARIFY": 58,
+            "correct": 58,
+            "ALLOW": 24,
+            "DENY": 58
+          },
+          "P+E2": {
+            "n": 140,
+            "CLARIFY": 82,
+            "correct": 82,
+            "DENY": 58
+          }
+        }
+      }
+    }
+  }
+}

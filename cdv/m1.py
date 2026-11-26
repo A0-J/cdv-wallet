@@ -78,14 +78,19 @@ class Finding:
 
 # ---------------------------------------------------------------- typed extraction (rules)
 
-_MONEY = r"(?:[$₩€£]\s?)?(\d{1,3}(?:[,\s]\d{3})+|\d+)(?:\.\d+)?\s?(?:k|K|won|원|만\s?원|dollars?|usd|krw)?"
+_NUMSTR = r"(\d{1,3}(?:[,\s]\d{3})+|\d+)(?:\.\d+)?"
+_CUR_AFTER = r"\s?(?:k\b|K\b|won\b|원|만\s?원|dollars?\b|usd\b|krw\b)"
+# A budget needs a currency marker (symbol before or currency word after), or an explicit
+# budget / spend word as the cue. "within 3 days" is not a budget.
 BUDGET_MAX_RE = re.compile(
-    r"(?:under|below|less than|no more than|not more than|up to|at most|max(?:imum)?|within|budget(?: is| of)?|cap(?: of)?)\s*"
-    + _MONEY, re.I)
+    r"(?:under|below|less than|no more than|not more than|up to|at most|max(?:imum)?|within|cap(?: of)?)\s*"
+    r"(?:[$₩€£]\s?" + _NUMSTR + r"|" + _NUMSTR + _CUR_AFTER + r")"
+    r"|(?:budget(?: is| of)?|spend(?: no more than| up to| at most)?)\s*[$₩€£]?\s?" + _NUMSTR, re.I)
 QTY_RE = re.compile(r"\b(\d+)\s*(?:x\b|pcs\b|pieces?\b|units?\b|of (?:them|each|it)\b)|\b(?:one|two|three|four|five) of each\b", re.I)
 DEADLINE_RE = re.compile(r"\b(?:within|in|by)\s+(\d+)\s+days?\b|\bby (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", re.I)
 CONDITIONAL_RE = re.compile(
     r"\b(?:if (?:it(?:'s| is)|that(?:'s| is)|they(?:'re| are)|[\w\s-]{1,40}? (?:is|are)) (?:out of stock|unavailable|sold out|not available)"
+    r"(?![,.]?\s*(?:just |please |then )?(?:tell me|let me know|ask me|check with me|don'?t (?:substitute|swap|replace)|no (?:substitut|swap)))"
     r"|or the closest(?: thing)?|(?:a )?similar (?:one|item|product)?\s*(?:is|would be) (?:fine|ok|okay)"
     r"|otherwise[, ]+(?:\w+\s){0,4}(?:is|would be) (?:fine|ok|okay))", re.I)
 
@@ -107,11 +112,14 @@ def _num(s: str) -> float:
 def budget_mentions(text: str) -> list[float]:
     out = []
     for m in BUDGET_MAX_RE.finditer(text):
+        g = next((i for i in (1, 2, 3) if m.group(i)), None)
+        if g is None:
+            continue
         try:
-            v = _num(m.group(1))
+            v = _num(m.group(g))
         except ValueError:
             continue
-        tail = text[m.end(1):m.end(1) + 4].lower()
+        tail = text[m.end(g):m.end(g) + 4].lower()
         if "만" in tail:
             v *= 10000
         elif tail.strip().startswith("k"):
@@ -172,21 +180,124 @@ def check_grounding(entry: Entry, turns: dict[str, UserTurn]) -> Finding:
     return Finding("V-B", UNDETERMINED, ["FREE_TEXT"], entry.id)          # NLI / LLM stage
 
 
-def scan_omissions(ledger: Ledger, user_turns: list[UserTurn]) -> Finding:
+_NUMW = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9,
+         "ten": 10, "a pair": 2, "a couple": 2}
+_N = r"(\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten)"
+QTY_RES = [
+    re.compile(r"\b(?:i'?d like|i want|i need|get me|buy me|order|send me)\s+" + _N +
+               r"(?=\s*(?:[.,!?;]|$|please\b|units?\b|pieces?\b|pcs\b|packs?\b|of (?:them|these|those|it)\b))", re.I),
+    re.compile(r"\bquantity(?: of| is|:)?\s+" + _N + r"\b", re.I),
+    re.compile(r"\b" + _N + r"\s+of (?:them|these|those|it)\b", re.I),
+    re.compile(r"\bmake it " + _N + r"\b", re.I),
+]
+DEADLINE_RES = [
+    re.compile(r"\b(?:within|in|by)\s+(\d{1,2})\s+(?:business\s+|working\s+)?days?\b", re.I),
+    re.compile(r"\b(?:by|before) (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday|tomorrow|next week|the weekend)\b", re.I),
+    re.compile(r"\b(?:express|overnight|next[- ]day|same[- ]day|fastest)\s+(?:shipping|delivery)?\b", re.I),
+    re.compile(r"\bneeds? (?:it|them) (?:fast|quickly|soon)\b", re.I),
+]
+PICKUP_RE = re.compile(r"\b(?:pick(?:\s|-)?(?:it\s+|them\s+)?up|collect (?:it |them )?(?:in|at|from) (?:the )?store|collect (?:it |them )?(?:from|at)|in[- ]store pick ?up|store pick ?up|click and collect)\b", re.I)
+SHIP_RE = re.compile(r"\b(?:ship (?:it |them )?to|deliver(?:ed)? (?:it |them )?to|delivery to|send (?:it |them )?to|send it (?:by )?(?:express|standard)|(?:standard|regular|normal|express|economy|free) (?:delivery|shipping)(?: option)?(?: is| would be)? (?:fine|ok|okay|good)|please send it express|(?:standard|regular|express) (?:delivery|shipping) please)\b", re.I)
+BRAND_NEG = r"(?:no|not|avoid|except|other than|anything but|don'?t want)\s+(?:a |an |the |any )?"
+BRAND_POS = r"(?:from|by|only|just|brand)\s+"
+
+
+def _qty(s: str) -> int:
+    s = s.lower()
+    return _NUMW[s] if s in _NUMW else int(s)
+
+
+def quantity_mentions(text: str) -> list[int]:
+    return [_qty(m.group(1)) for r in QTY_RES for m in r.finditer(text)]
+
+
+def deadline_mentioned(text: str) -> bool:
+    return any(r.search(text) for r in DEADLINE_RES)
+
+
+def fulfillment_mentions(text: str) -> list[tuple[int, str]]:
+    out = [(m.start(), "pickup") for m in PICKUP_RE.finditer(text)]
+    out += [(m.start(), "ship") for m in SHIP_RE.finditer(text)]
+    return sorted(out)
+
+
+def brand_mentions(text: str, known_brands) -> list[tuple[str, str]]:
+    """(brand, "in"|"out") for known brands stated with a positive or negative cue."""
+    out = []
+    for b in known_brands:
+        if not b:
+            continue
+        eb = re.escape(b)
+        if re.search(rf"\b{BRAND_NEG}{eb}\b", text, re.I):
+            out.append((b, "out"))
+        elif re.search(rf"\b{BRAND_POS}{eb}\b|\b{eb}\s+(?:only|brand only|products only)\b", text, re.I):
+            out.append((b, "in"))
+    return out
+
+
+BUNDLE_CUE = re.compile(r"\bone of each\b|\b(?:together|in one order|to one order|go together|all three|both of them)\b", re.I)
+
+
+def bundle_mentioned(text: str, known_items: dict) -> list[str]:
+    """Item ids named together ('X and Y', 'both', 'together', 'each') in one user turn."""
+    named = [iid for iid, name in known_items.items() if name and name.lower() in text.lower()]
+    if len(named) >= 2 and re.search(r"\b(?:and|together|both|each)\b", text, re.I):
+        return sorted(named)
+    return []
+
+
+def _has(ledger: Ledger, field: str, pred=lambda v: True) -> bool:
+    return any(e.field == field and pred(e.value) for e in ledger.entries)
+
+
+def scan_omissions(ledger: Ledger, user_turns: list[UserTurn], known_brands=(), known_items=None) -> Finding:
     """V-B over all user turns: typed conditions the user stated that no live entry represents.
 
-    Uses the latest budget statement only (earlier ones may have been changed)."""
+    Fields: budget, conditional substitution, quantity, brand (known brands only), required items
+    (bundle, known items only), delivery deadline, fulfillment (pickup / ship). For fields that can
+    be restated, only the latest statement counts (earlier ones may have been changed).
+    Rule-based: misses paraphrases its patterns do not cover; those go to the NLI stage."""
     codes = []
+    known_items = known_items or {}
     ordered = sorted(user_turns, key=lambda t: t.seq)
     stated_budgets = [(t, v) for t in ordered for v in budget_mentions(t.text)]
     if stated_budgets:
         t, v = stated_budgets[-1]
-        if not any(e.field == "budget_max" and abs(float(e.value) - v) < 1e-6 for e in ledger.entries):
+        if not _has(ledger, "budget_max", lambda x: abs(float(x) - v) < 1e-6):
             codes.append(f"OMITTED_BUDGET:{t.turn_id}")
     for t in ordered:
-        if CONDITIONAL_RE.search(t.text) and not any(e.field == "substitute" for e in ledger.entries):
+        if CONDITIONAL_RE.search(t.text) and not _has(ledger, "substitute"):
             codes.append(f"OMITTED_SUBSTITUTE:{t.turn_id}")
             break
+    qs = [(t, q) for t in ordered for q in quantity_mentions(t.text)]
+    if known_items:
+        qs += [(t, len(known_items)) for t in ordered if re.search(r"\bone of each\b", t.text, re.I)]
+        qs.sort(key=lambda x: x[0].seq)
+    if qs:
+        t, q = qs[-1]
+        if not _has(ledger, "quantity", lambda x: int(x) == q):
+            codes.append(f"OMITTED_QUANTITY:{t.turn_id}")
+    for t in ordered:
+        for b, pol in brand_mentions(t.text, known_brands):
+            fld = "brand_in" if pol == "in" else "brand_out"
+            if not _has(ledger, fld, lambda x: b.lower() in {str(v).lower() for v in _as_set(x)}):
+                codes.append(f"OMITTED_BRAND_{pol.upper()}:{t.turn_id}:{b}")
+    for t in ordered:
+        ids = bundle_mentioned(t.text, known_items)
+        if ids and not _has(ledger, "bundle_all", lambda x: set(ids) <= {str(v) for v in _as_set(x)}):
+            codes.append(f"OMITTED_BUNDLE:{t.turn_id}")
+            break
+        if not ids and BUNDLE_CUE.search(t.text) and not _has(ledger, "bundle_all"):
+            codes.append(f"OMITTED_BUNDLE:{t.turn_id}")       # catalog names differ from spoken names
+            break
+    dl = [t for t in ordered if deadline_mentioned(t.text)]
+    if dl and not (_has(ledger, "deadline_days") or _has(ledger, "delivery_speed")):
+        codes.append(f"OMITTED_DEADLINE:{dl[-1].turn_id}")
+    fm = [(t, kind) for t in ordered for _, kind in fulfillment_mentions(t.text)]
+    if fm:
+        t, kind = fm[-1]
+        if not _has(ledger, "fulfillment", lambda x: x == kind):
+            codes.append(f"OMITTED_FULFILLMENT:{t.turn_id}:{kind}")
     # An omitted user condition makes the ledger more permissive than the user: hold for CLARIFY.
     return Finding("V-B", ACCEPT if not codes else PENDING, codes, "omission scan")
 

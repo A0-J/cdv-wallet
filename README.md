@@ -3,11 +3,19 @@
 에이전트 결제에서 대화 맥락 검증과 권한 검증을 함께 하는 프레임워크(CDV-Wallet)의 구현 저장소다.
 
 - **상태(2026-11-26)**
-  - 권한 검증 1단계와 M1의 결정적 검증을 구현했다. 시험 39개가 통과한다.
-  - WhisperBench 오프라인 비교 결과: `results/whisperbench_e2_20261126/`
-  - G1 템플릿 세트(생성): `results/g1_templates_20261126/`
-  - 설계: `docs/M1_DESIGN.md`(§7–§11), `docs/EVALUATION_PLAN.md`
-- **시험 실행:** submodule을 추가한 뒤 `python -m pytest -q tests`. submodule이 없으면 `CDV_AVIP_BINDING`에 A-VIP `binding` 폴더 경로를 지정한다.
+  - 권한 검증 게이트(ECDSA P-256 서명), M1 결정적 검증(누락 검사 8개 필드)을 구현했다. 시험 49개가 통과한다.
+  - 실험 정리(논문용): `docs/EXPERIMENTS.md`
+  - 결과: `results/`
+    - `whisperbench_e2_20261126`(X1)
+    - `g3_whisperbench_20261126`(X2)
+    - `omission_realtext_20261126`(X3)
+    - `nli_selection_20261126`(X4)
+    - `g1_templates_20261126`(X5)
+    - `e_m1_20261126`(X7 계획, 승인 대기)
+- **실행 환경**
+  - `.venv`(git 제외): Python 3.13, cryptography 50, torch 2.15 CPU, transformers 5.24
+  - 시험: `.venv\Scripts\python.exe -m pytest -q tests`
+  - A-VIP submodule이 없으면 `CDV_AVIP_BINDING`에 `binding` 폴더 경로를 지정한다.
 - **비공개 저장소다.** 공개 여부는 논문 제출 때 정한다.
 - **설계 문서**
   - 전체 설계: `docs/design/cdv_wallet_design_v2_20261126.md`

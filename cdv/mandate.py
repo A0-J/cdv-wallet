@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from .canon import hmac_sign, hmac_verify
+from .canon import sign, verify
 
 
 @dataclass(frozen=True)
@@ -106,12 +106,14 @@ class Mandate:
                 "fallbacks": [c.as_dict() for c in self.fallbacks], "basis": self.basis,
                 "user_turn_chain_head": self.user_turn_chain_head, "session": self.session}
 
-    def signed(self, user_key: bytes) -> "Mandate":
+    def signed(self, user_signing_key) -> "Mandate":
+        """Signed by the user's wallet key (ECDSA P-256 private key; MockHmacKey only in the ablation)."""
         return Mandate(self.mandate_id, self.version, self.primary, self.fallbacks, self.basis,
-                       self.user_turn_chain_head, self.session, hmac_sign(user_key, self.body()))
+                       self.user_turn_chain_head, self.session, sign(user_signing_key, self.body()))
 
-    def signature_ok(self, user_key: bytes) -> bool:
-        return hmac_verify(user_key, self.body(), self.signature)
+    def signature_ok(self, user_verify_key) -> bool:
+        """Needs only the user's public key (ECDSA)."""
+        return verify(user_verify_key, self.body(), self.signature)
 
 
 class VersionRegistry:
