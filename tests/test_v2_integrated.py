@@ -325,3 +325,31 @@ def test_m1g_source_rule_without_call_and_label_mapping():
     assert m1g.decide(lambda s, u: LLMResult('{"label": "decision"}'), op, "user", "x", {})[0] == "ACCEPT"
     assert m1g.decide(lambda s, u: LLMResult('{"label": "ambiguous"}'), op, "user", "x", {})[0] == "CLARIFY"
     assert m1g.decide(lambda s, u: LLMResult("garbled"), op, "user", "x", {})[:2] == ("CLARIFY", "unparsed")
+
+
+def test_dst_baselines_accumulate_never_removes_latest_follows_extractor():
+    import arms as A
+    st = [{"seq": 0, "state": {PC: {"budget_max": 100, "brand_include": ["Sony"]}}},
+          {"seq": 2, "state": {PC: {"budget_max": 150, "brand_include": ["Bose"]}}},
+          {"seq": 4, "state": {PC: {"brand_include": ["Bose"]}}}]          # extractor dropped the budget
+    acc, latest = A.dst_acc(st), A.dst_latest(st)
+    assert acc[PC]["budget_max"] == 150 and acc[PC]["brand_include"] == ["Sony", "Bose"]
+    assert "budget_max" not in latest[PC] and latest[PC]["brand_include"] == ["Bose"]
+
+
+def test_m1g_path_accepts_decisions_keeps_prior_on_reject_and_holds_ambiguous():
+    from cdv.extract import LLMResult
+    from cdv.v2.m1g_path import run_m1g_path
+    reg = reg_with(("p1", "Sony WH-1000 Headphones", "Sony", 120.0))
+    replies = {"Set the total spending limit to 100.00.": "decision", "Set the total spending limit to 150.00.": "decision",
+               "Set the total spending limit to 300.00.": "not_mentioned", "Set the quantity to 2.": "ambiguous"}
+
+    def fake(system, user):
+        change = user.split("Proposed change to the shopper's purchase conditions:\n")[1].split("\n")[0]
+        return LLMResult('{"label": "%s"}' % replies.get(change, "not_mentioned"))
+    st = _states({"budget_max": 100}, {"budget_max": 150}, {"budget_max": 300, "quantity": 2})
+    r = run_m1g_path(st, _turns("Headphones under $100", "Actually I can stretch to $150", "Ok"), [(3, "Bundle total is $300")],
+                     reg, t=10, llm=fake)
+    assert r.ctx.entries["budget"].value == 150                       # 100 accepted, 150 accepted, 300 rejected
+    assert ("budget", "M1G_not_mentioned") in r.rejected
+    assert any(u.id == "qty" and u.kind == "M1G_AMBIGUOUS" for u in r.unresolved)

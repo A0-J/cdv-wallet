@@ -1,0 +1,169 @@
+{
+  "excluded_episodes": [
+    "ctw-37be76ca1294bd7e",
+    "ctw-ce69c8078f6c4767"
+  ],
+  "approx_cases": {
+    "v1": 0,
+    "v2": 0,
+    "M1-G": 0
+  },
+  "table": {
+    "all|M1+M2 [M1-G] B3-type": {
+      "DENY": 876,
+      "ALLOW": 508,
+      "CLARIFY": 90
+    },
+    "all|M1+M2 [M1-G] B4-type": {
+      "DENY": 838,
+      "ALLOW": 508,
+      "CLARIFY": 128
+    },
+    "all|M1+M2 [v1] B3-type": {
+      "DENY": 768,
+      "ALLOW": 434,
+      "CLARIFY": 272
+    },
+    "all|M1+M2 [v1] B4-type": {
+      "DENY": 426,
+      "CLARIFY": 756,
+      "ALLOW": 292
+    },
+    "all|M1+M2 [v2] B3-type": {
+      "DENY": 846,
+      "ALLOW": 434,
+      "CLARIFY": 194
+    },
+    "all|M1+M2 [v2] B4-type": {
+      "DENY": 644,
+      "ALLOW": 392,
+      "CLARIFY": 438
+    },
+    "all|M2 Only (all ops)": {
+      "DENY": 794,
+      "ALLOW": 522,
+      "CLARIFY": 158
+    },
+    "all|Oracle": {
+      "DENY": 860,
+      "ALLOW": 522,
+      "CLARIFY": 92
+    },
+    "expected_allow|M1+M2 [M1-G] B3-type": {
+      "ALLOW": 254,
+      "CLARIFY": 45,
+      "DENY": 8
+    },
+    "expected_allow|M1+M2 [M1-G] B4-type": {
+      "ALLOW": 254,
+      "CLARIFY": 45,
+      "DENY": 8
+    },
+    "expected_allow|M1+M2 [v1] B3-type": {
+      "ALLOW": 210,
+      "CLARIFY": 85,
+      "DENY": 12
+    },
+    "expected_allow|M1+M2 [v1] B4-type": {
+      "CLARIFY": 162,
+      "ALLOW": 139,
+      "DENY": 6
+    },
+    "expected_allow|M1+M2 [v2] B3-type": {
+      "ALLOW": 211,
+      "CLARIFY": 76,
+      "DENY": 20
+    },
+    "expected_allow|M1+M2 [v2] B4-type": {
+      "ALLOW": 190,
+      "CLARIFY": 100,
+      "DENY": 17
+    },
+    "expected_allow|M2 Only (all ops)": {
+      "ALLOW": 200,
+      "CLARIFY": 78,
+      "DENY": 29
+    },
+    "expected_allow|Oracle": {
+      "ALLOW": 261,
+      "CLARIFY": 45,
+      "DENY": 1
+    },
+    "expected_block|M1+M2 [M1-G] B3-type": {
+      "DENY": 868,
+      "ALLOW": 254,
+      "CLARIFY": 45
+    },
+    "expected_block|M1+M2 [M1-G] B4-type": {
+      "DENY": 830,
+      "ALLOW": 254,
+      "CLARIFY": 83
+    },
+    "expected_block|M1+M2 [v1] B3-type": {
+      "DENY": 756,
+      "ALLOW": 224,
+      "CLARIFY": 187
+    },
+    "expected_block|M1+M2 [v1] B4-type": {
+      "DENY": 420,
+      "CLARIFY": 594,
+      "ALLOW": 153
+    },
+    "expected_block|M1+M2 [v2] B3-type": {
+      "DENY": 826,
+      "ALLOW": 223,
+      "CLARIFY": 118
+    },
+    "expected_block|M1+M2 [v2] B4-type": {
+      "DENY": 627,
+      "ALLOW": 202,
+      "CLARIFY": 338
+    },
+    "expected_block|M2 Only (all ops)": {
+      "DENY": 765,
+      "ALLOW": 322,
+      "CLARIFY": 80
+    },
+    "expected_block|Oracle": {
+      "DENY": 859,
+      "ALLOW": 261,
+      "CLARIFY": 47
+    },
+    "follows_rejected_proposal|M1+M2 [M1-G] B3-type": {
+      "DENY": 256
+    },
+    "follows_rejected_proposal|M1+M2 [M1-G] B4-type": {
+      "DENY": 246,
+      "CLARIFY": 10
+    },
+    "follows_rejected_proposal|M1+M2 [v1] B3-type": {
+      "ALLOW": 14,
+      "DENY": 154,
+      "CLARIFY": 88
+    },
+    "follows_rejected_proposal|M1+M2 [v1] B4-type": {
+      "ALLOW": 14,
+      "DENY": 80,
+      "CLARIFY": 162
+    },
+    "follows_rejected_proposal|M1+M2 [v2] B3-type": {
+      "ALLOW": 12,
+      "DENY": 216,
+      "CLARIFY": 28
+    },
+    "follows_rejected_proposal|M1+M2 [v2] B4-type": {
+      "ALLOW": 12,
+      "DENY": 160,
+      "CLARIFY": 84
+    },
+    "follows_rejected_proposal|M2 Only (all ops)": {
+      "ALLOW": 122,
+      "DENY": 132,
+      "CLARIFY": 2
+    },
+    "follows_rejected_proposal|Oracle": {
+      "DENY": 254,
+      "CLARIFY": 2
+    }
+  }
+}

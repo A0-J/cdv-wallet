@@ -1,0 +1,111 @@
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 72/202 [00:00<00:00, 719.48it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1619.24it/s]
+# v4 dev 오염 주입 조건 (모델 호출 0; M1-G는 승인된 1회차 판정 재사용)
+
+- 이전 상태 = 정답 initial_state(주입 경로 오라클), 후보 연산을 근거 턴 순서로 적용. 같은 거래·같은 게이트. 생성 데이터.
+- 권한(grant) 축은 이 게이트의 검사 대상이 아니다(별도 축). 유형별 표에서 authority_only는 참고로만 본다.
+- 제외 여정 2. 확인 연산이 6개를 넘어 조합을 잘라 본 거래: {'v1': 0, 'v2': 0, 'M1-G': 0}.
+
+## follows_rejected_proposal (n=256)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 0 | 0 | 256 |
+| M1+M2 [M1-G] B4-type | 0 | 10 | 246 |
+| M1+M2 [v1] B3-type | 14 | 88 | 154 |
+| M1+M2 [v1] B4-type | 14 | 162 | 80 |
+| M1+M2 [v2] B3-type | 12 | 28 | 216 |
+| M1+M2 [v2] B4-type | 12 | 84 | 160 |
+| M2 Only (all ops) | 122 | 2 | 132 |
+| Oracle | 0 | 2 | 254 |
+
+## type_normal (n=307)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 254 | 45 | 8 |
+| M1+M2 [M1-G] B4-type | 254 | 45 | 8 |
+| M1+M2 [v1] B3-type | 210 | 85 | 12 |
+| M1+M2 [v1] B4-type | 139 | 162 | 6 |
+| M1+M2 [v2] B3-type | 211 | 76 | 20 |
+| M1+M2 [v2] B4-type | 190 | 100 | 17 |
+| M2 Only (all ops) | 200 | 78 | 29 |
+| Oracle | 261 | 45 | 1 |
+
+## type_context_only (n=430)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 0 | 0 | 430 |
+| M1+M2 [M1-G] B4-type | 0 | 19 | 411 |
+| M1+M2 [v1] B3-type | 7 | 51 | 372 |
+| M1+M2 [v1] B4-type | 7 | 216 | 207 |
+| M1+M2 [v2] B3-type | 6 | 21 | 403 |
+| M1+M2 [v2] B4-type | 6 | 119 | 305 |
+| M2 Only (all ops) | 61 | 1 | 368 |
+| Oracle | 0 | 1 | 429 |
+
+## type_both (n=430)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 0 | 0 | 430 |
+| M1+M2 [M1-G] B4-type | 0 | 19 | 411 |
+| M1+M2 [v1] B3-type | 7 | 51 | 372 |
+| M1+M2 [v1] B4-type | 7 | 216 | 207 |
+| M1+M2 [v2] B3-type | 6 | 21 | 403 |
+| M1+M2 [v2] B4-type | 6 | 119 | 305 |
+| M2 Only (all ops) | 61 | 1 | 368 |
+| Oracle | 0 | 1 | 429 |
+
+## type_authority_only (n=307)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 254 | 45 | 8 |
+| M1+M2 [M1-G] B4-type | 254 | 45 | 8 |
+| M1+M2 [v1] B3-type | 210 | 85 | 12 |
+| M1+M2 [v1] B4-type | 139 | 162 | 6 |
+| M1+M2 [v2] B3-type | 211 | 76 | 20 |
+| M1+M2 [v2] B4-type | 190 | 100 | 17 |
+| M2 Only (all ops) | 200 | 78 | 29 |
+| Oracle | 261 | 45 | 1 |
+
+## expected_allow (n=307)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 254 | 45 | 8 |
+| M1+M2 [M1-G] B4-type | 254 | 45 | 8 |
+| M1+M2 [v1] B3-type | 210 | 85 | 12 |
+| M1+M2 [v1] B4-type | 139 | 162 | 6 |
+| M1+M2 [v2] B3-type | 211 | 76 | 20 |
+| M1+M2 [v2] B4-type | 190 | 100 | 17 |
+| M2 Only (all ops) | 200 | 78 | 29 |
+| Oracle | 261 | 45 | 1 |
+
+## expected_block (n=1167)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 254 | 45 | 868 |
+| M1+M2 [M1-G] B4-type | 254 | 83 | 830 |
+| M1+M2 [v1] B3-type | 224 | 187 | 756 |
+| M1+M2 [v1] B4-type | 153 | 594 | 420 |
+| M1+M2 [v2] B3-type | 223 | 118 | 826 |
+| M1+M2 [v2] B4-type | 202 | 338 | 627 |
+| M2 Only (all ops) | 322 | 80 | 765 |
+| Oracle | 261 | 47 | 859 |
+
+## all (n=1474)
+
+| 비교군 | ALLOW | CLARIFY | DENY |
+|---|---:|---:|---:|
+| M1+M2 [M1-G] B3-type | 508 | 90 | 876 |
+| M1+M2 [M1-G] B4-type | 508 | 128 | 838 |
+| M1+M2 [v1] B3-type | 434 | 272 | 768 |
+| M1+M2 [v1] B4-type | 292 | 756 | 426 |
+| M1+M2 [v2] B3-type | 434 | 194 | 846 |
+| M1+M2 [v2] B4-type | 392 | 438 | 644 |
+| M2 Only (all ops) | 522 | 158 | 794 |
+| Oracle | 522 | 92 | 860 |
+

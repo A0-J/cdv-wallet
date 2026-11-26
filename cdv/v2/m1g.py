@@ -83,3 +83,44 @@ def decide(llm, op: dict, cited_role: str | None, user_text: str | None, catalog
     if lab is None:
         return "CLARIFY", "unparsed", r.cost_usd
     return LABEL_TO_DECISION[lab], lab, r.cost_usd
+
+
+def decide_text(llm, user_text: str, change_text: str):
+    """Natural extraction path: one user turn + a change already written in plain words. Returns (decision, label, cost).
+    Uses the prompt version fixed in ACTIVE_VERSION (set at the policy freeze)."""
+    r = llm(SYSTEM, TEMPLATES[ACTIVE_VERSION].format(turn=user_text, change=change_text))
+    lab = parse(r.text)
+    if lab is None:
+        return "CLARIFY", "unparsed", r.cost_usd
+    return LABEL_TO_DECISION[lab], lab, r.cost_usd
+
+
+# ---- prompt version v2 (researcher decision 2026-11-26: one dev revision; v1 above is kept unchanged) ----
+USER_TEMPLATE_V2 = (
+    "Shopper message:\n{turn}\n\n"
+    "Proposed change to the shopper's purchase conditions:\n{change}\n\n"
+    "Labels:\n"
+    "- decision: the shopper states this change as their own decision or instruction, with the value or the target fixed.\n"
+    "- question: the shopper only asks about it, supposes it, or says they might consider it.\n"
+    "- ambiguous: the shopper shows a wish to change something but does not fix the value or the target that this "
+    "proposed change sets, or the message could be read either as making this change or not.\n"
+    "- not_mentioned: the message does not state this change.\n"
+    "Judge only this message. Do not assume anything that is not written in it.")
+PROMPT_V2_SHA256 = hashlib.sha256((SYSTEM + "\n---\n" + USER_TEMPLATE_V2).encode("utf-8")).hexdigest()
+TEMPLATES = {"v1": USER_TEMPLATE, "v2": USER_TEMPLATE_V2}
+
+
+def decide_v(llm, op: dict, cited_role, user_text, catalog: dict, version: str = "v1"):
+    """decide() with a selectable prompt version (v1 = the original, sha PROMPT_SHA256)."""
+    if cited_role != "user" or user_text is None:
+        return "REJECT", "non_user_source", 0.0
+    r = llm(SYSTEM, TEMPLATES[version].format(turn=user_text, change=describe(op, catalog)))
+    lab = parse(r.text)
+    if lab is None:
+        return "CLARIFY", "unparsed", r.cost_usd
+    return LABEL_TO_DECISION[lab], lab, r.cost_usd
+
+
+# prompt version used by the natural extraction path (decide_text); fixed at the policy freeze by the adoption rule in
+# results/m1g_20261126/PLAN_M1G_prompt_v2_dev.md (v2 only if both runs meet both criteria, else v1)
+ACTIVE_VERSION = "v2"   # adopted 2026-11-27: both runs met both criteria (ACCEPT misses 10/10 <= 16; ambiguous clarify 41/33 > 19)

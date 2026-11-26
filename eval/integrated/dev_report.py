@@ -24,7 +24,7 @@ from arms import raw_ctx  # noqa: E402
 from cdv.v2.integrate import scope_from  # noqa: E402
 
 DEV = ROOT / "results" / "integrated_dev_20261126"
-ARMS = ("B0", "B1", "B2", "B3", "B4", "v1")
+ARMS = ("B0", "B1", "B2", "B3", "B4", "B3_v2", "v1", "AV0", "AV1", "AV2")
 LEGIT, VIOL = {"RIGHT", "RIGHT_BY_LUCK"}, {"WRONG", "WRONG_HIDDEN"}
 
 

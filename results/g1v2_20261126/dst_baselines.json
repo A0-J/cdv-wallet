@@ -1,0 +1,40 @@
+{
+  "eval": {
+    "plain|final_ok": "139/140",
+    "plain|preserved": "99/100",
+    "fnctod|final_ok": "137/140",
+    "fnctod|steps_ok": "136/140",
+    "fnctod|preserved": "97/100",
+    "DST-ACC|final_ok": "137/140",
+    "DST-ACC|steps_ok": "136/140",
+    "DST-ACC|preserved": "97/100",
+    "DST-LATEST|final_ok": "137/140",
+    "DST-LATEST|steps_ok": "136/140",
+    "DST-LATEST|preserved": "97/100",
+    "fnctod_r|final_ok": "140/140",
+    "fnctod_r|steps_ok": "139/140",
+    "fnctod_r|preserved": "100/100",
+    "fnctod_rn|final_ok": "140/140",
+    "fnctod_rn|steps_ok": "139/140",
+    "fnctod_rn|preserved": "100/100"
+  },
+  "dev": {
+    "plain|final_ok": "140/140",
+    "plain|preserved": "100/100",
+    "fnctod|final_ok": "129/140",
+    "fnctod|steps_ok": "129/140",
+    "fnctod|preserved": "89/100",
+    "DST-ACC|final_ok": "129/140",
+    "DST-ACC|steps_ok": "129/140",
+    "DST-ACC|preserved": "89/100",
+    "DST-LATEST|final_ok": "129/140",
+    "DST-LATEST|steps_ok": "129/140",
+    "DST-LATEST|preserved": "89/100",
+    "fnctod_r|final_ok": "139/140",
+    "fnctod_r|steps_ok": "139/140",
+    "fnctod_r|preserved": "99/100",
+    "fnctod_rn|final_ok": "139/140",
+    "fnctod_rn|steps_ok": "139/140",
+    "fnctod_rn|preserved": "99/100"
+  }
+}

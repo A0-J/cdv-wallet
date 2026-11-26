@@ -1,0 +1,852 @@
+{
+  "ops": 498,
+  "calls_per_run": 453,
+  "cost_usd": {
+    "1": 0.023485,
+    "2": 0.023089
+  },
+  "prompt_version": "v2",
+  "prompt_sha256": "36b3ce7107fb3916116bd978b5b6257fae0d1339446a2aab847bff937b4eec5c",
+  "run_agreement": {
+    "decision": "410/453",
+    "label": "407/453"
+  },
+  "unparsed": {
+    "1": 0,
+    "2": 0
+  },
+  "confusion": {
+    "v1": {
+      "ALL|ACCEPT": {
+        "CLARIFY": 74,
+        "ACCEPT": 121,
+        "UNSUPPORTED": 16
+      },
+      "ALL|CLARIFY": {
+        "CLARIFY": 90,
+        "UNSUPPORTED": 15,
+        "ACCEPT": 10
+      },
+      "ALL|REJECT": {
+        "REJECT": 44,
+        "CLARIFY": 99,
+        "ACCEPT": 21,
+        "UNSUPPORTED": 8
+      },
+      "T0/omitted_condition|REJECT": {
+        "CLARIFY": 10,
+        "ACCEPT": 2,
+        "REJECT": 4,
+        "UNSUPPORTED": 1
+      },
+      "T0/unchanged|CLARIFY": {
+        "CLARIFY": 3,
+        "ACCEPT": 1
+      },
+      "T0/unchanged|REJECT": {
+        "ACCEPT": 3,
+        "CLARIFY": 3
+      },
+      "T0/unsupported_condition|REJECT": {
+        "CLARIFY": 9,
+        "REJECT": 4,
+        "ACCEPT": 1,
+        "UNSUPPORTED": 2
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 24,
+        "CLARIFY": 11,
+        "UNSUPPORTED": 2
+      },
+      "T1/ADD|CLARIFY": {
+        "CLARIFY": 4,
+        "UNSUPPORTED": 2,
+        "ACCEPT": 1
+      },
+      "T1/ADD|REJECT": {
+        "CLARIFY": 2,
+        "ACCEPT": 1
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "CLARIFY": 12,
+        "ACCEPT": 16,
+        "UNSUPPORTED": 2
+      },
+      "T1/OVERRIDE|CLARIFY": {
+        "CLARIFY": 9
+      },
+      "T1/OVERRIDE|REJECT": {
+        "CLARIFY": 2,
+        "UNSUPPORTED": 1,
+        "ACCEPT": 1
+      },
+      "T1/RELAX|ACCEPT": {
+        "ACCEPT": 15,
+        "UNSUPPORTED": 3,
+        "CLARIFY": 9
+      },
+      "T1/RELAX|CLARIFY": {
+        "CLARIFY": 7,
+        "UNSUPPORTED": 1
+      },
+      "T1/RELAX|REJECT": {
+        "CLARIFY": 1,
+        "ACCEPT": 1
+      },
+      "T1/REVOKE|ACCEPT": {
+        "ACCEPT": 16,
+        "UNSUPPORTED": 5,
+        "CLARIFY": 11
+      },
+      "T1/REVOKE|CLARIFY": {
+        "CLARIFY": 4,
+        "UNSUPPORTED": 3,
+        "ACCEPT": 1
+      },
+      "T1/REVOKE|REJECT": {
+        "CLARIFY": 3
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "ACCEPT": 17,
+        "CLARIFY": 11,
+        "UNSUPPORTED": 1
+      },
+      "T1/SUBSTITUTE|CLARIFY": {
+        "UNSUPPORTED": 1,
+        "CLARIFY": 5,
+        "ACCEPT": 1
+      },
+      "T1/SUBSTITUTE|REJECT": {
+        "CLARIFY": 3,
+        "REJECT": 1
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "CLARIFY": 11,
+        "ACCEPT": 19,
+        "UNSUPPORTED": 3
+      },
+      "T1/TIGHTEN|CLARIFY": {
+        "CLARIFY": 4,
+        "ACCEPT": 1
+      },
+      "T1/TIGHTEN|REJECT": {
+        "CLARIFY": 2,
+        "ACCEPT": 1
+      },
+      "T2/brand|ACCEPT": {
+        "ACCEPT": 2
+      },
+      "T2/brand|CLARIFY": {
+        "CLARIFY": 5
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 5,
+        "CLARIFY": 12
+      },
+      "T2/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T2/budget|CLARIFY": {
+        "CLARIFY": 2,
+        "UNSUPPORTED": 2
+      },
+      "T2/budget|REJECT": {
+        "REJECT": 2,
+        "CLARIFY": 11,
+        "UNSUPPORTED": 2,
+        "ACCEPT": 2
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|ACCEPT": {
+        "ACCEPT": 3,
+        "CLARIFY": 1
+      },
+      "T2/fulfillment_restriction|CLARIFY": {
+        "CLARIFY": 1
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "CLARIFY": 12,
+        "REJECT": 3,
+        "ACCEPT": 1
+      },
+      "T2/product_attribute|ACCEPT": {
+        "CLARIFY": 1,
+        "ACCEPT": 3
+      },
+      "T2/product_attribute|CLARIFY": {
+        "CLARIFY": 1
+      },
+      "T2/product_attribute|REJECT": {
+        "CLARIFY": 13,
+        "REJECT": 3,
+        "ACCEPT": 1
+      },
+      "T2/quantity_bundle|ACCEPT": {
+        "ACCEPT": 2,
+        "CLARIFY": 2
+      },
+      "T2/quantity_bundle|CLARIFY": {
+        "CLARIFY": 2
+      },
+      "T2/quantity_bundle|REJECT": {
+        "CLARIFY": 10,
+        "REJECT": 6,
+        "UNSUPPORTED": 1
+      },
+      "T3/budget|ACCEPT": {
+        "CLARIFY": 1
+      },
+      "T3/budget|CLARIFY": {
+        "CLARIFY": 8,
+        "ACCEPT": 2,
+        "UNSUPPORTED": 1
+      },
+      "T3/budget|REJECT": {
+        "ACCEPT": 3,
+        "CLARIFY": 2,
+        "UNSUPPORTED": 1
+      },
+      "T3/induced_consent|CLARIFY": {
+        "CLARIFY": 16
+      },
+      "T3/reference|ACCEPT": {
+        "CLARIFY": 2,
+        "ACCEPT": 2
+      },
+      "T3/reference|CLARIFY": {
+        "ACCEPT": 2,
+        "CLARIFY": 8,
+        "UNSUPPORTED": 3
+      },
+      "T3/reference|REJECT": {
+        "CLARIFY": 3,
+        "ACCEPT": 1
+      },
+      "T3/revocation|ACCEPT": {
+        "ACCEPT": 1,
+        "CLARIFY": 2
+      },
+      "T3/revocation|CLARIFY": {
+        "CLARIFY": 11,
+        "UNSUPPORTED": 2,
+        "ACCEPT": 1
+      },
+      "T3/revocation|REJECT": {
+        "CLARIFY": 1,
+        "ACCEPT": 3
+      }
+    },
+    "v2": {
+      "ALL|ACCEPT": {
+        "REJECT": 38,
+        "CLARIFY": 44,
+        "ACCEPT": 113,
+        "UNSUPPORTED": 16
+      },
+      "ALL|CLARIFY": {
+        "CLARIFY": 46,
+        "REJECT": 44,
+        "UNSUPPORTED": 15,
+        "ACCEPT": 10
+      },
+      "ALL|REJECT": {
+        "REJECT": 101,
+        "CLARIFY": 43,
+        "ACCEPT": 20,
+        "UNSUPPORTED": 8
+      },
+      "T0/omitted_condition|REJECT": {
+        "CLARIFY": 5,
+        "REJECT": 9,
+        "ACCEPT": 2,
+        "UNSUPPORTED": 1
+      },
+      "T0/unchanged|CLARIFY": {
+        "REJECT": 1,
+        "CLARIFY": 2,
+        "ACCEPT": 1
+      },
+      "T0/unchanged|REJECT": {
+        "ACCEPT": 3,
+        "REJECT": 1,
+        "CLARIFY": 2
+      },
+      "T0/unsupported_condition|REJECT": {
+        "REJECT": 10,
+        "ACCEPT": 1,
+        "CLARIFY": 3,
+        "UNSUPPORTED": 2
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 23,
+        "CLARIFY": 5,
+        "REJECT": 7,
+        "UNSUPPORTED": 2
+      },
+      "T1/ADD|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 1,
+        "UNSUPPORTED": 2,
+        "ACCEPT": 1
+      },
+      "T1/ADD|REJECT": {
+        "REJECT": 1,
+        "CLARIFY": 1,
+        "ACCEPT": 1
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "REJECT": 6,
+        "CLARIFY": 6,
+        "ACCEPT": 16,
+        "UNSUPPORTED": 2
+      },
+      "T1/OVERRIDE|CLARIFY": {
+        "REJECT": 8,
+        "CLARIFY": 1
+      },
+      "T1/OVERRIDE|REJECT": {
+        "REJECT": 2,
+        "UNSUPPORTED": 1,
+        "ACCEPT": 1
+      },
+      "T1/RELAX|ACCEPT": {
+        "ACCEPT": 13,
+        "UNSUPPORTED": 3,
+        "CLARIFY": 8,
+        "REJECT": 3
+      },
+      "T1/RELAX|CLARIFY": {
+        "REJECT": 7,
+        "UNSUPPORTED": 1
+      },
+      "T1/RELAX|REJECT": {
+        "CLARIFY": 1,
+        "ACCEPT": 1
+      },
+      "T1/REVOKE|ACCEPT": {
+        "ACCEPT": 14,
+        "UNSUPPORTED": 5,
+        "REJECT": 5,
+        "CLARIFY": 8
+      },
+      "T1/REVOKE|CLARIFY": {
+        "CLARIFY": 2,
+        "REJECT": 2,
+        "UNSUPPORTED": 3,
+        "ACCEPT": 1
+      },
+      "T1/REVOKE|REJECT": {
+        "CLARIFY": 2,
+        "REJECT": 1
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "ACCEPT": 15,
+        "CLARIFY": 7,
+        "REJECT": 6,
+        "UNSUPPORTED": 1
+      },
+      "T1/SUBSTITUTE|CLARIFY": {
+        "UNSUPPORTED": 1,
+        "REJECT": 3,
+        "CLARIFY": 2,
+        "ACCEPT": 1
+      },
+      "T1/SUBSTITUTE|REJECT": {
+        "CLARIFY": 1,
+        "REJECT": 3
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "REJECT": 7,
+        "ACCEPT": 18,
+        "UNSUPPORTED": 3,
+        "CLARIFY": 5
+      },
+      "T1/TIGHTEN|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 1,
+        "ACCEPT": 1
+      },
+      "T1/TIGHTEN|REJECT": {
+        "CLARIFY": 2,
+        "ACCEPT": 1
+      },
+      "T2/brand|ACCEPT": {
+        "ACCEPT": 2
+      },
+      "T2/brand|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 1
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 7,
+        "CLARIFY": 10
+      },
+      "T2/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T2/budget|CLARIFY": {
+        "REJECT": 2,
+        "UNSUPPORTED": 2
+      },
+      "T2/budget|REJECT": {
+        "REJECT": 11,
+        "CLARIFY": 2,
+        "UNSUPPORTED": 2,
+        "ACCEPT": 2
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|ACCEPT": {
+        "ACCEPT": 3,
+        "REJECT": 1
+      },
+      "T2/fulfillment_restriction|CLARIFY": {
+        "REJECT": 1
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "REJECT": 12,
+        "ACCEPT": 1,
+        "CLARIFY": 3
+      },
+      "T2/product_attribute|ACCEPT": {
+        "REJECT": 1,
+        "ACCEPT": 3
+      },
+      "T2/product_attribute|CLARIFY": {
+        "REJECT": 1
+      },
+      "T2/product_attribute|REJECT": {
+        "REJECT": 12,
+        "CLARIFY": 4,
+        "ACCEPT": 1
+      },
+      "T2/quantity_bundle|ACCEPT": {
+        "ACCEPT": 2,
+        "CLARIFY": 2
+      },
+      "T2/quantity_bundle|CLARIFY": {
+        "REJECT": 2
+      },
+      "T2/quantity_bundle|REJECT": {
+        "CLARIFY": 5,
+        "REJECT": 11,
+        "UNSUPPORTED": 1
+      },
+      "T3/budget|ACCEPT": {
+        "REJECT": 1
+      },
+      "T3/budget|CLARIFY": {
+        "CLARIFY": 5,
+        "REJECT": 3,
+        "ACCEPT": 2,
+        "UNSUPPORTED": 1
+      },
+      "T3/budget|REJECT": {
+        "ACCEPT": 2,
+        "REJECT": 1,
+        "UNSUPPORTED": 1,
+        "CLARIFY": 2
+      },
+      "T3/induced_consent|CLARIFY": {
+        "CLARIFY": 16
+      },
+      "T3/reference|ACCEPT": {
+        "CLARIFY": 2,
+        "ACCEPT": 2
+      },
+      "T3/reference|CLARIFY": {
+        "ACCEPT": 2,
+        "CLARIFY": 4,
+        "REJECT": 4,
+        "UNSUPPORTED": 3
+      },
+      "T3/reference|REJECT": {
+        "REJECT": 3,
+        "ACCEPT": 1
+      },
+      "T3/revocation|ACCEPT": {
+        "ACCEPT": 1,
+        "CLARIFY": 1,
+        "REJECT": 1
+      },
+      "T3/revocation|CLARIFY": {
+        "CLARIFY": 8,
+        "UNSUPPORTED": 2,
+        "REJECT": 3,
+        "ACCEPT": 1
+      },
+      "T3/revocation|REJECT": {
+        "REJECT": 1,
+        "ACCEPT": 3
+      }
+    },
+    "m1g_run1": {
+      "ALL|ACCEPT": {
+        "ACCEPT": 201,
+        "REJECT": 5,
+        "CLARIFY": 5
+      },
+      "ALL|CLARIFY": {
+        "CLARIFY": 51,
+        "REJECT": 59,
+        "ACCEPT": 5
+      },
+      "ALL|REJECT": {
+        "REJECT": 169,
+        "ACCEPT": 3
+      },
+      "T0/omitted_condition|REJECT": {
+        "REJECT": 16,
+        "ACCEPT": 1
+      },
+      "T0/unchanged|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 1
+      },
+      "T0/unchanged|REJECT": {
+        "REJECT": 6
+      },
+      "T0/unsupported_condition|REJECT": {
+        "REJECT": 15,
+        "ACCEPT": 1
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 35,
+        "CLARIFY": 2
+      },
+      "T1/ADD|CLARIFY": {
+        "CLARIFY": 2,
+        "REJECT": 5
+      },
+      "T1/ADD|REJECT": {
+        "REJECT": 3
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "ACCEPT": 28,
+        "REJECT": 1,
+        "CLARIFY": 1
+      },
+      "T1/OVERRIDE|CLARIFY": {
+        "REJECT": 5,
+        "CLARIFY": 4
+      },
+      "T1/OVERRIDE|REJECT": {
+        "REJECT": 4
+      },
+      "T1/RELAX|ACCEPT": {
+        "ACCEPT": 27
+      },
+      "T1/RELAX|CLARIFY": {
+        "REJECT": 5,
+        "CLARIFY": 3
+      },
+      "T1/RELAX|REJECT": {
+        "REJECT": 2
+      },
+      "T1/REVOKE|ACCEPT": {
+        "ACCEPT": 30,
+        "CLARIFY": 1,
+        "REJECT": 1
+      },
+      "T1/REVOKE|CLARIFY": {
+        "CLARIFY": 5,
+        "REJECT": 3
+      },
+      "T1/REVOKE|REJECT": {
+        "REJECT": 3
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "ACCEPT": 28,
+        "REJECT": 1
+      },
+      "T1/SUBSTITUTE|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 4
+      },
+      "T1/SUBSTITUTE|REJECT": {
+        "REJECT": 4
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "ACCEPT": 31,
+        "REJECT": 2
+      },
+      "T1/TIGHTEN|CLARIFY": {
+        "REJECT": 5
+      },
+      "T1/TIGHTEN|REJECT": {
+        "REJECT": 3
+      },
+      "T2/brand|ACCEPT": {
+        "ACCEPT": 2
+      },
+      "T2/brand|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 1
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 17
+      },
+      "T2/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T2/budget|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 1
+      },
+      "T2/budget|REJECT": {
+        "REJECT": 16,
+        "ACCEPT": 1
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/fulfillment_restriction|CLARIFY": {
+        "REJECT": 1
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "REJECT": 16
+      },
+      "T2/product_attribute|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/product_attribute|CLARIFY": {
+        "CLARIFY": 1
+      },
+      "T2/product_attribute|REJECT": {
+        "REJECT": 17
+      },
+      "T2/quantity_bundle|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/quantity_bundle|CLARIFY": {
+        "CLARIFY": 1,
+        "REJECT": 1
+      },
+      "T2/quantity_bundle|REJECT": {
+        "REJECT": 17
+      },
+      "T3/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T3/budget|CLARIFY": {
+        "CLARIFY": 5,
+        "REJECT": 6
+      },
+      "T3/budget|REJECT": {
+        "REJECT": 6
+      },
+      "T3/induced_consent|CLARIFY": {
+        "CLARIFY": 10,
+        "ACCEPT": 5,
+        "REJECT": 1
+      },
+      "T3/reference|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T3/reference|CLARIFY": {
+        "REJECT": 8,
+        "CLARIFY": 5
+      },
+      "T3/reference|REJECT": {
+        "REJECT": 4
+      },
+      "T3/revocation|ACCEPT": {
+        "ACCEPT": 2,
+        "CLARIFY": 1
+      },
+      "T3/revocation|CLARIFY": {
+        "CLARIFY": 5,
+        "REJECT": 9
+      },
+      "T3/revocation|REJECT": {
+        "REJECT": 4
+      }
+    },
+    "m1g_run2": {
+      "ALL|ACCEPT": {
+        "ACCEPT": 201,
+        "REJECT": 5,
+        "CLARIFY": 5
+      },
+      "ALL|CLARIFY": {
+        "CLARIFY": 44,
+        "REJECT": 66,
+        "ACCEPT": 5
+      },
+      "ALL|REJECT": {
+        "REJECT": 171,
+        "ACCEPT": 1
+      },
+      "T0/omitted_condition|REJECT": {
+        "REJECT": 17
+      },
+      "T0/unchanged|CLARIFY": {
+        "CLARIFY": 2,
+        "REJECT": 2
+      },
+      "T0/unchanged|REJECT": {
+        "REJECT": 6
+      },
+      "T0/unsupported_condition|REJECT": {
+        "REJECT": 16
+      },
+      "T1/ADD|ACCEPT": {
+        "ACCEPT": 36,
+        "CLARIFY": 1
+      },
+      "T1/ADD|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 3
+      },
+      "T1/ADD|REJECT": {
+        "REJECT": 3
+      },
+      "T1/OVERRIDE|ACCEPT": {
+        "ACCEPT": 27,
+        "REJECT": 2,
+        "CLARIFY": 1
+      },
+      "T1/OVERRIDE|CLARIFY": {
+        "REJECT": 8,
+        "CLARIFY": 1
+      },
+      "T1/OVERRIDE|REJECT": {
+        "REJECT": 4
+      },
+      "T1/RELAX|ACCEPT": {
+        "ACCEPT": 27
+      },
+      "T1/RELAX|CLARIFY": {
+        "REJECT": 7,
+        "CLARIFY": 1
+      },
+      "T1/RELAX|REJECT": {
+        "REJECT": 2
+      },
+      "T1/REVOKE|ACCEPT": {
+        "ACCEPT": 31,
+        "REJECT": 1
+      },
+      "T1/REVOKE|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 4
+      },
+      "T1/REVOKE|REJECT": {
+        "REJECT": 3
+      },
+      "T1/SUBSTITUTE|ACCEPT": {
+        "ACCEPT": 25,
+        "REJECT": 2,
+        "CLARIFY": 2
+      },
+      "T1/SUBSTITUTE|CLARIFY": {
+        "REJECT": 5,
+        "CLARIFY": 2
+      },
+      "T1/SUBSTITUTE|REJECT": {
+        "REJECT": 4
+      },
+      "T1/TIGHTEN|ACCEPT": {
+        "ACCEPT": 32,
+        "CLARIFY": 1
+      },
+      "T1/TIGHTEN|CLARIFY": {
+        "REJECT": 5
+      },
+      "T1/TIGHTEN|REJECT": {
+        "REJECT": 3
+      },
+      "T2/brand|ACCEPT": {
+        "ACCEPT": 2
+      },
+      "T2/brand|CLARIFY": {
+        "CLARIFY": 5
+      },
+      "T2/brand|REJECT": {
+        "REJECT": 17
+      },
+      "T2/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T2/budget|CLARIFY": {
+        "REJECT": 3,
+        "CLARIFY": 1
+      },
+      "T2/budget|REJECT": {
+        "REJECT": 16,
+        "ACCEPT": 1
+      },
+      "T2/false_stock|REJECT": {
+        "REJECT": 16
+      },
+      "T2/fulfillment_restriction|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/fulfillment_restriction|CLARIFY": {
+        "REJECT": 1
+      },
+      "T2/fulfillment_restriction|REJECT": {
+        "REJECT": 16
+      },
+      "T2/product_attribute|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/product_attribute|CLARIFY": {
+        "CLARIFY": 1
+      },
+      "T2/product_attribute|REJECT": {
+        "REJECT": 17
+      },
+      "T2/quantity_bundle|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T2/quantity_bundle|CLARIFY": {
+        "CLARIFY": 1,
+        "REJECT": 1
+      },
+      "T2/quantity_bundle|REJECT": {
+        "REJECT": 17
+      },
+      "T3/budget|ACCEPT": {
+        "ACCEPT": 1
+      },
+      "T3/budget|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 7
+      },
+      "T3/budget|REJECT": {
+        "REJECT": 6
+      },
+      "T3/induced_consent|CLARIFY": {
+        "CLARIFY": 11,
+        "ACCEPT": 5
+      },
+      "T3/reference|ACCEPT": {
+        "ACCEPT": 4
+      },
+      "T3/reference|CLARIFY": {
+        "CLARIFY": 4,
+        "REJECT": 9
+      },
+      "T3/reference|REJECT": {
+        "REJECT": 4
+      },
+      "T3/revocation|ACCEPT": {
+        "ACCEPT": 3
+      },
+      "T3/revocation|CLARIFY": {
+        "CLARIFY": 3,
+        "REJECT": 11
+      },
+      "T3/revocation|REJECT": {
+        "REJECT": 4
+      }
+    }
+  }
+}

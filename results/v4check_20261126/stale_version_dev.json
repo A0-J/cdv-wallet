@@ -1,0 +1,8 @@
+{
+  "episodes_with_accepted_change_normal_tx": 72,
+  "results": {
+    "v1_stale|DENY|STALE_VERSION": 72,
+    "v2_current|ALLOW|": 71,
+    "v2_current|DENY|OUT_OF_SCOPE": 1
+  }
+}

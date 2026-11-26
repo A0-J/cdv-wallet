@@ -138,6 +138,10 @@ def main():
     ap.add_argument("--budget", type=float, default=0.60)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--with-matched", action="store_true", help="also score matched_stockout.jsonl (same extraction)")
+    ap.add_argument("--m1g", action="store_true", help="main M1 = M1-G (paid basis judgement; separate ledger), adds B3_v2")
+    ap.add_argument("--m1g-budget", type=float, default=0.20)
+    ap.add_argument("--tag", default="", help="output suffix (rows/summary); never overwrites")
+    ap.add_argument("--unverified-policy", default="consent_clarify", choices=["consent_clarify", "record"])
     ap.add_argument("--seller-to-extractor", action="store_true",
                     help="condition (B): tool turns with source=seller are also given to the extractor (as assistant text)")
     a = ap.parse_args()
@@ -160,7 +164,11 @@ def main():
             excl[e] = {"source_episode_id": src, "seen_in": hits}
     keep = [e for e in eps if e not in excl]
     keep_tx = [t for t in txs if t["episode_id"] in set(keep)]
-    tag = f"{a.name}_{a.split}" + ("_B" if a.seller_to_extractor else "_A") + ("_dry" if a.dry_run else "")
+    tag = f"{a.name}_{a.split}" + ("_B" if a.seller_to_extractor else "_A") + (f"_{a.tag}" if a.tag else "") + ("_dry" if a.dry_run else "")
+    A.UNVERIFIED_POLICY = a.unverified_policy
+    m1_llm = None
+    if a.m1g and not a.dry_run:
+        m1_llm = OpenAIResponses(a.model, OUT / f"ledger_m1g_{a.name}.jsonl", a.m1g_budget)
     OUT.mkdir(parents=True, exist_ok=True)
     files_sha = {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(d.glob("*.jsonl"))}
     (OUT / f"exclusion_{a.name}_{a.split}.json").write_text(json.dumps(
@@ -206,7 +214,7 @@ def main():
         ep = eps[tx["episode_id"]]
         case = build_case(ep, tx, tgold.get(tx["transaction_id"]) or {})
         states = [{"turn_id": s["turn_id"], "state": s["state"]} for s in fn]
-        o = A.run_arms(case, states, nli=nli, gold=None)
+        o = A.run_arms(case, states, nli=nli, gold=None, m1_llm=m1_llm)
         eg = egold.get(tx["episode_id"])
         if eg:
             env = A.Env(case)
@@ -232,7 +240,7 @@ def main():
                 continue
             fn, pl = v
             case = build_case(eps[mx["episode_id"]], mx, {})
-            o = A.run_arms(case, [{"turn_id": s_["turn_id"], "state": s_["state"]} for s_ in fn], nli=nli, gold=None)
+            o = A.run_arms(case, [{"turn_id": s_["turn_id"], "state": s_["state"]} for s_ in fn], nli=nli, gold=None, m1_llm=m1_llm)
             g = mg.get(mx["challenge_id"]) or {}
             mrows.append({"challenge_id": mx["challenge_id"], "pair_id": mx["pair_id"], "episode_id": mx["episode_id"],
                           **{k: g.get(k) for k in ("intent_case", "reference_verdict", "evidence_status", "pair_similarity",
@@ -244,11 +252,12 @@ def main():
         n_matched = len(mrows)
     tab = defaultdict(Counter)
     for r in rows:
-        for arm in A.ARMS:
+        for arm in r["arms"]:                         # B0-B4 and the added AV0-AV2 (docs/COMPARISON_ARMS_20261126.md)
             tab[(arm, r["transaction_type"], r["expected"])][r["arms"][arm]["decision"]] += 1
     summ.update({"failed": failed, "cost_usd": round(sum(sum(s.get("cost_usd", 0) for s in ext[e][0]) + ext[e][1]["cost_usd"]
                                                         for e in ext if not isinstance(ext[e], Exception)), 6),
-                 "cache_hits": llm.cache_hits, "matched_rows": n_matched,
+                 "cache_hits": llm.cache_hits, "matched_rows": n_matched, "m1_main": "M1-G" if m1_llm else "rules_v2",
+                 "m1g_cost_usd": round(m1_llm.spent, 6) if m1_llm else 0.0, "unverified_policy": A.UNVERIFIED_POLICY,
                  "by_arm_type_expected": {f"{k[0]}|{k[1]}|{k[2]}": dict(v) for k, v in sorted(tab.items())}})
     (OUT / f"summary_{tag}.json").write_text(json.dumps(summ, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in summ.items() if k != "by_arm_type_expected"}))

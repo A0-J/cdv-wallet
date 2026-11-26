@@ -36,7 +36,7 @@ from cdv.v2.candidates import ENUM, REF, resolve_turn  # noqa: E402
 
 DEV = ROOT / "results" / "integrated_dev_20261126"
 SETS = ("V1", "V3", "V2")
-ARMS = ("B0", "B1", "B2", "B3", "B4", "v1")
+ARMS = ("B0", "B1", "B2", "B3", "B4", "B3_v2", "v1", "AV0", "AV1", "AV2")
 LEGIT, VIOL = {"RIGHT", "RIGHT_BY_LUCK"}, {"WRONG", "WRONG_HIDDEN"}
 PC = "set_purchase_conditions"
 
@@ -97,7 +97,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", default="", help="suffix for output files (existing results are never overwritten)")
     ap.add_argument("--no-consent-check", action="store_true", help="arms.CONSENT_CHECKOUT_CHECK = False (before)")
+    ap.add_argument("--m1g", action="store_true", help="main M1 = M1-G (paid: gpt-6-luna basis judgement), adds B3_v2")
+    ap.add_argument("--m1g-budget", type=float, default=0.10)
+    ap.add_argument("--unverified-policy", default="consent_clarify", choices=["consent_clarify", "record"])
     a = ap.parse_args()
+    A.UNVERIFIED_POLICY = a.unverified_policy
+    m1_llm = None
+    if a.m1g:
+        from cdv.extract import OpenAIResponses
+        m1_llm = OpenAIResponses("gpt-6-luna", DEV / f"ledger_m1g{('_' + a.tag) if a.tag else ''}.jsonl", a.m1g_budget)
     A.CONSENT_CHECKOUT_CHECK = not a.no_consent_check
     sfx = f"_{a.tag}" if a.tag else ""
     for f in (f"dev_rows{sfx}.jsonl", f"dev_summary{sfx}.json"):
@@ -115,7 +123,7 @@ def main():
         assert abs(c.t - r["t"]) < 1e-9, f"decision point differs from extraction for {r['episode_id']}"
         g = R.gold_fields(json.loads(c.scoring["hidden_spec"]))
         t1 = time.perf_counter()
-        o = A.run_arms(c, r["fnctod_states"], nli=nli, gold=g)
+        o = A.run_arms(c, r["fnctod_states"], nli=nli, gold=g, m1_llm=m1_llm)
         ms_v2 = round(1000 * (time.perf_counter() - t1), 1)
         # bridge: PLAN_v3 rules + M2a on the same truncated states
         st = [dict(x, seq=int(x["turn_id"][1:])) for x in r["fnctod_states"] if int(x["turn_id"][1:]) < c.t]
@@ -131,7 +139,9 @@ def main():
     secs = round(time.perf_counter() - t0, 1)
     (DEV / f"dev_rows{sfx}.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False, default=str) + "\n" for x in out),
                                         encoding="utf-8", newline="\n")
-    summ = {"consent_checkout_check": A.CONSENT_CHECKOUT_CHECK, "note": __doc__.split("\n\n")[0], "model_calls": 0, "n": len(out), "seconds": secs,
+    summ = {"m1_main": "M1-G" if m1_llm else "rules_v2", "unverified_policy": A.UNVERIFIED_POLICY,
+            "m1g_prompt": __import__("cdv.v2.m1g", fromlist=["x"]).ACTIVE_VERSION if m1_llm else None,
+            "m1g_cost_usd": round(m1_llm.spent, 6) if m1_llm else 0.0, "consent_checkout_check": A.CONSENT_CHECKOUT_CHECK, "note": __doc__.split("\n\n")[0], "model_calls": ("M1-G basis calls, see ledger_m1g" if m1_llm else 0), "n": len(out), "seconds": secs,
             "sets": dict(Counter(x["set"] for x in out)), "reference_turns": dict(refc), "groups": {}}
     groups = {"legit(outcome)": [x for x in out if x["outcome"] in LEGIT],
               "violating(outcome)": [x for x in out if x["outcome"] in VIOL],
@@ -140,6 +150,8 @@ def main():
     for gname, G in groups.items():
         summ["groups"][gname] = {"n": len(G)}
         for arm in ARMS:
+            if not G or arm not in G[0]["arms"]:
+                continue
             dec = Counter(x["arms"][arm]["decision"] for x in G)
             blocked = sum(v for k, v in dec.items() if k != "ALLOW")
             causes = Counter(clarify_cause(x["arms"][arm]) for x in G if x["arms"][arm]["decision"] == "CLARIFY")

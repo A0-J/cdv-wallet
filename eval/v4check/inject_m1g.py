@@ -36,7 +36,11 @@ def main():
     ap.add_argument("--model", default="gpt-6-luna")
     ap.add_argument("--budget", type=float, default=0.15, help="cap per run (each run has its own ledger)")
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--prompt-version", default="v1", choices=["v1", "v2"])
     a = ap.parse_args()
+    global OUT
+    if a.prompt_version != "v1":                    # v1 outputs are never overwritten
+        OUT = OUT / f"prompt_{a.prompt_version}"
     eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (V4 / "dev" / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
     gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (V4 / "dev" / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
     items = []
@@ -56,9 +60,10 @@ def main():
         dl = R.DryLLM()
         for it in items:
             if it["role"] == "user":
-                dl(m1g.SYSTEM, m1g.USER_TEMPLATE.format(turn=it["text"], change=m1g.describe(it["op"], it["cat"])))
+                dl(m1g.SYSTEM, m1g.TEMPLATES[a.prompt_version].format(turn=it["text"], change=m1g.describe(it["op"], it["cat"])))
         out = {"ops": len(items), "calls_per_run": n_calls, "runs": 2, "input_tokens_est_per_run": int(dl.chars_in / 4),
-               "prompt_sha256": m1g.PROMPT_SHA256}
+               "prompt_version": a.prompt_version,
+               "prompt_sha256": m1g.PROMPT_SHA256 if a.prompt_version == "v1" else m1g.PROMPT_V2_SHA256}
         (OUT / "dry_run.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8", newline="\n")
         print(json.dumps(out))
         return
@@ -69,7 +74,7 @@ def main():
         llm = OpenAIResponses(a.model, OUT / f"ledger_run{k}.jsonl", a.budget)
 
         def job(it, llm=llm):
-            return m1g.decide(llm, it["op"], it["role"], it["text"], it["cat"])
+            return m1g.decide_v(llm, it["op"], it["role"], it["text"], it["cat"], a.prompt_version)
         with ThreadPoolExecutor(max_workers=a.workers) as ex:
             runs[k] = list(ex.map(job, items))
     from cdv.nli import NLI
@@ -91,14 +96,15 @@ def main():
     agree_dec = sum(r["m1g_run1"] == r["m1g_run2"] for r in called)
     agree_lab = sum(r["m1g_label_run1"] == r["m1g_label_run2"] for r in called)
     cost = {k: round(sum(x[2] for x in runs[k]), 6) for k in (1, 2)}
-    res = {"ops": len(rows), "calls_per_run": len(called), "cost_usd": cost, "prompt_sha256": m1g.PROMPT_SHA256,
+    psha = m1g.PROMPT_SHA256 if a.prompt_version == "v1" else m1g.PROMPT_V2_SHA256
+    res = {"ops": len(rows), "calls_per_run": len(called), "cost_usd": cost, "prompt_version": a.prompt_version, "prompt_sha256": psha,
            "run_agreement": {"decision": f"{agree_dec}/{len(called)}", "label": f"{agree_lab}/{len(called)}"},
            "unparsed": {k: sum(1 for x in runs[k] if x[1] == "unparsed") for k in (1, 2)},
            "confusion": {arm: {k: dict(v) for k, v in sorted(m.items())} for arm, m in cm.items()}}
     (OUT / "inject_dev.json").write_text(json.dumps(res, indent=2) + "\n", encoding="utf-8", newline="\n")
     (OUT / "rows_dev.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
     md = ["# v4 dev 주입: M1 v1 대 v2 대 M1-G (정답 operation_labels)", "",
-          f"- 후보 {len(rows)}개, M1-G 호출 실행당 {len(called)}회 × 2회, 비용 {cost}. 프롬프트 sha256 `{m1g.PROMPT_SHA256}`.",
+          f"- 후보 {len(rows)}개, M1-G 호출 실행당 {len(called)}회 × 2회, 비용 {cost}. 프롬프트 {a.prompt_version} sha256 `{psha}`.",
           f"- M1-G 두 실행의 일치: 판정 {agree_dec}/{len(called)}, 분류 {agree_lab}/{len(called)}. 해석 실패 {res['unparsed']}.", "",
           "| 정답 | n | v1 수용/거부/확인/미지원 | v2 | M1-G 1회 | M1-G 2회 |", "|---|---:|---|---|---|---|"]
     for lab in ("ACCEPT", "CLARIFY", "REJECT"):
