@@ -198,3 +198,11 @@ dialogue[≤t] ──FnCTOD(1회 추출, 모든 비교군 공유)──▶ 턴�
 2. 생성 확장 범위(6절): T3·T4·T5 모두 / T3만.
 3. 일정: 구현 약 1.5–2일 + 개발 실행 + 최종 실행. 학위논문 일정(마감 2026-11-26, 심사 11-30)과 맞출지.
 4. 비용 상한 $3과 개발·최종 두 번의 계획 승인.
+
+### 10.7 구현 상태와 추가 결정 (2026-11-26)
+
+- 구현됨(무과금 시험만): `cdv/verdict.py`(공통 판정), `cdv/v2/`(candidates, scope, m1v2, integrate), `cdv/gate.py`의 하위 호환 확장(UNKNOWN_ATTR → CLARIFY; 기존 Scope 동작 불변, G3 결과 바이트 동일 재현), `eval/integrated/`(env, arms, functional_validation, extract_dev).
+- 비교군 표기는 B0–B4(B0 = 제안 검증 없음, 공통 결제 보안은 유지). 모듈 켜고 끄기는 `eval/integrated/arms.py`의 `ARMS` 표 한 곳에만 있다.
+- M2 Only(B2)의 Mandate는 검증하지 않은 FnCTOD 출력으로 만든다. 정답 조건 Mandate(U)는 실행 입력에 쓰지 않고 상한 참고값으로만 따로 보고한다.
+- T3(판매자 글 공격) 생성 사례를 통합 평가에 포함한다. WhisperBench 문구는 복사하지 않는다. T4·T5 제외.
+- 전체 유료 상한 $3. 봉인 표본 최종 평가는 별도 승인 뒤에만 실행한다. 4단계(무과금 통합 기능 시험) 뒤 중간 보고하고 심사 전 범위를 다시 정한다.

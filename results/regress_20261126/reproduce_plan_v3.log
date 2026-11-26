@@ -1,0 +1,7 @@
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2252.26it/s]
+R1_test_cross_store {"n": 200, "mismatched_rows": 0, "verdict_mismatches": [], "n_verdict_mismatches": 0}
+R3_test_cross_store {"n": 100, "mismatched_rows": 0, "verdict_mismatches": [], "n_verdict_mismatches": 0}
+R2_test_cross_store {"n": 96, "mismatched_rows": 0, "verdict_mismatches": [], "n_verdict_mismatches": 0}
+R1_validation {"n": 10, "mismatched_rows": 0, "verdict_mismatches": [], "n_verdict_mismatches": 0}
+G1_eval {"n": 260, "mismatched_rows": 0}
+EXACT

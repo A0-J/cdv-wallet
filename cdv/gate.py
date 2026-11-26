@@ -18,6 +18,7 @@ Phase 2 (M1) adds CLARIFY for decisions that rest on a pending, unverified dialo
 """
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass, field
 
 from adapters import avip
@@ -89,18 +90,28 @@ def authorize(req: Request) -> Result:
     captured = set(cap.keys())
     if any(k not in captured or k not in req.catalog for k in cart_keys):
         return Result("DENY", ["NOT_CAPTURED"])
-    lines = [Line(**{**req.catalog[tuple(k)].__dict__, "quantity": q}) for k, q in req.cart]
+    lines = [dataclasses.replace(req.catalog[tuple(k)], quantity=q) for k, q in req.cart]   # keeps Line subclasses
     captured_lines = [req.catalog[k] for k in cap.keys() if k in req.catalog]
 
     declared = req.context_r.get("clause_id")
+    # Scope v2 (cdv/v2/scope.py) also reports conditions it cannot check (missing catalog facts).
+    # They are never counted as satisfied: CLARIFY. The PLAN_v3-era Scope has no unknowns(): unchanged.
+    unknowns = getattr(m.primary, "unknowns", lambda ls: [])
     if not m.primary.violations(lines):
         if declared is not None:
             return Result("DENY", ["CLAUSE_MISMATCH"])
+        unk = unknowns(lines)
+        if unk:
+            return Result("CLARIFY", sorted(set(unk)))
         return Result("ALLOW", [])
 
     pending: list[str] = []
     for c in m.fallbacks:
         if c.then.violations(lines):
+            continue
+        unk_then = getattr(c.then, "unknowns", lambda ls: [])(lines)
+        if unk_then:
+            pending.append("UNKNOWN_ATTR")
             continue
         opened, why = clause_open(c, req.evidences, captured_lines, req.issuers, req.now, req.session,
                                   req.nonces)

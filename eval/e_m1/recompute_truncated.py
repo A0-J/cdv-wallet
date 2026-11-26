@@ -11,6 +11,8 @@ same rules, NLI model, known-brand list (built from truncated states) and decisi
 The plain-LLM arm read the whole dialogue in one call and cannot be truncated offline; it is not corrected here.
 
 Decisions are reported as ALLOW / CLARIFY / DENY separately, original (leaky) next to corrected.
+Self-check: every journey is first replayed WITHOUT truncation; that must give the stored PLAN_v3 decision
+for all three FnCTOD arms exactly, or the script stops.
 Output: results/e_m1_20261126/corrected_truncation/{summary.json, TABLES.md}
 Usage:  .venv/Scripts/python.exe eval/e_m1/recompute_truncated.py
 """
@@ -26,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "eval" / "m1_v2"))
 import diagnose as D  # noqa: E402
+from cdv import verdict  # noqa: E402
 from cdv.m1 import Ledger, UserTurn  # noqa: E402
 from cdv.pipeline import cart_check, run_verified, state_to_entries  # noqa: E402
 
@@ -53,10 +56,12 @@ def cart_of(eid):
             for l in c.get("lines") or []]
 
 
-def replay(r, T, nli):
-    cut, kind = decision_point(T)
-    ut = [UserTurn(f"s{x['seq']}", x["seq"], x["text"] or "") for x in T
-          if x["kind"] == "message" and x["actor"] == "shopper" and x["seq"] < cut]
+def replay(r, T, nli, no_cut=False):
+    """no_cut=True replays the whole dialogue; it must give the stored PLAN_v3 decisions exactly (self-check)."""
+    cut, kind = (float("inf"), "none(self-check)") if no_cut else decision_point(T)
+    # same user-turn definition as run.py::load_dialogues (message, non-blank text, shopper)
+    ut = [UserTurn(f"s{x['seq']}", x["seq"], x["text"]) for x in T
+          if x["kind"] == "message" and x["actor"] == "shopper" and (x["text"] or "").strip() and x["seq"] < cut]
     states = [dict(s, seq=int(s["turn_id"][1:])) for s in r.get("fnctod_states") or []]
     trunc = [s for s in states if s["seq"] < cut]
     cart = cart_of(r["episode_id"])
@@ -64,13 +69,13 @@ def replay(r, T, nli):
                                                          and x["seq"] >= cut), "arms": {}}
     final = trunc[-1]["state"] if trunc else {}
     led = Ledger(1, tuple(state_to_entries(final).values()))
-    out["arms"]["fnctod"] = cart_check(led, cart)[0]
+    out["arms"]["fnctod"] = verdict.plan_v3(None, cart_check(led, cart)[0])
     brands = sorted({str(b) for st in trunc for k in ("brand_include", "brand_exclude")
                      for b in ((st["state"].get(PC) or {}).get(k) or [])})
     for name, use in (("fnctod_r", None), ("fnctod_rn", nli)):
         res = run_verified(trunc, ut, nli=use, known_brands=brands)
         d, _ = cart_check(res["ledger"], cart)
-        out["arms"][name] = "CLARIFY" if res["hint"] == "CLARIFY" else d    # same precedence as run.py
+        out["arms"][name] = verdict.plan_v3(res["hint"], d)          # common decision function
     return out
 
 
@@ -112,6 +117,10 @@ def main():
         for r in rs:
             grp = "legit" if r["outcome"] in LEGIT else "viol"
             assert T.get(r["episode_id"]), f"no turns for {r['episode_id']}"
+            assert cart_of(r["episode_id"]), f"no cart for {r['episode_id']}"
+            full = replay(r, T[r["episode_id"]], nli, no_cut=True)
+            bad = {a: (full["arms"][a], r["arms"][a]["decision"]) for a in ARMS if full["arms"][a] != r["arms"][a]["decision"]}
+            assert not bad, f"self-check failed (no cut != PLAN_v3) {r['episode_id']}: {bad}"
             rp = replay(r, T[r["episode_id"]], nli)
             kinds[rp["cut_kind"]] += 1
             dropped += rp["n_user_turns_dropped"] > 0

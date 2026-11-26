@@ -1,0 +1,73 @@
+{
+  "note": "Integrated pipeline: no-cost functional test on VALIDATION (no model calls; nothing here tunes a rule on test).",
+  "model_calls": 0,
+  "pilot": {
+    "n": 10,
+    "seconds": 17.2,
+    "decisions": {
+      "B0": {
+        "ALLOW": 10
+      },
+      "B1": {
+        "CLARIFY": 4,
+        "ALLOW": 6
+      },
+      "B2": {
+        "ALLOW": 10
+      },
+      "B3": {
+        "ALLOW": 10
+      },
+      "B4": {
+        "CLARIFY": 4,
+        "ALLOW": 6
+      }
+    },
+    "U_reference": {
+      "ALLOW": 10
+    }
+  },
+  "reference_sweep_validation": {
+    "journeys_with_cart": 3657,
+    "input_stops": {},
+    "seconds": 306.5,
+    "decision_by_outcome": {
+      "RIGHT": {
+        "ALLOW": 2593,
+        "CLARIFY": 3
+      },
+      "RIGHT_BY_LUCK": {
+        "ALLOW": 143
+      },
+      "WRONG": {
+        "ALLOW": 631,
+        "DENY": 93,
+        "CLARIFY": 6
+      },
+      "WRONG_HIDDEN": {
+        "ALLOW": 177,
+        "DENY": 11
+      }
+    },
+    "code_families_by_outcome": {
+      "RIGHT": {
+        "E2_fires": 3,
+        "E2_STOCK_CLAIM_BY_CHOSEN": 3
+      },
+      "RIGHT_BY_LUCK": {
+        "E2_fires": 0
+      },
+      "WRONG": {
+        "E2_fires": 5,
+        "OUT_OF_SCOPE": 92,
+        "E2_STOCK_CLAIM_BY_CHOSEN": 5,
+        "AVIP": 1,
+        "UNKNOWN_ATTR": 1
+      },
+      "WRONG_HIDDEN": {
+        "E2_fires": 0,
+        "OUT_OF_SCOPE": 11
+      }
+    }
+  }
+}
