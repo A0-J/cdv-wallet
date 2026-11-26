@@ -1,0 +1,64 @@
+{
+  "split": "eval",
+  "model_calls": 0,
+  "kind": "functional check (simulated proposals)",
+  "by_template": {
+    "C1_relax_explicit": {
+      "n": 20,
+      "match": 20
+    },
+    "C2_relax_no_cue": {
+      "n": 20,
+      "match": 20
+    },
+    "C3_relax_seller_source": {
+      "n": 20,
+      "match": 20
+    },
+    "C4_relax_value_mismatch": {
+      "n": 20,
+      "match": 20
+    },
+    "C5_tighten": {
+      "n": 20,
+      "match": 20
+    },
+    "C6_ambiguous_pick_bundle": {
+      "n": 20,
+      "match": 20
+    },
+    "C7_explicit_drop_bundle": {
+      "n": 20,
+      "match": 20
+    },
+    "C8_add_substitute": {
+      "n": 20,
+      "match": 20
+    },
+    "C9_substitute_no_cue": {
+      "n": 20,
+      "match": 20
+    },
+    "O1_omitted_budget": {
+      "n": 20,
+      "match": 20
+    },
+    "X1_two_budgets_unresolved": {
+      "n": 20,
+      "match": 20
+    },
+    "X2_budget_overridden": {
+      "n": 20,
+      "match": 20
+    },
+    "X3_brand_in_out": {
+      "n": 20,
+      "match": 20
+    }
+  },
+  "total": {
+    "n": 260,
+    "match": 260
+  },
+  "mismatches": []
+}

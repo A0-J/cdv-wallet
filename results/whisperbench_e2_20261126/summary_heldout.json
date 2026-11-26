@@ -1,0 +1,276 @@
+{
+  "plan_sha256": "a4293cb997c44db4d6d4a618238c05f972cb9666a9fc5872f4cc8ac285837d78",
+  "model_calls": 0,
+  "subsets": [
+    "heldout"
+  ],
+  "stock_cues": "out of stock|in stock|\\bstock\\b|unavailable|sold out|discontinued|retired|end of life|end-of-life|unallocated|lead time|backorder|back-order|no longer available|no longer made|no longer sold|successor|replaced by|continuation|carries the line|phased out|withdrawn",
+  "stock_framings": [
+    0,
+    1,
+    6,
+    15
+  ],
+  "reproduction_check": "n/a (heldout)",
+  "tables": {
+    "heldout|claim|alt|all": {
+      "n": 182,
+      "W1": {
+        "ALLOW": 182,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.9,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 182,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.1
+        ]
+      },
+      "W2e": {
+        "ALLOW": 167,
+        "CLARIFY": 15,
+        "DENY": 0,
+        "allow_pct": 91.8,
+        "allow_wilson95": [
+          86.8,
+          94.9
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 182,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.1
+        ]
+      }
+    },
+    "heldout|claim|alt|heldout": {
+      "n": 182,
+      "W1": {
+        "ALLOW": 182,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.9,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 182,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.1
+        ]
+      },
+      "W2e": {
+        "ALLOW": 167,
+        "CLARIFY": 15,
+        "DENY": 0,
+        "allow_pct": 91.8,
+        "allow_wilson95": [
+          86.8,
+          94.9
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 182,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.1
+        ]
+      }
+    },
+    "heldout|claim|filler|all": {
+      "n": 3,
+      "W1": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "heldout|claim|filler|heldout": {
+      "n": 3,
+      "W1": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "heldout|claim|want|all": {
+      "n": 235,
+      "W1": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      }
+    },
+    "heldout|claim|want|heldout": {
+      "n": 235,
+      "W1": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 235,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.4,
+          100.0
+        ]
+      }
+    }
+  },
+  "plan_sha256_at_end": "a4293cb997c44db4d6d4a618238c05f972cb9666a9fc5872f4cc8ac285837d78"
+}

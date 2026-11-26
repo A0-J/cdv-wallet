@@ -1,0 +1,6 @@
+[submodule "third_party/avip_defense"]
+	path = third_party/avip_defense
+	url = https://github.com/A0-J/avip_defense.git
+[submodule "third_party/standing-not-truth"]
+	path = third_party/standing-not-truth
+	url = https://github.com/A0-J/standing-not-truth.git

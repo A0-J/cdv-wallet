@@ -1,0 +1,14 @@
+cdv-wallet
+Copyright 2026 the cdv-wallet authors. Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This project uses, without modification, the following works as git submodules pinned to fixed commits:
+
+1. avip_defense (A-VIP decision-basis binding), https://github.com/yedidel/avip_defense
+   via fork https://github.com/A0-J/avip_defense @ 0c1b5388de1ea022a99b0f96f662d1b277bec313
+   Licensed under the Apache License, Version 2.0.
+
+2. standing-not-truth (Standing, Not Truth: Who May Say What About Whom in Agentic Selection), https://github.com/yedidel/standing-not-truth
+   via fork https://github.com/A0-J/standing-not-truth @ 9f041c08813c01edd1cfc90886193f16717f88db
+   Code licensed under the MIT License. Where text or functions are copied from it
+   (e.g. lexical_classify, SUBJECT_PROMPT), the copy carries this attribution and the MIT notice
+   from that repository's LICENSE file.

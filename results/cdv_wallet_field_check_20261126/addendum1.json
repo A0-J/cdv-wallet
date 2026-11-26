@@ -1,0 +1,106 @@
+{
+  "model_calls": 0,
+  "note": "regex counts, rough; first shopper turn excluded",
+  "groups": {
+    "browse_stockout": {
+      "counts": {
+        "journeys": 9301,
+        "has_pick": 2086,
+        "has_decline_at_checkout_or_payment": 204,
+        "has_accept_at_checkout_or_payment": 2828,
+        "pick_then_decline": 72
+      },
+      "journeys_by_split": {
+        "test_cross_store": 887,
+        "train": 7940,
+        "validation": 474
+      },
+      "pick_then_decline_by_split": {
+        "train": 61,
+        "test_cross_store": 8,
+        "validation": 3
+      },
+      "pick_then_decline_state_outcome": {
+        "checkout_incomplete/WRONG": 53,
+        "bought_right/RIGHT": 12,
+        "checkout_incomplete/WRONG_HIDDEN": 2,
+        "bought_wrong/WRONG": 2,
+        "checkout_incomplete/WRONG_REFUSAL": 1,
+        "bought_wrong/RIGHT_BY_LUCK": 1,
+        "refused_correctly/CORRECT_REFUSAL": 1
+      },
+      "transaction_state": {
+        "bought_right": 2014,
+        "checkout_incomplete": 1496,
+        "cart_right_handoff": 1478,
+        "no_cart": 1203,
+        "bought_wrong": 961,
+        "cart_right_no_handoff": 934,
+        "cart_not_right": 781,
+        "refused_correctly": 333,
+        "stopped_payment_designed": 84,
+        "stopped_for_buyer": 10,
+        "stopped_unshippable": 4,
+        "stopped_stock_gone": 3
+      }
+    },
+    "checkout_stockout": {
+      "counts": {
+        "journeys": 101,
+        "has_pick": 46,
+        "has_decline_at_checkout_or_payment": 17,
+        "has_accept_at_checkout_or_payment": 85,
+        "pick_then_decline": 11
+      },
+      "journeys_by_split": {
+        "train": 76,
+        "validation": 4,
+        "test_cross_store": 19,
+        "test_cross_template": 2
+      },
+      "pick_then_decline_by_split": {
+        "validation": 3,
+        "train": 7,
+        "test_cross_store": 1
+      },
+      "pick_then_decline_state_outcome": {
+        "stopped_stock_gone/WRONG": 7,
+        "stopped_stock_gone/RIGHT": 4
+      },
+      "transaction_state": {
+        "stopped_stock_gone": 91,
+        "checkout_incomplete": 6,
+        "bought_right": 3,
+        "bought_wrong": 1
+      }
+    },
+    "checkout_reprice": {
+      "counts": {
+        "journeys": 96,
+        "has_pick": 34,
+        "has_decline_at_checkout_or_payment": 10,
+        "has_accept_at_checkout_or_payment": 85,
+        "pick_then_decline": 3
+      },
+      "journeys_by_split": {
+        "test_cross_store": 9,
+        "test_cross_template": 8,
+        "train": 74,
+        "validation": 5
+      },
+      "pick_then_decline_by_split": {
+        "train": 3
+      },
+      "pick_then_decline_state_outcome": {
+        "checkout_incomplete/WRONG": 1,
+        "bought_right/RIGHT": 1,
+        "bought_wrong/WRONG": 1
+      },
+      "transaction_state": {
+        "bought_right": 52,
+        "bought_wrong": 24,
+        "checkout_incomplete": 20
+      }
+    }
+  }
+}

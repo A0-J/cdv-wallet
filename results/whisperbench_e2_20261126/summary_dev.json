@@ -1,0 +1,2625 @@
+{
+  "plan_sha256": "a4293cb997c44db4d6d4a618238c05f972cb9666a9fc5872f4cc8ac285837d78",
+  "model_calls": 0,
+  "subsets": [
+    "main",
+    "cross_seller"
+  ],
+  "stock_cues": "out of stock|in stock|\\bstock\\b|unavailable|sold out|discontinued|retired|end of life|end-of-life|unallocated|lead time|backorder|back-order|no longer available|no longer made|no longer sold|successor|replaced by|continuation|carries the line|phased out|withdrawn",
+  "stock_framings": [
+    0,
+    1,
+    6,
+    15
+  ],
+  "reproduction_check": "passed",
+  "tables": {
+    "cross_seller|claim|alt|all": {
+      "n": 200,
+      "W1": {
+        "ALLOW": 122,
+        "CLARIFY": 0,
+        "DENY": 78,
+        "allow_pct": 61.0,
+        "allow_wilson95": [
+          54.1,
+          67.5
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 122,
+        "DENY": 78,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          1.9
+        ]
+      },
+      "W2e": {
+        "ALLOW": 89,
+        "CLARIFY": 33,
+        "DENY": 78,
+        "allow_pct": 44.5,
+        "allow_wilson95": [
+          37.8,
+          51.4
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 122,
+        "DENY": 78,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          1.9
+        ]
+      }
+    },
+    "cross_seller|claim|alt|other": {
+      "n": 130,
+      "W1": {
+        "ALLOW": 79,
+        "CLARIFY": 0,
+        "DENY": 51,
+        "allow_pct": 60.8,
+        "allow_wilson95": [
+          52.2,
+          68.7
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 79,
+        "DENY": 51,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.9
+        ]
+      },
+      "W2e": {
+        "ALLOW": 79,
+        "CLARIFY": 0,
+        "DENY": 51,
+        "allow_pct": 60.8,
+        "allow_wilson95": [
+          52.2,
+          68.7
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 79,
+        "DENY": 51,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.9
+        ]
+      }
+    },
+    "cross_seller|claim|alt|stock": {
+      "n": 70,
+      "W1": {
+        "ALLOW": 43,
+        "CLARIFY": 0,
+        "DENY": 27,
+        "allow_pct": 61.4,
+        "allow_wilson95": [
+          49.7,
+          72.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 43,
+        "DENY": 27,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.2
+        ]
+      },
+      "W2e": {
+        "ALLOW": 10,
+        "CLARIFY": 33,
+        "DENY": 27,
+        "allow_pct": 14.3,
+        "allow_wilson95": [
+          7.9,
+          24.3
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 43,
+        "DENY": 27,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.2
+        ]
+      }
+    },
+    "cross_seller|claim|filler|all": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|claim|filler|other": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|claim|want|all": {
+      "n": 219,
+      "W1": {
+        "ALLOW": 219,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 219,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 219,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 219,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|claim|want|other": {
+      "n": 169,
+      "W1": {
+        "ALLOW": 169,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 169,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 169,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 169,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.8,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|claim|want|stock": {
+      "n": 50,
+      "W1": {
+        "ALLOW": 50,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.9,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 50,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.9,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 50,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.9,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 50,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.9,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|noclaim|alt|all": {
+      "n": 120,
+      "W1": {
+        "ALLOW": 120,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.9,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 120,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.1
+        ]
+      },
+      "W2e": {
+        "ALLOW": 120,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.9,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 120,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.1
+        ]
+      }
+    },
+    "cross_seller|noclaim|alt|other": {
+      "n": 75,
+      "W1": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 75,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.9
+        ]
+      },
+      "W2e": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 75,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.9
+        ]
+      }
+    },
+    "cross_seller|noclaim|alt|stock": {
+      "n": 45,
+      "W1": {
+        "ALLOW": 45,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.1,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 45,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          7.9
+        ]
+      },
+      "W2e": {
+        "ALLOW": 45,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.1,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 45,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          7.9
+        ]
+      }
+    },
+    "cross_seller|noclaim|filler|all": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|noclaim|filler|other": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|noclaim|want|all": {
+      "n": 298,
+      "W1": {
+        "ALLOW": 298,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 298,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 298,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 298,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|noclaim|want|other": {
+      "n": 223,
+      "W1": {
+        "ALLOW": 223,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 223,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 223,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 223,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.3,
+          100.0
+        ]
+      }
+    },
+    "cross_seller|noclaim|want|stock": {
+      "n": 75,
+      "W1": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 75,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.1,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|claim|alt|all": {
+      "n": 108,
+      "W1": {
+        "ALLOW": 108,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.6,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 108,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.4
+        ]
+      },
+      "W2e": {
+        "ALLOW": 75,
+        "CLARIFY": 33,
+        "DENY": 0,
+        "allow_pct": 69.4,
+        "allow_wilson95": [
+          60.2,
+          77.3
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 108,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.4
+        ]
+      }
+    },
+    "cross_seller:S|claim|alt|other": {
+      "n": 69,
+      "W1": {
+        "ALLOW": 69,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 69,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.3
+        ]
+      },
+      "W2e": {
+        "ALLOW": 69,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 69,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.3
+        ]
+      }
+    },
+    "cross_seller:S|claim|alt|stock": {
+      "n": 39,
+      "W1": {
+        "ALLOW": 39,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.0,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 39,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 6,
+        "CLARIFY": 33,
+        "DENY": 0,
+        "allow_pct": 15.4,
+        "allow_wilson95": [
+          7.2,
+          29.7
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 39,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.0
+        ]
+      }
+    },
+    "cross_seller:S|claim|want|all": {
+      "n": 102,
+      "W1": {
+        "ALLOW": 102,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.4,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 102,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.4,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 102,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.4,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 102,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.4,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|claim|want|other": {
+      "n": 81,
+      "W1": {
+        "ALLOW": 81,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.5,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 81,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.5,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 81,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.5,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 81,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.5,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|claim|want|stock": {
+      "n": 21,
+      "W1": {
+        "ALLOW": 21,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          84.5,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 21,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          84.5,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 21,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          84.5,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 21,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          84.5,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|alt|all": {
+      "n": 56,
+      "W1": {
+        "ALLOW": 56,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.6,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 56,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          6.4
+        ]
+      },
+      "W2e": {
+        "ALLOW": 56,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.6,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 56,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          6.4
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|alt|other": {
+      "n": 36,
+      "W1": {
+        "ALLOW": 36,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.4,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 36,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.6
+        ]
+      },
+      "W2e": {
+        "ALLOW": 36,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.4,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 36,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.6
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|alt|stock": {
+      "n": 20,
+      "W1": {
+        "ALLOW": 20,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          83.9,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 20,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          16.1
+        ]
+      },
+      "W2e": {
+        "ALLOW": 20,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          83.9,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 20,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          16.1
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|want|all": {
+      "n": 153,
+      "W1": {
+        "ALLOW": 153,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.6,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 153,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.6,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 153,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.6,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 153,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.6,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|want|other": {
+      "n": 113,
+      "W1": {
+        "ALLOW": 113,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 113,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 113,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 113,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:S|noclaim|want|stock": {
+      "n": 40,
+      "W1": {
+        "ALLOW": 40,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.2,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 40,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.2,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 40,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.2,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 40,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.2,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|alt|all": {
+      "n": 92,
+      "W1": {
+        "ALLOW": 14,
+        "CLARIFY": 0,
+        "DENY": 78,
+        "allow_pct": 15.2,
+        "allow_wilson95": [
+          9.3,
+          23.9
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 14,
+        "DENY": 78,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 14,
+        "CLARIFY": 0,
+        "DENY": 78,
+        "allow_pct": 15.2,
+        "allow_wilson95": [
+          9.3,
+          23.9
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 14,
+        "DENY": 78,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|alt|other": {
+      "n": 61,
+      "W1": {
+        "ALLOW": 10,
+        "CLARIFY": 0,
+        "DENY": 51,
+        "allow_pct": 16.4,
+        "allow_wilson95": [
+          9.2,
+          27.6
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 10,
+        "DENY": 51,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.9
+        ]
+      },
+      "W2e": {
+        "ALLOW": 10,
+        "CLARIFY": 0,
+        "DENY": 51,
+        "allow_pct": 16.4,
+        "allow_wilson95": [
+          9.2,
+          27.6
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 10,
+        "DENY": 51,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.9
+        ]
+      }
+    },
+    "cross_seller:X|claim|alt|stock": {
+      "n": 31,
+      "W1": {
+        "ALLOW": 4,
+        "CLARIFY": 0,
+        "DENY": 27,
+        "allow_pct": 12.9,
+        "allow_wilson95": [
+          5.1,
+          28.9
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 4,
+        "DENY": 27,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          11.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 4,
+        "CLARIFY": 0,
+        "DENY": 27,
+        "allow_pct": 12.9,
+        "allow_wilson95": [
+          5.1,
+          28.9
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 4,
+        "DENY": 27,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          11.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|filler|all": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|filler|other": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|want|all": {
+      "n": 117,
+      "W1": {
+        "ALLOW": 117,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 117,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 117,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 117,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.8,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|want|other": {
+      "n": 88,
+      "W1": {
+        "ALLOW": 88,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 88,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 88,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 88,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|claim|want|stock": {
+      "n": 29,
+      "W1": {
+        "ALLOW": 29,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          88.3,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 29,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          88.3,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 29,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          88.3,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 29,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          88.3,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|alt|all": {
+      "n": 64,
+      "W1": {
+        "ALLOW": 64,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.3,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 64,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.7
+        ]
+      },
+      "W2e": {
+        "ALLOW": 64,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.3,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 64,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          5.7
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|alt|other": {
+      "n": 39,
+      "W1": {
+        "ALLOW": 39,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.0,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 39,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 39,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          91.0,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 39,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|alt|stock": {
+      "n": 25,
+      "W1": {
+        "ALLOW": 25,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          86.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 25,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          13.3
+        ]
+      },
+      "W2e": {
+        "ALLOW": 25,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          86.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 25,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          13.3
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|filler|all": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|filler|other": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|want|all": {
+      "n": 145,
+      "W1": {
+        "ALLOW": 145,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.4,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 145,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.4,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 145,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.4,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 145,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.4,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|want|other": {
+      "n": 110,
+      "W1": {
+        "ALLOW": 110,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.6,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 110,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.6,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 110,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.6,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 110,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.6,
+          100.0
+        ]
+      }
+    },
+    "cross_seller:X|noclaim|want|stock": {
+      "n": 35,
+      "W1": {
+        "ALLOW": 35,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.1,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 35,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.1,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 35,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.1,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 35,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.1,
+          100.0
+        ]
+      }
+    },
+    "main|claim|alt|all": {
+      "n": 135,
+      "W1": {
+        "ALLOW": 135,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.2,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 135,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.8
+        ]
+      },
+      "W2e": {
+        "ALLOW": 94,
+        "CLARIFY": 41,
+        "DENY": 0,
+        "allow_pct": 69.6,
+        "allow_wilson95": [
+          61.4,
+          76.8
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 135,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          2.8
+        ]
+      }
+    },
+    "main|claim|alt|other": {
+      "n": 87,
+      "W1": {
+        "ALLOW": 87,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 87,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.2
+        ]
+      },
+      "W2e": {
+        "ALLOW": 87,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          95.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 87,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          4.2
+        ]
+      }
+    },
+    "main|claim|alt|stock": {
+      "n": 48,
+      "W1": {
+        "ALLOW": 48,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          92.6,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 48,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          7.4
+        ]
+      },
+      "W2e": {
+        "ALLOW": 7,
+        "CLARIFY": 41,
+        "DENY": 0,
+        "allow_pct": 14.6,
+        "allow_wilson95": [
+          7.2,
+          27.2
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 48,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          7.4
+        ]
+      }
+    },
+    "main|claim|filler|all": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "main|claim|filler|other": {
+      "n": 1,
+      "W1": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 1,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          20.7,
+          100.0
+        ]
+      }
+    },
+    "main|claim|want|all": {
+      "n": 214,
+      "W1": {
+        "ALLOW": 214,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.2,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 214,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.2,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 214,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.2,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 214,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.2,
+          100.0
+        ]
+      }
+    },
+    "main|claim|want|other": {
+      "n": 162,
+      "W1": {
+        "ALLOW": 162,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.7,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 162,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.7,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 162,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.7,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 162,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          97.7,
+          100.0
+        ]
+      }
+    },
+    "main|claim|want|stock": {
+      "n": 52,
+      "W1": {
+        "ALLOW": 52,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.1,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 52,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.1,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 52,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.1,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 52,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.1,
+          100.0
+        ]
+      }
+    },
+    "main|noclaim|alt|all": {
+      "n": 96,
+      "W1": {
+        "ALLOW": 96,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.2,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 96,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.8
+        ]
+      },
+      "W2e": {
+        "ALLOW": 96,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          96.2,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 96,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          3.8
+        ]
+      }
+    },
+    "main|noclaim|alt|other": {
+      "n": 58,
+      "W1": {
+        "ALLOW": 58,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 58,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          6.2
+        ]
+      },
+      "W2e": {
+        "ALLOW": 58,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          93.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 58,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          6.2
+        ]
+      }
+    },
+    "main|noclaim|alt|stock": {
+      "n": 38,
+      "W1": {
+        "ALLOW": 38,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 0,
+        "CLARIFY": 38,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.2
+        ]
+      },
+      "W2e": {
+        "ALLOW": 38,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          90.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 0,
+        "CLARIFY": 38,
+        "DENY": 0,
+        "allow_pct": 0.0,
+        "allow_wilson95": [
+          0.0,
+          9.2
+        ]
+      }
+    },
+    "main|noclaim|filler|all": {
+      "n": 3,
+      "W1": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "main|noclaim|filler|other": {
+      "n": 3,
+      "W1": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 3,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "main|noclaim|want|all": {
+      "n": 251,
+      "W1": {
+        "ALLOW": 251,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.5,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 251,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.5,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 251,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.5,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 251,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.5,
+          100.0
+        ]
+      }
+    },
+    "main|noclaim|want|other": {
+      "n": 189,
+      "W1": {
+        "ALLOW": 189,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.0,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 189,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.0,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 189,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.0,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 189,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          98.0,
+          100.0
+        ]
+      }
+    },
+    "main|noclaim|want|stock": {
+      "n": 62,
+      "W1": {
+        "ALLOW": 62,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.2,
+          100.0
+        ]
+      },
+      "W2s": {
+        "ALLOW": 62,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.2,
+          100.0
+        ]
+      },
+      "W2e": {
+        "ALLOW": 62,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.2,
+          100.0
+        ]
+      },
+      "W3": {
+        "ALLOW": 62,
+        "CLARIFY": 0,
+        "DENY": 0,
+        "allow_pct": 100.0,
+        "allow_wilson95": [
+          94.2,
+          100.0
+        ]
+      }
+    }
+  },
+  "attribution_sets": {
+    "neg_own": {
+      "n": 70,
+      "e2_fires": 0
+    },
+    "neg_self:other": {
+      "n": 50,
+      "e2_fires": 0
+    },
+    "neg_self:stock": {
+      "n": 20,
+      "e2_fires": 0
+    },
+    "pos_e41x:other": {
+      "n": 50,
+      "e2_fires": 0
+    },
+    "pos_e41x:stock": {
+      "n": 20,
+      "e2_fires": 18
+    },
+    "pos_e42": {
+      "n": 140,
+      "e2_fires": 11
+    }
+  },
+  "plan_sha256_at_end": "a4293cb997c44db4d6d4a618238c05f972cb9666a9fc5872f4cc8ac285837d78"
+}

@@ -1,0 +1,9 @@
+*_api_key.txt
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# generated evaluation cases and raw model outputs live outside the repo (C:\ct\runs\cdv_wallet)
+runs/
+_out/

@@ -1,0 +1,478 @@
+{
+  "source": "CartTrace-100k local copy C:/ct (see C:/ct/PROVENANCE.txt)",
+  "model_calls": 0,
+  "spec": {
+    "train": {
+      "journeys": 77765,
+      "predicate_source": {
+        "stated": 188876,
+        "on_ask": 36852,
+        "default": 56495
+      },
+      "predicate_op": {
+        "count": 77765,
+        "kind": 60864,
+        "max_price": 42586,
+        "checkout": 16793,
+        "all_of": 15213,
+        "lines": 15213,
+        "eq": 13396,
+        "prefer": 7940,
+        "one_of": 7842,
+        "cheapest": 7635,
+        "is": 7489,
+        "policy": 4456,
+        "mentions": 4044,
+        "brand": 540,
+        "excludes": 244,
+        "cheapest_per_unit": 203
+      },
+      "on_ask_fields": {
+        "product_type": 13557,
+        "budget": 13487,
+        "color": 3491,
+        "substitute_ok": 3166,
+        "size": 1934,
+        "product_name": 852,
+        "scent": 198,
+        "allergens": 115,
+        "flavor": 36,
+        "material": 8,
+        "stone": 8
+      },
+      "predicates_with_forgets_flag": 8315,
+      "hidden_spec_keys_suggesting_scheduled_change": {},
+      "stockout_fault_journeys_by_template": {
+        "intents.substitute": 7940
+      },
+      "stockout_fault_outcomes": {
+        "RIGHT": 3884,
+        "WRONG_REFUSAL": 2074,
+        "CORRECT_REFUSAL": 282,
+        "WRONG": 1339,
+        "WRONG_HIDDEN": 261,
+        "RIGHT_BY_LUCK": 100
+      },
+      "template_family": {
+        "intents.bundle": 15213,
+        "fallback.express": 9650,
+        "fallback.specify": 9056,
+        "intents.plain.gift": 8853,
+        "intents.substitute": 7940,
+        "compare.named": 7842,
+        "fallback.discover": 6534,
+        "intents.budget_max": 4949,
+        "intents.policy": 4456,
+        "general-merchandise.replenish": 450,
+        "toys-games.replenish": 358,
+        "general-merchandise.discover": 346,
+        "books-stationery.discover": 322,
+        "bags-accessories.replenish": 312,
+        "haircare-fragrance.replenish": 252,
+        "arts-crafts-music.replenish": 228,
+        "clothing-adult.replenish": 221,
+        "baby-kids.replenish": 202,
+        "kitchen-dining.replenish": 185,
+        "jewelry-watches.replenish": 125,
+        "tools-hardware.replenish": 124,
+        "pet-supplies.replenish": 83,
+        "fallback.compare": 64
+      },
+      "kind": {
+        "baseline": 74734,
+        "designed_failure": 3031
+      },
+      "licence": {
+        "CC-BY-4.0 AND Apache-2.0": 36258,
+        "Apache-2.0": 22267,
+        "CC-BY-4.0 AND Apache-2.0 AND MIT": 8618,
+        "CC-BY-4.0": 4431,
+        "Apache-2.0 AND MIT": 3634,
+        "MIT": 1649,
+        "CC-BY-4.0 AND MIT": 908
+      }
+    },
+    "validation": {
+      "journeys": 4199,
+      "predicate_source": {
+        "stated": 10311,
+        "on_ask": 1929,
+        "default": 3018
+      },
+      "predicate_op": {
+        "count": 4199,
+        "kind": 3316,
+        "max_price": 2181,
+        "checkout": 982,
+        "all_of": 767,
+        "lines": 767,
+        "eq": 674,
+        "one_of": 496,
+        "prefer": 474,
+        "cheapest": 472,
+        "is": 436,
+        "policy": 261,
+        "mentions": 194,
+        "cheapest_per_unit": 24,
+        "brand": 11,
+        "excludes": 4
+      },
+      "on_ask_fields": {
+        "product_type": 782,
+        "budget": 631,
+        "substitute_ok": 217,
+        "color": 199,
+        "size": 67,
+        "product_name": 30,
+        "scent": 3
+      },
+      "predicates_with_forgets_flag": 416,
+      "hidden_spec_keys_suggesting_scheduled_change": {},
+      "stockout_fault_journeys_by_template": {
+        "intents.substitute": 474
+      },
+      "stockout_fault_outcomes": {
+        "WRONG_REFUSAL": 151,
+        "RIGHT": 202,
+        "WRONG_HIDDEN": 14,
+        "WRONG": 85,
+        "CORRECT_REFUSAL": 11,
+        "RIGHT_BY_LUCK": 11
+      },
+      "template_family": {
+        "intents.bundle": 767,
+        "intents.plain.gift": 508,
+        "compare.named": 496,
+        "fallback.express": 485,
+        "intents.substitute": 474,
+        "fallback.specify": 456,
+        "fallback.discover": 290,
+        "intents.budget_max": 290,
+        "intents.policy": 261,
+        "general-merchandise.replenish": 32,
+        "bags-accessories.replenish": 29,
+        "arts-crafts-music.replenish": 20,
+        "tools-hardware.replenish": 17,
+        "toys-games.replenish": 14,
+        "general-merchandise.discover": 13,
+        "clothing-adult.replenish": 11,
+        "baby-kids.replenish": 8,
+        "fallback.compare": 8,
+        "kitchen-dining.replenish": 8,
+        "jewelry-watches.replenish": 7,
+        "books-stationery.discover": 5
+      },
+      "kind": {
+        "baseline": 4015,
+        "designed_failure": 184
+      },
+      "licence": {
+        "CC-BY-4.0 AND Apache-2.0": 1901,
+        "Apache-2.0": 1115,
+        "CC-BY-4.0 AND Apache-2.0 AND MIT": 548,
+        "CC-BY-4.0": 244,
+        "Apache-2.0 AND MIT": 226,
+        "MIT": 110,
+        "CC-BY-4.0 AND MIT": 55
+      }
+    },
+    "test_cross_store": {
+      "journeys": 10334,
+      "predicate_source": {
+        "stated": 24687,
+        "on_ask": 4806,
+        "default": 7647
+      },
+      "predicate_op": {
+        "count": 10334,
+        "kind": 7314,
+        "max_price": 5641,
+        "all_of": 1991,
+        "lines": 1991,
+        "checkout": 1967,
+        "is": 1846,
+        "eq": 1826,
+        "one_of": 1029,
+        "cheapest": 1001,
+        "prefer": 887,
+        "policy": 579,
+        "mentions": 527,
+        "brand": 119,
+        "excludes": 59,
+        "cheapest_per_unit": 28,
+        "note": 1
+      },
+      "on_ask_fields": {
+        "budget": 1848,
+        "product_type": 1667,
+        "color": 507,
+        "substitute_ok": 330,
+        "product_name": 213,
+        "size": 193,
+        "allergens": 31,
+        "flavor": 9,
+        "stone": 4,
+        "scent": 4
+      },
+      "predicates_with_forgets_flag": 1117,
+      "hidden_spec_keys_suggesting_scheduled_change": {},
+      "stockout_fault_journeys_by_template": {
+        "intents.substitute": 887
+      },
+      "stockout_fault_outcomes": {
+        "WRONG_REFUSAL": 220,
+        "RIGHT": 439,
+        "RIGHT_BY_LUCK": 17,
+        "CORRECT_REFUSAL": 40,
+        "WRONG_HIDDEN": 21,
+        "WRONG": 150
+      },
+      "template_family": {
+        "intents.bundle": 1991,
+        "intents.plain.gift": 1080,
+        "compare.named": 1029,
+        "fallback.express": 1023,
+        "fallback.specify": 983,
+        "intents.substitute": 887,
+        "fallback.replenish": 683,
+        "fallback.discover": 605,
+        "intents.budget_max": 604,
+        "intents.policy": 579,
+        "books-stationery.discover": 81,
+        "bags-accessories.discover": 70,
+        "gifts-collectibles.replenish": 69,
+        "jewelry-watches.replenish": 65,
+        "tools-hardware.discover": 58,
+        "bags-accessories.replenish": 55,
+        "tools-hardware.replenish": 43,
+        "consumer-electronics.discover": 42,
+        "baby-kids.replenish": 37,
+        "computers-accessories.replenish": 36,
+        "sports-fitness.replenish": 31,
+        "arts-crafts-music.replenish": 30,
+        "clothing-adult.replenish": 30,
+        "non-prescription-health.replenish": 29,
+        "haircare-fragrance.replenish": 26,
+        "toys-games.replenish": 25,
+        "general-merchandise.replenish": 24,
+        "kitchen-dining.replenish": 20,
+        "general-merchandise.discover": 19,
+        "kitchen-dining.discover": 17,
+        "furniture.replenish": 16,
+        "consumer-electronics.replenish": 11,
+        "computers-accessories.discover": 8,
+        "home-decor-textiles.replenish": 8,
+        "fallback.compare": 6,
+        "food-non-alcohol.discover": 6,
+        "food-non-alcohol.replenish": 4,
+        "haircare-fragrance.discover": 4
+      },
+      "kind": {
+        "baseline": 9934,
+        "designed_failure": 400
+      },
+      "licence": {
+        "CC-BY-4.0 AND Apache-2.0": 4628,
+        "Apache-2.0": 3020,
+        "CC-BY-4.0 AND Apache-2.0 AND MIT": 974,
+        "CC-BY-4.0": 747,
+        "Apache-2.0 AND MIT": 442,
+        "MIT": 329,
+        "CC-BY-4.0 AND MIT": 194
+      }
+    },
+    "test_cross_template": {
+      "journeys": 9118,
+      "predicate_source": {
+        "stated": 15139,
+        "default": 7882,
+        "on_ask": 4933
+      },
+      "predicate_op": {
+        "count": 9118,
+        "is": 7597,
+        "max_price": 5578,
+        "kind": 2413,
+        "eq": 1872,
+        "brand": 528,
+        "mentions": 464,
+        "excludes": 260,
+        "note": 120,
+        "safe_for": 4
+      },
+      "on_ask_fields": {
+        "budget": 2529,
+        "product_name": 892,
+        "color": 649,
+        "product_type": 601,
+        "size": 128,
+        "allergens": 111,
+        "flavor": 16,
+        "dietary": 4,
+        "scent": 3
+      },
+      "predicates_with_forgets_flag": 1081,
+      "hidden_spec_keys_suggesting_scheduled_change": {},
+      "stockout_fault_journeys_by_template": {},
+      "stockout_fault_outcomes": {},
+      "template_family": {
+        "fallback.replenish": 5574,
+        "gifts-collectibles.replenish": 489,
+        "computers-accessories.replenish": 476,
+        "consumer-electronics.discover": 374,
+        "bags-accessories.discover": 352,
+        "tools-hardware.discover": 335,
+        "furniture.replenish": 232,
+        "non-prescription-health.replenish": 226,
+        "computers-accessories.discover": 222,
+        "kitchen-dining.discover": 190,
+        "skincare-makeup.replenish": 139,
+        "sports-fitness.replenish": 132,
+        "consumer-electronics.replenish": 126,
+        "footwear.replenish": 120,
+        "food-non-alcohol.replenish": 50,
+        "haircare-fragrance.discover": 36,
+        "home-decor-textiles.replenish": 33,
+        "food-non-alcohol.discover": 12
+      },
+      "kind": {
+        "baseline": 8756,
+        "designed_failure": 362
+      },
+      "licence": {
+        "Apache-2.0": 3447,
+        "CC-BY-4.0 AND Apache-2.0": 3018,
+        "CC-BY-4.0": 993,
+        "CC-BY-4.0 AND Apache-2.0 AND MIT": 888,
+        "Apache-2.0 AND MIT": 357,
+        "MIT": 355,
+        "CC-BY-4.0 AND MIT": 60
+      }
+    }
+  },
+  "turns": {
+    "validation": {
+      "shopper_turns_per_journey": {
+        "1": 1016,
+        "2": 1082,
+        "3": 874,
+        "4": 637,
+        "5": 298,
+        "6": 130,
+        "7": 66,
+        "8": 38,
+        "9": 18,
+        "10": 9,
+        "11": 9,
+        "12": 4,
+        "13": 4,
+        "14": 7,
+        "15": 3,
+        "16": 1,
+        "17": 3
+      },
+      "non_opening_shopper_turns": 7848,
+      "non_opening_turn_type_regex": {
+        "other": 3939,
+        "confirm": 1711,
+        "pick_shown": 1239,
+        "delegate": 554,
+        "reject": 405
+      },
+      "non_opening_wording": {
+        "model": 7512,
+        "fallback": 336
+      },
+      "turns_matching_revision_regex": 1,
+      "on_ask_predicates": 1929,
+      "on_ask_found_by_token_overlap": 135,
+      "on_ask_overlap_threshold": 0.6,
+      "on_ask_with_unparaphrased_later_turn": 0,
+      "on_ask_say_substring_in_unparaphrased_turn": 0
+    },
+    "test_cross_store": {
+      "shopper_turns_per_journey": {
+        "1": 2430,
+        "2": 2580,
+        "3": 2323,
+        "4": 1523,
+        "5": 763,
+        "6": 316,
+        "7": 172,
+        "8": 86,
+        "9": 55,
+        "10": 31,
+        "11": 14,
+        "12": 12,
+        "13": 10,
+        "14": 5,
+        "15": 3,
+        "16": 2,
+        "17": 4,
+        "18": 2,
+        "19": 2,
+        "25": 1
+      },
+      "non_opening_shopper_turns": 19467,
+      "non_opening_turn_type_regex": {
+        "other": 9938,
+        "confirm": 4276,
+        "pick_shown": 2814,
+        "delegate": 1445,
+        "reject": 994
+      },
+      "non_opening_wording": {
+        "model": 18616,
+        "fallback": 851
+      },
+      "turns_matching_revision_regex": 1,
+      "on_ask_predicates": 4806,
+      "on_ask_found_by_token_overlap": 408,
+      "on_ask_overlap_threshold": 0.6,
+      "on_ask_with_unparaphrased_later_turn": 0,
+      "on_ask_say_substring_in_unparaphrased_turn": 0
+    },
+    "test_cross_template": {
+      "shopper_turns_per_journey": {
+        "1": 1859,
+        "2": 2507,
+        "3": 2255,
+        "4": 1405,
+        "5": 552,
+        "6": 228,
+        "7": 118,
+        "8": 70,
+        "9": 34,
+        "10": 29,
+        "11": 23,
+        "12": 12,
+        "13": 6,
+        "14": 4,
+        "15": 6,
+        "16": 1,
+        "17": 4,
+        "18": 3,
+        "20": 1,
+        "27": 1
+      },
+      "non_opening_shopper_turns": 17056,
+      "non_opening_turn_type_regex": {
+        "other": 9143,
+        "confirm": 3867,
+        "delegate": 1502,
+        "pick_shown": 1492,
+        "reject": 1052
+      },
+      "non_opening_wording": {
+        "model": 16315,
+        "fallback": 741
+      },
+      "turns_matching_revision_regex": 3,
+      "on_ask_predicates": 4933,
+      "on_ask_found_by_token_overlap": 534,
+      "on_ask_overlap_threshold": 0.6,
+      "on_ask_with_unparaphrased_later_turn": 0,
+      "on_ask_say_substring_in_unparaphrased_turn": 0
+    }
+  }
+}
