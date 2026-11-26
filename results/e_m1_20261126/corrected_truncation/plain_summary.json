@@ -1,0 +1,42 @@
+{
+  "model": "gpt-6-luna",
+  "calls": 396,
+  "failed": [],
+  "sets": {
+    "R1_test_cross_store": {
+      "legit": {
+        "ALLOW": 116,
+        "DENY": 36
+      },
+      "viol": {
+        "ALLOW": 37,
+        "DENY": 11
+      },
+      "changed": 30
+    },
+    "R3_test_cross_store": {
+      "legit": {
+        "ALLOW": 56,
+        "DENY": 24
+      },
+      "viol": {
+        "ALLOW": 15,
+        "DENY": 5
+      },
+      "changed": 13
+    },
+    "R2_test_cross_store": {
+      "legit": {
+        "ALLOW": 18,
+        "DENY": 5
+      },
+      "viol": {
+        "ALLOW": 56,
+        "DENY": 17
+      },
+      "changed": 29
+    }
+  },
+  "cost_usd": 0.070016,
+  "cache_hits": 0
+}

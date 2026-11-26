@@ -19,6 +19,7 @@ Final decision: cdv/verdict.py::integrated (the only combiner).
 """
 from __future__ import annotations
 
+import dataclasses
 import sys
 from pathlib import Path
 
@@ -100,6 +101,15 @@ class Env:
                 continue
             break
         d, codes = res.decision, list(res.codes)
+        if d == "DENY" and codes == ["OUT_OF_SCOPE"]:
+            # integration policy (dev decision 2026-11-26): if the cart breaks ONLY the selection (the user picked
+            # another product / a picked bundle member is missing), ask instead of refusing: the selection comes
+            # from reference resolution whose accuracy is still being measured. Constraint breaches stay DENY.
+            lines = [dataclasses.replace(self.case.catalog[k], quantity=q) for k, q in self.case.cart]
+            viol = sm.primary.violations(lines)
+            codes = codes + viol
+            if viol and all(v.startswith(("ITEM:", "SELECTED_MISSING:")) for v in viol):
+                d, codes = "CLARIFY", ["SELECTION_MISMATCH"] + viol
         if d == "ALLOW" and self.e2:
             d, codes = "CLARIFY", codes + ["E2_STOCK_CLAIM_BY_CHOSEN"]
         return d, codes

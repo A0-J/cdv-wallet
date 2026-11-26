@@ -224,3 +224,10 @@ def test_plan_v3_pilot_rows_reproduce_exactly():
     from cdv.nli import NLI
     res = RP.reproduce_set("R1_validation", NLI())
     assert res["mismatched_rows"] == 0 and res["n_verdict_mismatches"] == 0, res
+
+
+def test_brand_title_match_counts_even_if_brand_field_is_store_name():
+    # dev finding: 'Tide' product whose brand field is the store 'Builtamart'
+    s = ScopeV2(brands=frozenset({"Tide"}))
+    assert s.violations([line("a", 6.49, brand="Builtamart", title="Tide Ultra Original Scent Bar Detergent")]) == []
+    assert s.violations([line("b", 6.49, brand="Builtamart", title="Generic Bar Detergent")]) == ["BRAND:b"]

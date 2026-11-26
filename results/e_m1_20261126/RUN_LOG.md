@@ -67,3 +67,9 @@ PLAN_v3 9절 고정 이후 아래 두 파일을 바꿨다. 비교군, 데이터 
 - **자기 검사 추가:** 여정마다 먼저 '절단 없이' 재생해 PLAN_v3 저장 판정과 FnCTOD 세 팔 모두 정확히 같은지 확인하고, 하나라도 다르면 멈춘다. 396여정 × 3팔 모두 통과했다.
 - 교정 표(`corrected_truncation/TABLES.md`)는 앞 실행과 한 글자도 다르지 않았다.
 - 일반 LLM 팔의 절단 재추출은 계획 P1(`corrected_truncation/PLAN_P1_plain_truncated.md`)으로 승인 대기 중이다.
+
+## P1 실행: 일반 LLM 팔 절단 재추출 (2026-11-26 19:55–19:58)
+
+- 계획 `corrected_truncation/PLAN_P1_plain_truncated.md` (sha256 `9a493ceb84116ea7cf3b56a882c7604aa82c16d83778d7adc6e1d2e43664a7ff`), 연구자 승인. 코드 해시 5개 확인 뒤 실행.
+- 호출 396(완료 396, 오류 0, 캐시 0), 비용 $0.0700(상한 $0.12). 원장 `ledger_plain_truncated.jsonl`.
+- 결과: `corrected_truncation/PLAIN_P1_RESULTS.md`. 원 결과와의 차이에는 절단 효과와 재호출에 따른 출력 변동이 섞여 있다.

@@ -1,0 +1,15 @@
+{
+  "set": "V2",
+  "split": "validation",
+  "n_selected": 6,
+  "n_done": 6,
+  "failed": [],
+  "outcomes": {
+    "RIGHT": 1,
+    "WRONG": 5
+  },
+  "dry_run": false,
+  "model": "gpt-6-luna",
+  "cost_usd": 0.017074,
+  "cache_hits": 35
+}

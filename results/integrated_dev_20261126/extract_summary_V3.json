@@ -1,0 +1,16 @@
+{
+  "set": "V3",
+  "split": "validation",
+  "n_selected": 100,
+  "n_done": 100,
+  "failed": [],
+  "outcomes": {
+    "RIGHT": 80,
+    "WRONG": 17,
+    "WRONG_HIDDEN": 3
+  },
+  "dry_run": false,
+  "model": "gpt-6-luna",
+  "cost_usd": 0.070755,
+  "cache_hits": 80
+}

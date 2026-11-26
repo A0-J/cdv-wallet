@@ -112,7 +112,8 @@ def build_case(eid: str, msg: dict, T: list, source="original") -> IntegratedCas
             catalog[key] = LineV2(**{**c.__dict__, "unit_price": (l.get("unit_price") or 0) / 100})
         cart.append((key, int(l.get("quantity") or 1)))
     return IntegratedCase(eid, msg["split"], source, t, t_kind, ut, at, reg, seller, offers, catalog, cart, unavailable,
-                          scoring={"outcome": msg["outcome_class"], "hidden_spec": msg["hidden_spec"]})
+                          scoring={"outcome": msg["outcome_class"], "hidden_spec": msg["hidden_spec"],
+                                   "final_cart": msg["final_cart"]})   # final_cart: for the PLAN_v3 bridge row only
 
 
 def build_cases(eids) -> dict:

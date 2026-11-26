@@ -26,14 +26,16 @@ class LineV2(Line):
 
 
 def _brand_hit(line: LineV2, names) -> bool | None:
-    """True/False when decidable from structured fields (brand field, else brand name in the title); None if not."""
+    """True if the brand field or the title names one of `names`; False if the brand field is known and neither
+    does; None if undecidable. (Dev finding 2026-11-26: the brand field sometimes holds the store name, e.g. a
+    'Tide' product with brand 'Builtamart', so a title match also counts.)"""
     names = {str(n).lower() for n in names}
+    t = (line.title or "").lower()
+    if any(re.search(r"\b" + re.escape(n) + r"\b", t) for n in names):
+        return True
     if line.brand_known and line.brand:
         b = line.brand.lower()
         return any(n == b or n in b or b in n for n in names)
-    t = (line.title or "").lower()
-    if any(re.search(rf"\b{re.escape(n)}\b", t) for n in names):
-        return True
     return None
 
 
