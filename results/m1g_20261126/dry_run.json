@@ -1,0 +1,7 @@
+{
+  "ops": 498,
+  "calls_per_run": 453,
+  "runs": 2,
+  "input_tokens_est_per_run": 88217,
+  "prompt_sha256": "da3bb6c513293ec0d52c23ddd7a069e15f8a917748bee0e9e0aef2c4ed289b5a"
+}

@@ -55,18 +55,40 @@ def scope_from(ctx: Ctx, reg, with_selection=True) -> ScopeV2:
         deadline_days=int(e["deadline_days"].value) if "deadline_days" in e else None)
 
 
+def _ids(pids, reg) -> set:
+    out = set()
+    for pid in pids or ():
+        p = reg.products.get(pid) if reg else None
+        out |= {pid} | (set(p.variants) if p else set())
+    return out
+
+
 def ledger_to_mandate(ctx: Ctx, reg, seller: str, mandate_id: str, version: int, session: str,
                       chain_head: str | None = None) -> Mandate:
     prim = scope_from(ctx, reg)
+    if ctx.alternatives and prim.cart_ids is not None:       # either-or: both are inside the primary scope
+        prim = ScopeV2(**{**prim.__dict__, "cart_ids": frozenset(set(prim.cart_ids) | _ids(ctx.alternatives, reg))})
     fbs = []
     sub = next((x for x in ctx.entries.values() if x.field == "substitute"), None)
     if sub is not None and ctx.selection:
         then = scope_from(ctx, reg, with_selection=False)
         named = (sub.scope or {}).get("named")
         alts = ((sub.scope or {}).get("then") or {}).get("brand_in")
-        if named and alts:
+        targets = set(ctx.sub_targets or ())
+        if named and alts and not targets and reg is not None:   # a named alternative that is a listed product
+            for a in alts:
+                p, _ = reg.best_match(str(a), float("inf"), min_overlap=0.6)
+                if p is not None:
+                    targets.add(p.product_id)
+        if targets:                                           # substitution to identified products only
+            then = ScopeV2(**{**then.__dict__, "cart_ids": frozenset(_ids(targets, reg))})
+        elif named and alts:
             then = ScopeV2(**{**then.__dict__, "brands": frozenset(str(a) for a in alts)})
-        for vid in sorted(set().union(*selection_ids(ctx, reg)) - set(ctx.selection)):   # variants of the chosen products
+        subjects = set()
+        for pid in ctx.selection:                     # the chosen products' variants (= the product itself if no variants)
+            p = reg.products.get(pid) if reg else None
+            subjects |= set(p.variants) if p and p.variants else {pid}
+        for vid in sorted(subjects):
             fbs.append(Clause(f"fb-{vid}", (seller, vid), "out_of_stock", then=then, proof=("platform",)))
     basis = {"C": {x.id: list(x.basis) for x in ctx.entries.values()}, "S": sorted(ctx.selection or [])}
     return Mandate(mandate_id, version, prim, tuple(fbs), basis, chain_head, session)

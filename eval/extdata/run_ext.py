@@ -93,7 +93,9 @@ def build_case(ep: dict, tx: dict, gold_tx: dict) -> IntegratedCase:
         cart.append((k, int(l.get("quantity") or 1)))
     ful = {"delivery": "ship", "shipping": "ship", "ship": "ship", "pickup": "pickup"}.get(str(tx["checkout"].get("fulfillment") or "").lower())
     return IntegratedCase(ep["episode_id"], "ext", "generated", len(turns), "consent_request", ut, nonuser, reg, seller, offers,
-                          catalog, cart, unavailable, checkout_facts={"fulfillment": ful, "max_days": tx["checkout"].get("days")},
+                          catalog, cart, unavailable, checkout_facts={"fulfillment": ful, "max_days": tx["checkout"].get("days"),
+                          "payment_total": (sum(l["unit_minor"] * int(l.get("quantity") or 1) for l in tx["checkout"]["lines"])
+                                            + int(tx["checkout"].get("fees_minor") or 0)) / 100},
                           scoring={"gold": gold_tx})
 
 
@@ -112,14 +114,18 @@ def authority_check(tx: dict) -> list:
 
 
 def gold_ctx(eg: dict, catalog_by_sku: dict) -> Ctx:
+    """U reference from the gold effective state (scoring side only). Revoked conditions have no key.
+    Alternatives {sku: [options]} = unconditional either-or; Substitution {sku: alt} = conditional (platform evidence)."""
     es = {}
     st = eg.get("effective_state") or {}
-    for f in ("Price", "Quantity", "Brand", "Bundle", "Fulfillment", "Deadline"):
+    for f in ("Price", "Quantity", "Brand", "Bundle", "Fulfillment", "Deadline", "Substitution"):
         if f in st and st[f] not in (None, {}, []):
             for eid, e in entries_from(f, st[f], catalog_by_sku):
                 if e is not None:
                     es[eid] = e
-    return Ctx(es, None, frozenset(st.get("Product") or []) or None)
+    alts = frozenset(str(o) for opts in (st.get("Alternatives") or {}).values() for o in opts) or None
+    subs = frozenset(str(v) for v in (st.get("Substitution") or {}).values()) or None
+    return Ctx(es, None, frozenset(st.get("Product") or []) or None, alternatives=alts, sub_targets=subs)
 
 
 def main():

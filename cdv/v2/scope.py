@@ -26,16 +26,20 @@ class LineV2(Line):
 
 
 def _brand_hit(line: LineV2, names) -> bool | None:
-    """True if the brand field or the title names one of `names`; False if the brand field is known and neither
-    does; None if undecidable. (Dev finding 2026-11-26: the brand field sometimes holds the store name, e.g. a
-    'Tide' product with brand 'Builtamart', so a title match also counts.)"""
+    """Brand decision from the STRUCTURED brand field only (researcher decision 2026-11-26, review comment 20).
+
+    True  the brand field names one of `names`
+    False the brand field is known, names none of them, and the title does not name one either
+    None  undecidable -> UNKNOWN_ATTR (CLARIFY): no brand field, or the only match is in the seller-written title
+          (the 2026-11-26 dev policy 'title match counts as a brand match' is withdrawn)."""
     names = {str(n).lower() for n in names}
     t = (line.title or "").lower()
-    if any(re.search(r"\b" + re.escape(n) + r"\b", t) for n in names):
-        return True
+    title_hit = any(re.search(r"\b" + re.escape(n) + r"\b", t) for n in names)
     if line.brand_known and line.brand:
         b = line.brand.lower()
-        return any(n == b or n in b or b in n for n in names)
+        if any(n == b or n in b or b in n for n in names):
+            return True
+        return None if title_hit else False
     return None
 
 
@@ -120,6 +124,14 @@ def checkout_violations(scope: ScopeV2, facts: dict) -> tuple[list[str], list[st
     facts: {"fulfillment": "ship" | "pickup" | None, "max_days": int | None} from structured checkout tool results.
     Returns (violations, still_unverified). A missing fact leaves the condition unverified (never satisfied)."""
     viol, unk = [], []
+    # M2 fix 2026-11-26 (researcher decision): the budget bounds the PAYMENT total, fees / shipping / tax included.
+    # facts["payment_total"] comes from the payment request (CartTrace final_cart.total; synthetic: lines + fees).
+    if scope.max_total is not None:
+        pt = (facts or {}).get("payment_total")
+        if pt is None:
+            unk.append("payment_total")
+        elif pt > scope.max_total + 1e-6:
+            viol.append(f"MAX_TOTAL_WITH_FEES:{pt:.2f}>{scope.max_total:g}")
     if scope.fulfillment:
         f = (facts or {}).get("fulfillment")
         if f is None:

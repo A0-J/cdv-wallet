@@ -165,7 +165,8 @@ def build_case(eid: str, msg: dict, T: list, source="original") -> IntegratedCas
             catalog[key] = LineV2(**{**c.__dict__, "unit_price": (l.get("unit_price") or 0) / 100})
         cart.append((key, int(l.get("quantity") or 1)))
     return IntegratedCase(eid, msg["split"], source, t, t_kind, ut, at, reg, seller, offers, catalog, cart, unavailable,
-                          checkout_facts=checkout_facts(T, t) if t_kind == "consent_request" else {},
+                          checkout_facts={**(checkout_facts(T, t) if t_kind == "consent_request" else {}),
+                                          "payment_total": (fc.get("total") / 100) if isinstance(fc.get("total"), (int, float)) else None},
                           scoring={"outcome": msg["outcome_class"], "hidden_spec": msg["hidden_spec"],
                                    "final_cart": msg["final_cart"]})   # final_cart: for the PLAN_v3 bridge row only
 

@@ -1,0 +1,30 @@
+{
+  "split": "dev",
+  "accept_labelled_ops_rejected_by_v2": 38,
+  "by_cause": [
+    {
+      "operation": "REVOKE",
+      "field": "Deadline",
+      "cause": "REVOKE_NO_ANCHOR",
+      "n": 12
+    },
+    {
+      "operation": "REVOKE",
+      "field": "Fulfillment",
+      "cause": "REVOKE_NO_ANCHOR",
+      "n": 10
+    },
+    {
+      "operation": "REVOKE",
+      "field": "Price",
+      "cause": "REVOKE_NO_ANCHOR",
+      "n": 8
+    },
+    {
+      "operation": "OVERRIDE",
+      "field": "Quantity",
+      "cause": "NON_USER_SOURCE (value said earlier by agent/tool)",
+      "n": 8
+    }
+  ]
+}

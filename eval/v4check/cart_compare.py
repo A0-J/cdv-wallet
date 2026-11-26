@@ -25,12 +25,12 @@ import run_ext as X  # noqa: E402
 from cdv.v2.scope import checkout_violations  # noqa: E402
 
 OUT = ROOT / "results" / "v4check_20261126"
-OURS_TO_FIELD = {"MAX_TOTAL": "Price", "QUANTITY": "Quantity", "BUNDLE_MEMBER_MISSING": "Quantity",
+OURS_TO_FIELD = {"MAX_TOTAL": "Price", "MAX_TOTAL_WITH_FEES": "Price", "QUANTITY": "Quantity", "BUNDLE_MEMBER_MISSING": "Quantity",
                  "SELECTED_MISSING": "Quantity", "ITEM": "Quantity", "BRAND": "Brand", "BRAND_EXCLUDED": "Brand",
                  "FULFILLMENT": "Fulfillment", "DEADLINE": "Deadline"}
 
 
-def main(split="dev"):
+def main(split="dev", tag=""):
     eps = {e["episode_id"]: e for e in X.jl(V4 / split / "episodes.jsonl")}
     eg = {g["episode_id"]: g for g in X.jl(V4 / split / "episode_gold.jsonl")}
     tg = {g["transaction_id"]: g for g in X.jl(V4 / split / "transaction_gold.jsonl")}
@@ -44,32 +44,33 @@ def main(split="dev"):
         case = X.build_case(ep, tx, tg.get(tx["transaction_id"]) or {})
         env = A.Env(case)
         m = A.ledger_to_mandate(X.gold_ctx(g, cat), case.reg, case.seller, "m", 1, env.session)
-        lines = [dataclasses.replace(case.catalog[k], quantity=q) for k, q in case.cart]
-        viol = m.primary.violations(lines)
-        cv, unk_c = checkout_violations(m.primary, case.checkout_facts)
-        unk = m.primary.unknowns(lines)
-        ours = {OURS_TO_FIELD.get(v.split(":")[0]) for v in viol + cv} - {None}
-        unknown_fields = {u.split(":")[1] for u in unk} | set(unk_c)
-        for f in sorted(theirs | ours | {"Stock", "Attribute"} & theirs):
+        d_gate, codes = env.full_gate(m)                 # the real gate: scope, clauses + platform evidence, payment total
+        ours = {OURS_TO_FIELD.get(str(c).split(":")[0]) for c in codes} - {None} if d_gate == "DENY" else set()
+        unknown_fields = {str(c).split(":")[1] for c in codes if str(c).startswith("UNKNOWN_ATTR:")}
+        per_field[("_decision", d_gate)] += 1
+        for f in sorted(theirs | ours):
             per_field[(f, "both" if f in theirs and f in ours else ("reference_only" if f in theirs else "ours_only"))] += 1
-        rows.append({"transaction_id": tx["transaction_id"], "theirs": sorted(theirs), "ours": sorted(ours),
+        rows.append({"transaction_id": tx["transaction_id"], "theirs": sorted(theirs), "ours": sorted(ours), "ours_decision": d_gate,
                      "ours_unknown": sorted(unknown_fields), "expected": (tg.get(tx["transaction_id"]) or {}).get("expected_checkout")})
-    agree_any = sum(1 for r in rows if bool(r["theirs"]) == bool(r["ours"]))
-    fields = sorted({f for f, _ in per_field})
+    agree_any = sum(1 for r in rows if bool(r["theirs"]) == (r["ours_decision"] != "ALLOW"))
+    fields = sorted({f for f, _ in per_field if f != "_decision"})
     res = {"split": split, "transactions": len(rows), "agree_on_any_violation": agree_any,
            "per_field": {f: {k: per_field[(f, k)] for k in ("both", "reference_only", "ours_only")} for f in fields}}
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"cart_compare_{split}.json").write_text(json.dumps(res, indent=2) + "\n", encoding="utf-8", newline="\n")
-    (OUT / f"cart_compare_rows_{split}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
+    sfx = f"_{tag}" if tag else ""
+    assert not (OUT / f"cart_compare_{split}{sfx}.json").exists(), "refusing to overwrite"
+    (OUT / f"cart_compare_{split}{sfx}.json").write_text(json.dumps(res, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"cart_compare_rows_{split}{sfx}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
     md = [f"# v4 {split}: 참조 cart_reasons() 대 우리 M2 범위 검사 (둘 다 정답 effective_state 기준, 모델 호출 0)", "",
-          f"- 거래 {len(rows)}건. '위반 있음/없음' 일치: {agree_any}/{len(rows)}.", "",
+          f"- 거래 {len(rows)}건. 우리 게이트 판정 분포: " + str({k: v for (f, k), v in per_field.items() if f == "_decision"}) +
+          f". '참조 위반 있음' 대 '우리 판정이 ALLOW 아님' 일치: {agree_any}/{len(rows)}. 필드별 표는 DENY 사유만 센다.", "",
           "| 필드 | 둘 다 위반 | 참조만 위반 | 우리만 위반 |", "|---|---:|---:|---:|"]
     for f in fields:
         d = res["per_field"][f]
         md.append(f"| {f} | {d['both']} | {d['reference_only']} | {d['ours_only']} |")
-    (OUT / f"CART_COMPARE_{split}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"CART_COMPARE_{split}{sfx}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(md))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "dev")
+    main(sys.argv[1] if len(sys.argv) > 1 else "dev", sys.argv[2] if len(sys.argv) > 2 else "")

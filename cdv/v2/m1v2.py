@@ -87,9 +87,13 @@ class Ctx:
     entries: dict                      # id -> Entry  (budget, qty, brand_in, brand_out, bundle, deadline, ful, sub)
     kind: str | None = None
     selection: frozenset | None = None  # product ids chosen by the user (None = user did not choose / delegated)
+    # M2 fix 2026-11-26: unconditional either-or ("A or B is fine") and conditional substitution targets
+    alternatives: frozenset | None = None   # extra product ids allowed in place of the selection, no condition
+    sub_targets: frozenset | None = None    # product ids allowed only if the platform shows the selection out of stock
 
     def copy(self, **kw):
-        return replace(self, entries=dict(self.entries), **kw)
+        kw.setdefault("entries", dict(self.entries))
+        return replace(self, **kw)
 
 
 @dataclass

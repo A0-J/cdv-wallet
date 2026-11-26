@@ -56,10 +56,13 @@ def test_missing_brand_is_unknown_not_violation():
     assert s.unknowns([l]) == ["UNKNOWN_ATTR:brand:a"]
 
 
-def test_brand_decided_from_title_or_field():
+def test_brand_from_structured_field_only_title_match_is_unknown():
+    # researcher decision 2026-11-26: a match only in the seller-written title is not an allow -> UNKNOWN_ATTR (CLARIFY)
     s = ScopeV2(brands=frozenset({"Sony"}), brands_excluded=frozenset({"Bose"}))
     assert s.violations([line("a", 10, brand=None, title="Sony WH-1000")]) == []
-    assert s.unknowns([line("a", 10, brand=None, title="Sony WH-1000")]) == []
+    assert "UNKNOWN_ATTR:brand:a" in s.unknowns([line("a", 10, brand=None, title="Sony WH-1000")])
+    assert s.violations([line("s", 10, brand="Sony", title="WH-1000")]) == [] and not [u for u in s.unknowns(
+        [line("s", 10, brand="Sony", title="WH-1000")]) if u.startswith("UNKNOWN_ATTR:brand:")]
     assert "BRAND:b" in s.violations([line("b", 10, brand="Anker", title="Anker Q30")])
     assert "BRAND_EXCLUDED:c" in ScopeV2(brands_excluded=frozenset({"Bose"})).violations([line("c", 10, "Bose", "Bose QC")])
 
@@ -226,10 +229,11 @@ def test_plan_v3_pilot_rows_reproduce_exactly():
     assert res["mismatched_rows"] == 0 and res["n_verdict_mismatches"] == 0, res
 
 
-def test_brand_title_match_counts_even_if_brand_field_is_store_name():
-    # dev finding: 'Tide' product whose brand field is the store 'Builtamart'
+def test_brand_field_store_name_with_title_match_is_unknown_not_allow():
+    # 'Tide' product whose brand field is the store 'Builtamart': title-only match -> unknown (was: allow, withdrawn)
     s = ScopeV2(brands=frozenset({"Tide"}))
-    assert s.violations([line("a", 6.49, brand="Builtamart", title="Tide Ultra Original Scent Bar Detergent")]) == []
+    a = line("a", 6.49, brand="Builtamart", title="Tide Ultra Original Scent Bar Detergent")
+    assert s.violations([a]) == [] and s.unknowns([a]) == ["UNKNOWN_ATTR:brand:a"]
     assert s.violations([line("b", 6.49, brand="Builtamart", title="Generic Bar Detergent")]) == ["BRAND:b"]
 
 
@@ -292,3 +296,32 @@ def test_joint_pending_items_counterexample_through_real_scope():
     assert gate(u2.variants[1][1](u1.variants[1][1](base)))[0] == "ALLOW"                              # only jointly
     d, codes, rel, n, approx = decide_selective(base, [u1, u2], gate)
     assert d == "CLARIFY" and set(rel) == {"u1", "u2"} and n == 4 and not approx
+
+
+def test_substitution_clause_when_product_equals_variant_and_either_or():
+    from cdv.v2.integrate import ledger_to_mandate
+    from cdv.v2.candidates import Product, Registry
+    reg = Registry()
+    for pid, b in (("A1", "Acme"), ("B1", "Bolt"), ("C1", "Core")):
+        reg.products[pid] = Product(pid, f"{b} kettle", b, f"{b} kettle", "", {pid: {"price": 20.0, "available": True, "title": ""}}, 0)
+    sub = Entry("sub", "substitute", None, scope={"named": True, "then": {"brand_in": None}})
+    m = ledger_to_mandate(Ctx({"sub": sub}, None, frozenset({"A1"}), sub_targets=frozenset({"B1"})), reg, "s", "m", 1, "x")
+    assert [c.subject for c in m.fallbacks] == [("s", "A1")] and m.fallbacks[0].then.cart_ids == frozenset({"B1"})
+    m2 = ledger_to_mandate(Ctx({}, None, frozenset({"A1"}), alternatives=frozenset({"C1"})), reg, "s", "m", 1, "x")
+    assert m2.primary.cart_ids == frozenset({"A1", "C1"}) and not m2.fallbacks
+
+
+def test_m1g_source_rule_without_call_and_label_mapping():
+    from cdv.extract import LLMResult
+    from cdv.v2 import m1g
+    calls = []
+
+    def fake(system, user, reply='{"label": "question"}'):
+        calls.append(user)
+        return LLMResult(reply)
+    op = {"field": "Price", "operation": "RELAX", "value": 60000}
+    assert m1g.decide(fake, op, "tool", "anything", {}) == ("REJECT", "non_user_source", 0.0) and not calls
+    assert m1g.decide(fake, op, "user", "Could I go to 600?", {})[:2] == ("REJECT", "question") and len(calls) == 1
+    assert m1g.decide(lambda s, u: LLMResult('{"label": "decision"}'), op, "user", "x", {})[0] == "ACCEPT"
+    assert m1g.decide(lambda s, u: LLMResult('{"label": "ambiguous"}'), op, "user", "x", {})[0] == "CLARIFY"
+    assert m1g.decide(lambda s, u: LLMResult("garbled"), op, "user", "x", {})[:2] == ("CLARIFY", "unparsed")
