@@ -147,7 +147,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--split", choices=["dev", "eval"], default="dev")
     ap.add_argument("--no-nli", action="store_true")
+    ap.add_argument("--tag", default="", help="output suffix; existing outputs are never overwritten")
     a = ap.parse_args()
+    sfx = f"_{a.tag}" if a.tag else ""
+    for f in (f"inject_{a.split}{sfx}.json", f"inject_rows_{a.split}{sfx}.jsonl", f"INJECT_{a.split}{sfx}.md"):
+        assert not (OUT / f).exists(), f"refusing to overwrite {f}"
     eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (V3 / a.split / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
     gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (V3 / a.split / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
     nli = None
@@ -169,6 +173,8 @@ def main():
         for op in sorted(ops, key=lambda o: next((x["idx"] for x in turns if x["turn_id"] == o["evidence_turn_id"]), 0)):
             k = (op["operation"], op["field"], op["evidence_turn_id"])
             label = "ACCEPT" if k in acc else ("REJECT" if k in inv else "UNLABELED")
+            if g["subtype"] == "induced_consent":
+                label = "CLARIFY"          # researcher correction 2026-11-26: consent on a disputed premise -> ask
             d1 = v1_decide(prev1, op, cat, turns, users)
             d2 = v2_decide(prev2, op, cat, turns, users, nli)
             rows.append({"episode_id": e, "group": g["group"], "subtype": g["subtype"], "op": op["operation"],
@@ -183,8 +189,8 @@ def main():
            "labels": dict(Counter(r["label"] for r in rows)),
            "confusion": {v: {k: dict(c) for k, c in sorted(m.items())} for v, m in cm.items()}}
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"inject_{a.split}.json").write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
-    (OUT / f"inject_rows_{a.split}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
+    (OUT / f"inject_{a.split}{sfx}.json").write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"inject_rows_{a.split}{sfx}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
     D = ("ACCEPT", "REJECT", "CLARIFY", "UNSUPPORTED")
     md = [f"# v3 변경 후보 개입 경로 ({a.split}): M1 v1 대 v2 혼동 행렬", "",
           "- 이 경로의 통과율은 추출기 오류율이 아니다(v3 README). 이전 장부는 v3 정답 initial_state(오라클). 표지는 accepted_changes = 수용, proposed_invalid_operations = 거부.",
@@ -196,7 +202,7 @@ def main():
         n = sum(cm["v1"][k].values())
         md.append(f"| {grp} | {lab} | {n} | " + " / ".join(str(cm["v1"][k].get(d, 0)) for d in D) + " | " +
                   " / ".join(str(cm["v2"][k].get(d, 0)) for d in D) + " |")
-    (OUT / f"INJECT_{a.split}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
+    (OUT / f"INJECT_{a.split}{sfx}.md").write_text("\n".join(md) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(md))
 
 

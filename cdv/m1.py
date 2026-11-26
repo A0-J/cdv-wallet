@@ -78,14 +78,45 @@ class Finding:
 
 # ---------------------------------------------------------------- typed extraction (rules)
 
-_NUMSTR = r"(\d{1,3}(?:[,\s]\d{3})+|\d+)(?:\.\d+)?"
-_CUR_AFTER = r"\s?(?:k\b|K\b|won\b|원|만\s?원|dollars?\b|usd\b|krw\b)"
-# A budget needs a currency marker (symbol before or currency word after), or an explicit
-# budget / spend word as the cue. "within 3 days" is not a budget.
-BUDGET_MAX_RE = re.compile(
-    r"(?:under|below|less than|no more than|not more than|up to|at most|max(?:imum)?|within|cap(?: of)?)\s*"
-    r"(?:[$₩€£]\s?" + _NUMSTR + r"|" + _NUMSTR + _CUR_AFTER + r")"
-    r"|(?:budget(?: is| of)?|spend(?: no more than| up to| at most)?)\s*[$₩€£]?\s?" + _NUMSTR, re.I)
+# ---- money expressions and budget (upper-bound) mentions: specification MONEY-1 (2026-11-26) ----
+# An AMOUNT is   [currency prefix] NUMBER [magnitude] [currency suffix]   with at least one currency marker:
+#   NUMBER     digits, optional thousands groups ",ddd" (or " ddd" after 1-3 digits), optional decimals ".d" / ".dd"
+#   magnitude  k / K (x1,000); Korean 만 before 원 (x10,000)
+#   prefix     $ € £ ₩ | US$ | USD EUR GBP KRW (any case, optional space)
+#   suffix     dollar(s) bucks usd eur(o)(s) gbp pound(s) won krw 원 만원
+# A BUDGET MENTION is an amount bounded from above by the user, i.e. one of:
+#   (a) an upper-bound phrase ends at most 3 words before the amount in the same clause
+#       (under, below, less than, no more than, not more than, no higher than, up to, at most, max/maximum (of),
+#        within, cap/capped (at|of), limit (is|of), ceiling (is|of), budget (is|of), spend(ing) [no more than|up to|
+#        at most|under], [can't|cannot|won't|will not|don't want to|do not want to] [go|spend|pay] [over|above|more than],
+#        not [go|be] [over|above], not exceed(ing), nothing [over|above], keep [it|the total|the order] [under|below|to|within])
+#   (b) a bound phrase follows within 2 words in the same clause
+#       (max/maximum, or less, or under, or below, at (the) most, tops,
+#        [is|as|will be|would be] [the|my|our] [total|order|spending|overall] [limit|budget|cap|ceiling|max|maximum],
+#        Korean 이하 / 이내 / 미만 / 까지 / 안 넘게 / 넘지 않게)
+#   (c) a budget word directly governs a bare number: "budget (is|of) 200", "spend (no more than|up to|at most) 200"
+# Numbers without a currency marker and without (c) are never money (days, quantities, addresses, option numbers).
+# Values keep their decimals. Clause boundary: . ; ! ? or a line break.
+_NUM = r"(?P<{n}>\d{{1,3}}(?:,\d{{3}})+|\d{{1,3}}(?: \d{{3}})+(?!\d)|\d+)(?P<{d}>\.\d{{1,2}})?"
+_PREFIX = r"(?:US\$|[$€£₩]|(?:USD|EUR|GBP|KRW)\b)"
+_SUFFIX = r"(?:만\s?원|원|dollars?\b|bucks\b|usd\b|eur(?:o?s?)?\b|gbp\b|pounds?\b|won\b|krw\b)"
+MONEY_RE = re.compile(
+    r"(?P<pre>" + _PREFIX + r")\s?" + _NUM.format(n="n1", d="d1") + r"(?P<k1>\s?[kK]\b)?(?:\s?(?P<s1>" + _SUFFIX + r"))?"
+    r"|" + _NUM.format(n="n2", d="d2") + r"(?P<k2>\s?[kK]\b|\s?만(?=\s?원))?\s?(?P<s2>" + _SUFFIX + r")", re.I)
+_UB_BEFORE = re.compile(
+    r"(?:under|below|less than|no more than|not more than|no higher than|up to|at most|max(?:imum)?(?: of)?|within|"
+    r"cap(?:ped)?(?: at| of)?|limit(?: is| of)?|ceiling(?: is| of)?|budget(?: is| of)?|"
+    r"spend(?:ing)?(?: no more than| up to| at most| under)?|"
+    r"(?:can'?t|cannot|won'?t|will not|don'?t want to|do not want to)(?: go| spend| pay)?(?: over| above| more than)|"
+    r"not(?: go| be)?(?: over| above)|not exceed(?:ing)?|nothing(?: over| above)|"
+    r"keep(?: it| the total| the order)?(?: under| below| to| within))"
+    r"(?:\W+\w+){0,3}?\W*$", re.I)
+_UB_AFTER = re.compile(
+    r"^\W*(?:\w+\W+){0,2}?(?:max(?:imum)?\b|or (?:less|under|below)\b|at (?:the )?most\b|tops\b|"
+    r"(?:is|as|will be|would be)(?: the| my| our)?(?: total| order| spending| overall)? (?:limit|budget|cap|ceiling|max(?:imum)?)\b|"
+    r"\s*(?:이하|이내|미만|까지|안\s?넘|넘지\s?않))", re.I)
+_BARE_BUDGET = re.compile(r"(?:budget(?: is| of)?|spend(?: no more than| up to| at most)?)\s+" + _NUM.format(n="n", d="d") + r"(?!\s?(?:days?|items?|units?|pcs|pieces?)\b)", re.I)
+_CLAUSE = re.compile(r"[.;!?\n](?!\d)")
 QTY_RE = re.compile(r"\b(\d+)\s*(?:x\b|pcs\b|pieces?\b|units?\b|of (?:them|each|it)\b)|\b(?:one|two|three|four|five) of each\b", re.I)
 DEADLINE_RE = re.compile(r"\b(?:within|in|by)\s+(\d+)\s+days?\b|\bby (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", re.I)
 CONDITIONAL_RE = re.compile(
@@ -109,23 +140,42 @@ def _num(s: str) -> float:
     return float(s)
 
 
+def _amount_value(m) -> float:
+    n, d = (m.group("n1"), m.group("d1")) if m.group("n1") else (m.group("n2"), m.group("d2"))
+    v = float(n.replace(",", "").replace(" ", "") + (d or ""))
+    k = (m.group("k1") or m.group("k2") or "").strip().lower()
+    suf = (m.group("s1") or m.group("s2") or "").replace(" ", "")
+    if k == "k":
+        v *= 1000
+    elif k == "만" or suf.startswith("만"):
+        v *= 10000
+    return v
+
+
+def money_amounts(text: str) -> list[tuple[int, int, float]]:
+    """Every AMOUNT (spec MONEY-1) as (start, end, value)."""
+    return [(m.start(), m.end(), _amount_value(m)) for m in MONEY_RE.finditer(text or "")]
+
+
 def budget_mentions(text: str) -> list[float]:
+    """Upper-bound amounts the text states (spec MONEY-1 (a)-(c)), in text order."""
+    text = text or ""
     out = []
-    for m in BUDGET_MAX_RE.finditer(text):
-        g = next((i for i in (1, 2, 3) if m.group(i)), None)
-        if g is None:
+    taken = []
+    for st, en, v in money_amounts(text):
+        cut = max([m.end() for m in _CLAUSE.finditer(text, 0, st)] or [0])
+        before = text[cut:st]
+        nxt = _CLAUSE.search(text, en)
+        after = text[en:nxt.start() if nxt else len(text)]
+        if _UB_BEFORE.search(before) or _UB_AFTER.search(after):
+            out.append((st, v))
+            taken.append((st, en))
+    for m in _BARE_BUDGET.finditer(text):
+        s0 = m.start("n")
+        if any(a <= s0 < b for a, b in taken):
             continue
-        try:
-            v = _num(m.group(g))
-        except ValueError:
-            continue
-        tail = text[m.end(g):m.end(g) + 4].lower()
-        if "만" in tail:
-            v *= 10000
-        elif tail.strip().startswith("k"):
-            v *= 1000
-        out.append(v)
-    return out
+        out.append((s0, float(m.group("n").replace(",", "").replace(" ", "") + (m.group("d") or ""))))
+    return [v for _, v in sorted(out)]
 
 
 def _mentions_value(text: str, value) -> bool:

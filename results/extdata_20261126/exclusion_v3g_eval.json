@@ -1,0 +1,104 @@
+{
+  "dataset": "v3g",
+  "split": "eval",
+  "files_sha256": {
+    "episode_gold.jsonl": "e1a3a27bbb39dbd005108e82742cc96b7661f546bbe4dfad3a0d86f416916c17",
+    "episodes.jsonl": "5779a212727d57a08bc5a7397ac9698cba7c0ef1cbcb085636225996d2952e65",
+    "integrity_gold.jsonl": "d8376ef46cfed932c19afd367f7be94cd58f31e5019263d04b19f2ba696e4075",
+    "integrity_transactions.jsonl": "e271273059fb5c1940afa02a2e283f431d6eb1a2a237f8c85e63745a6f47ac65",
+    "matched_stockout.jsonl": "25d95e4d0714e019cb1e53a5686486f47590eead24fca0db8a21a251accd6c40",
+    "matched_stockout_gold.jsonl": "e4924fc43a6cf70aeb5fefebdf9aa0c98887aef00fbc1c8795f9912d7da2fd67",
+    "transaction_gold.jsonl": "a9278f5b18a3b3bf6158e9924652479b01e80dd7c5150ea86a1666ef3da8117e",
+    "transactions.jsonl": "2edbd670fdaf40818b0a2bca1846e6c4e6bfcecfca1d3626298b012bb946cc48"
+  },
+  "episodes_in": 800,
+  "transactions_in": 1448,
+  "excluded_episodes": {
+    "ctw-c0b08e4f085524d6": {
+      "source_episode_id": "ep-6abd4a814881",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-bb5d1f0613a7a4ac": {
+      "source_episode_id": "ep-d64d52fa075a",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-8379b7187aad035b": {
+      "source_episode_id": "ep-8262632ed6f3",
+      "seen_in": [
+        "P2_dev"
+      ]
+    },
+    "ctw-7a6b0de1b1b7ef74": {
+      "source_episode_id": "ep-2c3c2a8e7e1c",
+      "seen_in": [
+        "G1v2_bases"
+      ]
+    },
+    "ctw-5ffc49568ffe9cf0": {
+      "source_episode_id": "ep-d64d52fa075a",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-1ebfd3b8abae55b7": {
+      "source_episode_id": "ep-d64d52fa075a",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-d4e6e90f3f7315d9": {
+      "source_episode_id": "ep-47248103c9d3",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-83bba73ebd5a2ed9": {
+      "source_episode_id": "ep-ef5fa2e71a24",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-dd380bda37dff800": {
+      "source_episode_id": "ep-56e7d19c04b0",
+      "seen_in": [
+        "P2_dev"
+      ]
+    },
+    "ctw-4035aac5c13bd899": {
+      "source_episode_id": "ep-093952121a2c",
+      "seen_in": [
+        "P2_dev"
+      ]
+    },
+    "ctw-882a5d7228e887ab": {
+      "source_episode_id": "ep-d64d52fa075a",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-9ebb0658e9e7f999": {
+      "source_episode_id": "ep-73c95e9a289d",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-c7e191123750b867": {
+      "source_episode_id": "ep-0e9446e18dd3",
+      "seen_in": [
+        "E-M1_rows"
+      ]
+    },
+    "ctw-e1c8e536d06d0a73": {
+      "source_episode_id": "ep-5eead9fb9feb",
+      "seen_in": [
+        "G1v2_bases"
+      ]
+    }
+  },
+  "episodes_kept": 786,
+  "transactions_kept": 1425
+}

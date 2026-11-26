@@ -1,0 +1,32 @@
+{
+  "dataset": "v3g",
+  "split": "dev",
+  "files_sha256": {
+    "episode_gold.jsonl": "af8167ffe72b63cc997e739ca8ee5fb0abd6984de2fb5a53cf500b2579972cb4",
+    "episodes.jsonl": "b68792c2ccd2336f2bde29cbd9f7e9350d758f686c01077e381b490e28278945",
+    "integrity_gold.jsonl": "164087da47f37c7133a7849922c7331351b4c788414e4f3687097992cd8609c3",
+    "integrity_transactions.jsonl": "90767bad9928879adca3024e718e0a995429fd0932c474b625acb7087f0a6384",
+    "matched_stockout.jsonl": "18f5b9baff4f2194eddddac92f39e624ae07c0de7bb50a690a6a9cf85f297fdf",
+    "matched_stockout_gold.jsonl": "b0b7db01405efe4da673afe37267c5cb1b038f33e3ad54b4e05323b36c2adf24",
+    "transaction_gold.jsonl": "03006ecaed240d8b2a83476baf441d07651aed4f2a102625ecf8fdd09ff94825",
+    "transactions.jsonl": "e94012d8897a45d93983ff022d6e0eeac745a0c5e8301f2f4e8a834f6782510d"
+  },
+  "episodes_in": 400,
+  "transactions_in": 727,
+  "excluded_episodes": {
+    "ctw-ce69c8078f6c4767": {
+      "source_episode_id": "ep-7cd88a5b0ca1",
+      "seen_in": [
+        "exposure_registry"
+      ]
+    },
+    "ctw-37be76ca1294bd7e": {
+      "source_episode_id": "ep-53dcf50a1717",
+      "seen_in": [
+        "exposure_registry"
+      ]
+    }
+  },
+  "episodes_kept": 398,
+  "transactions_kept": 723
+}

@@ -33,6 +33,7 @@ OUT = ROOT / "results" / "regress_20261126"
 SPLITS = ("train", "validation", "test_cross_store", "test_cross_template")
 SETS = ["R1_test_cross_store", "R3_test_cross_store", "R2_test_cross_store", "R1_validation"]
 VOLATILE = {"cost_usd", "extract_s", "verify_ms"}
+SAVE = None
 
 
 def strip(x):
@@ -93,7 +94,7 @@ def reproduce_set(name, nli):
     missing = sorted(eids - set(msgs)) + sorted(eids - set(dl))
     if missing:
         raise SystemExit(f"{name}: episodes not found in any split: {missing[:5]} ({len(missing)})")
-    mism, vbad = [], []
+    mism, vbad, new_rows = [], [], []
     for r in rows:
         fn = [{"turn_id": s["turn_id"], "selected": s["selected"], "state": s["state"], "cost_usd": 0.0}
               for s in r["fnctod_states"]]
@@ -102,6 +103,11 @@ def reproduce_set(name, nli):
         if d:
             mism.append({"episode_id": r["episode_id"], "diffs": d[:10]})
         vbad += check_verdicts(r)
+        if SAVE:
+            new_rows.append(norm(out))
+    if SAVE:
+        SAVE.mkdir(parents=True, exist_ok=True)
+        (SAVE / f"rows_{name}.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in new_rows), encoding="utf-8", newline="\n")
     return {"n": len(rows), "mismatched_rows": len(mism), "examples": mism[:5], "verdict_mismatches": vbad[:10],
             "n_verdict_mismatches": len(vbad)}
 
@@ -139,6 +145,9 @@ def reproduce_g1(nli):
     R.FnCTOD, R.PlainLLM = FnStub, PlainStub
     out, failed = R.run_g1(None, None, nli, len(rows), workers=1)
     assert not failed, failed
+    if SAVE:
+        SAVE.mkdir(parents=True, exist_ok=True)
+        (SAVE / "rows_G1_eval.jsonl").write_text("".join(json.dumps(norm(x)) + "\n" for x in out), encoding="utf-8", newline="\n")
     mism = []
     for a, b in zip(rows, out):
         d = diff(strip(norm(a)), strip(norm(b)))
@@ -150,7 +159,10 @@ def reproduce_g1(nli):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sets", nargs="*", default=SETS + ["G1_eval"])
+    ap.add_argument("--save", default="", help="also write the recomputed rows to results/regress_20261126/rerun_<save>/")
     a = ap.parse_args()
+    global SAVE
+    SAVE = (OUT / f"rerun_{a.save}") if a.save else None
     from cdv.nli import NLI
     nli = NLI()
     res = {"note": __doc__.split("\n\n")[0], "sets": {}}
@@ -160,7 +172,7 @@ def main():
     ok = all(v["mismatched_rows"] == 0 and v.get("n_verdict_mismatches", 0) == 0 for v in res["sets"].values())
     res["exact_reproduction"] = ok
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "reproduce_plan_v3.json").write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    (OUT / (f"reproduce_plan_v3_{a.save}.json" if a.save else "reproduce_plan_v3.json")).write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print("EXACT" if ok else "MISMATCH")
     sys.exit(0 if ok else 1)
 

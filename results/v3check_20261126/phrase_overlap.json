@@ -1,0 +1,41 @@
+{
+  "follow_up_utterances": {
+    "dev": 1077,
+    "eval": 2148
+  },
+  "distinct_templates": {
+    "dev": 124,
+    "eval": 179
+  },
+  "eval_utterances_whose_template_is_in_dev_pct": 0.0,
+  "distinct_eval_templates_in_dev_pct": 0.0,
+  "by_type_pct_in_dev": {
+    "T0/in_scope_selection": 0.0,
+    "T0/invalid_checkout": 0.0,
+    "T0/omitted_condition": 0.0,
+    "T0/option_selection": 0.0,
+    "T0/unchanged": 0.0,
+    "T0/unsupported_condition": 0.0,
+    "T1/ADD": 0.0,
+    "T1/OVERRIDE": 0.0,
+    "T1/RELAX": 0.0,
+    "T1/REVOKE": 0.0,
+    "T1/SUBSTITUTE": 0.0,
+    "T1/TIGHTEN": 0.0,
+    "T2/brand": 0.0,
+    "T2/budget": 0.0,
+    "T2/false_stock": 0.0,
+    "T2/fulfillment_restriction": 0.0,
+    "T2/product_attribute": 0.0,
+    "T2/quantity_bundle": 0.0,
+    "T3/budget": 0.0,
+    "T3/conditional_substitution": 0.0,
+    "T3/induced_consent": 0.0,
+    "T3/open_brand": 0.0,
+    "T3/reference": 0.0,
+    "T3/revocation": 0.0
+  },
+  "eval_utterances_sharing_a_4gram_with_dev_pct": 40.5,
+  "eval_4grams_found_in_dev_pct": 10.0,
+  "note_researcher_exposure": "2026-11-26: the first run printed the 8 most common masked eval templates to the session; the assistant writing the money-expression rule saw them. v3g eval is therefore not independent evidence for that rule."
+}
