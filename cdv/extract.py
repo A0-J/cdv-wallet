@@ -91,6 +91,17 @@ class OpenAIResponses:
         self._key, self.model, self.ledger = key, model, Path(ledger)
         self.budget, self.max_out, self.effort, self.timeout = budget_usd, max_output_tokens, reasoning_effort, timeout
         self.spent = self._spent_so_far()
+        import threading
+        self._lock = threading.Lock()
+        # replay cache: a request already answered (same request sha256, completed, no error) is not paid twice
+        self.cache = {}
+        if self.ledger.exists():
+            for l in self.ledger.read_text(encoding="utf-8").splitlines():
+                if l:
+                    r = json.loads(l)
+                    if r.get("request_sha256") and not r.get("error") and r.get("status") == "completed":
+                        self.cache[r["request_sha256"]] = r
+        self.cache_hits = 0
 
     def _spent_so_far(self) -> float:
         if not self.ledger.exists():
@@ -107,31 +118,50 @@ class OpenAIResponses:
         body = json.dumps({"model": self.model, "input": [{"role": "system", "content": system},
                                                           {"role": "user", "content": user}],
                            "reasoning": {"effort": self.effort}, "max_output_tokens": self.max_out}).encode("utf-8")
+        sha = hashlib.sha256(body).hexdigest()
+        hit = self.cache.get(sha)
+        if hit is not None:
+            with self._lock:
+                self.cache_hits += 1
+            return LLMResult(hit["output_text"], hit.get("usage") or {}, 0.0, 0.0, hit.get("model", self.model))
         est_in = len(body) // 3
-        if self.spent + self.worst_case(est_in) > self.budget:
-            raise SystemExit(f"budget stop: spent {self.spent:.4f} + worst case would exceed {self.budget}")
-        rq = urllib.request.Request(self.endpoint, data=body, method="POST",
-                                    headers={"Authorization": f"Bearer {self._key}", "Content-Type": "application/json"})
-        t0 = time.perf_counter()
-        try:
-            with urllib.request.urlopen(rq, timeout=self.timeout) as r:  # noqa: S310
-                resp = json.loads(r.read().decode("utf-8"))
-            err = None
-        except urllib.error.HTTPError as e:
-            resp, err = {}, f"http {e.code}"
-        lat = time.perf_counter() - t0
+        with self._lock:
+            if self.spent + self.worst_case(est_in) > self.budget:
+                raise SystemExit(f"budget stop: spent {self.spent:.4f} + worst case would exceed {self.budget}")
+        resp, err, lat = {}, None, 0.0
+        for attempt in range(6):          # transient errors only (429 / 5xx / network); each attempt is logged
+            rq = urllib.request.Request(self.endpoint, data=body, method="POST",
+                                        headers={"Authorization": f"Bearer {self._key}", "Content-Type": "application/json"})
+            t0 = time.perf_counter()
+            try:
+                with urllib.request.urlopen(rq, timeout=self.timeout) as r:  # noqa: S310
+                    resp = json.loads(r.read().decode("utf-8"))
+                err = None
+            except urllib.error.HTTPError as e:
+                resp, err = {}, f"http {e.code}"
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+                resp, err = {}, f"net {type(e).__name__}"
+            lat = time.perf_counter() - t0
+            transient = err is not None and (err.startswith("net") or err in ("http 429", "http 500", "http 502", "http 503", "http 504"))
+            if not transient or attempt == 5:
+                break
+            with self._lock, self.ledger.open("a", encoding="utf-8", newline="\n") as f:
+                f.write(json.dumps({"ts": time.time(), "model": self.model, "request_sha256": sha, "usage": {}, "cost_usd": 0.0,
+                                    "latency_s": round(lat, 3), "error": err, "status": "retry", "attempt": attempt}) + "\n")
+            time.sleep(min(60, 2 ** attempt * 2))
         u = resp.get("usage") or {}
         p = PRICES[self.model]
         cost = (u.get("input_tokens", 0) * p["input"] + u.get("output_tokens", 0) * p["output"]) / 1e6
-        self.spent += cost
         text = "".join(c.get("text", "") for o in resp.get("output", []) if o.get("type") == "message"
                        for c in o.get("content", []) if c.get("type") == "output_text")
-        rec = {"ts": time.time(), "model": resp.get("model", self.model), "request_sha256": hashlib.sha256(body).hexdigest(),
+        rec = {"ts": time.time(), "model": resp.get("model", self.model), "request_sha256": sha,
                "usage": u, "cost_usd": round(cost, 8), "latency_s": round(lat, 3), "error": err,
                "status": resp.get("status"), "output_text": text}
-        self.ledger.parent.mkdir(parents=True, exist_ok=True)
-        with self.ledger.open("a", encoding="utf-8", newline="\n") as f:
-            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        with self._lock:
+            self.spent += cost
+            self.ledger.parent.mkdir(parents=True, exist_ok=True)
+            with self.ledger.open("a", encoding="utf-8", newline="\n") as f:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         if err:
             raise RuntimeError(err)
         return LLMResult(text, u, lat, cost, resp.get("model", self.model))
@@ -161,6 +191,41 @@ def _render(context: list[Turn], prev_calls: dict[int, list[dict]]) -> str:
                             for c in prev_calls.get(i, []))
             lines.append(f"Assistant: {calls}{t.text[:400]}")
     return "\n".join(lines)
+
+
+_NUMW = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
+
+
+def normalize_args(a: dict) -> dict:
+    """Output-parsing normalization (added after the pilot, applied to every extractor the same way):
+    map free-text values onto the schema types. Unknown values are left unchanged (and later ignored)."""
+    a = dict(a)
+    f = a.get("fulfillment")
+    if isinstance(f, str):
+        fl = f.lower()
+        if re.search(r"pick|collect|in[- ]store|store", fl):
+            a["fulfillment"] = "pickup"
+        elif re.search(r"ship|deliver|express|standard|regular|mail|courier|post", fl):
+            a["fulfillment"] = "ship"
+    for k in ("quantity", "deadline_days"):
+        v = a.get(k)
+        if isinstance(v, str):
+            s = v.strip().lower()
+            m = re.match(r"^(\d+)", s)
+            if m:
+                a[k] = int(m.group(1))
+            elif s in _NUMW:
+                a[k] = _NUMW[s]
+            elif k == "quantity" and re.search(r"\bone of each\b", s) and isinstance(a.get("required_items"), list):
+                a[k] = len(a["required_items"])
+    b = a.get("budget_max")
+    if isinstance(b, str):
+        m = re.search(r"\d[\d,]*(?:\.\d+)?", b)
+        if m:
+            a["budget_max"] = float(m.group(0).replace(",", ""))
+    if isinstance(a.get("product_type"), list):
+        a["product_type"] = " and ".join(str(x) for x in a["product_type"])
+    return a
 
 
 def _parse_calls(text: str) -> list[dict]:
@@ -195,7 +260,10 @@ class FnCTOD:
             sel_user = (f"{ctx}\n\nFor the LAST user turn only: which functions' arguments does it set or change? "
                         "Answer with one <domain>function_name</domain> per line, or <domain>none</domain>.")
             r1 = self.llm(sel_sys, sel_user)
-            selected = [s for s in re.findall(r"<domain>\s*([\w_]+)\s*</domain>", r1.text) if s in FN_BY_NAME]
+            # parse fix after pilot (2026-11-26): the model sometimes wraps the name in another tag
+            # (e.g. <shopping>...</shopping>); accept any matching tag pair whose content is a known function
+            selected = list(dict.fromkeys(s for _, s in re.findall(r"<(\w+)>\s*([\w_]+)\s*</\1>", r1.text)
+                                          if s in FN_BY_NAME))
             lat, cost, calls = r1.latency_s, r1.cost_usd, []
             for fn in selected:
                 spec = json.dumps(FN_BY_NAME[fn], ensure_ascii=False, indent=1)
@@ -209,7 +277,7 @@ class FnCTOD:
                 cost += r2.cost_usd
                 for c in _parse_calls(r2.text):
                     if c["function"] == fn:
-                        state[fn] = c["arguments"]
+                        state[fn] = normalize_args(c["arguments"])
                         calls.append(c)
             prev_calls[i] = calls
             out.append({"turn_index": i, "turn_id": t.turn_id, "selected": selected, "calls": calls,
@@ -239,7 +307,7 @@ class PlainLLM:
         sp = {k: v for k, v in flat.items() if k in [a["name"] for a in FUNCTIONS[1]["arguments"]]}
         state = {}
         if pc:
-            state["set_purchase_conditions"] = pc
+            state["set_purchase_conditions"] = normalize_args(pc)
         if sp:
             state["set_substitution_policy"] = sp
         return {"state": state, "latency_s": r.latency_s, "cost_usd": r.cost_usd}

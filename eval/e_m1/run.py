@@ -149,15 +149,36 @@ def select(set_name, split, n, rows, dialogs_needed=True):
 
 # ---------------------------------------------------------------- per journey
 
-def run_journey(r, dlg, fn_llm, plain_llm, nli):
-    h = json.loads(r["hidden_spec"])
-    g = gold_fields(h)
+def extract_journey(dlg, fn_llm, plain_llm):
+    """Model calls only (safe to run in parallel threads). One extraction shared by all FnCTOD arms."""
     dialogue = [Turn("user" if x["actor"] == "shopper" else "assistant", x["text"], f"s{x['seq']}") for x in dlg]
-    user_turns = [UserTurn(f"s{x['seq']}", x["seq"], x["text"]) for x in dlg if x["actor"] == "shopper"]
     t0 = time.perf_counter()
     fn = FnCTOD(fn_llm).run(dialogue)
     t_fn = time.perf_counter() - t0
     pl = PlainLLM(plain_llm).run(dialogue)
+    return fn, pl, t_fn
+
+
+def parallel_extract(items, fn_llm, plain_llm, workers):
+    """items: list of (key, dlg). Returns {key: (fn, pl, t_fn) | Exception}."""
+    from concurrent.futures import ThreadPoolExecutor
+    def job(it):
+        k, dlg = it
+        try:
+            return k, extract_journey(dlg, fn_llm, plain_llm)
+        except SystemExit:
+            raise
+        except Exception as e:  # noqa: BLE001 - recorded as a failed journey, never silently dropped
+            return k, e
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        return dict(ex.map(job, items))
+
+
+def run_journey(r, dlg, extracted, nli):
+    h = json.loads(r["hidden_spec"])
+    g = gold_fields(h)
+    user_turns = [UserTurn(f"s{x['seq']}", x["seq"], x["text"]) for x in dlg if x["actor"] == "shopper"]
+    fn, pl, t_fn = extracted
     for st in fn:
         st["seq"] = int(st["turn_id"][1:])
     cart = cart_lines(r["final_cart"])
@@ -181,7 +202,10 @@ def run_journey(r, dlg, fn_llm, plain_llm, nli):
     du, _ = cart_check(gold_led, cart)
     out = {"episode_id": r["episode_id"], "outcome": r["outcome_class"], "gold": {k: v for k, v in g.items()},
            "n_user_turns": len(user_turns), "extract_s": round(t_fn, 3),
-           "cost_usd": round(sum(s["cost_usd"] for s in fn) + pl["cost_usd"], 6), "upper_bound_decision": du, "arms": {}}
+           "cost_usd": round(sum(s["cost_usd"] for s in fn) + pl["cost_usd"], 6), "upper_bound_decision": du, "arms": {},
+           "fnctod_states": [{"turn_id": s["turn_id"], "selected": s.get("selected"), "state": s["state"]} for s in fn],
+           "plain_state": pl["state"],
+           "traces": {k: arms[k].get("trace") for k in ("fnctod_r", "fnctod_rn")}}
     stated = {k for k, (_, s) in g.items() if s == "stated"}
     for name, a in arms.items():
         acc = {e.field: e for e in a["ledger"].entries}
@@ -237,6 +261,7 @@ def main():
     ap.add_argument("--model", default="gpt-6-luna")
     ap.add_argument("--budget", type=float, default=15.0)
     ap.add_argument("--no-nli", action="store_true")
+    ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args()
     splits = [a.split] if a.set != "R2" else ["train", "validation", "test_cross_store", "test_cross_template"]
     rows = load_messages(splits)
@@ -266,13 +291,20 @@ def main():
     if not a.no_nli:
         from cdv.nli import NLI
         nli = NLI()
-    res = [run_journey(r, dl.get(r["episode_id"], []), fn_llm, pl_llm, nli) for r in sample if dl.get(r["episode_id"])]
-    OUT.mkdir(parents=True, exist_ok=True)
     assert a.dry_run or not (OUT / f"rows_{tag}.jsonl").exists(), f"refusing to overwrite rows_{tag}.jsonl"
+    todo = [r for r in sample if dl.get(r["episode_id"])]
+    ext = parallel_extract([(r["episode_id"], dl[r["episode_id"]]) for r in todo], fn_llm, pl_llm, a.workers)
+    failed = [{"episode_id": e, "error": repr(v)} for e, v in ext.items() if isinstance(v, Exception)]
+    res = [run_journey(r, dl[r["episode_id"]], ext[r["episode_id"]], nli) for r in todo
+           if not isinstance(ext[r["episode_id"]], Exception)]
+    OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"rows_{tag}.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False, default=str) + "\n" for x in res),
                                            encoding="utf-8", newline="\n")
     summ = {"set": a.set, "split": a.split, "n": len(res), "model": None if a.dry_run else a.model,
-            "dry_run": a.dry_run, "summary": summarize(res) if res else {}}
+            "dry_run": a.dry_run, "n_selected": len(sample), "n_no_dialogue": len(sample) - len(todo),
+            "failed_journeys": failed, "summary": summarize(res) if res else {}}
+    if not a.dry_run:
+        summ["cache_hits"] = fn_llm.cache_hits
     if a.dry_run:
         tok = (fn_llm.chars_in + pl_llm.chars_in) / 4
         summ["dry_run_estimate"] = {"calls_lower_bound": fn_llm.calls + pl_llm.calls, "input_tokens_est": int(tok),
@@ -327,22 +359,43 @@ def g1_correct(exp, led: Ledger, hint: str) -> bool:
     return bool(ok)
 
 
-def run_g1(fn_llm, plain_llm, nli, n):
+def run_g1(fn_llm, plain_llm, nli, n, workers=8):
     cases = [json.loads(l) for l in G1_FILE.read_text(encoding="utf-8").splitlines()][:n]
-    out = []
-    for c in cases:
+    out, failed = [], []
+
+    def g1_dialogue(c):
         ut = [UserTurn(f"s{i * 2}", i * 2, u["text"]) for i, u in enumerate(c["user_turns"])]
         dialogue = [Turn("user", ut[0].text, ut[0].turn_id)]
         for x in c.get("external_texts") or []:
             dialogue.append(Turn("assistant", x["text"], "s1"))
         for u in ut[1:]:
             dialogue.append(Turn("user", u.text, u.turn_id))
-        fn = FnCTOD(fn_llm).run(dialogue)
+        return ut, dialogue
+
+    from concurrent.futures import ThreadPoolExecutor
+
+    def job(c):
+        _, dialogue = g1_dialogue(c)
+        try:
+            return c["case_id"], (FnCTOD(fn_llm).run(dialogue), PlainLLM(plain_llm).run(dialogue))
+        except SystemExit:
+            raise
+        except Exception as e:  # noqa: BLE001
+            return c["case_id"], e
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        ext = dict(ex.map(job, cases))
+    for c in cases:
+        ut, _ = g1_dialogue(c)
+        if isinstance(ext[c["case_id"]], Exception):
+            failed.append({"case_id": c["case_id"], "error": repr(ext[c["case_id"]])})
+            continue
+        fn, pl = ext[c["case_id"]]
         for st in fn:
             st["seq"] = int(st["turn_id"][1:])
-        pl = PlainLLM(plain_llm).run(dialogue)
         exp = g1_expect(c)
-        row = {"case_id": c["case_id"], "template_id": c["template_id"], "arms": {}}
+        row = {"case_id": c["case_id"], "template_id": c["template_id"], "arms": {},
+               "fnctod_states": [{"turn_id": s["turn_id"], "selected": s.get("selected"), "state": s["state"]} for s in fn],
+               "plain_state": pl["state"]}
         for name, state in (("plain", pl["state"]), ("fnctod", fn[-1]["state"] if fn else {})):
             led = Ledger(1, tuple(state_to_entries(state).values()))
             row["arms"][name] = {"correct": g1_correct(exp, led, "OK"), "hint": "OK"}
@@ -351,7 +404,7 @@ def run_g1(fn_llm, plain_llm, nli, n):
             row["arms"][name] = {"correct": g1_correct(exp, res["ledger"], res["hint"]), "hint": res["hint"],
                                  "verify_ms": res["verify_ms"]}
         out.append(row)
-    return out
+    return out, failed
 
 
 def main_g1():
@@ -361,13 +414,14 @@ def main_g1():
     ap.add_argument("--model", default="gpt-6-luna")
     ap.add_argument("--budget", type=float, default=15.0)
     ap.add_argument("--no-nli", action="store_true")
+    ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(sys.argv[2:])
     fn_llm = pl_llm = DryLLM() if a.dry_run else OpenAIResponses(a.model, OUT / "ledger.jsonl", a.budget)
     nli = None
     if not a.no_nli:
         from cdv.nli import NLI
         nli = NLI()
-    rows = run_g1(fn_llm, pl_llm, nli, a.n)
+    rows, failed = run_g1(fn_llm, pl_llm, nli, a.n, a.workers)
     tag = "G1_eval" + ("_dry" if a.dry_run else "")
     assert a.dry_run or not (OUT / f"rows_{tag}.jsonl").exists(), f"refusing to overwrite rows_{tag}.jsonl"
     (OUT / f"rows_{tag}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8", newline="\n")
@@ -376,7 +430,8 @@ def main_g1():
         for arm, v in r["arms"].items():
             by[arm][r["template_id"]]["n"] += 1
             by[arm][r["template_id"]]["correct"] += v["correct"]
-    summ = {"set": "G1 (generated)", "n": len(rows), "dry_run": a.dry_run,
+    summ = {"set": "G1 (generated)", "n": len(rows), "dry_run": a.dry_run, "failed_cases": failed,
+            "cache_hits": getattr(fn_llm, "cache_hits", None),
             "correct_pct": {arm: round(100 * sum(c["correct"] for c in t.values()) / sum(c["n"] for c in t.values()), 1)
                             for arm, t in by.items()},
             "by_template": {arm: {k: dict(v) for k, v in t.items()} for arm, t in by.items()}}

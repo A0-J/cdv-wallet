@@ -1,0 +1,75 @@
+{
+  "set": "R1",
+  "split": "test_cross_store",
+  "n": 200,
+  "model": "gpt-6-luna",
+  "dry_run": false,
+  "n_selected": 200,
+  "n_no_dialogue": 0,
+  "failed_journeys": [],
+  "summary": {
+    "plain": {
+      "unjustified_condition_detection_pct": 0.0,
+      "n_unjustified": 200,
+      "legit_condition_acceptance_pct": 100.0,
+      "n_legit": 373,
+      "silent_omission_pct": 1.1,
+      "n_stated": 377,
+      "clarify_pct": 0.0,
+      "legit_cart_blocked_pct": 25.0,
+      "violating_cart_allowed_pct": 77.1,
+      "n_legit_carts": 152,
+      "n_violating_carts": 48,
+      "verify_ms_median": 0.0
+    },
+    "fnctod": {
+      "unjustified_condition_detection_pct": 0.0,
+      "n_unjustified": 126,
+      "legit_condition_acceptance_pct": 100.0,
+      "n_legit": 402,
+      "silent_omission_pct": 1.1,
+      "n_stated": 377,
+      "clarify_pct": 0.0,
+      "legit_cart_blocked_pct": 7.9,
+      "violating_cart_allowed_pct": 91.7,
+      "n_legit_carts": 152,
+      "n_violating_carts": 48,
+      "verify_ms_median": 0.0
+    },
+    "fnctod_r": {
+      "unjustified_condition_detection_pct": 65.9,
+      "n_unjustified": 126,
+      "legit_condition_acceptance_pct": 68.7,
+      "n_legit": 402,
+      "silent_omission_pct": 17.2,
+      "n_stated": 377,
+      "clarify_pct": 30.0,
+      "legit_cart_blocked_pct": 32.9,
+      "violating_cart_allowed_pct": 56.2,
+      "n_legit_carts": 152,
+      "n_violating_carts": 48,
+      "verify_ms_median": 0.768
+    },
+    "fnctod_rn": {
+      "unjustified_condition_detection_pct": 65.9,
+      "n_unjustified": 126,
+      "legit_condition_acceptance_pct": 83.6,
+      "n_legit": 402,
+      "silent_omission_pct": 3.7,
+      "n_stated": 377,
+      "clarify_pct": 49.5,
+      "legit_cart_blocked_pct": 50.0,
+      "violating_cart_allowed_pct": 45.8,
+      "n_legit_carts": 152,
+      "n_violating_carts": 48,
+      "verify_ms_median": 914.233
+    },
+    "upper_bound_gold_ledger": {
+      "legit_cart_blocked_pct": 0.0,
+      "violating_cart_allowed_pct": 89.6
+    },
+    "extract_s_median": 12.367,
+    "cost_usd_total": 0.1413
+  },
+  "cache_hits": 0
+}

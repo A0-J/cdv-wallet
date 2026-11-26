@@ -76,3 +76,16 @@ def test_pending_item_survives_later_rejected_proposal():
     ops = [(t["seq"], o[1], o[3]) for t in res["trace"] for o in t["ops"]]
     assert (0, "qty", PENDING) in ops and (2, "qty", REJECT) in ops
     assert ("add", "qty") in res["pending"] and res["hint"] == "CLARIFY"
+
+
+def test_selection_accepts_other_tag_and_values_are_normalized():
+    """Parse fixes after the pilot: <shopping>fn</shopping> selection; free-text values mapped to schema."""
+    from cdv.extract import normalize_args
+    llm = ScriptedLLM(["<shopping>set_purchase_conditions</shopping>",
+                       '<function_call> {"function": "set_purchase_conditions", "arguments": '
+                       '{"fulfillment": "regular delivery", "quantity": "two"}} </function_call>'])
+    out = FnCTOD(llm).run(DLG[:1])
+    assert out[0]["selected"] == ["set_purchase_conditions"]
+    assert out[0]["state"]["set_purchase_conditions"] == {"fulfillment": "ship", "quantity": 2}
+    assert normalize_args({"quantity": "one of each", "required_items": ["a", "b"]})["quantity"] == 2
+    assert normalize_args({"fulfillment": "in-store pickup", "budget_max": "$1,250"}) == {"fulfillment": "pickup", "budget_max": 1250.0}

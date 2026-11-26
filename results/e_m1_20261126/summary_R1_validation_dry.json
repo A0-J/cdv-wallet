@@ -4,6 +4,9 @@
   "n": 10,
   "model": null,
   "dry_run": true,
+  "n_selected": 10,
+  "n_no_dialogue": 0,
+  "failed_journeys": [],
   "summary": {
     "plain": {
       "unjustified_condition_detection_pct": null,
@@ -45,7 +48,7 @@
       "violating_cart_allowed_pct": 0.0,
       "n_legit_carts": 8,
       "n_violating_carts": 2,
-      "verify_ms_median": 0.368
+      "verify_ms_median": 0.371
     },
     "fnctod_rn": {
       "unjustified_condition_detection_pct": null,
@@ -59,7 +62,7 @@
       "violating_cart_allowed_pct": 0.0,
       "n_legit_carts": 8,
       "n_violating_carts": 2,
-      "verify_ms_median": 0.36
+      "verify_ms_median": 0.362
     },
     "upper_bound_gold_ledger": {
       "legit_cart_blocked_pct": 0.0,

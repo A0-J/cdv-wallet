@@ -1,0 +1,231 @@
+{
+  "set": "G1 (generated)",
+  "n": 260,
+  "dry_run": false,
+  "failed_cases": [],
+  "cache_hits": 38,
+  "correct_pct": {
+    "plain": 85.4,
+    "fnctod": 87.3,
+    "fnctod_r": 94.6,
+    "fnctod_rn": 96.2
+  },
+  "by_template": {
+    "plain": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 20
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 20
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 20
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 20
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 20
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 11
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 13
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 18
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 20
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 20
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 20
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 0
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 20
+      }
+    },
+    "fnctod": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 20
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 20
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 20
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 20
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 20
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 14
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 13
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 20
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 20
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 20
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 20
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 0
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 20
+      }
+    },
+    "fnctod_r": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 20
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 18
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 18
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 20
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 20
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 13
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 20
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 18
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 20
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 20
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 19
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 20
+      }
+    },
+    "fnctod_rn": {
+      "C1_relax_explicit": {
+        "n": 20,
+        "correct": 20
+      },
+      "C2_relax_no_cue": {
+        "n": 20,
+        "correct": 20
+      },
+      "C3_relax_seller_source": {
+        "n": 20,
+        "correct": 18
+      },
+      "C4_relax_value_mismatch": {
+        "n": 20,
+        "correct": 20
+      },
+      "C5_tighten": {
+        "n": 20,
+        "correct": 20
+      },
+      "C6_ambiguous_pick_bundle": {
+        "n": 20,
+        "correct": 20
+      },
+      "C7_explicit_drop_bundle": {
+        "n": 20,
+        "correct": 13
+      },
+      "C8_add_substitute": {
+        "n": 20,
+        "correct": 20
+      },
+      "C9_substitute_no_cue": {
+        "n": 20,
+        "correct": 19
+      },
+      "X1_two_budgets_unresolved": {
+        "n": 20,
+        "correct": 20
+      },
+      "X2_budget_overridden": {
+        "n": 20,
+        "correct": 20
+      },
+      "X3_brand_in_out": {
+        "n": 20,
+        "correct": 20
+      },
+      "O1_omitted_budget": {
+        "n": 20,
+        "correct": 20
+      }
+    }
+  }
+}
