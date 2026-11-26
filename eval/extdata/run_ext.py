@@ -146,6 +146,8 @@ def main():
     ap.add_argument("--m1g-memo", action="store_true",
                     help="within this run, one M1-G call per distinct input shared by all transactions; parallel pre-warm")
     ap.add_argument("--ledger-tag", default="", help="separate extraction and M1-G ledgers (an independent repeat run)")
+    ap.add_argument("--m1g-ledger-tag", default=None,
+                    help="M1-G ledger tag only (default: --ledger-tag); e.g. run 2 = run-1 extraction + a fresh M1-G ledger")
     ap.add_argument("--seller-to-extractor", action="store_true",
                     help="condition (B): tool turns with source=seller are also given to the extractor (as assistant text)")
     a = ap.parse_args()
@@ -172,7 +174,8 @@ def main():
     A.UNVERIFIED_POLICY = a.unverified_policy
     m1_llm = None
     if a.m1g and not a.dry_run:
-        lt = f"_{a.ledger_tag}" if a.ledger_tag else ""
+        mt = a.ledger_tag if a.m1g_ledger_tag is None else a.m1g_ledger_tag
+        lt = f"_{mt}" if mt else ""
         m1_llm = OpenAIResponses(a.model, OUT / f"ledger_m1g_{a.name}{lt}.jsonl", a.m1g_budget)
         if a.m1g_memo:
             from m1g_memo import MemoLLM

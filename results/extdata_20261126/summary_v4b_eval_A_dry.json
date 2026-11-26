@@ -1,0 +1,14 @@
+{
+  "dataset": "v4b",
+  "split": "eval",
+  "input_condition": "A (shopper and agent turns only)",
+  "episodes": 852,
+  "transactions": 2982,
+  "excluded_episodes": 16,
+  "dry_run": true,
+  "dry_run_estimate": {
+    "calls_lower_bound": 2731,
+    "input_tokens_est": 782474,
+    "note": "dry answers select no function: FnCTOD argument calls not counted"
+  }
+}
