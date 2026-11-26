@@ -1,0 +1,21 @@
+{
+  "note": "Can fulfillment / deadline be checked at the payment-consent point? (feasibility only; no model calls)",
+  "counts": {
+    "checkout_state_has_delivery_days_text": 110,
+    "checkout_state_has_fulfillment_method": 127,
+    "checkout_state_has_selected_option": 107,
+    "checkout_state_selected_option_with_days": 91,
+    "consent_journeys": 144,
+    "consent_message_mentions_days": 0,
+    "consent_message_mentions_fulfillment": 0,
+    "last_tool:choose_fulfillment": 28,
+    "last_tool:create_checkout": 7,
+    "last_tool:create_checkout_mandate": 1,
+    "last_tool:create_checkout_session": 4,
+    "last_tool:get_checkout": 9,
+    "last_tool:request_cart_mandate": 9,
+    "last_tool:set_shipping_address": 1,
+    "last_tool:update_checkout": 77,
+    "last_tool:update_checkout_session": 8
+  }
+}

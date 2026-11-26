@@ -231,3 +231,46 @@ def test_brand_title_match_counts_even_if_brand_field_is_store_name():
     s = ScopeV2(brands=frozenset({"Tide"}))
     assert s.violations([line("a", 6.49, brand="Builtamart", title="Tide Ultra Original Scent Bar Detergent")]) == []
     assert s.violations([line("b", 6.49, brand="Builtamart", title="Generic Bar Detergent")]) == ["BRAND:b"]
+
+
+def test_g1v2_scoring_multi_change_and_preservation():
+    sys.path.insert(0, str(ROOT / "eval" / "g1v2"))
+    import run_g1v2 as G
+    case = {"type": "L2", "dialogue": [{"role": "user", "text": "Shoes under $30", "turn_id": "s0"},
+                                       {"role": "assistant", "text": "Got it.", "turn_id": "s1"},
+                                       {"role": "user", "text": "Please keep it under $24.", "turn_id": "s2"},
+                                       {"role": "assistant", "text": "Understood.", "turn_id": "s3"},
+                                       {"role": "user", "text": "Actually I can go up to $40.", "turn_id": "s4"}],
+            "gold": {"final": {"budget_max": 40}, "per_user_turn": [{"budget_max": 30}, {"budget_max": 24}, {"budget_max": 40}],
+                     "expect_no_question": True}}
+    fn = [{"turn_id": t, "selected": [], "state": {PC: {"budget_max": b}}} for t, b in (("s0", 30), ("s2", 24), ("s4", 40))]
+    out = G.evaluate(case, fn, {"state": {PC: {"budget_max": 40}}}, None)
+    assert out["fnctod"]["final_ok"] and out["fnctod"]["steps_ok"]
+    assert out["fnctod_r"]["final_ok"] and out["fnctod_r"]["steps_ok"] and not out["fnctod_r"]["unnecessary_question"]
+    # a pick that the extractor turns into a budget raise must not count as preserved
+    case2 = {"type": "S2", "dialogue": case["dialogue"][:1] + [{"role": "assistant", "text": "1. A - $20\n2. B - $39", "turn_id": "s1"},
+                                                              {"role": "user", "text": "I'll go with option 2.", "turn_id": "s2"}],
+             "gold": {"final": {"budget_max": 30}, "per_user_turn": [{"budget_max": 30}, {"budget_max": 30}], "expect_no_question": False}}
+    fn2 = [{"turn_id": "s0", "selected": [], "state": {PC: {"budget_max": 30}}}, {"turn_id": "s2", "selected": [], "state": {PC: {"budget_max": 39}}}]
+    out2 = G.evaluate(case2, fn2, {"state": {PC: {"budget_max": 39}}}, None)
+    assert out2["fnctod"]["preserved"] is False and out2["fnctod_r"]["preserved"] is True
+
+
+def test_checkout_violations_at_consent():
+    from cdv.v2.scope import checkout_violations
+    s = ScopeV2(fulfillment="pickup", deadline_days=5)
+    assert checkout_violations(s, {"fulfillment": "ship", "max_days": 3}) == (["FULFILLMENT:ship"], [])
+    assert checkout_violations(s, {"fulfillment": "pickup", "max_days": 7}) == (["DEADLINE:7>5"], [])
+    assert checkout_violations(s, {}) == ([], ["fulfillment", "deadline_days"])     # unverified, not satisfied
+    assert checkout_violations(ScopeV2(), {"fulfillment": "ship"}) == ([], [])
+
+
+def test_checkout_facts_reads_selected_option_only():
+    import env as E
+    res = {"fulfillment": {"methods": [{"type": "shipping", "groups": [{"options": [
+        {"id": "std", "title": "Standard (4-7 days)"}, {"id": "exp", "title": "Express (1-2 days)"}], "selected_option_id": "exp"}]}]}}
+    T = [{"seq": 5, "kind": "tool_result", "tool": "update_checkout", "result": json.dumps(json.dumps(res))}]
+    assert E.checkout_facts(T, 10) == {"fulfillment": "ship", "max_days": 2}
+    res2 = {"fulfillment": {"methods": [{"type": "shipping", "groups": [{"options": [{"id": "std", "title": "Standard (4-7 days)"}]}]}]}}
+    T2 = [{"seq": 5, "kind": "tool_result", "tool": "update_checkout", "result": json.dumps(res2)}]
+    assert E.checkout_facts(T2, 10) == {"fulfillment": "ship", "max_days": None}   # offered, not selected
