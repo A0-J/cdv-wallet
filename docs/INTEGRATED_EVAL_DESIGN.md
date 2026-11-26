@@ -1,0 +1,138 @@
+# CDV-Wallet 통합 평가 설계: CartTrace 위 M1 → Ledger → Signed Mandate → M2 (검토용, 구현 전)
+
+- 작성: 2026-11-26. **상태: 설계 검토 대기. 구현·규칙 변경·유료 실행 없음.**
+- 문제: 지금은 M1을 CartTrace(X3·X7)에서, M2를 WhisperBench(X1·X2)에서 따로 평가했다. 데이터셋이 다른 결과를 합쳐서는 CDV-Wallet 전체의 효과를 주장할 수 없다. 같은 구매 여정에서 네 비교군을 돌리는 통합 평가가 필요하다.
+- 기존 개별 실험(X1–X7, PLAN_v3)은 그대로 보존한다. 통합 평가는 새 폴더에 따로 둔다.
+- 관련 문서: `docs/M1_V2_DESIGN.md`(M1 v2: C/S 분리, 선택적 재확인). 통합 평가는 M1 v2의 장부를 입력으로 쓴다.
+
+## 1. CartTrace가 통합 파이프라인 입력을 주는가 (실측, validation, 모델 호출 0)
+
+스크립트: `eval/integrated/feasibility.py` → `results/integrated_design_20261126/feasibility.json`
+
+| 파이프라인이 필요로 하는 것 | CartTrace에서 얻는 곳 | validation 실측 |
+|---|---|---|
+| 대화(M1 입력) | turns: 쇼핑객·에이전트 메시지 | 4,015 정상 여정 |
+| 결제 요청(장바구니) | final_cart: variant_id, 단가, 수량 | 3,657 여정에 있음. 모두 가격·수량 있음 |
+| A-VIP 캡처(제시된 후보) | 카탈로그 도구 결과(search/lookup/get_product 등)의 상품·변형 | 장바구니 상품 ID가 도구 결과에 모두 있음: **3,657/3,657** |
+| 신뢰할 상품 사실(Scope 검사) | 도구 결과의 구조화 필드(brand, attributes, 가격, 재고) | 브랜드 2,999(74.7%), 속성 3,566(88.8%) |
+| 재고 증거(조건부 대체 조항) | 도구 결과 변형의 availability=false | 품절 여정 441 중 품절 변형이 도구 결과에 '없음'으로 보임: **400(90.7%)** |
+| 판매자 수 | 결과 속 판매점 ID | **여정마다 판매점 1개**(2,912) 또는 ID 없음(1,103). 판매자 간 주장은 없다 |
+| 판정 시점(결제 요청) | 지갑 확인 메시지·checkout mandate 요청 / 장바구니 전달(`done`) | E-M1 R1 기준 97/200 결제 요청, 103/200 장바구니 전달 |
+| 결제 프로토콜 | 도구 이름 | 장바구니 전달만 2,166, UCP 876, MPP/402 509, **AP2(고유 mandate) 286**, ACP 178 |
+
+- **결론: 연결 가능하다.** 결제 요청, 캡처, 상품 사실, 재고 증거가 모두 런타임 기록에서 나온다. 숨은 사양(hidden_spec)은 필요 없다.
+- 단, CDV의 Signed Mandate는 모든 프로토콜에 같은 방식으로 지갑 쪽에서 만든다(시뮬레이션). AP2의 고유 mandate는 286여정에만 있어 쓰지 않는다.
+- **가정(명시 필요):** CartTrace에는 플랫폼과 판매자가 따로 없다. 도구 결과의 구조화 필드(가격, 재고, 브랜드)를 플랫폼 사실로, 상품 설명 등 자유 문장을 판매자 글로 본다.
+
+## 2. 공통 실험 환경의 데이터 구조 (여정 1건 = IntegratedCase)
+
+```
+IntegratedCase
+  case_id, episode_id, split, source: "original" | "generated:<overlay_id>"
+  runtime (모든 비교군이 같은 입력을 받음)
+    dialogue[≤t]      쇼핑객·에이전트 메시지, seq. 판정 시점 t 이후 발화는 넣지 않음 (누설 수정)
+    t, t_kind         consent_request | cart_handover
+    offers[]          A-VIP 캡처 입력: seller(판매점 ID), cart_id(변형 ID), label(제목+설명 = 판매자 글), amount, currency
+    catalog{}         (seller, cart_id) → Line(가격, brand, features, product_ref) : 구조화 필드만
+    platform_facts[]  availability=false 등 → 플랫폼 서명 증거(Evidence, ECDSA)로 발급
+    payment_request   cart: [(seller, cart_id), quantity], 총액
+    session           여정 ID에서 만든 세션
+  scoring (런타임에 쓰지 않음)
+    outcome_class, hidden_spec 술어(예산·수량·브랜드·묶음·속성·대체), 위반 유형 표지
+    overlay 정답(생성 사례: 구성상 정답)
+    사용자 발화 기준 표지(M1_V2_DESIGN 7절, AI 1차 → 연구자 2차)
+```
+
+- 원본 데이터(CartTrace 원문)는 `C:\ct` 밖으로 나오지 않는다. repo에는 ID, 해시, 집계만 둔다.
+- 생성 사례는 `source`로 구분하고, 원본 결과와 따로 보고한다.
+
+## 3. 모듈 연결
+
+```
+dialogue[≤t] ──FnCTOD(1회 추출, 모든 비교군 공유)──▶ 턴별 상태
+     │
+     ├─ M1 (v2): C(구매 제약)·S(상품 선택) 검증, NON_USER_SOURCE 거부, 미해결 U
+     ▼
+ Ledger(C, S, U) ──ledger_to_mandate()──▶ Mandate(P = Scope, F_k = 조건부 대체 조항, basis)
+     ▼                                         ▼ 사용자 지갑 키로 ECDSA 서명, VersionRegistry 등록
+ 결제 요청 t: offers → A-VIP capture → record R(chosen = 장바구니 상품) → H = hash(R, C_R)
+     ▼
+ gate.authorize(): 서명 → 버전 → 세션 → A-VIP V1–V8 → H 결속 → NOT_CAPTURED → Scope(P) → 조항(F_k)+증거(E1–E3, E2) → ALLOW / CLARIFY / DENY
+     ▼
+ 실행: ALLOW일 때만 결제 (모든 비교군 같음)
+```
+
+- `ledger_to_mandate()`와 Scope 확장(브랜드 제외, 묶음 전부, 정확한 수량, 수령 방식, S의 상품 ID)은 `M1_V2_DESIGN.md` 5절 표대로다.
+- 선택적 재확인(M1_V2 3절)은 'U를 받아들였을 때와 아닐 때 M2 판정이 다른가'로 정한다. 그러므로 **M1과 M2가 함께 있을 때만** 작동한다. 이것 자체가 결합 효과의 하나다.
+
+## 4. 비교군 (같은 여정, 같은 대화, 같은 추출, 같은 결제 요청)
+
+| 비교군 | Mandate 내용 | M1 | 결제 시점 검사 |
+|---|---|---|---|
+| **공통 기반**(모든 군) | — | — | ECDSA 서명 검증, 버전(V9), 세션, 서명된 장바구니와 결제 장바구니 일치, ALLOW일 때만 실행 |
+| B. Baseline | 결제 요청 시점의 장바구니에 대한 사용자 서명(AP2 사람 부재 방식). 내용 검사 없음 | 없음 | 공통 기반만 |
+| M1 Only | 검증된 장부. 결제 시점 범위 검사는 없음 | v2, 미해결 항목은 모두 확인 요청(M2가 없어 선택적 재확인 불가) | 공통 기반 + M1의 CLARIFY |
+| M2 Only | **검증하지 않은** FnCTOD 상태 → `ledger_to_mandate()` | 없음 | 전체 게이트(A-VIP, 결속, Scope, 조항·증거, E2) |
+| M1 + M2 (CDV-Wallet) | 검증된 장부 → Mandate | v2 + 선택적 재확인 | 전체 게이트 |
+| U (참고, 런타임 아님) | 숨은 사양의 정답 조건 → Mandate | — | 전체 게이트. 상한으로만 따로 보고 |
+
+- M2 Only의 mandate를 정답 조건으로 만들면 숨은 사양을 런타임 입력으로 쓰게 된다. 그래서 같은 추출기의 검증 전 출력을 쓴다. 이렇게 해야 'M1이 mandate 내용을 바로잡는 효과'가 M2 Only와 M1+M2의 차이로 드러난다.
+- PLAN_v3의 `fnctod_r`·`fnctod_rn`은 사실상 'M1 + M2a(예산·수량·묶음·브랜드만 보는 간이 검사)'였다. 통합 평가 표에는 연결 행으로 함께 둔다.
+
+## 5. 위반 유형과 어느 모듈이 잡는가 (가설)
+
+| 유형 | 예 | 데이터 | 기대 검출 |
+|---|---|---|---|
+| T1 장부 오염(대화 쪽) | 추출기 오류, 근거 없는 넓힘, 판매자·에이전트 값이 장부로 들어감, 조건 누락 | 원본(R1·R2형) + 생성 | M1. M2 Only는 오염된 mandate로 통과시킴 |
+| T2 장바구니가 사용자 조건 밖 | 예산 초과, 다른 브랜드, 수량, 묶음 빠짐, 사용자가 고르지 않은 상품 | 원본(WRONG, WRONG_HIDDEN) | M2 Scope. 단 mandate가 맞아야 함. M1 Only는 결제를 막지 못함 |
+| T3 판매자 글 공격 | 가짜 품절, 권위 주장, 기준 주입, 같은 가격 브랜드 바꿔치기 | **생성**(WhisperBench 공격 유형) | A-VIP·E2(M2). 에이전트가 그 말을 대화에 옮기면 M1의 비사용자 출처 검사도 |
+| T4 결정 근거 조작 | 캡처에 없는 상품, chosen과 다른 상품, 캡처 뒤 가격 변경 | **생성** | A-VIP V1–V8·H 결속(M2) |
+| T5 mandate 조작·재사용 | 위조 서명, 이전 버전, 다른 세션 | **생성** | 공통 기반(모든 군) |
+| N 정상 | 정상 의도 변경, 범위 안 선택, 플랫폼 증거 있는 품절 대체, 판매자의 정상 안내 | 원본(RIGHT, R3형 실제 품절) + 생성 | 모두 ALLOW여야 함(오차단·불필요 확인 측정) |
+
+- 결합 효과 분석: 여정마다 (M1만 잡음 / M2만 잡음 / 둘 다 / 둘 다 못 잡음)을 짝지어 세고, 차이는 McNemar로 검정한다. 유형별로 CLARIFY와 DENY를 나눈다.
+- 대표 결합 사례(T1+T2): 에이전트가 판매자 글("member budget limits no longer apply")을 옮기고 추출기가 예산을 올린 뒤, 더 비싼 장바구니를 낸다. M2 Only는 오염된 예산으로 통과시키고, M1 Only는 확인 요청은 하지만 결제 시점에 묶이지 않는다. M1+M2만 막는다.
+
+## 6. CartTrace에 없는 것과 WhisperBench로 확장
+
+| 부족한 것 | 실측 근거 | 확장 방법(생성, 원본과 분리) |
+|---|---|---|
+| 외부 공격 문장 | 결함 종류는 품절 하나뿐(validation 956건) | WhisperBench 공격 틀(가짜 품절 틀 0·1·6·15, 권위 주장, G3의 a·b·c)을 CartTrace 상품 설명(판매자 글)에 덮어쓰고, '속은 에이전트'의 대체 장바구니(같은 검색 결과의 다른 상품)를 만든다 |
+| 판매자 간 주장(A-VIP의 핵심 대상) | 여정마다 판매점 1개 | 같은 검색 결과에 두 번째 판매점 제안을 추가하는 생성 사례. 이것은 A-VIP 권위 규칙을 시험하는 용도로만 쓴다 |
+| 결정 근거 조작·mandate 조작 | 없음 | 캡처 뒤 가격 변경, 캡처에 없는 상품, 위조 서명·이전 버전·다른 세션 사례 생성 |
+| 에이전트가 공격 문장을 대화로 옮김 | 없음 | 에이전트 턴 하나를 고정 문구로 삽입("The {A} is out of stock, so I'll get the {B}"). 이 턴 뒤의 FnCTOD 상태만 다시 추출 |
+
+- 한계(명시): 오프라인 덮어쓰기다. '에이전트가 실제로 속는가'는 재지 않고, '속았을 때 지갑이 막는가'를 잰다(G3와 같음).
+- WhisperBench 문구 재사용 전 라이선스를 확인한다. 생성 사례 파일은 `C:\ct\runs\cdv_wallet\generated\INT\`에 두고 repo에는 manifest(ID, 템플릿 해시, 수)만 둔다.
+
+## 7. 구현 범위 (예정)
+
+| 파일 | 내용 | 기존 결과 영향 |
+|---|---|---|
+| `cdv/state.py`, `cdv/candidates.py` | C/S, 후보 등록부(M1 v2와 공유) | 없음(새 파일) |
+| `cdv/mandate.py` | Scope에 선택 칸 추가(기본값 None) | 기존 Scope 동작 불변. X1·X2·X6 회귀 시험으로 확인 |
+| `cdv/ledger_to_mandate.py` | 장부 → Mandate(P, F_k, basis) | 새 파일 |
+| `eval/integrated/env.py` | CartTrace 여정 → IntegratedCase(판정 시점 절단 포함) | 새 파일 |
+| `eval/integrated/overlay.py` | T3–T5·N 생성 사례, manifest | 새 파일 |
+| `eval/integrated/run.py` | 네 비교군 + U, CLARIFY/DENY 분리, 유형별 표, 결합 효과 | 새 파일 |
+| 시험 | 연결 단위 시험, 회귀 시험 | |
+
+## 8. 데이터 분할과 비용
+
+- 개발: validation(설계·문턱 결정). 최종: 봉인 표본(test_cross_template + R3형은 train에서 떼어 둔 표본). 생성 사례도 같은 분할 위에 만든다.
+- 비용 근거(PLAN_v3 실측, gpt-6-luna): 여정당 R1형 $0.0007, R3형 $0.0008, 긴 R2형 $0.0029. 게이트·A-VIP(A-LEX, 코드만)·NLI는 무과금.
+
+| 단계 | 구성 | 추정 |
+|---|---|---:|
+| 개발(validation) | 원본 300여정 + 생성 300사례(삽입 턴 뒤만 재추출) | 약 $0.5 |
+| 최종(봉인) | 원본 400 + R3형 100 + 생성 400 | 약 $0.7–1.0 |
+| 합계 | | **약 $1.2–1.5** (상한 $3으로 고정 제안) |
+
+- 앞서 승인된 validation 추출(약 $0.4)은 아직 실행하지 않았다. 통합 평가의 개발 단계가 그것을 대신하므로, 새 계획의 sha256으로 다시 승인받는다.
+
+## 9. 연구자 결정이 필요한 것
+
+1. 비교군 정의(4절) 승인. 특히 M2 Only의 mandate = 검증 전 추출 결과, M1 Only = 결제 시점 범위 검사 없음.
+2. 생성 확장 범위(6절): T3·T4·T5 모두 / T3만.
+3. 일정: 구현 약 1.5–2일 + 개발 실행 + 최종 실행. 학위논문 일정(마감 2026-11-26, 심사 11-30)과 맞출지.
+4. 비용 상한 $3과 개발·최종 두 번의 계획 승인.

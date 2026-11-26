@@ -1,0 +1,46 @@
+{
+  "split": "validation",
+  "note": "no model calls; hidden spec used only to count stockout faults (scoring side)",
+  "counts": {
+    "journeys": 4015,
+    "brand_metadata_in_results": 2999,
+    "attributes_in_results": 3566,
+    "with_final_cart": 3657,
+    "cart_lines_all_in_catalog_results": 3657,
+    "cart_lines_have_price_and_qty": 3657,
+    "no_final_cart": 358,
+    "stockout_journeys": 441,
+    "stockout_variant_shown_unavailable": 400
+  },
+  "protocol_family": {
+    "MPP/402": 509,
+    "AP2 (native mandates)": 286,
+    "ACP": 178,
+    "cart handover only": 2166,
+    "UCP/checkout": 876
+  },
+  "merchants_per_journey": {
+    "1": 2912,
+    "0": 1103
+  },
+  "all_kinds_subkinds_outcomes": {
+    "baseline / full / RIGHT": 2596,
+    "baseline / full / WRONG": 730,
+    "baseline / full / WRONG_REFUSAL": 358,
+    "baseline / full / WRONG_HIDDEN": 188,
+    "baseline / full / RIGHT_BY_LUCK": 143,
+    "designed_failure / payment / RIGHT": 56,
+    "designed_failure / payment / WRONG": 35,
+    "designed_failure / impossible / CORRECT_REFUSAL": 30,
+    "designed_failure / checkout / RIGHT": 23,
+    "designed_failure / checkout / WRONG": 16,
+    "designed_failure / impossible / WRONG": 9,
+    "designed_failure / payment / WRONG_REFUSAL": 7,
+    "designed_failure / checkout / WRONG_REFUSAL": 4,
+    "designed_failure / impossible / WRONG_HIDDEN": 2,
+    "designed_failure / checkout / RIGHT_BY_LUCK": 2
+  },
+  "fault_kinds_all_episodes": {
+    "stockout": 956
+  }
+}
