@@ -1,0 +1,32 @@
+{
+  "split": "dev",
+  "transactions": 1482,
+  "agree_on_any_violation": 1194,
+  "per_field": {
+    "Brand": {
+      "both": 72,
+      "reference_only": 0,
+      "ours_only": 0
+    },
+    "Deadline": {
+      "both": 240,
+      "reference_only": 0,
+      "ours_only": 0
+    },
+    "Fulfillment": {
+      "both": 262,
+      "reference_only": 0,
+      "ours_only": 0
+    },
+    "Price": {
+      "both": 4,
+      "reference_only": 214,
+      "ours_only": 0
+    },
+    "Quantity": {
+      "both": 148,
+      "reference_only": 0,
+      "ours_only": 204
+    }
+  }
+}

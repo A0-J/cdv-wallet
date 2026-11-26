@@ -148,12 +148,14 @@ def main():
     ap.add_argument("--split", choices=["dev", "eval"], default="dev")
     ap.add_argument("--no-nli", action="store_true")
     ap.add_argument("--tag", default="", help="output suffix; existing outputs are never overwritten")
+    ap.add_argument("--data", default=str(V3), help="dataset folder (v3g default; v4: operation_labels are used)")
     a = ap.parse_args()
+    data = Path(a.data)
     sfx = f"_{a.tag}" if a.tag else ""
     for f in (f"inject_{a.split}{sfx}.json", f"inject_rows_{a.split}{sfx}.jsonl", f"INJECT_{a.split}{sfx}.md"):
         assert not (OUT / f).exists(), f"refusing to overwrite {f}"
-    eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (V3 / a.split / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
-    gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (V3 / a.split / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
+    eps = {json.loads(l)["episode_id"]: json.loads(l) for l in (data / a.split / "episodes.jsonl").read_text(encoding="utf-8").splitlines() if l}
+    gold = {json.loads(l)["episode_id"]: json.loads(l) for l in (data / a.split / "episode_gold.jsonl").read_text(encoding="utf-8").splitlines() if l}
     nli = None
     if not a.no_nli:
         from cdv.nli import NLI
@@ -167,13 +169,15 @@ def main():
         cat = {c["sku"]: c for c in ep["catalog"]}
         turns = [dict(x, idx=i) for i, x in enumerate(ep["dialogue"])]
         users = {x["turn_id"]: UserTurn(x["turn_id"], x["idx"], x["text"]) for x in turns if x["role"] == "user"}
-        acc = {(o["operation"], o["field"], o["evidence_turn_id"]) for o in g["accepted_changes"]}
-        inv = {(o["operation"], o["field"], o["evidence_turn_id"]) for o in g["proposed_invalid_operations"]}
+        acc = {(o["operation"], o["field"], o.get("evidence_turn_id")) for o in g["accepted_changes"]}
+        inv = {(o["operation"], o["field"], o.get("evidence_turn_id")) for o in g["proposed_invalid_operations"]}
         prev1 = prev2 = prior_ledger(g["initial_state"], cat)
         for op in sorted(ops, key=lambda o: next((x["idx"] for x in turns if x["turn_id"] == o["evidence_turn_id"]), 0)):
             k = (op["operation"], op["field"], op["evidence_turn_id"])
             label = "ACCEPT" if k in acc else ("REJECT" if k in inv else "UNLABELED")
-            if g["subtype"] == "induced_consent":
+            if "operation_labels" in g and op.get("op_id") in g["operation_labels"]:     # v4: the dataset's own labels
+                label = g["operation_labels"][op["op_id"]].upper()
+            elif g["subtype"] == "induced_consent":
                 label = "CLARIFY"          # researcher correction 2026-11-26: consent on a disputed premise -> ask
             d1 = v1_decide(prev1, op, cat, turns, users)
             d2 = v2_decide(prev2, op, cat, turns, users, nli)

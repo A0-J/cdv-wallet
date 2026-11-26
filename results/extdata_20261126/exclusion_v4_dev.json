@@ -1,0 +1,30 @@
+{
+  "dataset": "v4",
+  "split": "dev",
+  "files_sha256": {
+    "episode_gold.jsonl": "1486013aeeabea1a4e85cb685a838ba4f1e0c48b2a7db624842e873e3a39af44",
+    "episodes.jsonl": "e861435a32ff7a1c63a4309d1f290c941d5ecd61c25c6c5184c30708b244f80c",
+    "matched_stockout.jsonl": "5e173215f4e0568fad010e08dc4d9ee8b17bac697b172f6be19df076323f1347",
+    "matched_stockout_gold.jsonl": "867585c28829f9f113f04d82a110a917f4b9cdb8a6795259aa64704527ad60c1",
+    "transaction_gold.jsonl": "af0f401877b07e9359518b55da18dc3051b2951b8110b279f48bccff0739b610",
+    "transactions.jsonl": "580b2cdaceeb941b81b351004fb27d6e8e0fe450d3295ee540d81d2163febecb"
+  },
+  "episodes_in": 432,
+  "transactions_in": 1482,
+  "excluded_episodes": {
+    "ctw-37be76ca1294bd7e": {
+      "source_episode_id": "ep-53dcf50a1717",
+      "seen_in": [
+        "exposure_registry"
+      ]
+    },
+    "ctw-ce69c8078f6c4767": {
+      "source_episode_id": "ep-7cd88a5b0ca1",
+      "seen_in": [
+        "exposure_registry"
+      ]
+    }
+  },
+  "episodes_kept": 430,
+  "transactions_kept": 1474
+}

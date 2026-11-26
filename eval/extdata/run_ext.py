@@ -71,13 +71,19 @@ def build_case(ep: dict, tx: dict, gold_tx: dict) -> IntegratedCase:
                                                                               "available": (c.get("stock") or 0) > 0 if c.get("stock") is not None else None,
                                                                               "title": c.get("title") or ""}}, 0)
         reg.variant_to_product[sku] = sku
-        offers.append({"cart_id": sku, "seller": seller, "label": (c.get("title") or "") + (". " + c["seller_description"] if c.get("seller_description") else ""),
+        prose = c.get("listing_text") or c.get("seller_description") or ""      # v4: listing_text; v3g: seller_description
+        offers.append({"cart_id": sku, "seller": seller, "label": (c.get("title") or "") + (". " + prose if prose else ""),
                        "amount": f"{c['unit_minor'] / 100:.2f}", "currency": c.get("currency") or ep.get("currency") or "USD"})
         catalog[(seller, sku)] = LineV2(seller, sku, c["unit_minor"] / 100, 1, c.get("brand"), sku, frozenset(),
                                         title=c.get("title") or "", kind_text=" ".join([c.get("title") or "", c.get("product_type") or ""]),
                                         product_id=sku, brand_known=bool(c.get("brand")))
         if c.get("stock") == 0:
             unavailable.append((seller, sku))       # structured catalog stock = platform fact
+    for t in turns:                                 # v4: platform tool turns carry structured stock for a listing
+        if t.get("role") == "tool" and t.get("source") == "platform" and t.get("listing_sku") and t.get("stock") == 0:
+            k = (seller, str(t["listing_sku"]))
+            if k not in unavailable:
+                unavailable.append(k)
     cart = []
     for l in tx["checkout"]["lines"]:
         k = (seller, str(l["sku"]))
@@ -125,6 +131,9 @@ def main():
     ap.add_argument("--model", default="gpt-6-luna")
     ap.add_argument("--budget", type=float, default=0.60)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--with-matched", action="store_true", help="also score matched_stockout.jsonl (same extraction)")
+    ap.add_argument("--seller-to-extractor", action="store_true",
+                    help="condition (B): tool turns with source=seller are also given to the extractor (as assistant text)")
     a = ap.parse_args()
     d = a.data / a.split
     eps = {e["episode_id"]: e for e in jl(d / "episodes.jsonl")}
@@ -145,7 +154,7 @@ def main():
             excl[e] = {"source_episode_id": src, "seen_in": hits}
     keep = [e for e in eps if e not in excl]
     keep_tx = [t for t in txs if t["episode_id"] in set(keep)]
-    tag = f"{a.name}_{a.split}" + ("_dry" if a.dry_run else "")
+    tag = f"{a.name}_{a.split}" + ("_B" if a.seller_to_extractor else "_A") + ("_dry" if a.dry_run else "")
     OUT.mkdir(parents=True, exist_ok=True)
     files_sha = {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(d.glob("*.jsonl"))}
     (OUT / f"exclusion_{a.name}_{a.split}.json").write_text(json.dumps(
@@ -155,8 +164,14 @@ def main():
     assert a.dry_run or not (OUT / f"rows_{tag}.jsonl").exists(), f"refusing to overwrite rows_{tag}.jsonl"
     llm = R.DryLLM() if a.dry_run else OpenAIResponses(a.model, OUT / f"ledger_{a.name}.jsonl", a.budget)
 
+    def to_extractor(t):
+        if t["role"] in ("user", "assistant"):
+            return True
+        return a.seller_to_extractor and t["role"] == "tool" and t.get("source") == "seller"
+
     def job(e):
-        dlg = [Turn(t["role"], t["text"], f"s{i}") for i, t in enumerate(eps[e]["dialogue"]) if t["role"] in ("user", "assistant")]
+        dlg = [Turn("user" if t["role"] == "user" else "assistant", t["text"], f"s{i}")
+               for i, t in enumerate(eps[e]["dialogue"]) if to_extractor(t)]
         try:
             return e, (FnCTOD(llm).run(dlg), PlainLLM(llm).run(dlg))
         except SystemExit:
@@ -165,7 +180,8 @@ def main():
             return e, ex
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
         ext = dict(ex.map(job, keep))
-    summ = {"dataset": a.name, "split": a.split, "episodes": len(keep), "transactions": len(keep_tx),
+    summ = {"dataset": a.name, "split": a.split, "input_condition": "B (seller turns to extractor)" if a.seller_to_extractor
+            else "A (shopper and agent turns only)", "episodes": len(keep), "transactions": len(keep_tx),
             "excluded_episodes": len(excl), "dry_run": a.dry_run}
     if a.dry_run:
         summ["dry_run_estimate"] = {"calls_lower_bound": llm.calls, "input_tokens_est": int(llm.chars_in / 4),
@@ -200,13 +216,33 @@ def main():
                      "fnctod_states": states, "plain_state": pl["state"]})
     (OUT / f"rows_{tag}.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False, default=str) + "\n" for r in rows),
                                            encoding="utf-8", newline="\n")
+    n_matched = 0
+    if a.with_matched:                               # separate analysis view; never merged into the main table
+        mg = {g["challenge_id"]: g for g in jl(d / "matched_stockout_gold.jsonl")}
+        mrows = []
+        for mx in jl(d / "matched_stockout.jsonl"):
+            v = ext.get(mx["episode_id"])
+            if v is None or isinstance(v, Exception):
+                continue
+            fn, pl = v
+            case = build_case(eps[mx["episode_id"]], mx, {})
+            o = A.run_arms(case, [{"turn_id": s_["turn_id"], "state": s_["state"]} for s_ in fn], nli=nli, gold=None)
+            g = mg.get(mx["challenge_id"]) or {}
+            mrows.append({"challenge_id": mx["challenge_id"], "pair_id": mx["pair_id"], "episode_id": mx["episode_id"],
+                          **{k: g.get(k) for k in ("intent_case", "reference_verdict", "evidence_status", "pair_similarity",
+                                                    "analysis_stratum", "seller_claim_present")},
+                          "arms": {k: {"decision": x["decision"], "codes": x["codes"]} for k, x in o["arms"].items()},
+                          "e2_fires": o["e2_fires"]})
+        (OUT / f"rows_{tag}_matched.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in mrows),
+                                                       encoding="utf-8", newline="\n")
+        n_matched = len(mrows)
     tab = defaultdict(Counter)
     for r in rows:
         for arm in A.ARMS:
             tab[(arm, r["transaction_type"], r["expected"])][r["arms"][arm]["decision"]] += 1
     summ.update({"failed": failed, "cost_usd": round(sum(sum(s.get("cost_usd", 0) for s in ext[e][0]) + ext[e][1]["cost_usd"]
                                                         for e in ext if not isinstance(ext[e], Exception)), 6),
-                 "cache_hits": llm.cache_hits,
+                 "cache_hits": llm.cache_hits, "matched_rows": n_matched,
                  "by_arm_type_expected": {f"{k[0]}|{k[1]}|{k[2]}": dict(v) for k, v in sorted(tab.items())}})
     (OUT / f"summary_{tag}.json").write_text(json.dumps(summ, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in summ.items() if k != "by_arm_type_expected"}))

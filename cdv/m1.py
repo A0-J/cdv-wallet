@@ -119,19 +119,65 @@ _BARE_BUDGET = re.compile(r"(?:budget(?: is| of)?|spend(?: no more than| up to| 
 _CLAUSE = re.compile(r"[.;!?\n](?!\d)")
 QTY_RE = re.compile(r"\b(\d+)\s*(?:x\b|pcs\b|pieces?\b|units?\b|of (?:them|each|it)\b)|\b(?:one|two|three|four|five) of each\b", re.I)
 DEADLINE_RE = re.compile(r"\b(?:within|in|by)\s+(\d+)\s+days?\b|\bby (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", re.I)
-CONDITIONAL_RE = re.compile(
-    r"\b(?:if (?:it(?:'s| is)|that(?:'s| is)|they(?:'re| are)|[\w\s-]{1,40}? (?:is|are)) (?:out of stock|unavailable|sold out|not available)"
-    r"(?![,.]?\s*(?:just |please |then )?(?:tell me|let me know|ask me|check with me|don'?t (?:substitute|swap|replace)|no (?:substitut|swap)))"
-    r"|or the closest(?: thing)?|(?:a )?similar (?:one|item|product)?\s*(?:is|would be) (?:fine|ok|okay)"
-    r"|otherwise[, ]+(?:\w+\s){0,4}(?:is|would be) (?:fine|ok|okay))", re.I)
+# ---- cue specifications (2026-11-26, last rule change; written from the definitions, not from dataset sentences) ----
+# CONDITIONAL-1  A user turn grants a conditional substitution iff
+#   (1) it states the unavailability condition of the requested item: if / when / in case / should / in the event (that)
+#       + (up to 6 words) + [is|are|be|'s|'re|goes|gets|turns out to be] + an unavailability predicate
+#       (out of stock, sold out, unavailable, not available, not in stock, discontinued, gone, backordered,
+#        can't / cannot be found), or "if you|they can't|cannot|couldn't get|find|source ..."
+#   (2) it is not immediately followed by a request to be asked instead (tell me, let me know, ask me, check with me,
+#       don't substitute|swap|replace, no substitutes), and
+#   (3) within the same sentence it grants an alternative: a named alternative ("Bose is fine"), a similar / comparable / equivalent / alternative /
+#       substitute / replacement / closest / next best / another / other item ... is|are|would be|will be fine|ok|
+#       acceptable|good|works|will do, or go with|for X, get|buy|order|take X instead, switch to X,
+#       substitute|swap|replace (it) with X, feel free to|you can|you may substitute|swap|choose.
+#   A standalone grant without the condition also counts: "(or) the closest (thing|one)", "a similar one is fine",
+#   "substitutes are fine", "otherwise X is fine".
+_UNAVAIL = (r"(?:out of stock|sold out|unavailable|not available|not in stock|discontinued|gone|back-?ordered|"
+            r"(?:can'?t|cannot) be found|isn'?t available|aren'?t available)")
+_COND = (r"\b(?:if|when|in case|should|in the event(?: that)?)\s+(?:[\w'-]+\s+){0,6}?"
+         r"(?:(?:is|are|be|'s|'re|goes|go|gets|get|turns out to be|happens to be)\s+)?" + _UNAVAIL +
+         r"|\bif (?:you|they) (?:can'?t|cannot|couldn'?t) (?:get|find|source)\b")
+_ASK_INSTEAD = (r"(?![,.;]?\s*(?:just |please |then |simply )?(?:tell me|let me know|ask me|check with me|"
+                r"don'?t (?:substitute|swap|replace)|do not (?:substitute|swap|replace)|no (?:substitut|swap|replacement)))")
+_ALT_NOUN = (r"(?:similar|comparable|equivalent|alternative|substitute|replacement|closest|next best|another|other)"
+             r"(?:\s+(?:one|ones|item|items|product|products|model|models|option|options|brand|thing))?")
+_OKAY = r"(?:is|are|would be|will be|'s)\s+(?:fine|ok|okay|acceptable|good|alright|all right)|works?|will do"
+_GRANT = (r"(?:\b(?:a|an|any|the)?\s*" + _ALT_NOUN + r"\s+(?:" + _OKAY + r")"
+          r"|\b(?:[\w'-]+\s+){1,4}?(?:" + _OKAY + r")"          # a named alternative: "Bose is fine", "the JBL would be ok"
+          r"|\bgo (?:with|for)\b|\b(?:get|buy|order|take|use|pick)\b[^.;!?]{0,40}?\binstead\b|\bswitch to\b"
+          r"|\b(?:substitute|swap|replace)\b(?:\s+(?:it|them))?\s+with\b"
+          r"|\b(?:feel free to|you can|you may|it'?s (?:ok|okay|fine) to)\s+(?:substitute|swap|replace|choose|pick)\b)")
+_STANDALONE = (r"\bor the closest(?: thing| one)?\b|\b(?:a |any )?similar (?:one|item|product)?\s*(?:is|would be) (?:fine|ok|okay)"
+               r"|\bsubstitutes? (?:is|are) (?:fine|ok|okay|acceptable)|\botherwise[, ]+(?:\w+\s){0,4}(?:is|would be) (?:fine|ok|okay)")
+CONDITIONAL_RE = re.compile(r"(?:" + _COND + r")" + _ASK_INSTEAD + r"[^.;!?]{0,100}?(?:" + _GRANT + r")|" + _STANDALONE, re.I)
 
-# Explicit widening cues. Widening ops (relax / revoke / scope expansion) need one of these in a
-# cited user turn; ordinary picks ("I'll go with X") are not widening cues.
-WIDEN_CUES = re.compile(
-    r"\b(?:actually|instead|change (?:it|that|my)|raise|increase|go up to|can (?:go|spend) (?:up to|more)|"
-    r"don'?t need|no longer need|forget (?:about )?|drop (?:the )?|remove (?:the )?|skip (?:the )?|"
-    r"any brand|brand doesn'?t matter|doesn'?t matter|not required|optional now|that'?s fine too|"
-    r"just the|only the|without the)\b", re.I)
+# WIDEN-1  A user turn is an explicit widening cue iff the user states, as their own decision, that an earlier
+#   condition no longer holds or holds more loosely. Two kinds of evidence (either suffices):
+#   (D) a revision marker: actually, instead, rather, after all, on second thought, scratch that, change (it|that|my|the),
+#       switch (it|to), update (it|my|the), make it, let's make it
+#   (W) a widening predicate on a condition:
+#       raise / increase / extend / expand / stretch / bump up / up the (budget|limit) / go up to / go higher|above|over|beyond
+#       / spend|pay more / can go|spend|pay|afford (up to|more|higher) ;
+#       removal: don't|do not|no longer|won't need|want, no need for, forget (about), drop, remove, skip, cancel, leave out,
+#       take out, without the, just the, only the ;
+#       unrestricting: any brand|color|colour|size|model|kind, (it|that|brand|color|size) doesn't|does not matter,
+#       no preference, not required, optional, no (budget|limit|deadline|rush|hurry), whenever is fine ;
+#       admitting more options: (X) is|are fine|ok|okay|acceptable too, also fine, works too, that's fine too,
+#       either|both (is|are) fine, also accept|allow|consider, open to (other|any).
+#   An ordinary pick ("I'll go with X") is not a widening cue (PICK_ONLY, V-C).
+_REVISION = (r"actually|instead|rather|after all|on second thought|scratch that|change (?:it|that|my|the)|"
+             r"switch (?:it|to)|update (?:it|my|the)|make it|let'?s make it")
+_WIDEN_PRED = (r"raise|increase|extend|expand|stretch|bump (?:it |that |the \w+ )?up|up (?:the|my) (?:budget|limit)|"
+               r"go up to|go (?:higher|above|over|beyond)|(?:spend|pay) more|can (?:go|spend|pay|afford) (?:up to|more|higher)|"
+               r"(?:don'?t|do not|no longer|won'?t) (?:need|want)|no need for|forget (?:about )?|drop|remove|skip|cancel|"
+               r"leave out|take out|without the|just the|only the|"
+               r"any (?:brand|colou?r|size|model|kind)|(?:it|that|brand|colou?r|size) (?:doesn'?t|does not) matter|"
+               r"doesn'?t matter|no preference|not required|optional|no (?:budget|limit|deadline|rush|hurry)|whenever is fine|"
+               r"(?:is|are) (?:fine|ok|okay|acceptable) too|also fine|works too|that'?s fine too|(?:either|both) (?:is|are) fine|"
+               r"also (?:accept|allow|consider)|open to (?:other|any)")
+WIDEN_CUES = re.compile(r"\b(?:" + _REVISION + r"|" + _WIDEN_PRED + r")\b", re.I)
+
 PICK_ONLY = re.compile(r"^\s*(?:i'?ll|i will|let'?s|i'?d like to)?\s*(?:go with|take|choose|pick|proceed with)\b", re.I)
 
 

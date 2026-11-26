@@ -1,0 +1,207 @@
+{
+  "note": "Exact reproduction of the PLAN_v3 result rows (no model calls). Regression gate for all later work.",
+  "sets": {
+    "R1_test_cross_store": {
+      "n": 200,
+      "mismatched_rows": 3,
+      "examples": [
+        {
+          "episode_id": "ep-40ed94fab2d7",
+          "diffs": [
+            ".arms.fnctod_r.codes: len 1 != 0",
+            ".arms.fnctod_r.decision: 'DENY' != 'CLARIFY'",
+            ".arms.fnctod_r.flags: len 0 != 1",
+            ".arms.fnctod_r.hint: 'OK' != 'CLARIFY'",
+            ".arms.fnctod_r.ledger.bundle_all: missing on one side",
+            ".arms.fnctod_r.missing_silent: 1 != 0",
+            ".arms.fnctod_r.missing_stated: 1 != 2",
+            ".arms.fnctod_rn.codes: len 1 != 0",
+            ".arms.fnctod_rn.flags: len 0 != 1",
+            ".arms.fnctod_rn.ledger.bundle_all: missing on one side"
+          ]
+        },
+        {
+          "episode_id": "ep-1fd4549d4d6f",
+          "diffs": [
+            ".arms.fnctod_r.ledger.bundle_all[1]: 'Amazon Brand' != 'Solimo Designer Arrow Texture case'",
+            ".arms.fnctod_rn.ledger.bundle_all[1]: 'Amazon Brand' != 'Solimo Designer Arrow Texture case'",
+            ".traces.fnctod_r[3].findings: len 0 != 1",
+            ".traces.fnctod_r[3].ledger.bundle[1]: 'Amazon Brand' != 'Amazon Brand Arrow Texture case'",
+            ".traces.fnctod_r[3].ops[0][3]: 'PENDING' != 'ACCEPT'",
+            ".traces.fnctod_r[3].ops[0][4][0]: 'WIDEN_WITHOUT_EXPLICIT_CUE' != 'WIDEN_EXPLICIT'",
+            ".traces.fnctod_r[4].ledger.bundle[1]: 'Amazon Brand' != 'Amazon Brand Arrow Texture case'",
+            ".traces.fnctod_r[4].ops: len 4 != 3",
+            ".traces.fnctod_r[5].ledger.bundle[1]: 'Amazon Brand' != 'Amazon Brand Arrow Texture case'",
+            ".traces.fnctod_r[5].ops: len 1 != 2"
+          ]
+        },
+        {
+          "episode_id": "ep-10bf6b6bd454",
+          "diffs": [
+            ".arms.fnctod_r.accepted_correct: 1 != 2",
+            ".arms.fnctod_r.decision: 'CLARIFY' != 'ALLOW'",
+            ".arms.fnctod_r.hint: 'CLARIFY' != 'OK'",
+            ".arms.fnctod_r.ledger.bundle_all[1]: 'Saddle Seat Cover/ Cushion For Bike' != 'Saddle Seat Cover/Cushion For Bike'",
+            ".arms.fnctod_r.missing_silent: 0 != 1",
+            ".arms.fnctod_rn.accepted_correct: 1 != 2",
+            ".arms.fnctod_rn.ledger.bundle_all[1]: 'Saddle Seat Cover/ Cushion For Bike' != 'Saddle Seat Cover/Cushion For Bike'",
+            ".traces.fnctod_r[2].findings: len 0 != 1",
+            ".traces.fnctod_r[2].ledger.bundle: missing on one side",
+            ".traces.fnctod_r[2].ops[0][2]: 'none' != 'rule'"
+          ]
+        }
+      ],
+      "verdict_mismatches": [],
+      "n_verdict_mismatches": 0
+    },
+    "R3_test_cross_store": {
+      "n": 100,
+      "mismatched_rows": 3,
+      "examples": [
+        {
+          "episode_id": "ep-75187264ecd8",
+          "diffs": [
+            ".arms.fnctod_r.accepted_correct: 2 != 1",
+            ".arms.fnctod_r.codes: len 1 != 0",
+            ".arms.fnctod_r.decision: 'CLARIFY' != 'ALLOW'",
+            ".arms.fnctod_r.hint: 'CLARIFY' != 'OK'",
+            ".arms.fnctod_r.ledger.brand_in: missing on one side",
+            ".arms.fnctod_r.ledger.substitute: missing on one side",
+            ".arms.fnctod_r.missing_silent: 0 != 1",
+            ".arms.fnctod_r.missing_stated: 0 != 1",
+            ".arms.fnctod_rn.accepted_correct: 2 != 1",
+            ".arms.fnctod_rn.codes: len 1 != 0"
+          ]
+        },
+        {
+          "episode_id": "ep-e09ead19b33e",
+          "diffs": [
+            ".arms.fnctod_r.ledger.product_type: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'",
+            ".arms.fnctod_rn.ledger.product_type: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'",
+            ".traces.fnctod_r[1].findings: len 0 != 1",
+            ".traces.fnctod_r[1].ledger.ptype: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'",
+            ".traces.fnctod_r[1].ops[1][3]: 'PENDING' != 'ACCEPT'",
+            ".traces.fnctod_r[1].ops[1][4][0]: 'WIDEN_WITHOUT_EXPLICIT_CUE' != 'WIDEN_EXPLICIT'",
+            ".traces.fnctod_r[2].ledger.ptype: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'",
+            ".traces.fnctod_r[3].ledger.ptype: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'",
+            ".traces.fnctod_rn[1].findings: len 0 != 1",
+            ".traces.fnctod_rn[1].ledger.ptype: '14k Yellow Gold-Filled Letter \"K\" Charm Pendant Necklace' != 'Letter \"K\" Charm Pendant Necklace (no metal preference)'"
+          ]
+        },
+        {
+          "episode_id": "ep-5469b507a24f",
+          "diffs": [
+            ".arms.fnctod_r.accepted_correct: 2 != 1",
+            ".arms.fnctod_r.ledger.substitute: missing on one side",
+            ".arms.fnctod_r.missing_stated: 0 != 1",
+            ".arms.fnctod_rn.accepted_correct: 2 != 1",
+            ".arms.fnctod_rn.ledger.substitute: missing on one side",
+            ".arms.fnctod_rn.missing_stated: 0 != 1",
+            ".traces.fnctod_r[1].ledger.sub: missing on one side",
+            ".traces.fnctod_r[1].ops[0][2]: 'rule' != 'none'",
+            ".traces.fnctod_r[1].ops[0][3]: 'ACCEPT' != 'REJECT'",
+            ".traces.fnctod_r[1].ops[0][4][0]: 'WIDEN' != 'NON_USER_SOURCE'"
+          ]
+        }
+      ],
+      "verdict_mismatches": [],
+      "n_verdict_mismatches": 0
+    },
+    "R2_test_cross_store": {
+      "n": 96,
+      "mismatched_rows": 23,
+      "examples": [
+        {
+          "episode_id": "ep-17f994c1c05b",
+          "diffs": [
+            ".arms.fnctod_r.accepted_correct: 1 != 0",
+            ".arms.fnctod_r.ledger.substitute: missing on one side",
+            ".arms.fnctod_r.missing_stated: 0 != 1",
+            ".arms.fnctod_rn.accepted_correct: 1 != 0",
+            ".arms.fnctod_rn.ledger.substitute: missing on one side",
+            ".arms.fnctod_rn.missing_stated: 0 != 1",
+            ".traces.fnctod_r[1].ledger.sub: missing on one side",
+            ".traces.fnctod_r[1].ops[1][2]: 'rule' != 'none'",
+            ".traces.fnctod_r[1].ops[1][3]: 'ACCEPT' != 'REJECT'",
+            ".traces.fnctod_r[1].ops[1][4][0]: 'WIDEN' != 'NON_USER_SOURCE'"
+          ]
+        },
+        {
+          "episode_id": "ep-2ecc471721c0",
+          "diffs": [
+            ".arms.fnctod_r.flags: len 1 != 2",
+            ".arms.fnctod_r.ledger.substitute: missing on one side",
+            ".arms.fnctod_r.missing_stated: 0 != 1",
+            ".arms.fnctod_rn.flags: len 1 != 2",
+            ".arms.fnctod_rn.ledger.substitute: missing on one side",
+            ".arms.fnctod_rn.missing_stated: 0 != 1",
+            ".traces.fnctod_r[4].findings[0][2]: len 1 != 2",
+            ".traces.fnctod_r[4].ledger.sub: missing on one side",
+            ".traces.fnctod_r[4].ops[4][2]: 'none' != 'rule'",
+            ".traces.fnctod_r[4].ops[4][3]: 'REJECT' != 'ACCEPT'"
+          ]
+        },
+        {
+          "episode_id": "ep-2ede05445daf",
+          "diffs": [
+            ".arms.fnctod_r.ledger.product_type: 'Gold 10 pcs Cake Candle' != 'similar candle'",
+            ".arms.fnctod_rn.ledger.product_type: 'Gold 10 pcs Cake Candle' != 'similar candle'",
+            ".traces.fnctod_r[1].findings: len 0 != 1",
+            ".traces.fnctod_r[1].ledger.ptype: 'Gold 10 pcs Cake Candle' != 'similar candle'",
+            ".traces.fnctod_r[1].ops[0][3]: 'PENDING' != 'ACCEPT'",
+            ".traces.fnctod_r[1].ops[0][4][0]: 'WIDEN_WITHOUT_EXPLICIT_CUE' != 'WIDEN_EXPLICIT'",
+            ".traces.fnctod_r[2].ledger.ptype: 'Gold 10 pcs Cake Candle' != 'similar candle'",
+            ".traces.fnctod_r[2].ops: len 2 != 1",
+            ".traces.fnctod_r[3].ledger.ptype: 'Gold 10 pcs Cake Candle' != 'similar candle'",
+            ".traces.fnctod_r[4].ledger.ptype: 'Gold 10 pcs Cake Candle' != 'similar candle'"
+          ]
+        },
+        {
+          "episode_id": "ep-45253c138506",
+          "diffs": [
+            ".arms.fnctod_r.ledger.product_type: missing on one side",
+            ".arms.fnctod_rn.ledger.product_type: missing on one side",
+            ".traces.fnctod_r[2].findings: len 0 != 1",
+            ".traces.fnctod_r[2].ledger.bundle: missing on one side",
+            ".traces.fnctod_r[2].ops[0][2]: 'none' != 'rule'",
+            ".traces.fnctod_r[2].ops[0][3]: 'REJECT' != 'ACCEPT'",
+            ".traces.fnctod_r[2].ops[0][4][0]: 'NON_USER_SOURCE' != 'WIDEN_EXPLICIT'",
+            ".traces.fnctod_r[3].findings: len 1 != 2",
+            ".traces.fnctod_r[3].ledger.bundle: missing on one side",
+            ".traces.fnctod_r[3].ops: len 3 != 2"
+          ]
+        },
+        {
+          "episode_id": "ep-4f88e300757e",
+          "diffs": [
+            ".arms.fnctod_r.accepted_wrong: 0 != 1",
+            ".arms.fnctod_r.codes: len 1 != 0",
+            ".arms.fnctod_r.decision: 'CLARIFY' != 'ALLOW'",
+            ".arms.fnctod_r.flags: len 1 != 0",
+            ".arms.fnctod_r.hint: 'CLARIFY' != 'OK'",
+            ".arms.fnctod_r.ledger.brand_in[0]: 'Salomon' != 'adidas'",
+            ".arms.fnctod_rn.accepted_wrong: 0 != 1",
+            ".arms.fnctod_rn.codes: len 1 != 0",
+            ".arms.fnctod_rn.flags: len 1 != 0",
+            ".arms.fnctod_rn.ledger.brand_in[0]: 'Salomon' != 'adidas'"
+          ]
+        }
+      ],
+      "verdict_mismatches": [],
+      "n_verdict_mismatches": 0
+    },
+    "R1_validation": {
+      "n": 10,
+      "mismatched_rows": 0,
+      "examples": [],
+      "verdict_mismatches": [],
+      "n_verdict_mismatches": 0
+    },
+    "G1_eval": {
+      "n": 260,
+      "mismatched_rows": 0,
+      "examples": []
+    }
+  },
+  "exact_reproduction": false
+}
