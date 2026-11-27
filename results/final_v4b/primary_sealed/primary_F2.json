@@ -1,0 +1,170 @@
+[
+  {
+    "n": 43,
+    "clusters": 43,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 18,
+    "y_count": 40,
+    "x_pct": 41.9,
+    "y_pct": 93.0,
+    "diff_pp": -51.2,
+    "ci95": [
+      -65.1,
+      -37.2
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B2_only": 0,
+      "AV2_only": 22
+    },
+    "num": 1,
+    "label": "B2 대 AV2: 위반 부당 허용",
+    "population": "pay_viol",
+    "expect": "x<y",
+    "p_holm": 6e-05,
+    "reject": true
+  },
+  {
+    "n": 289,
+    "clusters": 289,
+    "x": "B2",
+    "y": "AV2",
+    "event": "ALLOW",
+    "x_count": 244,
+    "y_count": 274,
+    "x_pct": 84.4,
+    "y_pct": 94.8,
+    "diff_pp": -10.4,
+    "ci95": [
+      -14.5,
+      -6.2
+    ],
+    "p_perm": 2e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B2_only": 5,
+      "AV2_only": 35
+    },
+    "num": 2,
+    "label": "B2 대 AV2: 정상 허용",
+    "population": "legit",
+    "expect": "x>=y",
+    "p_holm": 6e-05,
+    "reject": true
+  },
+  {
+    "n": 289,
+    "clusters": 289,
+    "x": "B3",
+    "y": "B2",
+    "event": "ALLOW",
+    "x_count": 263,
+    "y_count": 244,
+    "x_pct": 91.0,
+    "y_pct": 84.4,
+    "diff_pp": 6.6,
+    "ci95": [
+      3.5,
+      10.0
+    ],
+    "p_perm": 9e-05,
+    "p_mcnemar_units": 7e-05,
+    "discordant": {
+      "B3_only": 21,
+      "B2_only": 2
+    },
+    "num": 4,
+    "label": "B3 대 B2: 정상 허용",
+    "population": "legit",
+    "expect": "x<=y",
+    "p_holm": 0.00018,
+    "reject": true
+  },
+  {
+    "n": 289,
+    "clusters": 289,
+    "x": "B3",
+    "y": "B4",
+    "event": "CLARIFY",
+    "x_count": 22,
+    "y_count": 71,
+    "x_pct": 7.6,
+    "y_pct": 24.6,
+    "diff_pp": -17.0,
+    "ci95": [
+      -21.5,
+      -12.8
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 0,
+      "B4_only": 49
+    },
+    "num": 5,
+    "label": "B3 대 B4: 정상 확인 요청",
+    "population": "legit",
+    "expect": "x<y",
+    "p_holm": 6e-05,
+    "reject": true
+  },
+  {
+    "n": 289,
+    "clusters": 289,
+    "x": "B3",
+    "y": "PRECHECK",
+    "event": "ALLOW",
+    "x_count": 263,
+    "y_count": 179,
+    "x_pct": 91.0,
+    "y_pct": 61.9,
+    "diff_pp": 29.1,
+    "ci95": [
+      22.1,
+      35.6
+    ],
+    "p_perm": 1e-05,
+    "p_mcnemar_units": 0.0,
+    "discordant": {
+      "B3_only": 104,
+      "PRECHECK_only": 20
+    },
+    "num": 6,
+    "label": "B3 대 PRECHECK: 정상 허용",
+    "population": "legit",
+    "expect": "x>y",
+    "p_holm": 6e-05,
+    "reject": true
+  },
+  {
+    "n": 43,
+    "clusters": 43,
+    "x": "B3",
+    "y": "PRECHECK",
+    "event": "ALLOW",
+    "x_count": 25,
+    "y_count": 30,
+    "x_pct": 58.1,
+    "y_pct": 69.8,
+    "diff_pp": -11.6,
+    "ci95": [
+      -25.6,
+      2.3
+    ],
+    "p_perm": 0.22656,
+    "p_mcnemar_units": 0.22656,
+    "discordant": {
+      "B3_only": 3,
+      "PRECHECK_only": 8
+    },
+    "num": 7,
+    "label": "B3 대 PRECHECK: 위반 부당 허용",
+    "population": "pay_viol",
+    "expect": "x>=y",
+    "p_holm": 0.22656,
+    "reject": false
+  }
+]

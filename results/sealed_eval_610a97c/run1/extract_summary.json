@@ -1,0 +1,47 @@
+{
+  "run": 1,
+  "freeze_commit": "610a97c",
+  "ids_sha256": "540669d10c44bb26a9dfe208a01268d1ade649ea3375ba9eff32ce8a449bfb46",
+  "dry_run": false,
+  "model": "gpt-6-luna",
+  "sets": {
+    "S_R1": {
+      "split": "test_cross_template",
+      "n_ids": 300,
+      "n_done": 300,
+      "excluded": [],
+      "failed": [],
+      "outcomes": {
+        "RIGHT": 210,
+        "WRONG": 60,
+        "RIGHT_BY_LUCK": 8,
+        "WRONG_HIDDEN": 22
+      },
+      "t_kind": {
+        "consent_request": 145,
+        "cart_handover": 155
+      },
+      "user_turns_before_t": 691
+    },
+    "S_R3": {
+      "split": "train",
+      "n_ids": 100,
+      "n_done": 100,
+      "excluded": [],
+      "failed": [],
+      "outcomes": {
+        "WRONG": 26,
+        "RIGHT": 68,
+        "WRONG_HIDDEN": 3,
+        "RIGHT_BY_LUCK": 3
+      },
+      "t_kind": {
+        "cart_handover": 47,
+        "consent_request": 53
+      },
+      "user_turns_before_t": 247
+    }
+  },
+  "cost_usd": 0.232818,
+  "cache_hits": 0
+}
