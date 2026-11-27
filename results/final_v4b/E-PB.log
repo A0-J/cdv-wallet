@@ -1,0 +1,1 @@
+{"prompts_sha256": "d9c696febf7ffc7c49640f3afd5a492c64e1e783e6e343f0f366cf6e6a18ce43", "input_condition": "B (seller turns in input)", "precheck_only": true, "ledger": "ledger_baselines_v4b.jsonl", "rows": 3180, "cost_usd_ledger_total": 0.414306, "cache_hits": 1813, "summary_failures": 0, "precheck_unparsed": 0}

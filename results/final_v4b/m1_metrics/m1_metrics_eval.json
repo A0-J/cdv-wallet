@@ -1,0 +1,1614 @@
+{
+  "all": {
+    "rules v1": {
+      "n": 959,
+      "accuracy": 36.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.2,
+          "recall": 18.7,
+          "f1": 29.7,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 100.0,
+          "recall": 28.9,
+          "f1": 44.9,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 25.7,
+          "recall": 87.1,
+          "f1": 39.7,
+          "support": 202
+        }
+      },
+      "macro_f1": 38.1,
+      "confusion": {
+        "ACCEPT": {
+          "CLARIFY": 302,
+          "ACCEPT": 78,
+          "UNSUPPORTED": 38
+        },
+        "REJECT": {
+          "ACCEPT": 15,
+          "REJECT": 98,
+          "CLARIFY": 207,
+          "UNSUPPORTED": 19
+        },
+        "CLARIFY": {
+          "CLARIFY": 176,
+          "ACCEPT": 15,
+          "UNSUPPORTED": 11
+        }
+      }
+    },
+    "rules v2": {
+      "n": 959,
+      "accuracy": 37.9,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 67.1,
+          "recall": 12.2,
+          "f1": 20.6,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 46.2,
+          "recall": 65.2,
+          "f1": 54.1,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 27.0,
+          "recall": 45.0,
+          "f1": 33.8,
+          "support": 202
+        }
+      },
+      "macro_f1": 36.2,
+      "confusion": {
+        "ACCEPT": {
+          "REJECT": 172,
+          "CLARIFY": 157,
+          "ACCEPT": 51,
+          "UNSUPPORTED": 38
+        },
+        "REJECT": {
+          "ACCEPT": 10,
+          "REJECT": 221,
+          "CLARIFY": 89,
+          "UNSUPPORTED": 19
+        },
+        "CLARIFY": {
+          "REJECT": 85,
+          "CLARIFY": 91,
+          "ACCEPT": 15,
+          "UNSUPPORTED": 11
+        }
+      }
+    },
+    "M1-G run 1": {
+      "n": 959,
+      "accuracy": 80.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 93.4,
+          "recall": 91.1,
+          "f1": 92.3,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 69.4,
+          "recall": 99.7,
+          "f1": 81.8,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 85.9,
+          "recall": 27.2,
+          "f1": 41.4,
+          "support": 202
+        }
+      },
+      "macro_f1": 71.8,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 381,
+          "REJECT": 28,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 338,
+          "ACCEPT": 1
+        },
+        "CLARIFY": {
+          "CLARIFY": 55,
+          "ACCEPT": 26,
+          "REJECT": 121
+        }
+      }
+    },
+    "M1-G run 2": {
+      "n": 959,
+      "accuracy": 80.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 94.1,
+          "recall": 91.4,
+          "f1": 92.7,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 68.5,
+          "recall": 99.4,
+          "f1": 81.1,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 85.2,
+          "recall": 25.7,
+          "f1": 39.5,
+          "support": 202
+        }
+      },
+      "macro_f1": 71.1,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 382,
+          "REJECT": 27,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 337,
+          "ACCEPT": 2
+        },
+        "CLARIFY": {
+          "REJECT": 128,
+          "ACCEPT": 22,
+          "CLARIFY": 52
+        }
+      }
+    },
+    "meta lookup: majority": {
+      "n": 959,
+      "accuracy": 43.6,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 43.6,
+          "recall": 100.0,
+          "f1": 60.7,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 20.2,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 418
+        },
+        "REJECT": {
+          "ACCEPT": 339
+        },
+        "CLARIFY": {
+          "ACCEPT": 202
+        }
+      }
+    },
+    "meta lookup: operation+field": {
+      "n": 959,
+      "accuracy": 48.9,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 48.9,
+          "recall": 92.1,
+          "f1": 63.9,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 48.8,
+          "recall": 24.8,
+          "f1": 32.9,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 32.3,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 385,
+          "REJECT": 33
+        },
+        "REJECT": {
+          "ACCEPT": 255,
+          "REJECT": 84
+        },
+        "CLARIFY": {
+          "ACCEPT": 147,
+          "REJECT": 55
+        }
+      }
+    },
+    "meta lookup: speaker+first": {
+      "n": 959,
+      "accuracy": 60.0,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 52.1,
+          "recall": 100.0,
+          "f1": 68.5,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 100.0,
+          "recall": 46.3,
+          "f1": 63.3,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 43.9,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 418
+        },
+        "REJECT": {
+          "ACCEPT": 182,
+          "REJECT": 157
+        },
+        "CLARIFY": {
+          "ACCEPT": 202
+        }
+      }
+    },
+    "meta lookup: operation+field+speaker+first": {
+      "n": 959,
+      "accuracy": 60.0,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 53.4,
+          "recall": 97.6,
+          "f1": 69.0,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 93.4,
+          "recall": 37.5,
+          "f1": 53.5,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 67.8,
+          "recall": 19.8,
+          "f1": 30.7,
+          "support": 202
+        }
+      },
+      "macro_f1": 51.1,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 408,
+          "CLARIFY": 2,
+          "REJECT": 8
+        },
+        "REJECT": {
+          "ACCEPT": 195,
+          "REJECT": 127,
+          "CLARIFY": 17
+        },
+        "CLARIFY": {
+          "ACCEPT": 161,
+          "CLARIFY": 40,
+          "REJECT": 1
+        }
+      }
+    },
+    "meta tree (depth 4)": {
+      "n": 959,
+      "accuracy": 70.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 69.5,
+          "recall": 87.3,
+          "f1": 77.4,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 69.5,
+          "recall": 85.5,
+          "f1": 76.7,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 100.0,
+          "recall": 8.4,
+          "f1": 15.5,
+          "support": 202
+        }
+      },
+      "macro_f1": 56.6,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 365,
+          "REJECT": 53
+        },
+        "REJECT": {
+          "ACCEPT": 49,
+          "REJECT": 290
+        },
+        "CLARIFY": {
+          "REJECT": 74,
+          "ACCEPT": 111,
+          "CLARIFY": 17
+        }
+      }
+    },
+    "meta naive Bayes": {
+      "n": 959,
+      "accuracy": 66.8,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.1,
+          "recall": 84.2,
+          "f1": 77.7,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 65.8,
+          "recall": 79.4,
+          "f1": 71.9,
+          "support": 339
+        },
+        "CLARIFY": {
+          "precision": 32.3,
+          "recall": 9.9,
+          "f1": 15.2,
+          "support": 202
+        }
+      },
+      "macro_f1": 54.9,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 352,
+          "CLARIFY": 16,
+          "REJECT": 50
+        },
+        "REJECT": {
+          "ACCEPT": 44,
+          "REJECT": 269,
+          "CLARIFY": 26
+        },
+        "CLARIFY": {
+          "REJECT": 90,
+          "ACCEPT": 92,
+          "CLARIFY": 20
+        }
+      }
+    }
+  },
+  "later user turn": {
+    "rules v1": {
+      "n": 802,
+      "accuracy": 31.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.2,
+          "recall": 18.7,
+          "f1": 29.7,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 27.8,
+          "recall": 87.1,
+          "f1": 42.1,
+          "support": 202
+        }
+      },
+      "macro_f1": 23.9,
+      "confusion": {
+        "ACCEPT": {
+          "CLARIFY": 302,
+          "ACCEPT": 78,
+          "UNSUPPORTED": 38
+        },
+        "REJECT": {
+          "ACCEPT": 15,
+          "CLARIFY": 156,
+          "UNSUPPORTED": 11
+        },
+        "CLARIFY": {
+          "CLARIFY": 176,
+          "ACCEPT": 15,
+          "UNSUPPORTED": 11
+        }
+      }
+    },
+    "rules v2": {
+      "n": 802,
+      "accuracy": 30.0,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 67.1,
+          "recall": 12.2,
+          "f1": 20.6,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 27.8,
+          "recall": 54.4,
+          "f1": 36.8,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 29.4,
+          "recall": 45.0,
+          "f1": 35.5,
+          "support": 202
+        }
+      },
+      "macro_f1": 31.0,
+      "confusion": {
+        "ACCEPT": {
+          "REJECT": 172,
+          "CLARIFY": 157,
+          "ACCEPT": 51,
+          "UNSUPPORTED": 38
+        },
+        "REJECT": {
+          "ACCEPT": 10,
+          "REJECT": 99,
+          "CLARIFY": 62,
+          "UNSUPPORTED": 11
+        },
+        "CLARIFY": {
+          "REJECT": 85,
+          "CLARIFY": 91,
+          "ACCEPT": 15,
+          "UNSUPPORTED": 11
+        }
+      }
+    },
+    "M1-G run 1": {
+      "n": 802,
+      "accuracy": 77.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 93.6,
+          "recall": 91.1,
+          "f1": 92.4,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 55.0,
+          "recall": 100.0,
+          "f1": 71.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 85.9,
+          "recall": 27.2,
+          "f1": 41.4,
+          "support": 202
+        }
+      },
+      "macro_f1": 68.2,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 381,
+          "REJECT": 28,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 182
+        },
+        "CLARIFY": {
+          "CLARIFY": 55,
+          "ACCEPT": 26,
+          "REJECT": 121
+        }
+      }
+    },
+    "M1-G run 2": {
+      "n": 802,
+      "accuracy": 76.8,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 94.6,
+          "recall": 91.4,
+          "f1": 92.9,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 54.0,
+          "recall": 100.0,
+          "f1": 70.1,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 85.2,
+          "recall": 25.7,
+          "f1": 39.5,
+          "support": 202
+        }
+      },
+      "macro_f1": 67.5,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 382,
+          "REJECT": 27,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 182
+        },
+        "CLARIFY": {
+          "REJECT": 128,
+          "ACCEPT": 22,
+          "CLARIFY": 52
+        }
+      }
+    },
+    "meta lookup: majority": {
+      "n": 802,
+      "accuracy": 52.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 52.1,
+          "recall": 100.0,
+          "f1": 68.5,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 22.8,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 418
+        },
+        "REJECT": {
+          "ACCEPT": 182
+        },
+        "CLARIFY": {
+          "ACCEPT": 202
+        }
+      }
+    },
+    "meta lookup: operation+field": {
+      "n": 802,
+      "accuracy": 51.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 56.3,
+          "recall": 92.1,
+          "f1": 69.9,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 25.4,
+          "recall": 16.5,
+          "f1": 20.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 30.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 385,
+          "REJECT": 33
+        },
+        "REJECT": {
+          "ACCEPT": 152,
+          "REJECT": 30
+        },
+        "CLARIFY": {
+          "ACCEPT": 147,
+          "REJECT": 55
+        }
+      }
+    },
+    "meta lookup: speaker+first": {
+      "n": 802,
+      "accuracy": 52.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 52.1,
+          "recall": 100.0,
+          "f1": 68.5,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 202
+        }
+      },
+      "macro_f1": 22.8,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 418
+        },
+        "REJECT": {
+          "ACCEPT": 182
+        },
+        "CLARIFY": {
+          "ACCEPT": 202
+        }
+      }
+    },
+    "meta lookup: operation+field+speaker+first": {
+      "n": 802,
+      "accuracy": 56.0,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 55.7,
+          "recall": 97.6,
+          "f1": 70.9,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 10.0,
+          "recall": 0.5,
+          "f1": 1.0,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 67.8,
+          "recall": 19.8,
+          "f1": 30.7,
+          "support": 202
+        }
+      },
+      "macro_f1": 34.2,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 408,
+          "CLARIFY": 2,
+          "REJECT": 8
+        },
+        "REJECT": {
+          "ACCEPT": 164,
+          "CLARIFY": 17,
+          "REJECT": 1
+        },
+        "CLARIFY": {
+          "ACCEPT": 161,
+          "CLARIFY": 40,
+          "REJECT": 1
+        }
+      }
+    },
+    "meta tree (depth 4)": {
+      "n": 802,
+      "accuracy": 64.2,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 69.5,
+          "recall": 87.3,
+          "f1": 77.4,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 51.2,
+          "recall": 73.1,
+          "f1": 60.2,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 100.0,
+          "recall": 8.4,
+          "f1": 15.5,
+          "support": 202
+        }
+      },
+      "macro_f1": 51.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 365,
+          "REJECT": 53
+        },
+        "REJECT": {
+          "ACCEPT": 49,
+          "REJECT": 133
+        },
+        "CLARIFY": {
+          "REJECT": 74,
+          "ACCEPT": 111,
+          "CLARIFY": 17
+        }
+      }
+    },
+    "meta naive Bayes": {
+      "n": 802,
+      "accuracy": 61.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 73.0,
+          "recall": 84.2,
+          "f1": 78.2,
+          "support": 418
+        },
+        "REJECT": {
+          "precision": 45.7,
+          "recall": 64.8,
+          "f1": 53.6,
+          "support": 182
+        },
+        "CLARIFY": {
+          "precision": 32.3,
+          "recall": 9.9,
+          "f1": 15.2,
+          "support": 202
+        }
+      },
+      "macro_f1": 49.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 352,
+          "CLARIFY": 16,
+          "REJECT": 50
+        },
+        "REJECT": {
+          "ACCEPT": 38,
+          "REJECT": 118,
+          "CLARIFY": 26
+        },
+        "CLARIFY": {
+          "REJECT": 90,
+          "ACCEPT": 92,
+          "CLARIFY": 20
+        }
+      }
+    }
+  },
+  "all, no Attribute": {
+    "rules v1": {
+      "n": 891,
+      "accuracy": 39.5,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.2,
+          "recall": 20.5,
+          "f1": 32.0,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 100.0,
+          "recall": 30.6,
+          "f1": 46.9,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 25.7,
+          "recall": 92.1,
+          "f1": 40.2,
+          "support": 191
+        }
+      },
+      "macro_f1": 39.7,
+      "confusion": {
+        "ACCEPT": {
+          "CLARIFY": 302,
+          "ACCEPT": 78
+        },
+        "REJECT": {
+          "ACCEPT": 15,
+          "REJECT": 98,
+          "CLARIFY": 207
+        },
+        "CLARIFY": {
+          "CLARIFY": 176,
+          "ACCEPT": 15
+        }
+      }
+    },
+    "rules v2": {
+      "n": 891,
+      "accuracy": 40.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 67.1,
+          "recall": 13.4,
+          "f1": 22.4,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 46.2,
+          "recall": 69.1,
+          "f1": 55.4,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 27.0,
+          "recall": 47.6,
+          "f1": 34.5,
+          "support": 191
+        }
+      },
+      "macro_f1": 37.4,
+      "confusion": {
+        "ACCEPT": {
+          "REJECT": 172,
+          "CLARIFY": 157,
+          "ACCEPT": 51
+        },
+        "REJECT": {
+          "ACCEPT": 10,
+          "REJECT": 221,
+          "CLARIFY": 89
+        },
+        "CLARIFY": {
+          "REJECT": 85,
+          "CLARIFY": 91,
+          "ACCEPT": 15
+        }
+      }
+    },
+    "M1-G run 1": {
+      "n": 891,
+      "accuracy": 80.5,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 92.7,
+          "recall": 90.3,
+          "f1": 91.5,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 69.8,
+          "recall": 99.7,
+          "f1": 82.1,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 85.9,
+          "recall": 28.8,
+          "f1": 43.1,
+          "support": 191
+        }
+      },
+      "macro_f1": 72.2,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 343,
+          "REJECT": 28,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 319,
+          "ACCEPT": 1
+        },
+        "CLARIFY": {
+          "CLARIFY": 55,
+          "ACCEPT": 26,
+          "REJECT": 110
+        }
+      }
+    },
+    "M1-G run 2": {
+      "n": 891,
+      "accuracy": 80.1,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 93.5,
+          "recall": 90.5,
+          "f1": 92.0,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 68.8,
+          "recall": 99.4,
+          "f1": 81.3,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 85.2,
+          "recall": 27.2,
+          "f1": 41.3,
+          "support": 191
+        }
+      },
+      "macro_f1": 71.5,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 344,
+          "REJECT": 27,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 318,
+          "ACCEPT": 2
+        },
+        "CLARIFY": {
+          "REJECT": 117,
+          "ACCEPT": 22,
+          "CLARIFY": 52
+        }
+      }
+    },
+    "meta lookup: majority": {
+      "n": 891,
+      "accuracy": 42.6,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 42.6,
+          "recall": 100.0,
+          "f1": 59.8,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 19.9,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 380
+        },
+        "REJECT": {
+          "ACCEPT": 320
+        },
+        "CLARIFY": {
+          "ACCEPT": 191
+        }
+      }
+    },
+    "meta lookup: operation+field": {
+      "n": 891,
+      "accuracy": 48.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 48.3,
+          "recall": 91.3,
+          "f1": 63.1,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 48.8,
+          "recall": 26.2,
+          "f1": 34.1,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 32.4,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 347,
+          "REJECT": 33
+        },
+        "REJECT": {
+          "ACCEPT": 236,
+          "REJECT": 84
+        },
+        "CLARIFY": {
+          "ACCEPT": 136,
+          "REJECT": 55
+        }
+      }
+    },
+    "meta lookup: speaker+first": {
+      "n": 891,
+      "accuracy": 59.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 51.2,
+          "recall": 100.0,
+          "f1": 67.7,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 100.0,
+          "recall": 46.6,
+          "f1": 63.5,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 43.8,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 380
+        },
+        "REJECT": {
+          "ACCEPT": 171,
+          "REJECT": 149
+        },
+        "CLARIFY": {
+          "ACCEPT": 191
+        }
+      }
+    },
+    "meta lookup: operation+field+speaker+first": {
+      "n": 891,
+      "accuracy": 59.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 52.6,
+          "recall": 97.4,
+          "f1": 68.3,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 93.0,
+          "recall": 37.2,
+          "f1": 53.1,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 67.8,
+          "recall": 20.9,
+          "f1": 32.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 51.1,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 370,
+          "CLARIFY": 2,
+          "REJECT": 8
+        },
+        "REJECT": {
+          "ACCEPT": 184,
+          "REJECT": 119,
+          "CLARIFY": 17
+        },
+        "CLARIFY": {
+          "ACCEPT": 150,
+          "CLARIFY": 40,
+          "REJECT": 1
+        }
+      }
+    },
+    "meta tree (depth 4)": {
+      "n": 891,
+      "accuracy": 70.3,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 69.5,
+          "recall": 87.6,
+          "f1": 77.5,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 69.9,
+          "recall": 86.2,
+          "f1": 77.2,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 100.0,
+          "recall": 8.9,
+          "f1": 16.3,
+          "support": 191
+        }
+      },
+      "macro_f1": 57.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 333,
+          "REJECT": 47
+        },
+        "REJECT": {
+          "ACCEPT": 44,
+          "REJECT": 276
+        },
+        "CLARIFY": {
+          "REJECT": 72,
+          "ACCEPT": 102,
+          "CLARIFY": 17
+        }
+      }
+    },
+    "meta naive Bayes": {
+      "n": 891,
+      "accuracy": 67.6,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.2,
+          "recall": 85.5,
+          "f1": 78.3,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 66.2,
+          "recall": 81.2,
+          "f1": 72.9,
+          "support": 320
+        },
+        "CLARIFY": {
+          "precision": 35.4,
+          "recall": 8.9,
+          "f1": 14.2,
+          "support": 191
+        }
+      },
+      "macro_f1": 55.2,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 325,
+          "CLARIFY": 11,
+          "REJECT": 44
+        },
+        "REJECT": {
+          "ACCEPT": 40,
+          "REJECT": 260,
+          "CLARIFY": 20
+        },
+        "CLARIFY": {
+          "REJECT": 89,
+          "ACCEPT": 85,
+          "CLARIFY": 17
+        }
+      }
+    }
+  },
+  "later user turn, no Attribute": {
+    "rules v1": {
+      "n": 742,
+      "accuracy": 34.2,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 72.2,
+          "recall": 20.5,
+          "f1": 32.0,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 27.8,
+          "recall": 92.1,
+          "f1": 42.7,
+          "support": 191
+        }
+      },
+      "macro_f1": 24.9,
+      "confusion": {
+        "ACCEPT": {
+          "CLARIFY": 302,
+          "ACCEPT": 78
+        },
+        "REJECT": {
+          "ACCEPT": 15,
+          "CLARIFY": 156
+        },
+        "CLARIFY": {
+          "CLARIFY": 176,
+          "ACCEPT": 15
+        }
+      }
+    },
+    "rules v2": {
+      "n": 742,
+      "accuracy": 32.5,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 67.1,
+          "recall": 13.4,
+          "f1": 22.4,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 27.8,
+          "recall": 57.9,
+          "f1": 37.6,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 29.4,
+          "recall": 47.6,
+          "f1": 36.3,
+          "support": 191
+        }
+      },
+      "macro_f1": 32.1,
+      "confusion": {
+        "ACCEPT": {
+          "REJECT": 172,
+          "CLARIFY": 157,
+          "ACCEPT": 51
+        },
+        "REJECT": {
+          "ACCEPT": 10,
+          "REJECT": 99,
+          "CLARIFY": 62
+        },
+        "CLARIFY": {
+          "REJECT": 85,
+          "CLARIFY": 91,
+          "ACCEPT": 15
+        }
+      }
+    },
+    "M1-G run 1": {
+      "n": 742,
+      "accuracy": 76.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 93.0,
+          "recall": 90.3,
+          "f1": 91.6,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 55.3,
+          "recall": 100.0,
+          "f1": 71.2,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 85.9,
+          "recall": 28.8,
+          "f1": 43.1,
+          "support": 191
+        }
+      },
+      "macro_f1": 68.7,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 343,
+          "REJECT": 28,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 171
+        },
+        "CLARIFY": {
+          "CLARIFY": 55,
+          "ACCEPT": 26,
+          "REJECT": 110
+        }
+      }
+    },
+    "M1-G run 2": {
+      "n": 742,
+      "accuracy": 76.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 94.0,
+          "recall": 90.5,
+          "f1": 92.2,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 54.3,
+          "recall": 100.0,
+          "f1": 70.4,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 85.2,
+          "recall": 27.2,
+          "f1": 41.3,
+          "support": 191
+        }
+      },
+      "macro_f1": 68.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 344,
+          "REJECT": 27,
+          "CLARIFY": 9
+        },
+        "REJECT": {
+          "REJECT": 171
+        },
+        "CLARIFY": {
+          "REJECT": 117,
+          "ACCEPT": 22,
+          "CLARIFY": 52
+        }
+      }
+    },
+    "meta lookup: majority": {
+      "n": 742,
+      "accuracy": 51.2,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 51.2,
+          "recall": 100.0,
+          "f1": 67.7,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 22.6,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 380
+        },
+        "REJECT": {
+          "ACCEPT": 171
+        },
+        "CLARIFY": {
+          "ACCEPT": 191
+        }
+      }
+    },
+    "meta lookup: operation+field": {
+      "n": 742,
+      "accuracy": 50.8,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 55.6,
+          "recall": 91.3,
+          "f1": 69.1,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 25.4,
+          "recall": 17.5,
+          "f1": 20.8,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 30.0,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 347,
+          "REJECT": 33
+        },
+        "REJECT": {
+          "ACCEPT": 141,
+          "REJECT": 30
+        },
+        "CLARIFY": {
+          "ACCEPT": 136,
+          "REJECT": 55
+        }
+      }
+    },
+    "meta lookup: speaker+first": {
+      "n": 742,
+      "accuracy": 51.2,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 51.2,
+          "recall": 100.0,
+          "f1": 67.7,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 22.6,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 380
+        },
+        "REJECT": {
+          "ACCEPT": 171
+        },
+        "CLARIFY": {
+          "ACCEPT": 191
+        }
+      }
+    },
+    "meta lookup: operation+field+speaker+first": {
+      "n": 742,
+      "accuracy": 55.4,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 55.0,
+          "recall": 97.4,
+          "f1": 70.3,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 10.0,
+          "recall": 0.6,
+          "f1": 1.1,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 67.8,
+          "recall": 20.9,
+          "f1": 32.0,
+          "support": 191
+        }
+      },
+      "macro_f1": 34.5,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 370,
+          "CLARIFY": 2,
+          "REJECT": 8
+        },
+        "REJECT": {
+          "ACCEPT": 153,
+          "CLARIFY": 17,
+          "REJECT": 1
+        },
+        "CLARIFY": {
+          "ACCEPT": 150,
+          "CLARIFY": 40,
+          "REJECT": 1
+        }
+      }
+    },
+    "meta tree (depth 4)": {
+      "n": 742,
+      "accuracy": 64.3,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 69.5,
+          "recall": 87.6,
+          "f1": 77.5,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 51.6,
+          "recall": 74.3,
+          "f1": 60.9,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 100.0,
+          "recall": 8.9,
+          "f1": 16.3,
+          "support": 191
+        }
+      },
+      "macro_f1": 51.6,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 333,
+          "REJECT": 47
+        },
+        "REJECT": {
+          "ACCEPT": 44,
+          "REJECT": 127
+        },
+        "CLARIFY": {
+          "REJECT": 72,
+          "ACCEPT": 102,
+          "CLARIFY": 17
+        }
+      }
+    },
+    "meta naive Bayes": {
+      "n": 742,
+      "accuracy": 61.7,
+      "per_class": {
+        "ACCEPT": {
+          "precision": 73.0,
+          "recall": 85.5,
+          "f1": 78.8,
+          "support": 380
+        },
+        "REJECT": {
+          "precision": 46.6,
+          "recall": 67.8,
+          "f1": 55.2,
+          "support": 171
+        },
+        "CLARIFY": {
+          "precision": 35.4,
+          "recall": 8.9,
+          "f1": 14.2,
+          "support": 191
+        }
+      },
+      "macro_f1": 49.4,
+      "confusion": {
+        "ACCEPT": {
+          "ACCEPT": 325,
+          "CLARIFY": 11,
+          "REJECT": 44
+        },
+        "REJECT": {
+          "ACCEPT": 35,
+          "REJECT": 116,
+          "CLARIFY": 20
+        },
+        "CLARIFY": {
+          "REJECT": 89,
+          "ACCEPT": 85,
+          "CLARIFY": 17
+        }
+      }
+    }
+  }
+}

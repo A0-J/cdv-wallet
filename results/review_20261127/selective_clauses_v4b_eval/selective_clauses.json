@@ -1,0 +1,156 @@
+{
+  "selective": {
+    "combos_median": 1,
+    "combos_max": 8,
+    "approx": 0,
+    "unresolved_kinds": {
+      "M1G_AMBIGUOUS": 332,
+      "SELECTION_UNRESOLVED": 338,
+      "OMISSION": 86
+    },
+    "b3_clarify_reasons": {
+      "M1 확인(판정을 바꾸는 미확정 항목)": 64,
+      "게이트 확인(E2_STOCK_CLAIM_BY_CHOSEN)": 60,
+      "게이트 확인(SELECTED_MISSING,SELECTION_MISMATCH)": 80,
+      "게이트 확인(UNKNOWN_ATTR)": 30,
+      "게이트 확인(ITEM,SELECTION_MISMATCH)": 2
+    },
+    "policy": {},
+    "table": {
+      "authority_only|0": {
+        "ALLOW/ALLOW": 425,
+        "CLARIFY/CLARIFY": 60,
+        "DENY/DENY": 15
+      },
+      "authority_only|1": {
+        "CLARIFY/CLARIFY": 32,
+        "ALLOW/CLARIFY": 87,
+        "DENY/CLARIFY": 3
+      },
+      "authority_only|2": {
+        "CLARIFY/CLARIFY": 7,
+        "ALLOW/CLARIFY": 7,
+        "DENY/CLARIFY": 2
+      },
+      "authority_only|3+": {
+        "CLARIFY/CLARIFY": 1
+      },
+      "both|0": {
+        "DENY/DENY": 548,
+        "ALLOW/ALLOW": 103,
+        "CLARIFY/CLARIFY": 10
+      },
+      "both|1": {
+        "DENY/CLARIFY": 145,
+        "CLARIFY/CLARIFY": 5,
+        "ALLOW/CLARIFY": 16
+      },
+      "both|2": {
+        "DENY/CLARIFY": 19,
+        "CLARIFY/CLARIFY": 2,
+        "ALLOW/CLARIFY": 1
+      },
+      "both|3+": {
+        "DENY/CLARIFY": 1,
+        "ALLOW/CLARIFY": 1,
+        "CLARIFY/CLARIFY": 1
+      },
+      "context_only|0": {
+        "DENY/DENY": 548,
+        "ALLOW/ALLOW": 103,
+        "CLARIFY/CLARIFY": 10
+      },
+      "context_only|1": {
+        "DENY/CLARIFY": 145,
+        "ALLOW/CLARIFY": 16,
+        "CLARIFY/CLARIFY": 5
+      },
+      "context_only|2": {
+        "DENY/CLARIFY": 19,
+        "CLARIFY/CLARIFY": 2,
+        "ALLOW/CLARIFY": 1
+      },
+      "context_only|3+": {
+        "CLARIFY/CLARIFY": 1,
+        "DENY/CLARIFY": 1,
+        "ALLOW/CLARIFY": 1
+      },
+      "normal|0": {
+        "ALLOW/ALLOW": 425,
+        "CLARIFY/CLARIFY": 60,
+        "DENY/DENY": 15
+      },
+      "normal|1": {
+        "CLARIFY/CLARIFY": 32,
+        "ALLOW/CLARIFY": 87,
+        "DENY/CLARIFY": 3
+      },
+      "normal|2": {
+        "CLARIFY/CLARIFY": 7,
+        "ALLOW/CLARIFY": 7,
+        "DENY/CLARIFY": 2
+      },
+      "normal|3+": {
+        "CLARIFY/CLARIFY": 1
+      }
+    }
+  },
+  "clauses": {
+    "tx|B2": {
+      "거래": 2982,
+      "조항 생성(1개 이상)": 0,
+      "조항 합계": 0,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "선택 S 있음": 0,
+      "증거·조항 실패: UNKNOWN_ATTR": 2,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 46
+    },
+    "tx|B3": {
+      "거래": 2982,
+      "조항 생성(1개 이상)": 76,
+      "조항 합계": 148,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "선택 S 있음": 2206,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 62,
+      "증거·조항 실패: UNKNOWN_ATTR": 42
+    },
+    "tx|B4": {
+      "거래": 2982,
+      "조항 생성(1개 이상)": 76,
+      "조항 합계": 148,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 62,
+      "증거·조항 실패: UNKNOWN_ATTR": 42
+    },
+    "matched|B2": {
+      "거래": 198,
+      "조항 생성(1개 이상)": 0,
+      "조항 합계": 0,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 61,
+      "선택 S 있음": 0
+    },
+    "matched|B3": {
+      "거래": 198,
+      "조항 생성(1개 이상)": 0,
+      "조항 합계": 0,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 65,
+      "선택 S 있음": 0
+    },
+    "matched|B4": {
+      "거래": 198,
+      "조항 생성(1개 이상)": 0,
+      "조항 합계": 0,
+      "발동(CLAUSE_ACTIVE)": 0,
+      "증거·조항 실패: E2_STOCK_CLAIM_BY_CHOSEN": 65
+    }
+  },
+  "replay": {
+    "hits": 19100,
+    "misses": 0,
+    "not_rebuilt": 0
+  },
+  "precheck_repeat": {},
+  "b2_cache_reproduction_vs_p4": {}
+}

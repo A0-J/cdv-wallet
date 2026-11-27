@@ -1,0 +1,365 @@
+{
+  "tag": "m1g",
+  "available": {
+    "A": 2982,
+    "B": 2982
+  },
+  "av2_vs_b2": {
+    "context_only": 852,
+    "AV2_allow": 357,
+    "B2_allow": 32,
+    "AV2_allows_B2_blocks": 330,
+    "B2_allows_AV2_blocks": 5,
+    "by_component": {
+      "수령 방식(동의 시점)": 110,
+      "기한(동의 시점)": 104,
+      "총액(수수료 포함)": 113,
+      "E2(판매자 주장)": 3
+    },
+    "by_gold_field": {
+      "Fulfillment": 112,
+      "Deadline": 104,
+      "Price": 114
+    },
+    "blocked_only_by_dev_adjustments": 327
+  },
+  "main": {
+    "A|normal|AV2": [
+      335,
+      0,
+      304,
+      335
+    ],
+    "A|normal|B2": [
+      592,
+      21,
+      26,
+      613
+    ],
+    "A|normal|B3": [
+      519,
+      100,
+      20,
+      619
+    ],
+    "A|normal|B4": [
+      425,
+      199,
+      15,
+      624
+    ],
+    "A|normal|PRECHECK": [
+      406,
+      221,
+      12,
+      627
+    ],
+    "A|context_only|AV2": [
+      357,
+      0,
+      495,
+      357
+    ],
+    "A|context_only|B2": [
+      32,
+      3,
+      817,
+      32
+    ],
+    "A|context_only|B3": [
+      121,
+      18,
+      713,
+      121
+    ],
+    "A|context_only|B4": [
+      103,
+      201,
+      548,
+      103
+    ],
+    "A|context_only|PRECHECK": [
+      1,
+      12,
+      839,
+      1
+    ],
+    "A|both|AV2": [
+      357,
+      0,
+      495,
+      357
+    ],
+    "A|both|B2": [
+      32,
+      3,
+      817,
+      32
+    ],
+    "A|both|B3": [
+      121,
+      18,
+      713,
+      121
+    ],
+    "A|both|B4": [
+      103,
+      201,
+      548,
+      103
+    ],
+    "A|both|PRECHECK": [
+      2,
+      14,
+      836,
+      2
+    ],
+    "B|normal|AV2": [
+      335,
+      0,
+      304,
+      335
+    ],
+    "B|normal|B2": [
+      592,
+      22,
+      25,
+      614
+    ],
+    "B|normal|B3": [
+      519,
+      100,
+      20,
+      619
+    ],
+    "B|normal|B4": [
+      425,
+      199,
+      15,
+      624
+    ],
+    "B|normal|PRECHECK": [
+      437,
+      186,
+      16,
+      623
+    ],
+    "B|context_only|AV2": [
+      359,
+      0,
+      493,
+      359
+    ],
+    "B|context_only|B2": [
+      34,
+      2,
+      816,
+      34
+    ],
+    "B|context_only|B3": [
+      121,
+      17,
+      714,
+      121
+    ],
+    "B|context_only|B4": [
+      100,
+      201,
+      551,
+      100
+    ],
+    "B|context_only|PRECHECK": [
+      9,
+      14,
+      829,
+      9
+    ],
+    "B|both|AV2": [
+      359,
+      0,
+      493,
+      359
+    ],
+    "B|both|B2": [
+      34,
+      2,
+      816,
+      34
+    ],
+    "B|both|B3": [
+      121,
+      17,
+      714,
+      121
+    ],
+    "B|both|B4": [
+      100,
+      201,
+      551,
+      100
+    ],
+    "B|both|PRECHECK": [
+      8,
+      12,
+      832,
+      8
+    ]
+  },
+  "case4": {
+    "A|contradicted_by_platform|AV2": [
+      0,
+      0,
+      16
+    ],
+    "A|contradicted_by_platform|B2": [
+      0,
+      0,
+      16
+    ],
+    "A|contradicted_by_platform|B3": [
+      1,
+      1,
+      14
+    ],
+    "A|contradicted_by_platform|B4": [
+      1,
+      2,
+      13
+    ],
+    "A|contradicted_by_platform|PRECHECK": [
+      5,
+      11,
+      0
+    ],
+    "A|no_platform_evidence|AV2": [
+      1,
+      0,
+      16
+    ],
+    "A|no_platform_evidence|B2": [
+      2,
+      0,
+      15
+    ],
+    "A|no_platform_evidence|B3": [
+      3,
+      1,
+      13
+    ],
+    "A|no_platform_evidence|B4": [
+      3,
+      2,
+      12
+    ],
+    "A|no_platform_evidence|PRECHECK": [
+      5,
+      12,
+      0
+    ],
+    "A|(전체)|AV2": [
+      1,
+      0,
+      32
+    ],
+    "A|(전체)|B2": [
+      2,
+      0,
+      31
+    ],
+    "A|(전체)|B3": [
+      4,
+      2,
+      27
+    ],
+    "A|(전체)|B4": [
+      4,
+      4,
+      25
+    ],
+    "A|(전체)|PRECHECK": [
+      10,
+      23,
+      0
+    ],
+    "B|contradicted_by_platform|AV2": [
+      0,
+      0,
+      16
+    ],
+    "B|contradicted_by_platform|B2": [
+      0,
+      0,
+      16
+    ],
+    "B|contradicted_by_platform|B3": [
+      1,
+      1,
+      14
+    ],
+    "B|contradicted_by_platform|B4": [
+      1,
+      2,
+      13
+    ],
+    "B|contradicted_by_platform|PRECHECK": [
+      5,
+      11,
+      0
+    ],
+    "B|no_platform_evidence|AV2": [
+      1,
+      0,
+      16
+    ],
+    "B|no_platform_evidence|B2": [
+      2,
+      0,
+      15
+    ],
+    "B|no_platform_evidence|B3": [
+      3,
+      1,
+      13
+    ],
+    "B|no_platform_evidence|B4": [
+      3,
+      2,
+      12
+    ],
+    "B|no_platform_evidence|PRECHECK": [
+      4,
+      13,
+      0
+    ],
+    "B|(전체)|AV2": [
+      1,
+      0,
+      32
+    ],
+    "B|(전체)|B2": [
+      2,
+      0,
+      31
+    ],
+    "B|(전체)|B3": [
+      4,
+      2,
+      27
+    ],
+    "B|(전체)|B4": [
+      4,
+      4,
+      25
+    ],
+    "B|(전체)|PRECHECK": [
+      9,
+      24,
+      0
+    ]
+  },
+  "repeat": {
+    "precheck_run1_vs_run2": "1467/1570",
+    "precheck_identical_input_groups_in_run1": "1369/1491",
+    "gate_recomputed_same": "400/400"
+  }
+}
